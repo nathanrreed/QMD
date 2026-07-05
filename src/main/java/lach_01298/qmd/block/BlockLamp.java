@@ -1,157 +1,53 @@
 package lach_01298.qmd.block;
 
-import lach_01298.qmd.enums.BlockTypes.LampType;
-import lach_01298.qmd.tab.QMDTabs;
-import nc.block.BlockMeta;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.*;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.*;
-import net.minecraft.util.math.*;
-import net.minecraft.world.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 
-import java.util.Random;
+import javax.annotation.Nullable;
 
-import static nc.block.property.BlockProperties.ACTIVE;
+import static com.nred.nuclearcraft.registration.BlockRegistration.ACTIVE;
 
-public class BlockLamp extends BlockMeta
-{
+public class BlockLamp extends net.minecraft.world.level.block.Block {
+    public BlockLamp() {
+        super(BlockBehaviour.Properties.of().strength(2, 15).lightLevel(s -> s.getValue(ACTIVE) ? 15 : 0).strength(0.3F).sound(SoundType.GLASS).isValidSpawn(Blocks::always));
+        registerDefaultState(defaultBlockState().setValue(ACTIVE, true));
 
-	
-	public final static PropertyEnum TYPE = PropertyEnum.create("type", LampType.class);
-	
-	public BlockLamp()
-	{
-		super(LampType.class, TYPE, Material.REDSTONE_LIGHT);
-		setDefaultState(getDefaultState().withProperty(ACTIVE, Boolean.valueOf(true)));
-		setCreativeTab(QMDTabs.BLOCKS);
-	}
+        //        @Override TODO
+//        public int getHarvestLevel() {
+//            return 0;
+//        }
+//
+//        @Override
+//        public String getHarvestTool() {
+//            return "pickaxe";
+//        }
+    }
 
-	
-	@Override
-	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos)
-	{
-		if(state.getValue(ACTIVE).booleanValue())
-		{
-			return ((LampType) state.getValue(type)).getLightValue();
-		}
-		else
-		{
-			return 0;
-		}
-		
-		
-	}
-	
-	@Override
-	public float getBlockHardness(IBlockState state, World world, BlockPos pos)
-	{
-		return ((LampType) state.getValue(type)).getHardness();
-	}
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(ACTIVE);
+    }
 
-	@Override
-	public String getHarvestTool(IBlockState state)
-	{
-		return ((LampType) state.getValue(type)).getHarvestTool();
-	}
+    @Nullable
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return this.defaultBlockState().setValue(ACTIVE, !context.getLevel().hasNeighborSignal(context.getClickedPos()));
+    }
 
-	public int getHarvestLevel(IBlockState state)
-	{
-		return ((LampType) state.getValue(type)).getHarvestLevel();
-	}
-	
-	@Override
-	public int getMetaFromState(IBlockState state)
-	{
-		if(state.getValue(ACTIVE).booleanValue())
-		{
-			return ((LampType) state.getValue(type)).getID();
-		}
-		else
-		{
-			return ((LampType) state.getValue(type)).getID() + values.length;
-		}
-	}
-	
-	@Override
-	public IBlockState getStateFromMeta(int meta)
-	{
-		if(meta >= values.length)
-		{
-			return getDefaultState().withProperty(type, values[meta -values.length]).withProperty(ACTIVE, Boolean.valueOf(false));
-		}
-		else
-		{
-			return getDefaultState().withProperty(type, values[meta]);
-		}
-	}
-	
-	@Override
-	public int damageDropped(IBlockState state)
-	{
-		return ((LampType) state.getValue(type)).getID();
-	}
-	
-	@Override
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
-	{
-		return new ItemStack(Item.getItemFromBlock(this), 1, ((LampType) state.getValue(type)).getID());
-	}
-	
-	
-	@Override
-	protected BlockStateContainer createBlockState()
-	{
-		return new BlockStateContainer(this, TYPE, ACTIVE);
-	}
-	
-	
-	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
-    {
-        if (!worldIn.isRemote)
-        {
-            if (!state.getValue(ACTIVE).booleanValue() && !worldIn.isBlockPowered(pos))
-            {
-                worldIn.setBlockState(pos, state.withProperty(ACTIVE, Boolean.valueOf(true)), 2);
-            }
-            else if (state.getValue(ACTIVE).booleanValue() && worldIn.isBlockPowered(pos))
-            {
-                worldIn.setBlockState(pos, state.withProperty(ACTIVE, Boolean.valueOf(false)), 2);
+    @Override
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
+        if (!level.isClientSide()) {
+            boolean isOn = state.getValue(ACTIVE);
+            if (isOn == level.hasNeighborSignal(pos)) {
+                level.setBlock(pos, state.cycle(ACTIVE), 2);
             }
         }
     }
-	
-		
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
-    {
-        if (!worldIn.isRemote)
-        {
-            if (!state.getValue(ACTIVE).booleanValue() && !worldIn.isBlockPowered(pos))
-            {
-            	worldIn.setBlockState(pos, state.withProperty(ACTIVE, Boolean.valueOf(true)), 2);
-            }
-        }
-    }
-	
-	
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
-    {
-        if (!worldIn.isRemote)
-        {
-            if (state.getValue(ACTIVE).booleanValue() && worldIn.isBlockPowered(pos))
-            {
-            	 worldIn.setBlockState(pos, state.withProperty(ACTIVE, Boolean.valueOf(false)), 2);
-            }
-            else if (!state.getValue(ACTIVE).booleanValue() && !worldIn.isBlockPowered(pos))
-            {
-            	worldIn.setBlockState(pos, state.withProperty(ACTIVE, Boolean.valueOf(true)), 2);
-            }
-        }
-    }
-	
-	
-	
-	
 }

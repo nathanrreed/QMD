@@ -1,87 +1,64 @@
 package lach_01298.qmd.item;
 
+import com.nred.nuclearcraft.item.NCFoodItem;
 import lach_01298.qmd.QMDDamageSources;
-import lach_01298.qmd.config.QMDConfig;
-import nc.capability.radiation.entity.IEntityRads;
-import nc.item.NCItemFood;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.*;
-import net.minecraft.util.*;
-import net.minecraft.world.World;
+import lach_01298.qmd.config.QMDServerConfig;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
-public class ItemTablet extends NCItemFood
-{
+import java.util.List;
 
-	public ItemTablet(PotionEffect[] potionEffects, String... tooltip)
-	{
-		super(0, 0f, false, potionEffects, tooltip);
-	}
+import static com.nred.nuclearcraft.registration.CapabilityRegistration.CAPABILITY_ENTITY_RADS;
 
-	
-	
-	
-	@Override
-	protected void onFoodEaten(ItemStack stack, World world, EntityPlayer player)
-	{
-		super.onFoodEaten(stack, world, player);
-		double lifetime = (double)QMDConfig.ki_time;
-		double currentTime = player.getCapability(IEntityRads.CAPABILITY_ENTITY_RADS, null).getRadiationImmunityTime();
-		
-		if(currentTime > lifetime)
-		{
-			double newTime = currentTime+lifetime*lifetime/currentTime;
-			player.getCapability(IEntityRads.CAPABILITY_ENTITY_RADS, null).setRadiationImmunityTime(newTime);
-			
-			int newIntTime = (int) newTime;
-			
-			player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("weakness"),newIntTime));
-			
-			if(currentTime>lifetime*1.5) //Maybe you should not take that many
-			{
-				player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("hunger"),newIntTime));
-			}
-			if(currentTime>lifetime*2) //You should not take this many
-			{
-				player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("hunger"),newIntTime*2));
-				player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("weakness"),newIntTime*2));
-				player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("slowness"),newIntTime*2));
-			}
-			if(currentTime>lifetime*3) //You really should not take this many
-			{
-				player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("hunger"),newIntTime*2,1));
-				player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("weakness"),newIntTime*2,1));
-				player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("slowness"),newIntTime*2,1));
-				player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("poison"),newIntTime/2));
-			}
-			if(currentTime>lifetime*4) //Are you trying to kill your self?
-			{
-				player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("nausea"),newIntTime));
-				player.attackEntityFrom(QMDDamageSources.SELF_POISONING, 10f);
-			}
-			if(currentTime>lifetime*4.5) // Apparently so
-			{
-				player.attackEntityFrom(QMDDamageSources.SELF_POISONING,player.getHealth());
-			}
-			
-		}
-		else
-		{
-			player.getCapability(IEntityRads.CAPABILITY_ENTITY_RADS, null).setRadiationImmunityTime(currentTime+lifetime);
-			player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("weakness"),(int)(currentTime+lifetime)));
-		}
-		
-		
-	}
-	
-	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
-	{
-		ItemStack itemstack = player.getHeldItem(hand);
+public class ItemTablet extends NCFoodItem {
+    public ItemTablet() {
+        super(0, 0f, List.of(), "item.qmd.potassium_iodine_tablet.desc", true);
+    }
 
-		player.setActiveHand(hand);
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+    @Override
+    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity player) {
+        super.finishUsingItem(stack, level, player);
 
-	}
-	
+        double lifetime = QMDServerConfig.ki_time;
+        double currentTime = player.getCapability(CAPABILITY_ENTITY_RADS, null).getRadiationImmunityTime();
+
+        if (currentTime > lifetime) {
+            double newTime = currentTime + lifetime * lifetime / currentTime;
+            player.getCapability(CAPABILITY_ENTITY_RADS, null).setRadiationImmunityTime(newTime);
+
+            int newIntTime = (int) newTime;
+
+            player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, newIntTime));
+
+            if (currentTime > lifetime * 1.5) { // Maybe you should not take that many
+                player.addEffect(new MobEffectInstance(MobEffects.HUNGER, newIntTime));
+            }
+            if (currentTime > lifetime * 2) { // You should not take this many
+                player.addEffect(new MobEffectInstance(MobEffects.HUNGER, newIntTime * 2));
+                player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, newIntTime * 2));
+                player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, newIntTime * 2));
+            }
+            if (currentTime > lifetime * 3) { // You really should not take this many
+                player.addEffect(new MobEffectInstance(MobEffects.HUNGER, newIntTime * 2, 1));
+                player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, newIntTime * 2, 1));
+                player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, newIntTime * 2, 1));
+                player.addEffect(new MobEffectInstance(MobEffects.POISON, newIntTime / 2));
+            }
+            if (currentTime > lifetime * 4) { // Are you trying to kill your self?
+                player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, newIntTime));
+                player.hurt(level.damageSources().source(QMDDamageSources.SELF_POISONING), 10f);
+            }
+            if (currentTime > lifetime * 4.5) { // Apparently so
+                player.hurt(level.damageSources().source(QMDDamageSources.SELF_POISONING), player.getHealth());
+            }
+        } else {
+            player.getCapability(CAPABILITY_ENTITY_RADS, null).setRadiationImmunityTime(currentTime + lifetime);
+            player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, (int) (currentTime + lifetime)));
+        }
+
+        return player.eat(level, stack, stack.getFoodProperties(player));
+    }
 }

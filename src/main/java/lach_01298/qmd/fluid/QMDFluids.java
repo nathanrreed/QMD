@@ -1,189 +1,126 @@
 package lach_01298.qmd.fluid;
 
+import com.nred.nuclearcraft.block.fluid.LiquidFluidBlock;
+import com.nred.nuclearcraft.info.NCFluid;
+import com.nred.nuclearcraft.info.NCFluidMaker;
 import lach_01298.qmd.QMD;
-import nc.block.fluid.NCBlockFluid;
-import nc.block.item.NCItemBlock;
-import nc.enumm.FluidType;
-import nc.util.*;
-import net.minecraft.block.Block;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.fluids.*;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import org.apache.commons.lang3.tuple.Pair;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.util.FastColor;
+import net.minecraft.world.level.material.Fluid;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
-import java.util.*;
+import java.util.HashMap;
 
-public class QMDFluids
-{
+import static lach_01298.qmd.block.QMDBlocks.BLOCKS;
+import static lach_01298.qmd.item.QMDItems.ITEMS;
 
-	public static List<Pair<Fluid, NCBlockFluid>> fluidPairList = new ArrayList<Pair<Fluid, NCBlockFluid>>();
+public class QMDFluids {
+    public static final HashMap<String, NCFluid> QMD_FLUIDS = new HashMap<>();
 
-	
-	public static void init()
-	{
-		try
-		{
+    public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.FLUID_TYPES, QMD.MOD_ID);
+    public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(BuiltInRegistries.FLUID, QMD.MOD_ID);
 
-			// acids
-			addFluidPair(FluidType.ACID, "hydrochloric_acid", 0x99ffee);
-			addFluidPair(FluidType.ACID, "nitric_acid", 0x4f9eff);
+    private static final NCFluidMaker MAKER = new NCFluidMaker(FLUID_TYPES, FLUIDS, BLOCKS, ITEMS);
 
-			// solutions
-			addFluidPair(FluidType.SALT_SOLUTION, "sodium_chloride_solution", waterBlend(0x0057fa));
-			addFluidPair(FluidType.SALT_SOLUTION, "sodium_nitrate_solution", waterBlend(0xffffff));
-			addFluidPair(FluidType.SALT_SOLUTION, "lead_nitrate_solution", waterBlend(0xd5d5d5));
-			addFluidPair(FluidType.SALT_SOLUTION, "sodium_tungstate_solution", waterBlend(0xfffea3));
-			addFluidPair(FluidType.SALT_SOLUTION, "lead_tungstate_solution", waterBlend(0xd58715));
-			addFluidPair(FluidType.SALT_SOLUTION, "salt_water", waterBlend(0x2974ff));
-			
-			//cryo liquids
-			addFluidPair(FluidType.LIQUID, "liquid_hydrogen",false, 0xB37AC4,71,20,170,0);
-			addFluidPair(FluidType.LIQUID, "liquid_argon",false, 0xff75dd,1395,87,170,0);
-			addFluidPair(FluidType.LIQUID, "liquid_neon",false, 0xff9f7a,1207,27,170,0);
-			addFluidPair(FluidType.LIQUID, "liquid_oxygen",false, 0x7E8CC8,1141,90,170,0);
-			addFluidPair(FluidType.LIQUID, "liquid_air",false, 0x6CDEFF,870,79,170,0);
-			
-			//liquids
-			addFluidPair(FluidType.LIQUID, "mercury", true,0xC6C6C6,13540,300,1000,0);
-			addFluidPair(FluidType.LIQUID, "hot_mercury", true, 0xD0D0D0, 13540, 630,1000,0);
-			addFluidPair(FluidType.LIQUID, "iodine",false, 0x7400B3,3960,387,1000,0);
-			
-			//gases
-			addFluidPair(FluidType.GAS, "argon", 0xff75dd);
-			addFluidPair(FluidType.GAS, "neon", 0xff9f7a);
-			addFluidPair(FluidType.GAS, "chlorine", 0xffff8f);
-			addFluidPair(FluidType.GAS, "nitric_oxide", 0xc9eeff);
-			addFluidPair(FluidType.GAS, "nitrogen_dioxide", 0x782a10);
-			addFluidPair(FluidType.GAS, "compressed_air", 0xBDF0FF);
-			
-			//molten
-			addFluidPair(FluidType.MOLTEN, "silicon", 0x676767);
-			addFluidPair(FluidType.MOLTEN, "yag", 0xfffddb);
-			addFluidPair(FluidType.MOLTEN, "nd_yag", 0xe4bcf5);
-			addFluidPair(FluidType.MOLTEN, "tungsten", 0x4E564F);
-			addFluidPair(FluidType.MOLTEN, "niobium", 0xCCCCC0);
-			addFluidPair(FluidType.MOLTEN, "chromium", 0xC9C9C9);
-			addFluidPair(FluidType.MOLTEN, "titanium", 0x8E7E8D);
-			addFluidPair(FluidType.MOLTEN, "cobalt", 0x364F70);
-			addFluidPair(FluidType.MOLTEN, "nickel", 0xA3A998);
-			addFluidPair(FluidType.MOLTEN, "hafnium", 0x948484);
-			addFluidPair(FluidType.MOLTEN, "zinc", 0xE0E0E0);
-			addFluidPair(FluidType.MOLTEN, "osmium", 0x6F89A9);
-			addFluidPair(FluidType.MOLTEN, "iridium", 0xDDD5DD);
-			addFluidPair(FluidType.MOLTEN, "platinum", 0x71A4A9);
-			addFluidPair(FluidType.MOLTEN, "calcium", 0xF4F3EA);
-			addFluidPair(FluidType.MOLTEN, "strontium", 0xC4CB97);
-			addFluidPair(FluidType.MOLTEN, "yttrium", 0xD1C375);
-			addFluidPair(FluidType.MOLTEN, "neodymium", 0x818A97);
-			
-			
-			addFluidPair(FluidType.MOLTEN, "samarium", 0xa4d95f);
-			addFluidPair(FluidType.MOLTEN, "terbium", 0x5ba694);
-			addFluidPair(FluidType.MOLTEN, "erbium", 0x5a7a45);
-			addFluidPair(FluidType.MOLTEN, "ytterbium", 0x7a4552);
-			addFluidPair(FluidType.MOLTEN, "bismuth", 0x827e73);
-			addFluidPair(FluidType.MOLTEN, "polonium", 0x5c7c78);
-			addFluidPair(FluidType.MOLTEN, "radium", 0x6e607b);
-			
+    public static final NCFluid.TypeInfo EXOTIC_TYPE = new NCFluid.TypeInfo(8, false, "liquid_still", "liquid_flow", FluidType.Properties.create(), BlockFluidExotic::new);
 
-			addFluidPair(FluidType.MOLTEN, "sodium_chloride", 0xd4cccc);
+    public static void init() {
+        // acids
+        addFluidPair(NCFluid.ACID_TYPE, "hydrochloric_acid", 0x99ffee);
+        addFluidPair(NCFluid.ACID_TYPE, "nitric_acid", 0x4f9eff);
 
-			//hot gases
-			addFluidPair(FluidType.HOT_GAS, "carbon", 0x343434);
-			addFluidPair(FluidType.HOT_GAS, "high_pressure_mercury", 0xAAAAAA);
-			addFluidPair(FluidType.HOT_GAS, "exhaust_mercury", 0x888888);
+        // solutions
+        addFluidPair(NCFluid.SALT_SOLUTION_TYPE, "sodium_chloride_solution", waterBlend(0x0057fa));
+        addFluidPair(NCFluid.SALT_SOLUTION_TYPE, "sodium_nitrate_solution", waterBlend(0xffffff));
+        addFluidPair(NCFluid.SALT_SOLUTION_TYPE, "lead_nitrate_solution", waterBlend(0xd5d5d5));
+        addFluidPair(NCFluid.SALT_SOLUTION_TYPE, "sodium_tungstate_solution", waterBlend(0xfffea3));
+        addFluidPair(NCFluid.SALT_SOLUTION_TYPE, "lead_tungstate_solution", waterBlend(0xd58715));
+        addFluidPair(NCFluid.SALT_SOLUTION_TYPE, "salt_water", waterBlend(0x2974ff));
 
-			//exotic matter
-			addFluidPair(QMDFluidType.EXOTIC,"antihydrogen", 0xB37AC4);
-			addFluidPair(QMDFluidType.EXOTIC,"antideuterium", 0x9E6FEF);
-			addFluidPair(QMDFluidType.EXOTIC,"antitritium", 0x5DBBD6);
-			addFluidPair(QMDFluidType.EXOTIC,"antihelium3", 0xCBBB67);
-			addFluidPair(QMDFluidType.EXOTIC,"antihelium", 0xC57B81);
-			addFluidPair(QMDFluidType.EXOTIC,"positronium", 0xc9c9c9);
-			addFluidPair(QMDFluidType.EXOTIC,"muonium", 0x9b93ff);
-			addFluidPair(QMDFluidType.EXOTIC,"tauonium", 0xc86300);
-			addFluidPair(QMDFluidType.EXOTIC,"glueballs", 0xa6f1f2);
-			
-			
-			
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
+        //cryo liquids
+        QMD_FLUIDS.put("liquid_hydrogen", MAKER.registerFluid("liquid_hydrogen", "liquid", false, false, 0XFFB37AC4, 71, 20, 170, 0, LiquidFluidBlock::new));
+        QMD_FLUIDS.put("liquid_argon", MAKER.registerFluid("liquid_argon", "liquid", false, false, 0XFFFF75DD, 1395, 87, 170, 0, LiquidFluidBlock::new));
+        QMD_FLUIDS.put("liquid_neon", MAKER.registerFluid("liquid_neon", "liquid", false, false, 0XFFFF9F7A, 1207, 27, 170, 0, LiquidFluidBlock::new));
+        QMD_FLUIDS.put("liquid_oxygen", MAKER.registerFluid("liquid_oxygen", "liquid", false, false, 0XFF7E8CC8, 1141, 90, 170, 0, LiquidFluidBlock::new));
+        QMD_FLUIDS.put("liquid_air", MAKER.registerFluid("liquid_air", "liquid", false, false, 0XFF6CDEFF, 870, 79, 170, 0, LiquidFluidBlock::new));
 
-	private static <T extends Fluid, V extends NCBlockFluid> void addFluidPair(FluidType fluidType, Object... fluidArgs)
-	{
-		try
-		{
-			T fluid = ReflectionHelper.newInstance(fluidType.getFluidClass(), fluidArgs);
-			V block = ReflectionHelper.newInstance(fluidType.getBlockClass(), fluid);
-			fluidPairList.add(Pair.of(fluid, block));
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-	
-	
-	private static <T extends Fluid, V extends NCBlockFluid> void addFluidPair(QMDFluidType fluidType, Object... fluidArgs)
-	{
-		try
-		{
-			T fluid = ReflectionHelper.newInstance(fluidType.getFluidClass(), fluidArgs);
-			V block = ReflectionHelper.newInstance(fluidType.getBlockClass(), fluid);
-			fluidPairList.add(Pair.of(fluid, block));
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-	
-	public static void register()
-	{
-		for (Pair<Fluid, NCBlockFluid> fluidPair : fluidPairList)
-		{
-			Fluid fluid = fluidPair.getLeft();
-			
-			boolean defaultFluid = FluidRegistry.registerFluid(fluid);
-			if (!defaultFluid)
-				fluid = FluidRegistry.getFluid(fluid.getName());
-			
-			if(!(fluidPair.getRight() instanceof BlockFluidExotic))
-			{
-			FluidRegistry.addBucketForFluid(fluid);
-			}
-			registerBlock(fluidPair.getRight());
-		}
-		
-		
-		
-	}
-	
-	public static void registerBlock(NCBlockFluid block)
-	{
-		ForgeRegistries.BLOCKS.register(withName(block));
-		ForgeRegistries.ITEMS.register(new NCItemBlock(block, TextFormatting.AQUA).setRegistryName(block.getRegistryName()));
-		QMD.proxy.registerFluidBlockRendering(block, block.name);
-	}
-	
-	public static <T extends NCBlockFluid> Block withName(T block)
-	{
-		return block.setTranslationKey(QMD.MOD_ID + "." + block.name).setRegistryName(new ResourceLocation(QMD.MOD_ID, block.name));
-	}
+        //liquids
+        QMD_FLUIDS.put("mercury", MAKER.registerFluid("mercury", "liquid_opaque", false, false, 0XFFC6C6C6, 13540, 300, 1000, 0, LiquidFluidBlock::new));
+        QMD_FLUIDS.put("hot_mercury", MAKER.registerFluid("hot_mercury", "liquid_opaque", false, false, 0XFFD0D0D0, 13540, 630, 1000, 0, LiquidFluidBlock::new));
+        QMD_FLUIDS.put("iodine", MAKER.registerFluid("iodine", "liquid", false, false, 0XFF7400B3, 3960, 387, 1000, 0, LiquidFluidBlock::new));
 
+        //gases
+        addFluidPair(NCFluid.GAS_TYPE, "argon", 0xff75dd);
+        addFluidPair(NCFluid.GAS_TYPE, "neon", 0xff9f7a);
+        addFluidPair(NCFluid.GAS_TYPE, "chlorine", 0xffff8f);
+        addFluidPair(NCFluid.GAS_TYPE, "nitric_oxide", 0xc9eeff);
+        addFluidPair(NCFluid.GAS_TYPE, "nitrogen_dioxide", 0x782a10);
+        addFluidPair(NCFluid.GAS_TYPE, "compressed_air", 0xBDF0FF);
 
-	private static int waterBlend(int soluteColor, float blendRatio)
-	{
-		return ColorHelper.blend(0x2F43F4, soluteColor, blendRatio);
-	}
+        //molten
+        addFluidPair(NCFluid.MOLTEN_TYPE, "silicon", 0x676767);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "yag", 0xfffddb);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "nd_yag", 0xe4bcf5);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "tungsten", 0x4E564F);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "niobium", 0xCCCCC0);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "chromium", 0xC9C9C9);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "titanium", 0x8E7E8D);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "cobalt", 0x364F70);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "nickel", 0xA3A998);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "hafnium", 0x948484);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "zinc", 0xE0E0E0);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "osmium", 0x6F89A9);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "iridium", 0xDDD5DD);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "platinum", 0x71A4A9);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "calcium", 0xF4F3EA);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "strontium", 0xC4CB97);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "yttrium", 0xD1C375);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "neodymium", 0x818A97);
 
-	private static int waterBlend(int soluteColor)
-	{
-		return waterBlend(soluteColor, 0.5F);
-	}
+        addFluidPair(NCFluid.MOLTEN_TYPE, "samarium", 0xa4d95f);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "terbium", 0x5ba694);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "erbium", 0x5a7a45);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "ytterbium", 0x7a4552);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "bismuth", 0x827e73);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "polonium", 0x5c7c78);
+        addFluidPair(NCFluid.MOLTEN_TYPE, "radium", 0x6e607b);
+
+        addFluidPair(NCFluid.MOLTEN_TYPE, "sodium_chloride", 0xd4cccc);
+
+        //hot gases
+        addFluidPair(NCFluid.HOT_GAS_TYPE, "carbon", 0x343434);
+        addFluidPair(NCFluid.HOT_GAS_TYPE, "high_pressure_mercury", 0xAAAAAA);
+        addFluidPair(NCFluid.HOT_GAS_TYPE, "exhaust_mercury", 0x888888);
+
+        //exotic matter
+        addFluidPair(EXOTIC_TYPE, "antihydrogen", 0xB37AC4);
+        addFluidPair(EXOTIC_TYPE, "antideuterium", 0x9E6FEF);
+        addFluidPair(EXOTIC_TYPE, "antitritium", 0x5DBBD6);
+        addFluidPair(EXOTIC_TYPE, "antihelium3", 0xCBBB67);
+        addFluidPair(EXOTIC_TYPE, "antihelium", 0xC57B81);
+        addFluidPair(EXOTIC_TYPE, "positronium", 0xc9c9c9);
+        addFluidPair(EXOTIC_TYPE, "muonium", 0x9b93ff);
+        addFluidPair(EXOTIC_TYPE, "tauonium", 0xc86300);
+        addFluidPair(EXOTIC_TYPE, "glueballs", 0xa6f1f2);
+    }
+
+    public static void register(IEventBus modEventBus) {
+        FLUID_TYPES.register(modEventBus);
+        FLUIDS.register(modEventBus);
+    }
+
+    private static void addFluidPair(NCFluid.TypeInfo type, String name, int colour) {
+        QMD_FLUIDS.put(name, MAKER.registerFluid(name, 0xFF000000 | colour, type));
+    }
+
+    private static int waterBlend(int soluteColor, float blendRatio) {
+        return FastColor.ARGB32.lerp(blendRatio, 0x2F43F4, soluteColor);
+    }
+
+    private static int waterBlend(int soluteColor) {
+        return waterBlend(soluteColor, 0.5F);
+    }
 }

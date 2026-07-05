@@ -1,64 +1,45 @@
 package lach_01298.qmd.fluid;
 
-import lach_01298.qmd.QMDDamageSources;
-import nc.block.fluid.NCBlockFluid;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import com.nred.nuclearcraft.block.fluid.NCFluidBlock;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FlowingFluid;
 
-import java.util.Random;
+import static lach_01298.qmd.QMDDamageSources.ANTIMATTER_ANNIHLATION;
 
-public class BlockFluidExotic extends NCBlockFluid
-{
-	
-	public BlockFluidExotic(FluidExotic fluid)
-	{
-		super(fluid, Material.WATER);
-	}
-	
-	@Override
-	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
-	{
-			entityIn.attackEntityFrom(QMDDamageSources.ANTIMATTER_ANNIHLATION, 10000F);
-			worldIn.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 10f, true);
-	}
+public class BlockFluidExotic extends NCFluidBlock {
+    public BlockFluidExotic(FlowingFluid fluid, BlockBehaviour.Properties properties) {
+        super(fluid, properties);
+    }
 
-	@Override
-	protected boolean canMixWithFluids(World world, BlockPos pos, IBlockState state)
-	{
-		return false;
-	}
+    @Override
+    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+        entity.hurt(level.damageSources().source(ANTIMATTER_ANNIHLATION), 10000F);
+        level.explode(null, pos.getX(), pos.getY(), pos.getZ(), 10f, Level.ExplosionInteraction.BLOCK);
+    }
 
-	@Override
-	protected boolean shouldMixWithAdjacentFluid(World world, BlockPos pos, IBlockState state, IBlockState otherState)
-	{
-		return false;
-	}
+    @Override
+    public BlockState getSourceMixingState() {
+        return Blocks.OBSIDIAN.defaultBlockState();
+    }
 
-	@Override
-	protected IBlockState getSourceMixingState(World world, BlockPos pos, IBlockState state)
-	{
-		return Blocks.OBSIDIAN.getDefaultState();
-	}
+    @Override
+    public BlockState getFlowingMixingState() {
+        return Blocks.COBBLESTONE.defaultBlockState();
+    }
 
-	@Override
-	protected IBlockState getFlowingMixingState(World world, BlockPos pos, IBlockState state)
-	{
-		return Blocks.COBBLESTONE.getDefaultState();
-	}
+    @Override
+    protected boolean canSetFireToSurroundings(Level level, BlockPos blockPos, BlockState blockState, RandomSource randomSource) {
+        return false;
+    }
 
-	@Override
-	protected boolean canSetFireToSurroundings(World world, BlockPos pos, IBlockState state, Random rand)
-	{
-		return false;
-	}
-
-	@Override
-	protected IBlockState getFlowingIntoWaterState(World world, BlockPos pos, IBlockState state, Random rand)
-	{
-		return null;
-	}
+    @Override
+    public BlockState getFlowingIntoWaterState() {
+        return null;
+    }
 }

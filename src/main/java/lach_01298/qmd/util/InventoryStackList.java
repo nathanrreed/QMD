@@ -1,39 +1,33 @@
 package lach_01298.qmd.util;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
+
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.*;
 
 public class InventoryStackList extends NonNullList<ItemStack> {
-    
-    public InventoryStackList() {
-        super();
-    }
-    
     public InventoryStackList(List<ItemStack> other) {
         super(other, null);
     }
-    
+
     @Override
     public List<ItemStack> subList(int fromIndex, int toIndex) {
         return new SubList<>(this, fromIndex, toIndex);
     }
-    
-    protected class SubList<E> extends NonNullList<E> {
-        
+
+    protected static class SubList<E> extends NonNullList<E> {
         private final AbstractList<E> internal;
         private final int offset;
         private int size;
-        
+
         SubList(AbstractList<E> list, int fromIndex, int toIndex) {
+            super(new ArrayList<>(), null);
             if (fromIndex < 0) {
                 throw new IndexOutOfBoundsException("fromIndex = " + fromIndex);
-            }
-            else if (toIndex > list.size()) {
+            } else if (toIndex > list.size()) {
                 throw new IndexOutOfBoundsException("toIndex = " + toIndex);
-            }
-            else if (fromIndex > toIndex) {
+            } else if (fromIndex > toIndex) {
                 throw new IllegalArgumentException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ")");
             }
             internal = list;
@@ -41,27 +35,27 @@ public class InventoryStackList extends NonNullList<ItemStack> {
             size = toIndex - fromIndex;
             // this.modCount = internal.modCount;
         }
-        
+
         @Override
         public E set(int index, E element) {
             rangeCheck(index);
             checkForComodification();
             return internal.set(index + offset, element);
         }
-        
+
         @Override
         public E get(int index) {
             rangeCheck(index);
             checkForComodification();
             return internal.get(index + offset);
         }
-        
+
         @Override
         public int size() {
             checkForComodification();
             return size;
         }
-        
+
         @Override
         public void add(int index, E element) {
             rangeCheckForAdd(index);
@@ -70,7 +64,7 @@ public class InventoryStackList extends NonNullList<ItemStack> {
             // this.modCount = internal.modCount;
             ++size;
         }
-        
+
         @Override
         public E remove(int index) {
             rangeCheck(index);
@@ -80,7 +74,7 @@ public class InventoryStackList extends NonNullList<ItemStack> {
             --size;
             return result;
         }
-        
+
         @Override
         protected void removeRange(int fromIndex, int toIndex) {
             /*checkForComodification();
@@ -89,12 +83,12 @@ public class InventoryStackList extends NonNullList<ItemStack> {
             size -= (toIndex - fromIndex);*/
             throw new UnsupportedOperationException();
         }
-        
+
         @Override
         public boolean addAll(Collection<? extends E> c) {
             return addAll(size, c);
         }
-        
+
         @Override
         public boolean addAll(int index, Collection<? extends E> c) {
             rangeCheckForAdd(index);
@@ -102,80 +96,78 @@ public class InventoryStackList extends NonNullList<ItemStack> {
             if (cSize == 0) {
                 return false;
             }
-            
+
             checkForComodification();
             internal.addAll(offset + index, c);
             // this.modCount = internal.modCount;
             size += cSize;
             return true;
         }
-        
+
         @Override
         public Iterator<E> iterator() {
             return listIterator();
         }
-        
+
         @Override
         public ListIterator<E> listIterator(final int index) {
             checkForComodification();
             rangeCheckForAdd(index);
-            
+
             return new ListIterator<E>() {
-                
+
                 private final ListIterator<E> internalIter = internal.listIterator(index + offset);
-                
+
                 @Override
                 public boolean hasNext() {
                     return nextIndex() < size;
                 }
-                
+
                 @Override
                 public E next() {
                     if (hasNext()) {
                         return internalIter.next();
-                    }
-                    else {
+                    } else {
                         throw new NoSuchElementException();
                     }
                 }
-                
+
                 @Override
                 public boolean hasPrevious() {
                     return previousIndex() >= 0;
                 }
-                
+
                 @Override
                 public E previous() {
                     if (hasPrevious()) {
                         return internalIter.previous();
-                    }
-                    else {
+                    } else {
                         throw new NoSuchElementException();
                     }
                 }
-                
+
                 @Override
                 public int nextIndex() {
                     return internalIter.nextIndex() - offset;
                 }
-                
+
                 @Override
                 public int previousIndex() {
                     return internalIter.previousIndex() - offset;
                 }
-                
+
                 @Override
                 public void remove() {
                     internalIter.remove();
                     // SubList.this.modCount = internal.modCount;
                     --size;
                 }
-                
+
                 @Override
                 public void set(E e) {
                     internalIter.set(e);
                 }
-                
+
                 @Override
                 public void add(E e) {
                     internalIter.add(e);
@@ -184,28 +176,28 @@ public class InventoryStackList extends NonNullList<ItemStack> {
                 }
             };
         }
-        
+
         @Override
         public List<E> subList(int fromIndex, int toIndex) {
             return new SubList<>(this, fromIndex, toIndex);
         }
-        
+
         private void rangeCheck(int index) {
             if (index < 0 || index >= size) {
                 throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
             }
         }
-        
+
         private void rangeCheckForAdd(int index) {
             if (index < 0 || index > size) {
                 throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
             }
         }
-        
+
         private String outOfBoundsMsg(int index) {
             return "Index: " + index + ", Size: " + size;
         }
-        
+
         private void checkForComodification() {
             /*if (this.modCount != internal.modCount) {
                 throw new ConcurrentModificationException();

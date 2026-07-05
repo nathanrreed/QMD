@@ -1,0 +1,50 @@
+{
+  "type": "qmd:ore_leacher_recipe",
+  "fluidIngredients": [
+    {
+      "amount": 16,
+      "ingredient": {
+        "tag": "c:nitric_acid"
+      }
+    },
+    {
+      "amount": 16,
+      "ingredient": {
+        "tag": "c:hydrochloric_acid"
+      }
+    },
+    {
+      "amount": 16,
+      "ingredient": {
+        "tag": "c:sulfuric_acid"
+      }
+    }
+  ],
+  "itemIngredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ores/boron"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 3,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:boron_dust"
+      }
+    },
+    {
+      "chancePercent": 50,
+      "count": 2,
+      "ingredient": {
+        "tag": "c:dusts/salt"
+      },
+      "minStackSize": 1
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 0.0,
+  "timeModifier": 1.0
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "qmd:item/copernicium/depleted_fuel/mix_291_ni"
+  }
+}

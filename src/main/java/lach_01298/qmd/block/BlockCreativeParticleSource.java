@@ -1,77 +1,20 @@
 package lach_01298.qmd.block;
 
-import lach_01298.qmd.QMD;
-import lach_01298.qmd.tab.QMDTabs;
+import com.nred.nuclearcraft.block.tile.BlockTile;
 import lach_01298.qmd.tile.TileCreativeParticleSource;
-import nc.block.tile.*;
-import nclegacy.tile.ITileGuiLegacy;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.*;
-import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
-public class BlockCreativeParticleSource extends BlockTile implements ITileType
-{
-
-	public BlockCreativeParticleSource()
-	{
-		super(Material.IRON);
-		setCreativeTab(QMDTabs.BLOCKS);
-		setBlockUnbreakable();
-		setResistance(6000000.0F);
-	}
-
-	
-	@Override
-	public TileEntity createNewTileEntity(World world, int meta)
-	{
-		return new TileCreativeParticleSource();
-	}
-
-
-	@Override
-	public String getTileName()
-	{
-		return "creative_particle_source";
-	}
-	
-	@Override
-	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity)
-    {
-		return false;
+public class BlockCreativeParticleSource extends BlockTile {
+    public BlockCreativeParticleSource() {
+        super(p -> p.strength(-1.0F, 3600000.0F).noLootTable().isValidSpawn(Blocks::never));
     }
-	
-	
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
-		if (player == null || hand != EnumHand.MAIN_HAND) return false;
-		
-		TileEntity tile = world.getTileEntity(pos);
-		
-		if (player.isSneaking()) return false;
-		if (!player.isCreative()) return false;
-		
-		if (tile instanceof ITileGuiLegacy<?> tileGui)
-		{
-			if (world.isRemote)
-			{
-				onGuiOpened(world, pos);
-				return true;
-			}
-			else
-			{
-				onGuiOpened(world, pos);
-				FMLNetworkHandler.openGui(player, QMD.instance, tileGui.getGuiID(), world, pos.getX(), pos.getY(), pos.getZ());
-			}
-		}
-		else return false;
-		
-		return true;
-	}
+
+    @Override
+    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new TileCreativeParticleSource(pos, state);
+    }
 }

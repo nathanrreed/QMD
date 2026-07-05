@@ -1,0 +1,18 @@
+{
+  "type": "qmd:liquefier_coolant_recipe",
+  "fluidInput": {
+    "amount": 1,
+    "ingredient": {
+      "tag": "c:liquid_argon"
+    }
+  },
+  "fluidProduct": {
+    "amount": 64,
+    "ingredient": {
+      "tag": "c:argon"
+    }
+  },
+  "heatRequired": 1000,
+  "inputTemp": 87,
+  "outputTemp": 300
+}

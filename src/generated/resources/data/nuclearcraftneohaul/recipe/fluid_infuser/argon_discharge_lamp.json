@@ -1,0 +1,30 @@
+{
+  "type": "nuclearcraftneohaul:infuser_recipe",
+  "fluidIngredients": [
+    {
+      "amount": 250,
+      "ingredient": {
+        "tag": "c:argon"
+      }
+    }
+  ],
+  "itemIngredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:empty_discharge_lamp"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:argon_discharge_lamp"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 0.0,
+  "timeModifier": 1.0
+}

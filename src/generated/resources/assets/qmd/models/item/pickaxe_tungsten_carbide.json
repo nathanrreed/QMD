@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "qmd:item/tools/pickaxe_tungsten_carbide"
+  }
+}

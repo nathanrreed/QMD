@@ -1,0 +1,13 @@
+{
+  "values": [
+    "qmd:rtg_strontium",
+    "qmd:strontium_90_block",
+    "qmd:tungsten_carbide_reflector",
+    "qmd:hafnium_shield",
+    "qmd:turbine_blade_super_alloy",
+    "qmd:irradiator",
+    "qmd:ore_leacher",
+    "qmd:atmosphere_collector",
+    "qmd:liquid_collector"
+  ]
+}

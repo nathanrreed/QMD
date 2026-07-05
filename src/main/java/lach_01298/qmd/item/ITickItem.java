@@ -1,13 +1,9 @@
 package lach_01298.qmd.item;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 
-public interface ITickItem
-{
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
-	public void updateTick(ItemStack stack, TileEntity tile, long worldTime);
-	
-	
-	
+public interface ITickItem {
+    void updateTick(ItemStack stack, BlockEntity tile, long worldTime);
 }

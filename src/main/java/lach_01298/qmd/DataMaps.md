@@ -1,0 +1,1 @@
+IRRADIATOR_FUELS -> speed mult in irradiator

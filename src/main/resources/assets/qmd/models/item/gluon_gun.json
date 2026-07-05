@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench by Zalgo",
 	"textures": {
-		"0": "qmd:items/tools/gluon_gun",
-		"particle": "qmd:items/tools/gluon_gun"
+		"0": "qmd:item/tools/gluon_gun",
+		"particle": "qmd:item/tools/gluon_gun"
 	},
 	"elements": [
 		{

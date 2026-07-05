@@ -1,216 +1,115 @@
 package lach_01298.qmd.machine.gui;
 
+import com.nred.nuclearcraft.handler.BlockEntityMenuInfo;
+import com.nred.nuclearcraft.screen.InfoTileScreen;
 import lach_01298.qmd.QMD;
 import lach_01298.qmd.gui.GuiParticle;
-import lach_01298.qmd.machine.container.ContainerCreativeParticleSource;
+import lach_01298.qmd.machine.container.MachineMenuImpl.CreativeParticleSourceMenu;
 import lach_01298.qmd.machine.network.CreativeParticleSourceGuiPacket;
-import lach_01298.qmd.particle.*;
+import lach_01298.qmd.machine.network.CreativeParticleSourceUpdatePacket;
+import lach_01298.qmd.particle.ParticleStack;
+import lach_01298.qmd.particle.Particles;
 import lach_01298.qmd.tile.TileCreativeParticleSource;
-import nc.gui.NCGui;
-import nc.util.Lang;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
-import org.lwjgl.input.Keyboard;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.world.entity.player.Inventory;
 
-import java.io.IOException;
+import java.util.regex.Pattern;
 
-public class GuiCreativeParticleSource extends NCGui
-{
+public class GuiCreativeParticleSource extends InfoTileScreen<CreativeParticleSourceMenu, TileCreativeParticleSource, CreativeParticleSourceUpdatePacket, BlockEntityMenuInfo<TileCreativeParticleSource>> {
+    private EditBox particleNameField;
+    private EditBox amountField;
+    private EditBox energyField;
+    private EditBox focusField;
 
-	protected final EntityPlayer player;
-	protected final TileCreativeParticleSource tile;
-	protected final ResourceLocation gui_textures;
-	
-	private GuiTextField particleNameField;
-    private GuiTextField amountField;
-    private GuiTextField energyField;
-    private GuiTextField focusField;
-    
     private String particleName = "";
     private int amount = 0;
     private long energy = 0;
     private double focus = 0;
-	
-	private final GuiParticle guiParticle;
-	
-	public GuiCreativeParticleSource(EntityPlayer player, TileCreativeParticleSource tile)
-	{
-		super(new ContainerCreativeParticleSource(player, tile));
-		this.player = player;
-		this.tile = tile;
-		gui_textures = new ResourceLocation(QMD.MOD_ID + ":textures/gui/creative_particle_source.png");
-		xSize = 176;
-		ySize = 115;
-		guiParticle = new GuiParticle(this);
-		particleName = tile.getParticleName();
-		amount = tile.getParticleAmount();
-		energy = tile.getParticleEnergy();
-		focus = tile.getParticleFocus();
-	}
 
+    private final GuiParticle guiParticle;
 
-	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
-	{
-		String s = tile.getDisplayName().getUnformattedText();
-		fontRenderer.drawString(s, xSize / 2 - fontRenderer.getStringWidth(s) / 2, 4, 4210752);
-		
-		fontRenderer.drawString(Lang.localize("gui.qmd.container.creative_particle_source.particle_name"),  10, 15, 4210752);
-		fontRenderer.drawString(Lang.localize("gui.qmd.container.creative_particle_source.particle_amount"),  10, 40, 4210752);
-		fontRenderer.drawString(Lang.localize("gui.qmd.container.creative_particle_source.particle_energy"),  10, 65, 4210752);
-		fontRenderer.drawString(Lang.localize("gui.qmd.container.creative_particle_source.particle_focus"),  10, 90, 4210752);
-	}
-	
-	
-	@Override
-	public void renderTooltips(int mouseX, int mouseY)
-	{
+    public GuiCreativeParticleSource(CreativeParticleSourceMenu menu, Inventory inventory, Component title) {
+        super(menu, inventory, title, ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "screen/creative_particle_source"));
+        imageWidth = 176;
+        imageHeight = 115;
+        guiParticle = new GuiParticle(this);
+        particleName = tile.getParticleName();
+        amount = tile.getParticleAmount();
+        energy = tile.getParticleEnergy();
+        focus = tile.getParticleFocus();
+    }
 
-		guiParticle.drawToolTipBoxwithFocus(tile.getParticleBeams().get(0).getParticleStack(), guiLeft + 134, guiTop + 43, mouseX, mouseY);
-	}
-	
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
-	{
-		GlStateManager.color(1F, 1F, 1F, 1F);
-		mc.getTextureManager().bindTexture(gui_textures);
-		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-		
-		guiParticle.drawParticleStack(tile.getParticleBeams().get(0).getParticleStack(), guiLeft + 134, guiTop + 43);
-	}
+    @Override
+    protected void drawBackgroundLayer(GuiGraphics guiGraphics, float partialTicks, int mouseX, int mouseY) {
+        super.drawBackgroundLayer(guiGraphics, partialTicks, mouseX, mouseY);
+        guiGraphics.blitSprite(guiTextures, 256, 256, 0, 0, leftPos, topPos, imageWidth, imageHeight);
 
-	 public void drawScreen(int mouseX, int mouseY, float partialTicks)
-	 {
-		 super.drawScreen(mouseX, mouseY, partialTicks);
-		 this.particleNameField.drawTextBox();
-		 this.amountField.drawTextBox();
-		 this.energyField.drawTextBox();
-		 this.focusField.drawTextBox();
-		 
-		
-	 }
-	
-	
-	
-	@Override
-	public void initGui()
-	{
-		super.initGui();
- 
-		Keyboard.enableRepeatEvents(true);
-		this.buttonList.add(new GuiButton(0, guiLeft+118, guiTop+16, 50, 20, Lang.localize("gui.qmd.container.creative_particle_source.set")));
-		this.particleNameField = new GuiTextField(1, this.fontRenderer, guiLeft+10, guiTop+25, 100, 10);
-		this.particleNameField.setText(particleName);
+        guiParticle.drawParticleStack(guiGraphics, tile.getParticleBeams().get(0).getParticleStack(), leftPos + 134, topPos + 43);
+    }
 
-		this.amountField = new GuiTextField(2, this.fontRenderer, guiLeft+10, guiTop+50, 100, 10);
-		this.amountField.setText(Integer.toString(amount));
-		
-		this.energyField = new GuiTextField(3, this.fontRenderer, guiLeft+ 10, guiTop+75, 100, 10);
-		this.energyField.setText(Long.toString(energy));
-		
-		this.focusField = new GuiTextField(4, this.fontRenderer, guiLeft+10, guiTop+100, 100, 10);
-		this.focusField.setText(Double.toString(focus));
-		
-		this.particleNameField.setFocused(true);
-	}
-	
-	
-	@Override
-	protected void actionPerformed(GuiButton guiButton)
-	{
-		if (tile.getWorld().isRemote)
-		{
-			if (guiButton.id == 0)
-			{
-				ParticleStack stack = new ParticleStack(Particles.getParticleFromName(particleName), amount, energy, focus);
-				if(stack.getParticle() != null)
-				{
-					tile.getParticleBeams().get(0).setParticleStack(stack);
-				}
-				new CreativeParticleSourceGuiPacket(tile).sendToServer();
-			}
-		}
-		
-		
-		
-	}
-	
-    /**
-     * Fired when a key is typed (except F11 which toggles full screen). This is the equivalent of
-     * KeyListener.keyTyped(KeyEvent e). Args : character (character on the key), keyCode (lwjgl Keyboard key code)
-     */
-    protected void keyTyped(char typedChar, int keyCode) throws IOException
-    {
-    	if (keyCode == 1)
-        {
-            this.mc.player.closeScreen();
-        }
-    	
-    	if (this.particleNameField.isFocused())
-        {
+    @Override
+    protected void renderTooltip(GuiGraphics guiGraphics, int x, int y) {
+        super.renderTooltip(guiGraphics, x, y);
 
-    		
-    		this.particleNameField.textboxKeyTyped(typedChar, keyCode);
-        	this.particleName = this.particleNameField.getText();
-        }
-        
-        if (this.amountField.isFocused())
-        {
-            this.amountField.textboxKeyTyped(typedChar, keyCode);
-            try {
-            	this.amount = Integer.valueOf(this.amountField.getText());
-            } catch (Exception e)
-            {
-            
+        guiParticle.drawToolTipBoxWithFocus(guiGraphics, tile.getParticleBeams().get(0).getParticleStack(), leftPos + 134, topPos + 43, x, y);
+    }
+
+    @Override
+    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        guiGraphics.drawString(this.font, this.title, this.imageWidth / 2 - font.width(this.title) / 2, this.titleLabelY, 4210752, false);
+
+        guiGraphics.drawString(font, Component.translatable("gui.qmd.container.creative_particle_source.particle_name"), 10, 15, 4210752, false);
+        guiGraphics.drawString(font, Component.translatable("gui.qmd.container.creative_particle_source.particle_amount"), 10, 40, 4210752, false);
+        guiGraphics.drawString(font, Component.translatable("gui.qmd.container.creative_particle_source.particle_energy"), 10, 65, 4210752, false);
+        guiGraphics.drawString(font, Component.translatable("gui.qmd.container.creative_particle_source.particle_focus"), 10, 90, 4210752, false);
+    }
+
+    private static final Pattern INT_LONG = Pattern.compile("^-?[0-9]*$");
+    private static final Pattern DOUBLE = Pattern.compile("^-?[0-9]*\\.?[0-9]*$");
+
+    @Override
+    public void init() {
+        super.init();
+
+        addRenderableWidget(new Button.Builder(Component.translatable("gui.qmd.container.creative_particle_source.set"), this::setButton).bounds(leftPos + 118, topPos + 16, 50, 20).build());
+
+        this.particleNameField = new EditBox(font, leftPos + 10, topPos + 25, 100, 12, Component.empty());
+        this.particleNameField.insertText(particleName);
+        addRenderableWidget(particleNameField);
+
+        this.amountField = new EditBox(font, leftPos + 10, topPos + 50, 100, 12, Component.empty());
+        this.amountField.insertText(Integer.toString(amount));
+        this.amountField.setFilter((string) -> INT_LONG.matcher(string).matches());
+        addRenderableWidget(amountField);
+
+        this.energyField = new EditBox(font, leftPos + 10, topPos + 75, 100, 12, Component.empty());
+        this.energyField.insertText(Long.toString(energy));
+        this.energyField.setFilter((string) -> INT_LONG.matcher(string).matches());
+        addRenderableWidget(energyField);
+
+        this.focusField = new EditBox(font, leftPos + 10, topPos + 100, 100, 12, Component.empty());
+        this.focusField.insertText(Double.toString(focus));
+        this.focusField.setFilter((string) -> DOUBLE.matcher(string).matches());
+        addRenderableWidget(focusField);
+    }
+
+    protected void setButton(Button guiButton) {
+        if (tile.getLevel().isClientSide()) {
+            int amount = amountField.getValue().isEmpty() ? 0 : Integer.parseInt(amountField.getValue());
+            long energy = energyField.getValue().isEmpty() ? 0 : Long.parseLong(energyField.getValue());
+            double focus = focusField.getValue().isEmpty() ? 0 : Double.parseDouble(focusField.getValue());
+
+            ParticleStack stack = new ParticleStack(Particles.getParticleFromName(particleNameField.getValue()), amount, energy, focus);
+            if (stack.getParticle() != null) {
+                tile.getParticleBeams().get(0).setParticleStack(stack);
             }
-            
+            new CreativeParticleSourceGuiPacket(tile).sendToServer();
         }
-        
-        if (this.energyField.isFocused())
-        {
-			this.energyField.textboxKeyTyped(typedChar, keyCode);
-			try
-			{
-				this.energy = Long.valueOf(this.energyField.getText());
-			}
-			catch (Exception e)
-			{
-
-			}
-        
-        }
-        
-        if (this.focusField.isFocused())
-        {
-			this.focusField.textboxKeyTyped(typedChar, keyCode);
-			try
-			{
-				this.focus = Double.valueOf(this.focusField.getText());
-			}
-			catch (Exception e)
-			{
-
-			}
-        }
-  
     }
-	
-    
-    /**
-     * Called when the mouse is clicked. Args : mouseX, mouseY, clickedButton
-     */
-    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException
-    {
-        super.mouseClicked(mouseX, mouseY, mouseButton);
-        this.particleNameField.mouseClicked(mouseX, mouseY, mouseButton);
-        this.amountField.mouseClicked(mouseX, mouseY, mouseButton);
-        this.energyField.mouseClicked(mouseX, mouseY, mouseButton);
-        this.focusField.mouseClicked(mouseX, mouseY, mouseButton);
-      
-    }
-
-	
-	
 }

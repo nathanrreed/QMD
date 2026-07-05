@@ -1,331 +1,151 @@
 package lach_01298.qmd.item;
 
-import lach_01298.qmd.*;
-import lach_01298.qmd.config.QMDConfig;
+import com.nred.nuclearcraft.item.NCFoodItem;
+import com.nred.nuclearcraft.item.NCItem;
+import lach_01298.qmd.QMD;
+import lach_01298.qmd.config.QMDStartupConfig;
 import lach_01298.qmd.enums.MaterialTypes.*;
-import lach_01298.qmd.tab.QMDTabs;
-import nc.item.*;
-import nc.item.tool.*;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.*;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item.Properties;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.SimpleTier;
+import net.neoforged.neoforge.registries.DeferredItem;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
-public class QMDItems
-{
+import java.util.HashMap;
+import java.util.Map;
 
-	public static Item dust;
-	public static Item dust2;
-	public static Item ingot;
-	public static Item ingot2;
-	public static Item ingotAlloy;
-	public static Item isotope;
-	public static Item part;
-	public static Item semiconductor;
-	public static Item chemicalDust;
-	public static Item fissionWaste;
-	public static Item spallationWaste;
-	public static Item spallationWaste2;
-	
-	public static Item source;
-	
-	
-	
-	public static ToolMaterial TUNGSTEN_CARBIDE;
-	public static Item sword_tungsten_carbide;
-	public static Item pickaxe_tungsten_carbide;
-	public static Item shovel_tungsten_carbide;
-	public static Item axe_tungsten_carbide;
-	public static Item hoe_tungsten_carbide;
-	
-	public static Item cell;
-	
-	public static Item flesh;
-	public static Item potassiumIodineTablet;
-	public static Item luminousPaint;
-	
-	public static Item leptonCannon;
-	public static Item gluonGun;
-	public static Item antimatterLauncher;
-	
-	public static Item beamMeter;
-	public static Item basic_drill;
-	public static Item advanced_drill;
-	
-	public static Item copernicium;
-	public static Item pellet_copernicium;
-	public static Item fuel_copernicium;
-	public static Item depleted_fuel_copernicium;
-	
-	public static void init()
-	{
-		dust = withName(new NCItemMeta(DustType.class), "dust");
-		dust2 = withName(new NCItemMeta(DustType2.class), "dust2");
-		ingot = withName(new NCItemMeta(IngotType.class), "ingot");
-		ingot2 = withName(new NCItemMeta(IngotType2.class), "ingot2");
-		ingotAlloy = withName(new NCItemMeta(IngotAlloyType.class), "ingot_alloy");
-		
-		source = withName(new ItemSource(),"source");
-		
-		
-		isotope = withName(new NCItemMeta(IsotopeType.class), "isotope");
-		part =  withName(new NCItemMeta(PartType.class), "part");
-		semiconductor =  withName(new NCItemMeta(SemiconductorType.class), "semiconductor");
-		chemicalDust =  withName(new NCItemMeta(ChemicalDustType.class), "chemical_dust");
-		fissionWaste =  withName(new NCItemMeta(FissionWasteType.class), "waste_fission");
-		spallationWaste =  withName(new NCItemMeta(SpallationWasteType.class), "waste_spallation");
-		spallationWaste2 =  withName(new NCItemMeta(SpallationWasteType2.class), "waste_spallation2");
-		
-		TUNGSTEN_CARBIDE = toolMaterial("tungsten_carbide", 0, new ItemStack(ingotAlloy, 1, IngotAlloyType.TUNGSTEN_CARBIDE.getID()));
-		
-		if(QMDConfig.register_tool[0])
-		{
-			sword_tungsten_carbide = withName(new NCSword(TUNGSTEN_CARBIDE, TextFormatting.GRAY), "sword_tungsten_carbide");
-			pickaxe_tungsten_carbide = withName(new NCPickaxe(TUNGSTEN_CARBIDE, TextFormatting.GRAY), "pickaxe_tungsten_carbide");
-			shovel_tungsten_carbide = withName(new NCShovel(TUNGSTEN_CARBIDE, TextFormatting.GRAY), "shovel_tungsten_carbide");
-			axe_tungsten_carbide = withName(new NCAxe(TUNGSTEN_CARBIDE, TextFormatting.GRAY), "axe_tungsten_carbide");
-			hoe_tungsten_carbide = withName(new NCHoe(TUNGSTEN_CARBIDE, TextFormatting.GRAY), "hoe_tungsten_carbide");
-		}
+import static lach_01298.qmd.block.QMDBlocks.*;
 
-		
-		flesh = withName(new NCItemFood(4, 0.1F, false, new PotionEffect[] {}), "flesh");
+public class QMDItems {
+    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(QMD.MOD_ID);
 
-		potassiumIodineTablet = withName(new ItemTablet(new PotionEffect[] {}), "potassium_iodine_tablet");
-		luminousPaint = withName(new ItemLuminousPaint(), "luminous_paint");
-		
-		leptonCannon =  withName(new ItemLeptonCannon(),"lepton_cannon");
-		gluonGun =  withName(new ItemGluonGun(),"gluon_gun");
-		antimatterLauncher =  withName(new ItemAntimatterLauncher(),"antimatter_launcher");
-		
-		beamMeter = withName(new ItemBeamMeter(),"beam_meter");
-		
-		if(QMDConfig.register_tool[1])
-		{
-			basic_drill = withName(new ItemDrill(QMDConfig.drill_radius[0], QMDConfig.drill_energy_capacity[0], QMDConfig.tool_mining_level[1], (float)QMDConfig.tool_speed[1],QMDInfo.drillInfo(0)),"drill_basic");
-			advanced_drill = withName(new ItemDrill(QMDConfig.drill_radius[1], QMDConfig.drill_energy_capacity[1], QMDConfig.tool_mining_level[2], (float)QMDConfig.tool_speed[2], QMDInfo.drillInfo(1)),"drill_advanced");
-		}
-		
-		cell = withName(new ItemCell(),"cell");
-		
-		copernicium = withName(new NCItemMeta(CoperniciumType.class), "copernicium");
-		pellet_copernicium = withName(new NCItemMeta(CoperniciumPelletType.class), "pellet_copernicium");
-		fuel_copernicium = withName(new ItemFissionFuel(CoperniciumFuelType.class), "fuel_copernicium");
-		depleted_fuel_copernicium = withName(new NCItemMeta(CoperniciumDepletedFuelType.class), "depleted_fuel_copernicium");
-		
-		
-	}
+    public static final Map<DustType, DeferredItem<Item>> dusts = new HashMap<>();
+    public static final Map<IngotType, DeferredItem<Item>> ingots = new HashMap<>();
+    public static final Map<IngotAlloyType, DeferredItem<Item>> ingotAlloys = new HashMap<>();
+    public static final Map<IsotopeType, DeferredItem<Item>> isotopes = new HashMap<>();
+    public static final Map<PartType, DeferredItem<Item>> parts = new HashMap<>();
+    public static final Map<SemiconductorType, DeferredItem<Item>> semiconductors = new HashMap<>();
+    public static final Map<ChemicalDustType, DeferredItem<Item>> chemicalDusts = new HashMap<>();
+    public static final Map<FissionWasteType, DeferredItem<Item>> fissionWastes = new HashMap<>();
+    public static final Map<SpallationWasteType, DeferredItem<Item>> spallationWastes = new HashMap<>();
 
-	public static void register()
-	{
-		registerItem(dust, QMDTabs.ITEMS);
-		registerItem(dust2, QMDTabs.ITEMS);
-		registerItem(ingot, QMDTabs.ITEMS);
-		registerItem(ingot2, QMDTabs.ITEMS);
-		registerItem(ingotAlloy, QMDTabs.ITEMS);
-		
-		registerItem(source, QMDTabs.ITEMS);
+    public static Map<SourceType, DeferredItem<Item>> sources = new HashMap<>();
 
-		
-		registerItem(isotope, QMDTabs.ITEMS);
-		
-		registerItem(part, QMDTabs.ITEMS);
-		registerItem(semiconductor, QMDTabs.ITEMS);
-		registerItem(chemicalDust, QMDTabs.ITEMS);
-		registerItem(fissionWaste, QMDTabs.ITEMS);
-		registerItem(spallationWaste, QMDTabs.ITEMS);
-		registerItem(spallationWaste2, QMDTabs.ITEMS);
-		
-		if(QMDConfig.register_tool[0])
-		{
-			registerItem(sword_tungsten_carbide,QMDTabs.ITEMS);
-			registerItem(pickaxe_tungsten_carbide,QMDTabs.ITEMS);
-			registerItem(shovel_tungsten_carbide,QMDTabs.ITEMS);
-			registerItem(axe_tungsten_carbide,QMDTabs.ITEMS);
-			registerItem(hoe_tungsten_carbide,QMDTabs.ITEMS);
-		}
-		
-		registerItem(flesh,QMDTabs.ITEMS);
-		registerItem(potassiumIodineTablet,QMDTabs.ITEMS);
-		registerItem(luminousPaint,QMDTabs.ITEMS);
-		registerItem(cell,QMDTabs.ITEMS);
-		registerItem(leptonCannon,QMDTabs.ITEMS);
-		registerItem(gluonGun,QMDTabs.ITEMS);
-		registerItem(antimatterLauncher,QMDTabs.ITEMS);
-		registerItem(beamMeter,QMDTabs.ITEMS);
-		
-		if(QMDConfig.register_tool[1])
-		{
-			registerItem(basic_drill,QMDTabs.ITEMS);
-			registerItem(advanced_drill,QMDTabs.ITEMS);
-		}
-		
-		
-		registerItem(copernicium,QMDTabs.ITEMS);
-		registerItem(pellet_copernicium,QMDTabs.ITEMS);
-		registerItem(fuel_copernicium,QMDTabs.ITEMS);
-		registerItem(depleted_fuel_copernicium,QMDTabs.ITEMS);
-		
-		
-	}
+    public static Tier TUNGSTEN_CARBIDE;
 
-	public static void registerRenders()
-	{
-		for(int i = 0; i < DustType.values().length; i++)
-		{
-			registerRender(dust, i, DustType.values()[i].getName());
-		}
-		
-		for(int i = 0; i < DustType2.values().length; i++)
-		{
-			registerRender(dust2, i, DustType2.values()[i].getName());
-		}
-		
-		for(int i = 0; i < IngotType.values().length; i++)
-		{
-			registerRender(ingot, i, IngotType.values()[i].getName());
-		}
-		
-		for(int i = 0; i < IngotType2.values().length; i++)
-		{
-			registerRender(ingot2, i, IngotType2.values()[i].getName());
-		}
-		
-		
-		for(int i = 0; i < IngotAlloyType.values().length; i++)
-		{
-			registerRender(ingotAlloy, i, IngotAlloyType.values()[i].getName());
-		}
-		
-		for(int i = 0; i < IsotopeType.values().length; i++)
-		{
-			registerRender(isotope, i, IsotopeType.values()[i].getName());
-		}
-		
-		for (int i = 0; i < PartType.values().length; i++)
-		{
-			registerRender(part, i, PartType.values()[i].getName());
-		}
-		
-		for (int i = 0; i < SemiconductorType.values().length; i++)
-		{
-			registerRender(semiconductor, i, SemiconductorType.values()[i].getName());
-		}
-		for (int i = 0; i < ChemicalDustType.values().length; i++)
-		{
-			registerRender(chemicalDust, i, ChemicalDustType.values()[i].getName());
-		}
-		
-		for (int i = 0; i < FissionWasteType.values().length; i++)
-		{
-			registerRender(fissionWaste, i, FissionWasteType.values()[i].getName());
-		}
-		
-		for (int i = 0; i < SpallationWasteType.values().length; i++)
-		{
-			registerRender(spallationWaste, i, SpallationWasteType.values()[i].getName());
-		}
-		
-		for (int i = 0; i < SpallationWasteType2.values().length; i++)
-		{
-			registerRender(spallationWaste2, i, SpallationWasteType2.values()[i].getName());
-		}
-		
-		for (int i = 0; i < SourceType.values().length; i++)
-		{
-			registerRender(source, i, SourceType.values()[i].getName());
-		}
-		
-		
-		
-		if(QMDConfig.register_tool[0])
-		{
-			registerRender(sword_tungsten_carbide);
-			registerRender(pickaxe_tungsten_carbide);
-			registerRender(shovel_tungsten_carbide);
-			registerRender(axe_tungsten_carbide);
-			registerRender(hoe_tungsten_carbide);
-		}
-		
-		
-		registerRender(flesh);
-		registerRender(potassiumIodineTablet);
-		
-		for (int i = 0; i < LuminousPaintType.values().length; i++)
-		{
-			registerRender(luminousPaint, i, LuminousPaintType.values()[i].getName());
-		}
-		
-		registerRender(leptonCannon);
-		registerRender(gluonGun);
-		registerRender(antimatterLauncher);
-		registerRender(beamMeter);
-		
-		if(QMDConfig.register_tool[1])
-		{
-			registerRender(basic_drill);
-			registerRender(advanced_drill);
-		}
-		
-		for (int i = 0; i < CellType.values().length; i++)
-		{
-			registerRender(cell, i, CellType.values()[i].getName());
-		}
-		
-		for (int i = 0; i < CoperniciumType.values().length; i++) {
-			registerRender(copernicium, i, CoperniciumType.values()[i].getName());
-		}
-		for (int i = 0; i < CoperniciumPelletType.values().length; i++) {
-			registerRender(pellet_copernicium, i, CoperniciumPelletType.values()[i].getName());
-		}
-		for (int i = 0; i < CoperniciumFuelType.values().length; i++) {
-			registerRender(fuel_copernicium, i, CoperniciumFuelType.values()[i].getName());
-		}
-		for (int i = 0; i < CoperniciumDepletedFuelType.values().length; i++) {
-			registerRender(depleted_fuel_copernicium, i, CoperniciumDepletedFuelType.values()[i].getName());
-		}
-	}
-	
+    public static DeferredItem<Item> sword_tungsten_carbide;
+    public static DeferredItem<Item> pickaxe_tungsten_carbide;
+    public static DeferredItem<Item> shovel_tungsten_carbide;
+    public static DeferredItem<Item> axe_tungsten_carbide;
+    public static DeferredItem<Item> hoe_tungsten_carbide;
 
-	
-	public static <T extends Item & IInfoItem> Item withName(T item, String name)
-	{
-		item.setTranslationKey(QMD.MOD_ID + "." + name).setRegistryName(new ResourceLocation(QMD.MOD_ID, name));
-		item.setInfo();
-		return item;
-	}
+    public static Map<CellType, DeferredItem<Item>> cells = new HashMap<>();
 
-	public static String infoLine(String name)
-	{
-		return "item." + QMD.MOD_ID + "." + name + ".desc";
-	}
+    public static DeferredItem<Item> flesh;
+    public static DeferredItem<Item> potassiumIodineTablet;
+    public static Map<LuminousPaintType, DeferredItem<Item>> luminousPaints = new HashMap<>();
 
-	public static void registerItem(Item item, CreativeTabs tab)
-	{
-		item.setCreativeTab(tab);
-		ForgeRegistries.ITEMS.register(item);
-	}
+//    public static DeferredItem<Item> leptonCannon;
+//    public static DeferredItem<Item> gluonGun;
+//    public static DeferredItem<Item> antimatterLauncher;
 
-	public static void registerRender(Item item)
-	{
-		ModelLoader.setCustomModelResourceLocation(item, 0,new ModelResourceLocation(item.getRegistryName(), "inventory"));
-	}
+    public static DeferredItem<Item> beamMeter;
+//    public static DeferredItem<Item> basic_drill;
+//    public static DeferredItem<Item> advanced_drill;
 
-	public static void registerRender(Item item, int meta, String type)
-	{
-		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(QMD.MOD_ID, "items/" + item.getRegistryName().getPath()), "type=" + type));
-	}
+    public static Map<CoperniciumType, DeferredItem<Item>> copernicium = new HashMap<>();
+    public static Map<CoperniciumPelletType, DeferredItem<Item>> pellet_copernicium = new HashMap<>();
+    public static Map<CoperniciumFuelType, DeferredItem<Item>> fuel_copernicium = new HashMap<>();
+    public static Map<CoperniciumDepletedFuelType, DeferredItem<Item>> depleted_fuel_copernicium = new HashMap<>();
 
-	public static ToolMaterial toolMaterial(String name, int id, ItemStack repairStack)
-	{
-		return EnumHelper.addToolMaterial(QMD.MOD_ID + ":" + name, QMDConfig.tool_mining_level[id], QMDConfig.tool_durability[id], (float) QMDConfig.tool_speed[id], (float) QMDConfig.tool_attack_damage[id], QMDConfig.tool_enchantability[id]).setRepairItem(repairStack);
-	}
+    public static void init() {
+        for (DustType type : DustType.values()) {
+            dusts.put(type, ITEMS.register(type.getSerializedName().toLowerCase() + "_dust", () -> new NCItem(new Properties())));
+        }
+        for (IngotType type : IngotType.values()) {
+            ingots.put(type, ITEMS.register(type.getSerializedName().toLowerCase() + "_ingot", () -> new NCItem(new Properties())));
+        }
+        for (IngotAlloyType type : IngotAlloyType.values()) {
+            ingotAlloys.put(type, ITEMS.register(type.getSerializedName().toLowerCase() + "_alloy", () -> new NCItem(new Properties())));
+        }
+        for (SourceType type : SourceType.values()) {
+            sources.put(type, ITEMS.register(type.getSerializedName().toLowerCase() + "_source", () -> new ItemSource(type)));
+        }
+        for (IsotopeType type : IsotopeType.values()) {
+            isotopes.put(type, ITEMS.register(type.getSerializedName().toLowerCase() + "_isotope", () -> new NCItem(new Properties())));
+        }
+        for (PartType type : PartType.values()) {
+            parts.put(type, ITEMS.register(type.getSerializedName().toLowerCase() + "_part", () -> new NCItem(new Properties())));
+        }
+        for (SemiconductorType type : SemiconductorType.values()) {
+            semiconductors.put(type, ITEMS.register(type.getSerializedName().toLowerCase() + "_semiconductor", () -> new NCItem(new Properties())));
+        }
+        for (ChemicalDustType type : ChemicalDustType.values()) {
+            chemicalDusts.put(type, ITEMS.register(type.getSerializedName().toLowerCase() + "_chemical_dust", () -> new NCItem(new Properties())));
+        }
+        for (FissionWasteType type : FissionWasteType.values()) {
+            fissionWastes.put(type, ITEMS.register(type.getSerializedName().toLowerCase() + "_waste_fission", () -> new NCItem(new Properties())));
+        }
+        for (SpallationWasteType type : SpallationWasteType.values()) {
+            spallationWastes.put(type, ITEMS.register(type.getSerializedName().toLowerCase() + "_waste_spallation", () -> new NCItem(new Properties())));
+        }
 
+        TUNGSTEN_CARBIDE = toolMaterial(0, ingotAlloys.get(IngotAlloyType.TUNGSTEN_CARBIDE));
 
+        sword_tungsten_carbide = ITEMS.register("sword_tungsten_carbide", () -> new SwordItem(TUNGSTEN_CARBIDE, new Properties().attributes(SwordItem.createAttributes(TUNGSTEN_CARBIDE, 3, -2.4F))));
+        pickaxe_tungsten_carbide = ITEMS.register("pickaxe_tungsten_carbide", () -> new PickaxeItem(TUNGSTEN_CARBIDE, new Properties().attributes(PickaxeItem.createAttributes(TUNGSTEN_CARBIDE, 1.0F, -2.8F))));
+        shovel_tungsten_carbide = ITEMS.register("shovel_tungsten_carbide", () -> new ShovelItem(TUNGSTEN_CARBIDE, new Properties().attributes(AxeItem.createAttributes(TUNGSTEN_CARBIDE, 1.5F, -3.0F))));
+        axe_tungsten_carbide = ITEMS.register("axe_tungsten_carbide", () -> new AxeItem(TUNGSTEN_CARBIDE, new Properties().attributes(AxeItem.createAttributes(TUNGSTEN_CARBIDE, 7.0F, -3.2F))));
+        hoe_tungsten_carbide = ITEMS.register("hoe_tungsten_carbide", () -> new AxeItem(TUNGSTEN_CARBIDE, new Properties().attributes(HoeItem.createAttributes(TUNGSTEN_CARBIDE, -1.0F, -2.0F))));
 
+        flesh = ITEMS.register("flesh", () -> new NCFoodItem(4, 0.1F));
+
+        potassiumIodineTablet = ITEMS.register("potassium_iodine_tablet", ItemTablet::new);
+
+        luminousPaints.put(LuminousPaintType.GREEN, ITEMS.register("green_luminous_paint", () -> new BlockItem(greenLuminousPaint.get(), new Properties())));
+        luminousPaints.put(LuminousPaintType.BLUE, ITEMS.register("blue_luminous_paint", () -> new BlockItem(blueLuminousPaint.get(), new Properties())));
+        luminousPaints.put(LuminousPaintType.ORANGE, ITEMS.register("orange_luminous_paint", () -> new BlockItem(orangeLuminousPaint.get(), new Properties())));
+
+//        leptonCannon = ITEMS.register("lepton_cannon", ItemLeptonCannon::new); TODO
+//        gluonGun = ITEMS.register("gluon_gun", ItemGluonGun::new);
+//        antimatterLauncher = ITEMS.register(new ItemAntimatterLauncher(), "antimatter_launcher");
+
+        beamMeter = ITEMS.register("beam_meter", ItemBeamMeter::new);
+
+//        basic_drill = ITEMS.register("drill_basic", () -> new ItemDrill(QMDStartupConfig.drill_radius[0], QMDStartupConfig.drill_energy_capacity[0], new SimpleTier(BlockTags.create(ResourceLocation.parse(QMDStartupConfig.tool_mining_level[1])), -1, (float) QMDStartupConfig.tool_speed[1], 0, 20, () -> Ingredient.EMPTY), QMDInfo.drillInfo(0)));
+//        advanced_drill = ITEMS.register("drill_advanced", () -> new ItemDrill(QMDStartupConfig.drill_radius[1], QMDStartupConfig.drill_energy_capacity[1], new SimpleTier(BlockTags.create(ResourceLocation.parse(QMDStartupConfig.tool_mining_level[2])), -1, (float) QMDStartupConfig.tool_speed[2], 0, 20, () -> Ingredient.EMPTY), QMDInfo.drillInfo(1)));
+//
+        for (CellType type : CellType.values()) {
+            cells.put(type, ITEMS.register(type.getSerializedName().toLowerCase() + "_cell", () -> new ItemCell(type)));
+        }
+        for (CoperniciumType type : CoperniciumType.values()) {
+            copernicium.put(type, ITEMS.register("copernicium_" + type.getSerializedName().toLowerCase(), () -> new NCItem(new Properties())));
+        }
+        for (CoperniciumPelletType type : CoperniciumPelletType.values()) {
+            pellet_copernicium.put(type, ITEMS.register("copernicium_" + type.getSerializedName().toLowerCase(), () -> new NCItem(new Properties())));
+        }
+        for (CoperniciumFuelType type : CoperniciumFuelType.values()) {
+            fuel_copernicium.put(type, ITEMS.register("copernicium_" + type.getSerializedName().toLowerCase(), () -> new NCItem(new Properties())));
+        }
+        for (CoperniciumDepletedFuelType type : CoperniciumDepletedFuelType.values()) {
+            depleted_fuel_copernicium.put(type, ITEMS.register("depleted_" + type.getSerializedName().toLowerCase(), () -> new NCItem(new Properties())));
+        }
+    }
+
+    public static void register(IEventBus modEventBus) {
+        ITEMS.register(modEventBus);
+    }
+
+    public static Tier toolMaterial(int id, ItemLike repairStack) {
+        return new SimpleTier(
+                BlockTags.create(ResourceLocation.parse(QMDStartupConfig.tool_mining_level[id])),
+                QMDStartupConfig.tool_durability[id], (float) QMDStartupConfig.tool_speed[id], (float) QMDStartupConfig.tool_attack_damage[id], QMDStartupConfig.tool_enchantability[id],
+                () -> Ingredient.of(repairStack)
+        );
+    }
 }

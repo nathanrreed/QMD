@@ -1,29 +1,30 @@
 package lach_01298.qmd;
 
-import lach_01298.qmd.entity.*;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.*;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.damagesource.DamageType;
 
-import javax.annotation.Nullable;
+public class QMDDamageSources {
+    public static final ResourceKey<DamageType> ANTIMATTER_ANNIHLATION = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "antimatter_annihilation"));
+    public static final ResourceKey<DamageType> SELF_POISONING = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "self_poisoning"));
 
-public class QMDDamageSources
-{
-	public static final DamageSource ANTIMATTER_ANNIHLATION = new DamageSource("antimatter_annihilation").setDamageBypassesArmor().setDamageIsAbsolute();
-	public static final DamageSource SELF_POISONING = new DamageSource("self_poisoning").setDamageBypassesArmor().setDamageIsAbsolute();
-	
-	public static final DamageSource causeLeptonCannonDamage(EntityLeptonBeam beam, @Nullable Entity indirectEntityIn)
-	{
-		return (new EntityDamageSourceIndirect("lepton_cannon", beam, indirectEntityIn)).setDamageBypassesArmor();
-	}
+    public static final ResourceKey<DamageType> LEPTON_CANNON = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "lepton_cannon"));
+    public static final ResourceKey<DamageType> GLUON_GUN = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "gluon_gun"));
+    public static final ResourceKey<DamageType> ANTIMATTER_LAUNCHER = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "antimatter_launcher"));
 
-	public static DamageSource causeGluonGunDamage(EntityGluonBeam beam, @Nullable Entity indirectEntityIn)
-	{
-		return (new EntityDamageSourceIndirect("gluon_gun", beam, indirectEntityIn)).setDamageBypassesArmor();
-	}
-	
-	public static DamageSource causeAntimatterLauncherDamage(EntityAntimatterProjectile projectile, @Nullable Entity indirectEntityIn)
-	{
-		return (new EntityDamageSourceIndirect("antimatter_launcher", projectile, indirectEntityIn)).setDamageBypassesArmor();
-	}
+//    public static final DamageSource causeLeptonCannonDamage(EntityLeptonBeam beam, @Nullable Entity indirectEntityIn) {
+//        return beam.level().damageSources().source(LEPTON_CANNON, beam, indirectEntityIn);
+//    }
+//
+//    public static DamageSource causeGluonGunDamage(EntityGluonBeam beam, @Nullable Entity indirectEntityIn) {
+//        return beam.level().damageSources().source(GLUON_GUN, beam, indirectEntityIn);
+//    }
+//
+//    public static DamageSource causeAntimatterLauncherDamage(EntityAntimatterProjectile projectile, @Nullable Entity indirectEntityIn) {
+//        return projectile.level().damageSources().source(ANTIMATTER_LAUNCHER, projectile, indirectEntityIn);
+//    }
 
+    public static void init() {
+    }
 }

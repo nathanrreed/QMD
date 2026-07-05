@@ -1,52 +1,39 @@
 package lach_01298.qmd.particle;
 
-import net.minecraft.util.EnumFacing;
+import net.minecraft.core.Direction;
 
-public class ParticleStorageAccelerator extends ParticleStorage
-{
-	public ParticleStorageAccelerator()
-	{
-		super(null,Long.MAX_VALUE,Integer.MAX_VALUE);
-	
-	}
-	
-	public void setMaxEnergy(long maxEnergy)
-	{
-		this.maxEnergy = maxEnergy;
-	}
-	
-	public void setMinEnergy(long minEnergy)
-	{
-		this.minEnergy = minEnergy;
-	}
-	
-	
-	@Override
-	public boolean reciveParticle(EnumFacing side, ParticleStack stack)
-	{
-		if(stack != null)
-		{
-			if(stack.getMeanEnergy() >= minEnergy && stack.getMeanEnergy() <= maxEnergy)
-			{
-				this.particleStack = stack;
-				return true;
-			}
-			return false;
-		}
-		this.particleStack = stack;
-		return true;
-	}
+public class ParticleStorageAccelerator extends ParticleStorage {
+    public ParticleStorageAccelerator() {
+        super(null, Long.MAX_VALUE, Integer.MAX_VALUE);
+    }
 
-	@Override
-	public ParticleStack extractParticle(EnumFacing side)
-	{
-		if (canExtractParticle(side))
-		{
-			ParticleStack stack = this.particleStack;
-			return stack;
-		}
-		return null;
-	}
-	
+    public void setMaxEnergy(long maxEnergy) {
+        this.maxEnergy = maxEnergy;
+    }
 
+    public void setMinEnergy(long minEnergy) {
+        this.minEnergy = minEnergy;
+    }
+
+    @Override
+    public boolean reciveParticle(Direction side, ParticleStack stack) {
+        if (stack != null) {
+            if (stack.getMeanEnergy() >= minEnergy && stack.getMeanEnergy() <= maxEnergy) {
+                this.particleStack = stack;
+                return true;
+            }
+            return false;
+        }
+        this.particleStack = stack;
+        return true;
+    }
+
+    @Override
+    public ParticleStack extractParticle(Direction side) {
+        if (canExtractParticle(side)) {
+            ParticleStack stack = this.particleStack;
+            return stack;
+        }
+        return null;
+    }
 }

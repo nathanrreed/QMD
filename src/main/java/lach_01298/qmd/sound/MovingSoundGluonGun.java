@@ -1,42 +1,35 @@
-package lach_01298.qmd.sound;
-
-import lach_01298.qmd.entity.EntityGluonBeam;
-import net.minecraft.client.audio.MovingSound;
-import net.minecraft.util.SoundCategory;
-import net.minecraftforge.fml.relauncher.*;
-
-
-@SideOnly(Side.CLIENT)
-public class MovingSoundGluonGun extends MovingSound
-{
-	private final EntityGluonBeam beam;
-	
-	public MovingSoundGluonGun(EntityGluonBeam entity)
-	{
-		super(QMDSounds.gluon_gun, SoundCategory.NEUTRAL);
-		this.beam = entity;
-		this.repeat = false;
-        this.repeatDelay = 0;
-        this.volume = 0.1F;
-        this.xPosF = (float) entity.posX;
-        this.yPosF = (float) entity.posY;
-        this.zPosF = (float) entity.posZ;
-	}
-
-	@Override
-	public void update()
-	{
-		
-		if (this.beam.isDead)
-		{
-			this.donePlaying = true;
-		}
-		else
-		{
-			this.xPosF = (float) this.beam.posX;
-			this.yPosF = (float) this.beam.posY;
-			this.zPosF = (float) this.beam.posZ;
-		}
-	}
-
-}
+//package lach_01298.qmd.sound;
+//
+//import lach_01298.qmd.entity.EntityGluonBeam;
+//import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
+//import net.minecraft.client.resources.sounds.SoundInstance;
+//import net.minecraft.sounds.SoundSource;
+//import net.neoforged.api.distmarker.Dist;
+//import net.neoforged.api.distmarker.OnlyIn;
+//
+//@OnlyIn(Dist.CLIENT)
+//public class MovingSoundGluonGun extends AbstractTickableSoundInstance {
+//    private final EntityGluonBeam beam;
+//
+//    public MovingSoundGluonGun(EntityGluonBeam entity) {
+//        super(QMDSounds.gluon_gun.get(), SoundSource.NEUTRAL, SoundInstance.createUnseededRandom());
+//        this.beam = entity;
+//        this.looping = false;
+//        this.delay = 0;
+//        this.volume = 0.1F;
+//        this.x = (float) entity.getX();
+//        this.y = (float) entity.getY();
+//        this.z = (float) entity.getZ();
+//    }
+//
+//    @Override
+//    public void tick() {
+//        if (!this.beam.isAlive()) {
+//            this.stop();
+//        } else {
+//            this.x = (float) this.beam.getX();
+//            this.y = (float) this.beam.getY();
+//            this.z = (float) this.beam.getZ();
+//        }
+//    }
+//}

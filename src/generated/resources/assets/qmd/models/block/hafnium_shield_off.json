@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "all": "qmd:block/fission/shield_hafnium_off"
+  }
+}

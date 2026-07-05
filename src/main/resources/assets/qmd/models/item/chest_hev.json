@@ -1,7 +1,0 @@
-{
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "qmd:items/tools/chest_hev",
-        "layer1": "qmd:items/tools/chest_hev_overlay"
-    }
-}

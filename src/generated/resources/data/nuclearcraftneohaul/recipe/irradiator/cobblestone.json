@@ -1,0 +1,22 @@
+{
+  "type": "qmd:irradiator_recipe",
+  "itemIngredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:mossy_cobblestone"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:cobblestone"
+      }
+    }
+  ],
+  "powerModifier": 0.0,
+  "radiation": 0.0,
+  "timeModifier": 1.0
+}

@@ -1,0 +1,14 @@
+{
+  "type": "qmd:liquid_collector_recipe",
+  "biomes": [],
+  "blocks": [
+    "minecraft:lava"
+  ],
+  "dimensions": [
+    "minecraft:the_nether"
+  ],
+  "outputFluid": {
+    "amount": 100,
+    "id": "minecraft:lava"
+  }
+}

@@ -1,106 +1,71 @@
 package lach_01298.qmd.proxy;
 
-import lach_01298.qmd.*;
-import lach_01298.qmd.item.QMDArmour;
-import lach_01298.qmd.render.*;
-import lach_01298.qmd.render.entity.BeamRenderer;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemMeshDefinition;
-import net.minecraft.client.renderer.block.model.*;
-import net.minecraft.client.renderer.block.statemap.StateMapperBase;
-import net.minecraft.client.renderer.color.*;
-import net.minecraft.client.resources.IReloadableResourceManager;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.*;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.event.*;
+import com.nred.nuclearcraft.info.NCFluid;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
-import static lach_01298.qmd.config.QMDConfig.clientPreInit;
+import static com.nred.nuclearcraft.helpers.Concat.fluidValues;
+import static lach_01298.qmd.fluid.QMDFluids.QMD_FLUIDS;
 
-public class ClientProxy extends CommonProxy
-{
+@EventBusSubscriber
+public class ClientProxy {
 
-	@Override
-	public void preInit(FMLPreInitializationEvent preEvent)
-	{
-		super.preInit(preEvent);
-		clientPreInit();
-		QMDRenderHandler.init();
-		MinecraftForge.EVENT_BUS.register(DrillBlockRenderHandler.INSTANCE);
-		
-		
-	}
+//    @Override TODO
+//    public void preInit(FMLCommonSetupEvent preEvent) {
+//        super.preInit(preEvent);
+//        clientPreInit();
+//        QMDRenderHandler.init();
+//        MinecraftForge.EVENT_BUS.register(DrillBlockRenderHandler.INSTANCE);
+//    }
+//
 
-	@Override
-	public void init(FMLInitializationEvent event)
-	{
-		super.init(event);
-		ItemColors itemcolors = Minecraft.getMinecraft().getItemColors();
-		itemcolors.registerItemColorHandler(new IItemColor()
-		{
-			public int colorMultiplier(ItemStack stack, int tintIndex)
-			{
-				return tintIndex > 0 ? -1 : ((ItemArmor) stack.getItem()).getColor(stack);
-			}
-		}, QMDArmour.helm_hev, QMDArmour.chest_hev, QMDArmour.legs_hev, QMDArmour.boots_hev);
+    /// /    @SubscribeEvent TODO
+    /// /    public void init(RegisterColorHandlersEvent.Item event) {
+    /// /        event.register(new IItemColor() {
+    /// /            public int colorMultiplier(ItemStack stack, int tintIndex) {
+    /// /                return tintIndex > 0 ? -1 : ((ItemArmor) stack.getItem()).getColor(stack);
+    /// /            }
+    /// /        }, QMDArmour.helm_hev, QMDArmour.chest_hev, QMDArmour.legs_hev, QMDArmour.boots_hev);
+    /// /    }
+//
+//    @Override
+//    public void postInit(FMLPostInitializationEvent postEvent) {
+//        super.postInit(postEvent);
+//        MinecraftForge.EVENT_BUS.register(new QMDTooltipHandler());
+//        MinecraftForge.EVENT_BUS.register(new ArmPositionHandler());
+//        MinecraftForge.EVENT_BUS.register(new BeamRenderer());
+//        ((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager()).registerReloadListener(DrillBlockRenderHandler.INSTANCE);
+//    }
+//
+//
+//    @Override
+//    public Player getPlayerClient() {
+//        return Minecraft.getInstance().player;
+//    }
+    @SubscribeEvent
+    public static void fluidLoad(RegisterClientExtensionsEvent event) {
+        for (NCFluid fluid : fluidValues(QMD_FLUIDS)) {
+            event.registerFluidType(fluid.client, fluid.type);
+        }
+    }
 
-	}
+    @SubscribeEvent
+    public static void fluidColoring(final FMLClientSetupEvent event) {
+        for (NCFluid fluid : fluidValues(QMD_FLUIDS)) {
+            ItemBlockRenderTypes.setRenderLayer(fluid.still.get(), RenderType.TRANSLUCENT);
+            ItemBlockRenderTypes.setRenderLayer(fluid.flowing.get(), RenderType.TRANSLUCENT);
+        }
+    }
 
-	@Override
-	public void postInit(FMLPostInitializationEvent postEvent)
-	{
-		super.postInit(postEvent);
-		MinecraftForge.EVENT_BUS.register(new QMDTooltipHandler());
-		MinecraftForge.EVENT_BUS.register(new ArmPositionHandler());
-		MinecraftForge.EVENT_BUS.register(new BeamRenderer());
-		((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager()).registerReloadListener(DrillBlockRenderHandler.INSTANCE);
-	}
-
-
-	@Override
-	public EntityPlayer getPlayerClient()
-	{
-		return Minecraft.getMinecraft().player;
-	}
-
-
-	@Override
-	public void registerFluidBlockRendering(Block block, String name)
-	{
-		super.registerFluidBlockRendering(block, name);
-		FluidStateMapper mapper = new FluidStateMapper(name);
-
-		Item item = Item.getItemFromBlock(block);
-		ModelBakery.registerItemVariants(item);
-		ModelLoader.setCustomMeshDefinition(item, mapper);
-
-		// ModelLoader.setCustomStateMapper(block, new
-		// StateMap.Builder().ignore(block.LEVEL).build());
-		ModelLoader.setCustomStateMapper(block, mapper);
-	}
-
-	public static class FluidStateMapper extends StateMapperBase implements ItemMeshDefinition
-	{
-		public final ModelResourceLocation location;
-
-		public FluidStateMapper(String name)
-		{
-			location = new ModelResourceLocation(QMD.MOD_ID + ":fluids", name);
-		}
-
-		@Override
-		protected ModelResourceLocation getModelResourceLocation(IBlockState state)
-		{
-			return location;
-		}
-
-		@Override
-		public ModelResourceLocation getModelLocation(ItemStack stack)
-		{
-			return location;
-		}
-	}
+    @SubscribeEvent
+    public static void bucketColoring(RegisterColorHandlersEvent.Item event) {
+        for (NCFluid fluid : fluidValues(QMD_FLUIDS)) {
+            event.register(((stack, tintIndex) -> tintIndex == 0 ? -1 : fluid.client.getTintColor()), fluid.bucket.asItem());
+        }
+    }
 }

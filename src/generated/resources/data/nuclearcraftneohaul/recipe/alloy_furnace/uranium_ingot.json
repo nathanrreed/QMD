@@ -1,0 +1,28 @@
+{
+  "type": "nuclearcraftneohaul:alloy_furnace_recipe",
+  "itemIngredients": [
+    {
+      "count": 9,
+      "ingredient": {
+        "tag": "c:isotopes/uranium/238"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:isotopes/uranium/235"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 10,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:uranium_ingot"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 0.0,
+  "timeModifier": 1.0
+}

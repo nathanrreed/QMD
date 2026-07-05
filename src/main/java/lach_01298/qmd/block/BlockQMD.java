@@ -1,17 +1,9 @@
 package lach_01298.qmd.block;
 
-import lach_01298.qmd.tab.QMDTabs;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import net.minecraft.world.level.block.Block;
 
-public class BlockQMD extends Block
-{
-
-	public BlockQMD(Material material)
-	{
-		super(material);
-		this.setCreativeTab(QMDTabs.BLOCKS);
-	}
-
-	
+public class BlockQMD extends Block {
+    public BlockQMD(Properties properties) {
+        super(properties);
+    }
 }

@@ -1,161 +1,107 @@
 package lach_01298.qmd.item;
 
-import lach_01298.qmd.accelerator.tile.TileAcceleratorBeamPort;
+import com.nred.nuclearcraft.item.NCItem;
 import lach_01298.qmd.capabilities.CapabilityParticleStackHandler;
-import lach_01298.qmd.enums.EnumTypes.IOType;
 import lach_01298.qmd.particle.IParticleStackHandler;
 import lach_01298.qmd.particle.ParticleStack;
-import lach_01298.qmd.particleChamber.CollisionChamberLogic;
-import lach_01298.qmd.particleChamber.tile.TileParticleChamberBeamPort;
-import lach_01298.qmd.pipe.TileBeamline;
 import lach_01298.qmd.util.Equations;
 import lach_01298.qmd.util.Units;
-import nc.item.NCItem;
-import nc.util.Lang;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
 
+public class ItemBeamMeter extends NCItem {
+    public ItemBeamMeter() {
+        super(new Properties().stacksTo(1), true, List.of("item.qmd.beam_meter.desc"));
+    }
 
-public class ItemBeamMeter extends NCItem
-{
+    @Override
+    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
+        Level level = context.getLevel();
+        if (!level.isClientSide()) {
+            BlockEntity tile = level.getBlockEntity(context.getClickedPos());
+            if (tile != null) {
+                Player player = context.getPlayer();
+                if (player.isCrouching()) {
+//                    if (tile instanceof TileParticleChamberBeamPort) { TODO add
+//                        TileParticleChamberBeamPort port = (TileParticleChamberBeamPort) tile;
+//                        if (port.getIOType() == IOType.OUTPUT) {
+//                            int inputNumberOffset = 0;
+//                            if (port.getMultiblock().getLogic() instanceof CollisionChamberLogic) {
+//                                inputNumberOffset = 1;
+//                            }
+//                            TextComponentString message = new TextComponentString(
+//                                    Lang.localize("qmd.block.particle_chamber_port_setting", ChatFormatting.LIGHT_PURPLE + " " + (port.getIONumber() - inputNumberOffset)));
+//                            player.sendMessage(message);
+//                            return EnumActionResult.SUCCESS;
+//                        }
+//                    }
+//                    if (tile instanceof TileAcceleratorBeamPort) {
+//                        TileAcceleratorBeamPort port = (TileAcceleratorBeamPort) tile;
+//                        ChatFormatting colour;
+//                        switch (port.getSetting()) {
+//                            case INPUT:
+//                                colour = ChatFormatting.DARK_AQUA;
+//                                break;
+//                            case OUTPUT:
+//                                colour = ChatFormatting.RED;
+//                                break;
+//                            default:
+//                                colour = ChatFormatting.GRAY;
+//                                break;
+//                        }
+//                        TextComponentString message = new TextComponentString(Lang.localize("qmd.block.accelerator_port_setting", colour + Lang.localize("qmd.block.port_mode." + port.getSetting().name())));
+//                        player.sendMessage(message);
+//                        return EnumActionResult.SUCCESS;
+//                    }
+                } else {
+                    for (Direction face : Direction.values()) {
+                        IParticleStackHandler particleStorage = level.getCapability(CapabilityParticleStackHandler.BLOCK, tile.getBlockPos(), face);
+                        if (particleStorage != null) {
+                            ParticleStack particles = particleStorage.getParticle();
 
-	public ItemBeamMeter(String... tooltip)
-	{
-		super(tooltip);
-		maxStackSize = 1;
-	}
+                            if (particles != null) {
+//                                if (tile instanceof TileBeamline) { TODO
+//                                    TileBeamline beam = (TileBeamline) tile;
+//                                    if (beam.getMultiblock() != null) {
+//                                        particles.addFocus(-Equations.focusLoss(beam.getMultiblock().length(), particles));
+//                                    }
+//                                }
 
-	@Override
-	public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX,
-			float hitY, float hitZ, EnumHand hand)
-	{
-		if (!world.isRemote)
-		{
-			TileEntity tile = world.getTileEntity(pos);
-			if (tile != null)
-			{
-				if (player.isSneaking())
-				{
-					if(tile instanceof TileParticleChamberBeamPort)
-					{
-						TileParticleChamberBeamPort port = (TileParticleChamberBeamPort) tile;
-						if(port.getIOType() == IOType.OUTPUT)
-						{
-							int inputNumberOffset = 0;
-							if (port.getMultiblock().getLogic() instanceof CollisionChamberLogic)
-							{
-								inputNumberOffset = 1;
-							}
-							TextComponentString message = new TextComponentString(
-									 Lang.localize("qmd.block.particle_chamber_port_setting",TextFormatting.LIGHT_PURPLE + " "+(port.getIONumber()-inputNumberOffset)));
-							player.sendMessage(message);
-							return EnumActionResult.SUCCESS;
-						}
-					}
-					if(tile instanceof TileAcceleratorBeamPort)
-					{
-						TileAcceleratorBeamPort port = (TileAcceleratorBeamPort) tile;
-						TextFormatting colour;
-						switch(port.getSetting())
-						{
-						case INPUT:
-							colour = TextFormatting.DARK_AQUA;
-							break;
-						case OUTPUT:
-							colour = TextFormatting.RED;
-							break;
-						default:
-							colour = TextFormatting.GRAY;
-							break;
-						}
-						TextComponentString message = new TextComponentString(Lang.localize("qmd.block.accelerator_port_setting",colour+Lang.localize("qmd.block.port_mode."+ port.getSetting().name())));
-						player.sendMessage(message);
-						return EnumActionResult.SUCCESS;
-					}
-					
-				}
-				else
-				{
-					for (EnumFacing face : EnumFacing.VALUES)
-					{
-						
-						if (tile.hasCapability(CapabilityParticleStackHandler.PARTICLE_HANDLER_CAPABILITY, face))
-						{
-							IParticleStackHandler particleStorage = tile
-									.getCapability(CapabilityParticleStackHandler.PARTICLE_HANDLER_CAPABILITY, face);
+                                DecimalFormat df = new DecimalFormat("#.####");
+                                DecimalFormat df2 = new DecimalFormat("#.#");
 
-							ParticleStack particle = particleStorage.getParticle();
+                                Component message = Component.translatable("gui.qmd.particlestack.line",
+                                        Component.translatable("gui.qmd.particlestack.name", Component.translatable("qmd.particle." + particles.getParticle().getName() + ".name").withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.AQUA),
+                                        Component.translatable("gui.qmd.particlestack.amount", ChatFormatting.WHITE + Units.getSIFormat(particles.getAmount(), "pu")).withStyle(ChatFormatting.YELLOW),
+                                        Component.translatable("gui.qmd.particlestack.mean_energy", ChatFormatting.WHITE + Units.getSIFormat(particles.getMeanEnergy(), 3, "eV")).withStyle(ChatFormatting.GREEN),
+                                        Component.translatable("gui.qmd.particlestack.focus", ChatFormatting.WHITE + df.format(particles.getFocus())).withStyle(ChatFormatting.DARK_AQUA),
 
-							if (particle != null)
-							{
-								if (tile instanceof TileBeamline)
-								{
-									TileBeamline beam = (TileBeamline) tile;
-									if (beam.getMultiblock() != null)
-									{
-										particle.addFocus(
-												-Equations.focusLoss(beam.getMultiblock().length(), particle));
-									}
-								}
+                                        Component.translatable("gui.qmd.particlestack.focus_loss", ChatFormatting.WHITE + df.format(Equations.focusLoss(1, particles))).withStyle(ChatFormatting.DARK_AQUA),
+                                        Component.translatable("gui.qmd.particlestack.travel_distance", ChatFormatting.WHITE + df2.format(Equations.travelDistance(particles))).withStyle(ChatFormatting.GREEN)
+                                );
+                                player.sendSystemMessage(message);
+                            } else {
+                                player.sendSystemMessage(Component.translatable("gui.qmd.particlestack.empty"));
+                            }
+                            return InteractionResult.SUCCESS;
+                        }
+                    }
+                }
 
-								DecimalFormat df = new DecimalFormat("#.####");
-								DecimalFormat df2 = new DecimalFormat("#.#");
+            }
+        }
 
-								TextComponentString message = new TextComponentString(
-										TextFormatting.AQUA
-												+ Lang.localize("gui.qmd.particlestack.name",
-														TextFormatting.WHITE + Lang.localize("qmd.particle."
-																+ particle.getParticle().getName() + ".name"))
-												+ " " + TextFormatting.YELLOW
-												+ Lang.localize("gui.qmd.particlestack.amount",
-														TextFormatting.WHITE
-																+ Units.getSIFormat(particle.getAmount(), "pu"))
-												+ " " + TextFormatting.GREEN
-												+ (Lang.localize("gui.qmd.particlestack.mean_energy",
-														TextFormatting.WHITE
-																+ Units.getSIFormat(particle.getMeanEnergy(), 3, "eV")))
-												+ " " + TextFormatting.DARK_AQUA
-												+ Lang.localize("gui.qmd.particlestack.focus",
-														TextFormatting.WHITE + df.format(particle.getFocus())));
-
-								player.sendMessage(message);
-
-								TextComponentString lossMessage = new TextComponentString(TextFormatting.DARK_AQUA
-										+ Lang.localize("gui.qmd.particlestack.focus_loss",
-												TextFormatting.WHITE + df.format(Equations.focusLoss(1, particle)))
-										+ " " + TextFormatting.GREEN
-										+ Lang.localize("gui.qmd.particlestack.travel_distance",
-												TextFormatting.WHITE + df2.format(Equations.travelDistance(particle)))
-
-								);
-								player.sendMessage(lossMessage);
-							}
-							else
-							{
-								player.sendMessage(
-										new TextComponentString(Lang.localize("gui.qmd.particlestack.empty")));
-							}
-							return EnumActionResult.SUCCESS;
-						}
-
-						
-					}
-				}
-
-			}
-		}
-
-		return EnumActionResult.PASS;
-	}
-	
+        return InteractionResult.PASS;
+    }
 }

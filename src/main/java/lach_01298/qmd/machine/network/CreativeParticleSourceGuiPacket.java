@@ -1,112 +1,92 @@
 package lach_01298.qmd.machine.network;
 
-import io.netty.buffer.ByteBuf;
+import lach_01298.qmd.QMD;
 import lach_01298.qmd.network.QMDPacket;
-import lach_01298.qmd.particle.*;
+import lach_01298.qmd.particle.ParticleStorage;
+import lach_01298.qmd.particle.ParticleStorageSource;
 import lach_01298.qmd.tile.TileCreativeParticleSource;
 import lach_01298.qmd.util.ByteUtil;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.*;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class CreativeParticleSourceGuiPacket extends QMDPacket
-{
+public class CreativeParticleSourceGuiPacket extends QMDPacket {
+    public static final Type<CreativeParticleSourceGuiPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "creative_particle_source_gui_packet"));
+    public static final StreamCodec<RegistryFriendlyByteBuf, CreativeParticleSourceGuiPacket> STREAM_CODEC = StreamCodec.ofMember(
+            CreativeParticleSourceGuiPacket::toBytes, CreativeParticleSourceGuiPacket::fromBytes
+    );
 
-	boolean messageValid;
-	
-	BlockPos pos;
-	public List<ParticleStorageSource> beams;
-	
-	public CreativeParticleSourceGuiPacket()
-	{
-		messageValid = false;
-		beams = new ArrayList<ParticleStorageSource>();
-	}
-	
-	public CreativeParticleSourceGuiPacket(TileCreativeParticleSource tile)
-	{
-		pos = tile.getTilePos();
-		beams = (List<ParticleStorageSource>) tile.getParticleBeams();
-		messageValid = true;
-	}
-	
-	
-	@Override
-	public void fromBytes(ByteBuf buf)
-	{
-		try
-		{
-			pos = new BlockPos(buf.readInt(), buf.readInt(), buf.readInt());
-			
-			int size = buf.readInt();
-			for (int i = 0; i < size; i++)
-			{
-				ParticleStorage storage = ByteUtil.readBufBeam(buf);
-				ParticleStorageSource beam = new ParticleStorageSource();
-				beam.setParticleStack(storage.getParticleStack());
-				beams.add(beam);
-			}
-		}
-		catch (IndexOutOfBoundsException e)
-		{
-			e.printStackTrace();
-			return;
-		}
-		messageValid = true;
+    BlockPos pos;
+    public List<ParticleStorageSource> beams;
 
-	}
+    public CreativeParticleSourceGuiPacket(TileCreativeParticleSource tile) {
+        pos = tile.getTilePos();
+        beams = (List<ParticleStorageSource>) tile.getParticleBeams();
+    }
 
-	@Override
-	public void toBytes(ByteBuf buf)
-	{
-		if (!messageValid)
-			return;
-		buf.writeInt(pos.getX());
-		buf.writeInt(pos.getY());
-		buf.writeInt(pos.getZ());
-		
-		buf.writeInt(beams.size());
-		for(ParticleStorageSource beam : beams)
-		{
-			ByteUtil.writeBufBeam(beam, buf);
-		}
+    public CreativeParticleSourceGuiPacket(BlockPos pos, List<ParticleStorageSource> beams) {
+        this.pos = pos;
+        this.beams = beams;
+    }
 
-	}
-	
-	
-	public static class Handler implements IMessageHandler<CreativeParticleSourceGuiPacket, IMessage>
-	{
+    public static CreativeParticleSourceGuiPacket fromBytes(RegistryFriendlyByteBuf buf) {
+        BlockPos pos = new BlockPos(buf.readInt(), buf.readInt(), buf.readInt());
+        List<ParticleStorageSource> beams = new ArrayList<>();
 
-		@Override
-		public IMessage onMessage(CreativeParticleSourceGuiPacket message, MessageContext ctx)
-		{
-			if (!message.messageValid && ctx.side != Side.SERVER)
-				return null;
-			FMLCommonHandler.instance().getWorldThread(ctx.netHandler)
-					.addScheduledTask(() -> processMessage(message, ctx));
-			return null;
-		}
+        int size = buf.readInt();
+        for (int i = 0; i < size; i++) {
+            ParticleStorage storage = ByteUtil.readBufBeam(buf);
+            ParticleStorageSource beam = new ParticleStorageSource();
+            beam.setParticleStack(storage.getParticleStack());
+            beams.add(beam);
+        }
 
-		void processMessage(CreativeParticleSourceGuiPacket message, MessageContext ctx)
-		{
-			EntityPlayerMP player = ctx.getServerHandler().player;
-			TileEntity tile = player.getServerWorld().getTileEntity(message.pos);
-			if (tile instanceof TileCreativeParticleSource)
-			{
-				TileCreativeParticleSource source = (TileCreativeParticleSource) tile;
-				source.setParticleBeams(message.beams);
-				source.markDirtyAndNotify(true);
-			}
-		}
-	}
-	
-	
-	
-	
+        return new CreativeParticleSourceGuiPacket(pos, beams);
+    }
 
+    @Override
+    public void toBytes(RegistryFriendlyByteBuf buf) {
+        buf.writeInt(pos.getX());
+        buf.writeInt(pos.getY());
+        buf.writeInt(pos.getZ());
+
+        buf.writeInt(beams.size());
+        for (ParticleStorageSource beam : beams) {
+            ByteUtil.writeBufBeam(beam, buf);
+        }
+    }
+
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
+    }
+
+    public static class Handler {
+        public static void handleOnServer(CreativeParticleSourceGuiPacket payload, IPayloadContext context) {
+            context.enqueueWork(() -> {
+                ServerPlayer player = (ServerPlayer) context.player();
+                Level level = player.level();
+                if (!level.isLoaded(payload.pos) || !level.mayInteract(player, payload.pos)) {
+                    return;
+                }
+                onPacket(payload, level.getBlockEntity(payload.pos));
+            });
+        }
+
+        protected static void onPacket(CreativeParticleSourceGuiPacket message, BlockEntity tile) {
+            if (tile instanceof TileCreativeParticleSource source) {
+                source.setParticleBeams(message.beams);
+                source.markDirtyAndNotify(true);
+            }
+        }
+    }
 }

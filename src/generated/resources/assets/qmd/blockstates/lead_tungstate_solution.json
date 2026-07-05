@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "qmd:block/block.qmd.lead_tungstate_solution"
+    }
+  }
+}

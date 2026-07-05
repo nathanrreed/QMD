@@ -1,0 +1,35 @@
+{
+  "type": "nuclearcraftneohaul:infuser_recipe",
+  "fluidIngredients": [
+    {
+      "amount": 1500,
+      "ingredient": {
+        "tag": "c:hydrofluoric_acid"
+      }
+    }
+  ],
+  "itemIngredients": [
+    {
+      "count": 1,
+      "ingredient": [
+        {
+          "tag": "c:ingots/iron"
+        },
+        {
+          "tag": "c:dusts/iron"
+        }
+      ]
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:iron_fluoride_chemical_dust"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 0.0,
+  "timeModifier": 1.0
+}

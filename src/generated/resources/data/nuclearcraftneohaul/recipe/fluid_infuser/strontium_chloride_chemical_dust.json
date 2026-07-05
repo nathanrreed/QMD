@@ -1,0 +1,30 @@
+{
+  "type": "nuclearcraftneohaul:infuser_recipe",
+  "fluidIngredients": [
+    {
+      "amount": 2000,
+      "ingredient": {
+        "tag": "c:hydrochloric_acid"
+      }
+    }
+  ],
+  "itemIngredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/strontium"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:strontium_chloride_chemical_dust"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 0.0,
+  "timeModifier": 1.0
+}

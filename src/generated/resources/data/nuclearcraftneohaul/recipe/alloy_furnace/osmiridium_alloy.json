@@ -1,0 +1,38 @@
+{
+  "type": "nuclearcraftneohaul:alloy_furnace_recipe",
+  "itemIngredients": [
+    {
+      "count": 1,
+      "ingredient": [
+        {
+          "tag": "c:ingots/osmium"
+        },
+        {
+          "tag": "c:dusts/osmium"
+        }
+      ]
+    },
+    {
+      "count": 1,
+      "ingredient": [
+        {
+          "tag": "c:ingots/iridium"
+        },
+        {
+          "tag": "c:dusts/iridium"
+        }
+      ]
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "qmd:osmiridium_alloy"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 0.0,
+  "timeModifier": 1.0
+}

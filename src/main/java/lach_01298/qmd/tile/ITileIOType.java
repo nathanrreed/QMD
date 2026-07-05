@@ -2,11 +2,8 @@ package lach_01298.qmd.tile;
 
 import lach_01298.qmd.enums.EnumTypes;
 
-public interface ITileIOType
-{
+public interface ITileIOType {
+    EnumTypes.IOType getIOType();
 
-	public  EnumTypes.IOType getIOType();
-	public  void setIOType(EnumTypes.IOType type);
-
-
+    void setIOType(EnumTypes.IOType type);
 }

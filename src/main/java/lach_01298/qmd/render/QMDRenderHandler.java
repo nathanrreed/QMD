@@ -1,48 +1,24 @@
-package lach_01298.qmd.render;
-
-import lach_01298.qmd.block.QMDBlocks;
-import lach_01298.qmd.entity.*;
-import lach_01298.qmd.item.*;
-import lach_01298.qmd.liquefier.tile.TileLiquefierController;
-import lach_01298.qmd.render.entity.*;
-import lach_01298.qmd.render.tile.*;
-import lach_01298.qmd.vacuumChamber.tile.*;
-import nc.util.*;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.entity.Entity;
-import net.minecraftforge.fml.client.registry.*;
-
-public class QMDRenderHandler
-{
-	public static void init()
-	{
-		QMDBlocks.registerRenders();
-		QMDItems.registerRenders();
-		QMDArmour.registerRenders();
-		
-		
-		ClientRegistry.bindTileEntitySpecialRenderer(TileExoticContainmentController.class, new RenderContainmentMaterial());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileLiquefierController.class, new RenderLiquefier());
-		
-		registerEntityRender(EntityGammaFlash.class, RenderGammaFlash.class);
-		registerEntityRender(EntityLeptonBeam.class, RenderLeptonBeam.class);
-		registerEntityRender(EntityGluonBeam.class, RenderGluonBeam.class);
-		registerEntityRender(EntityAntimatterProjectile.class, RenderAntimatterProjectile.class);
-	}
-
-	private static <E extends Entity, R extends Render<E>> void registerEntityRender(Class<E> entityClass, Class<R> renderClass) {
-		RenderingRegistry.registerEntityRenderingHandler(entityClass, manager -> {
-			R render = null;
-			try {
-				render = ReflectionHelper.newInstance(renderClass, manager);
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-			return render;
-		});
-	}
-
-
-
-}
+//package lach_01298.qmd.render;
+//
+//import lach_01298.qmd.QMD;
+//import lach_01298.qmd.render.entity.RenderGluonBeam;
+//import net.minecraft.client.renderer.entity.EntityRenderers;
+//import net.neoforged.bus.api.SubscribeEvent;
+//import net.neoforged.fml.common.EventBusSubscriber;
+//import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+//
+//import static lach_01298.qmd.entity.QMDEntities.GLUON_BEAM;
+//
+//@EventBusSubscriber(modid = QMD.MOD_ID)
+//public class QMDRenderHandler {
+//    @SubscribeEvent
+//    public static void entityRenderer(final FMLClientSetupEvent event) {
+/// /        ClientRegistry.bindTileEntitySpecialRenderer(TileExoticContainmentController.class, new RenderContainmentMaterial());
+/// /        ClientRegistry.bindTileEntitySpecialRenderer(TileLiquefierController.class, new RenderLiquefier());
+/// /
+/// /        EntityRenderers.register(GAMMA_FLASH.get(), RenderGammaFlash::new); TODO
+/// /        EntityRenderers.register(LEPTON_BEAM.get(), RenderLeptonBeam::new);
+//        EntityRenderers.register(GLUON_BEAM.get(), RenderGluonBeam::new);
+////        EntityRenderers.register(ANTIMATER_PROJECTILE.get(), RenderAntimatterProjectile::new);
+//    }
+//}

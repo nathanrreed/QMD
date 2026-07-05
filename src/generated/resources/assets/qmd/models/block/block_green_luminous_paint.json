@@ -1,0 +1,6 @@
+{
+  "parent": "qmd:block/block_luminous_paint",
+  "textures": {
+    "main": "qmd:block/other/green_luminous_paint"
+  }
+}

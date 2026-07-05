@@ -1,56 +1,50 @@
 package lach_01298.qmd.capabilities;
 
-import lach_01298.qmd.particle.*;
-import net.minecraft.nbt.*;
-import net.minecraft.util.EnumFacing;
-import net.minecraftforge.common.capabilities.*;
+import lach_01298.qmd.QMD;
+import lach_01298.qmd.particle.IParticleStackHandler;
+import lach_01298.qmd.particle.IParticleStorage;
+import lach_01298.qmd.particle.ParticleStack;
+import lach_01298.qmd.particle.ParticleStorage;
+import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.capabilities.BlockCapability;
+import net.neoforged.neoforge.common.util.INBTSerializable;
+import org.jetbrains.annotations.Nullable;
 
+public class CapabilityParticleStackHandler {
+    public static final BlockCapability<IParticleStackHandler, @Nullable Direction> BLOCK = BlockCapability.createSided(ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "particle"), IParticleStackHandler.class);
 
-public class CapabilityParticleStackHandler
-{
-	@CapabilityInject(IParticleStackHandler.class)
-    public static Capability<IParticleStackHandler> PARTICLE_HANDLER_CAPABILITY = null;
-	
-    public static void register()
-    {
-        CapabilityManager.INSTANCE.register(IParticleStackHandler.class, new DefaultParticleHandlerStorage(), () -> new ParticleStorage(null, Integer.MAX_VALUE));
-       
-    }
-    
-    private static class DefaultParticleHandlerStorage<T extends IParticleStackHandler> implements Capability.IStorage<T> {
+    // TODO why isn't this used
+    private static class DefaultParticleHandlerStorage<T extends IParticleStackHandler> implements INBTSerializable<Tag> {
         @Override
-		public NBTBase writeNBT(Capability<T> capability, T instance, EnumFacing side)
-		{
-			if (!(instance instanceof IParticleStorage))
-				throw new RuntimeException("IParticleStackHandler instance does not implement IParticleStorage");
-			NBTTagCompound nbt = new NBTTagCompound();
-			IParticleStorage tank = (IParticleStorage) instance;
-			ParticleStack particle = tank.getParticleStack();
-			if (particle != null)
-			{
-				particle.writeToNBT(nbt);
-			}
-			else
-			{
-				nbt.setString("Empty", "");
-			}
-			nbt.setLong("MaxEnergy", tank.getMaxEnergy());
-			nbt.setInteger("Capacity", tank.getCapacity());
-			nbt.setLong("MinEnergy", tank.getMinEnergy());
-			return nbt;
-		}
+        public Tag serializeNBT(HolderLookup.Provider provider) {
+            if (!(provider instanceof IParticleStorage tank))
+                throw new RuntimeException("IParticleStackHandler instance does not implement IParticleStorage");
+            CompoundTag nbt = new CompoundTag();
+            ParticleStack particles = tank.getParticleStack();
+            if (particles != null) {
+                particles.writeToNBT(nbt);
+            } else {
+                nbt.putString("Empty", "");
+            }
+            nbt.putLong("MaxEnergy", tank.getMaxEnergy());
+            nbt.putInt("Capacity", tank.getCapacity());
+            nbt.putLong("MinEnergy", tank.getMinEnergy());
+            return nbt;
+        }
 
         @Override
-		public void readNBT(Capability<T> capability, T instance, EnumFacing side, NBTBase nbt)
-		{
-			if (!(instance instanceof ParticleStorage))
-				throw new RuntimeException("IParticleStackHandler instance is not instance of ParticleStorage");
-			NBTTagCompound tags = (NBTTagCompound) nbt;
-			ParticleStorage tank = (ParticleStorage) instance;
-			tank.setMaxEnergy(tags.getLong("MaxEnergy"));
-			tank.setCapacity(tags.getInteger("Capacity"));
-			tank.setMinEnergy(tags.getLong("MinEnergy"));
-			tank.readFromNBT(tags);
-		}
+        public void deserializeNBT(HolderLookup.Provider provider, Tag nbt) {
+            if (!(provider instanceof ParticleStorage tank))
+                throw new RuntimeException("IParticleStackHandler instance is not instance of ParticleStorage");
+            CompoundTag tags = (CompoundTag) nbt;
+            tank.setMaxEnergy(tags.getLong("MaxEnergy"));
+            tank.setCapacity(tags.getInt("Capacity"));
+            tank.setMinEnergy(tags.getLong("MinEnergy"));
+            tank.readFromNBT(tags);
+        }
     }
 }

@@ -1,0 +1,24 @@
+{
+  "values": [
+    {
+      "id": "qmd:antimatter_annihilation",
+      "required": false
+    },
+    {
+      "id": "qmd:self_poisoning",
+      "required": false
+    },
+    {
+      "id": "qmd:lepton_cannon",
+      "required": false
+    },
+    {
+      "id": "qmd:gluon_gun",
+      "required": false
+    },
+    {
+      "id": "qmd:antimatter_launcher",
+      "required": false
+    }
+  ]
+}

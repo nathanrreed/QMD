@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "qmd:block/block_orange_luminous_paint",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "qmd:block/block_orange_luminous_paint",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "qmd:block/block_orange_luminous_paint",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "qmd:block/block_orange_luminous_paint",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "qmd:block/block_orange_luminous_paint"
+    },
+    "facing=west": {
+      "model": "qmd:block/block_orange_luminous_paint",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

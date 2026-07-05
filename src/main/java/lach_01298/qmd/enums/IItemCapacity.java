@@ -1,9 +1,7 @@
 package lach_01298.qmd.enums;
 
-import nc.enumm.IMetaEnum;
-import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.StringRepresentable;
 
-public interface IItemCapacity extends IStringSerializable, IMetaEnum
-{
-	public int getCapacity();	
+public interface IItemCapacity extends StringRepresentable {
+    int getCapacity();
 }

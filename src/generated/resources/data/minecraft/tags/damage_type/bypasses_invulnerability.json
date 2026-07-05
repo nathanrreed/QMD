@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "qmd:antimatter_annihilation",
+      "required": false
+    },
+    {
+      "id": "qmd:self_poisoning",
+      "required": false
+    }
+  ]
+}

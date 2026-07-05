@@ -1,0 +1,11 @@
+{
+  "type": "qmd:atmosphere_collector_recipe",
+  "biomes": [],
+  "dimensions": [
+    "minecraft:overworld"
+  ],
+  "outputFluid": {
+    "amount": 1000,
+    "id": "qmd:compressed_air"
+  }
+}

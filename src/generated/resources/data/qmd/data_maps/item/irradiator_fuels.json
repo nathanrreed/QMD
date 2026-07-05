@@ -1,0 +1,10 @@
+{
+  "values": {
+    "qmd:cobalt_60_source": {
+      "speed_mult": 1.0
+    },
+    "qmd:iridium_192_source": {
+      "speed_mult": 10.0
+    }
+  }
+}

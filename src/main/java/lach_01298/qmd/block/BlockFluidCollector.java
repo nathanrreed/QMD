@@ -1,75 +1,45 @@
 package lach_01298.qmd.block;
 
-import lach_01298.qmd.enums.BlockTypes.FluidCollectorType;
+import com.nred.nuclearcraft.block.tile.SimpleTileBlock;
+import com.nred.nuclearcraft.block_entity.passive.TilePassiveAbstract;
+import com.nred.nuclearcraft.util.UnitHelper;
 import lach_01298.qmd.tile.TileFluidCollector;
-import nc.block.tile.BlockTile;
-import nc.block.tile.ITileType;
-import nc.util.Lang;
-import nc.util.UnitHelper;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.world.World;
-import net.minecraftforge.fluids.Fluid;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 
-public class BlockFluidCollector extends BlockTile implements ITileType
-{
+public class BlockFluidCollector extends SimpleTileBlock<TilePassiveAbstract> {
+    public BlockFluidCollector(String type) {
+        super(type);
+    }
 
-	private final FluidCollectorType type;
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (hand != InteractionHand.MAIN_HAND) {
+            return ItemInteractionResult.FAIL;
+        }
 
-	public BlockFluidCollector(FluidCollectorType type)
-	{
-		super(Material.IRON);
-		this.type = type;
-		setCreativeTab(type.getCreativeTab());
-	}
+        if (player.getItemInHand(hand).isEmpty()) {
+            if (!level.isClientSide() && level.getBlockEntity(pos) instanceof TileFluidCollector collector) {
+                Fluid fluid = collector.getCollectionFluid();
+                if (fluid != null && fluid != Fluids.EMPTY) {
+                    Component name = fluid.getFluidType().getDescription();
+                    player.sendSystemMessage(Component.translatable("message.qmd.collector", name, UnitHelper.prefix(collector.getCollectionRate(), 5, "B/t", -1)));
+                } else {
+                    player.sendSystemMessage(Component.translatable("message.qmd.collector_no_fluid"));
+                }
+            }
+            return ItemInteractionResult.CONSUME;
+        }
 
-	@Override
-	public String getTileName()
-	{
-		return type.getName();
-	}
-
-	@Override
-	public TileEntity createNewTileEntity(World world, int meta)
-	{
-		return type.getTile();
-	}
-
-
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
-		if (hand != EnumHand.MAIN_HAND)
-		{
-			return false;
-		}
-
-		if (player != null && player.getHeldItem(hand).isEmpty())
-		{
-			TileEntity tile = world.getTileEntity(pos);
-			if (!world.isRemote && tile instanceof TileFluidCollector)
-			{
-				TileFluidCollector collector = (TileFluidCollector) tile;
-				Fluid fluid = collector.getCollectionFluid();
-				if(fluid != null)
-				{
-					String name = collector.getCollectionFluid().getUnlocalizedName();
-					player.sendMessage(new TextComponentString(Lang.localize("message.qmd.collector",Lang.localize(name), UnitHelper.prefix(collector.getCollectionRate(), 5, "B/t",-1))));
-				}
-				else
-				{
-					player.sendMessage(new TextComponentString(Lang.localize("message.qmd.collector_no_fluid")));
-				}
-
-			}
-			return true;
-		}
-		return super.onBlockActivated(world, pos, state, player, hand, facing, hitX, hitY, hitZ);
-	}
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+    }
 }

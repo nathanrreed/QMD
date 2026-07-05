@@ -1,0 +1,22 @@
+{
+  "type": "qmd:irradiator_recipe",
+  "itemIngredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:brown_mushroom"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:glowing_mushroom"
+      }
+    }
+  ],
+  "powerModifier": 0.0,
+  "radiation": 0.0,
+  "timeModifier": 4.0
+}

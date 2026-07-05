@@ -1,0 +1,7 @@
+{
+  "parent": "nuclearcraftneohaul:block/top_sides",
+  "textures": {
+    "sides": "qmd:block/machine/rtg_strontium_side",
+    "top": "qmd:block/machine/rtg_strontium_top"
+  }
+}

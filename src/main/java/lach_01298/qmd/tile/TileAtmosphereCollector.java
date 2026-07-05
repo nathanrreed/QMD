@@ -1,70 +1,62 @@
 package lach_01298.qmd.tile;
 
-import lach_01298.qmd.config.QMDConfig;
-import lach_01298.qmd.recipes.AtmosphereCollectorRecipes;
-import nc.util.MaterialHelper;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.MutableBlockPos;
+import lach_01298.qmd.config.QMDStartupConfig;
+import lach_01298.qmd.recipe.types.AtmosphereCollectorRecipe;
+import lach_01298.qmd.recipe.types.FluidCollectorInput;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.fluids.FluidStack;
 
-public class TileAtmosphereCollector extends TileFluidCollector
-{
-	public TileAtmosphereCollector()
-	{
-		super("atmosphere_collector", QMDConfig.processor_power[1] * 20);
-	}
+import java.util.Optional;
 
-	public boolean hasSufficientEnergy()
-	{
-		return getEnergyStored() >= QMDConfig.processor_power[1];
-	}
+import static lach_01298.qmd.recipe.RecipeTypeRegistration.ATMOSPHERE_COLLECTOR_RECIPE_TYPE;
+import static lach_01298.qmd.tile.QMDTiles.ATMOSPHERE_COLLECTOR_ENTITY_TYPE;
 
-	@Override
-	public void process()
-	{
-		if(outputFluid != null && !getTanks().get(0).isFull())
-		{
-			getEnergyStorage().changeEnergyStored(-QMDConfig.processor_power[1]);
+public class TileAtmosphereCollector extends TileFluidCollector {
+    public TileAtmosphereCollector(BlockPos pos, BlockState blockState) {
+        super(ATMOSPHERE_COLLECTOR_ENTITY_TYPE.get(), pos, blockState, "atmosphere_collector", -QMDStartupConfig.processor_power[1] * 20);
+    }
 
-			if (getTanks().get(0).isEmpty())
-			{
-				getTanks().get(0).changeFluidStored(outputFluid.getFluid(),(int) (outputFluid.amount*efficiency));
-			}
-			else if (getTanks().get(0).getFluid().isFluidEqual(outputFluid))
-			{
-				getTanks().get(0).changeFluidAmount((int) (outputFluid.amount*efficiency));
-			}
-		}
-	}
+    @Override
+    public void process() {
+        if (outputFluid != null && !getTanks().get(0).isFull()) {
+            getEnergyStorage().changeEnergyStored(-QMDStartupConfig.processor_power[1]);
 
-	@Override
-	public void checkEfficiency()
-	{
-		Iterable<MutableBlockPos> checkArea = BlockPos.getAllInBoxMutable(this.pos.add(-2, 0, -2),this.pos.add(2, 4, 2));
-		int occlusiveBlocks =0;
-		int checkedBlocks =0;
-		for (BlockPos otherPos : checkArea)
-		{
-			checkedBlocks++;
-			IBlockState state = world.getBlockState(otherPos);
-			if(!MaterialHelper.isEmpty(state.getMaterial()) && (state.isOpaqueCube() || !state.getMaterial().isOpaque()))
-			{
-				occlusiveBlocks ++;
-			}
-		}
-		efficiency = 1-(occlusiveBlocks-1)/ (double)(checkedBlocks-1);
-		
-		
-	}
+            if (getTanks().get(0).isEmpty()) {
+                getTanks().get(0).changeFluidStored(outputFluid.getFluid(), (int) (outputFluid.getAmount() * efficiency));
+            } else if (FluidStack.isSameFluidSameComponents(getTanks().get(0).getFluid(), outputFluid)) {
+                getTanks().get(0).changeFluidAmount((int) (outputFluid.getAmount() * efficiency));
+            }
+        }
+    }
 
-	@Override
-	public void checkInputs()
-	{
-		String biome = world.getBiome(this.pos).getRegistryName().toString();
-		int dimensionId = world.provider.getDimension();
+    @Override
+    public void checkEfficiency() {
+        Iterable<BlockPos> checkArea = BlockPos.betweenClosed(this.worldPosition.offset(-2, 0, -2), this.worldPosition.offset(2, 4, 2));
+        int occlusiveBlocks = 0;
+        int checkedBlocks = 0;
+        for (BlockPos otherPos : checkArea) {
+            checkedBlocks++;
+            BlockState state = level.getBlockState(otherPos);
+            if (!state.isAir() && (state.isSolid() || state.isCollisionShapeFullBlock(level, otherPos))) {
+                occlusiveBlocks++;
+            }
+        }
+        efficiency = 1 - (occlusiveBlocks - 1) / (double) (checkedBlocks - 1);
+    }
 
-		outputFluid = AtmosphereCollectorRecipes.getRecipe(biome,dimensionId);
-	}
+    @Override
+    public void checkInputs() {
+        ResourceLocation biome = level.getBiome(this.worldPosition).getKey().location();
+        ResourceLocation dimension = level.dimension().location();
 
-
+        Optional<RecipeHolder<AtmosphereCollectorRecipe>> recipe = level.getRecipeManager().getRecipeFor(ATMOSPHERE_COLLECTOR_RECIPE_TYPE.get(), new FluidCollectorInput(null, dimension, biome), level);
+        if (recipe.isPresent()) {
+            outputFluid = recipe.get().value().getOutputFluid();
+        } else {
+            outputFluid = FluidStack.EMPTY;
+        }
+    }
 }

@@ -3,7 +3,7 @@
 	"ambientocclusion": false,
 	"texture_size": [48, 48],
 	"textures": {
-		"8": "qmd:items/tools/lepton_cannon"
+		"8": "qmd:item/tools/lepton_cannon"
 	},
 	"elements": [
 		{

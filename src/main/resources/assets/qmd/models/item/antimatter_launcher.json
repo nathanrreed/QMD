@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench by Zalgo",
 	"textures": {
-		"0": "qmd:items/tools/antimatter_launcher",
-		"particle": "qmd:items/tools/antimatter_launcher"
+		"0": "qmd:item/tools/antimatter_launcher",
+		"particle": "qmd:item/tools/antimatter_launcher"
 	},
 	"elements": [
 		{
