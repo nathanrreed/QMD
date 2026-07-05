@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "nuclearcraftneohaul:liquid_collector"
+          "name": "qmd:liquid_collector"
         }
       ],
       "rolls": 1.0

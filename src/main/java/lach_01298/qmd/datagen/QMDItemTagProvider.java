@@ -13,11 +13,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.registries.DeferredItem;
 
-import java.util.HashMap;
 import java.util.concurrent.CompletableFuture;
-import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static com.nred.nuclearcraft.datagen.ModItemTagProvider.isotopeTag;
@@ -39,10 +36,10 @@ class QMDItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.SHOVELS).add(shovel_tungsten_carbide.asItem());
         tag(ItemTags.HOES).add(hoe_tungsten_carbide.asItem());
 
-        for (var entry : Stream.of(ingots, ingotAlloys).flatMap(e -> e.entrySet().stream()).toList()) {
+        for (var entry : Stream.of(ingots, ingotAlloys).flatMap(e -> e.entrySet().stream()).sorted((a, b) -> a.getKey().getSerializedName().compareTo(b.getKey().getSerializedName())).toList()) {
             simpleTag(entry.getKey().getSerializedName(), entry.getValue().get(), Tags.Items.INGOTS);
         }
-        for (var entry : Stream.of(dusts, chemicalDusts).flatMap(e -> e.entrySet().stream()).toList()) {
+        for (var entry : Stream.of(dusts, chemicalDusts).flatMap(e -> e.entrySet().stream()).sorted((a, b) -> a.getKey().getSerializedName().compareTo(b.getKey().getSerializedName())).toList()) {
             simpleTag(entry.getKey().getSerializedName(), entry.getValue().get(), Tags.Items.DUSTS);
         }
 
@@ -54,12 +51,6 @@ class QMDItemTagProvider extends ItemTagsProvider {
             String[] parts = key.getSerializedName().split("_");
             tag(isotopeTag(parts[0] + "/" + parts[1])).add(isotopes.get(key).asItem());
         }
-    }
-
-    private void isotopes(String name, HashMap<String, DeferredItem<Item>> isotopesMap) {
-        Pattern pattern = Pattern.compile("_[a-z]+");
-
-
     }
 
     private void simpleTag(String name, Item item, TagKey<Item> tag) {

@@ -5,7 +5,6 @@ import com.nred.nuclearcraft.block.processor.ProcessorBlock;
 import com.nred.nuclearcraft.multiblock.fisson.FissionPartType;
 import com.nred.nuclearcraft.multiblock.rtg.RTGPartType;
 import com.nred.nuclearcraft.multiblock.turbine.TurbinePartType;
-import com.nred.nuclearcraft.registration.Registers;
 import com.nred.nuclearcraft.util.InfoHelper;
 import com.nred.nuclearcraft.util.UnitHelper;
 import lach_01298.qmd.QMD;
@@ -228,13 +227,13 @@ public class QMDBlocks {
 
     private static DeferredBlock<Block> registerBlockItemWithTooltip(String name, Supplier<Block> block, Function<Block, ? extends BlockItem> itemBlockFunction) {
         DeferredBlock<Block> toReturn = BLOCKS.register(name, block);
-        Registers.ITEMS.register(name, () -> itemBlockFunction.apply(toReturn.get()));
+        ITEMS.register(name, () -> itemBlockFunction.apply(toReturn.get()));
         return toReturn;
     }
 
     public static <T extends Block> DeferredBlock<Block> registerBlockItemWithTooltip(String name, Supplier<T> block, boolean hasFixed, Component... tooltip) {
         DeferredBlock<Block> toReturn = BLOCKS.register(name, block);
-        Registers.ITEMS.register(name, () -> new NCItemBlock(toReturn.get(), ChatFormatting.RED, InfoHelper.EMPTY_ARRAY, hasFixed, ChatFormatting.AQUA, tooltip));
+        ITEMS.register(name, () -> new NCItemBlock(toReturn.get(), ChatFormatting.RED, InfoHelper.EMPTY_ARRAY, hasFixed, ChatFormatting.AQUA, tooltip));
         return toReturn;
     }
 

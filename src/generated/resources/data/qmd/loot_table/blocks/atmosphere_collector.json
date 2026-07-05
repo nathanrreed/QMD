@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "nuclearcraftneohaul:atmosphere_collector"
+          "name": "qmd:atmosphere_collector"
         }
       ],
       "rolls": 1.0

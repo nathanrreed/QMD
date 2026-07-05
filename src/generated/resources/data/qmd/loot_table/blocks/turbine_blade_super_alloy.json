@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "nuclearcraftneohaul:turbine_blade_super_alloy"
+          "name": "qmd:turbine_blade_super_alloy"
         }
       ],
       "rolls": 1.0
