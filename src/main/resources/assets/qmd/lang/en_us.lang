@@ -467,65 +467,58 @@ qmd.particle.antidelta_plus_plus.desc=Anti-Delta ++ is a baryon containing three
 qmd.particle.delta_minus.desc=Delta - is a baryon containing three Down Quarks. They quickly decay via the strong force.
 qmd.particle.antidelta_minus.desc=Anti-Delta - is a baryon containing three Anti-Down Quarks. They quickly decay via the strong force.
 
-//jei
-qmd.gui.jei.category.accelerator_source=Ion Source
-qmd.gui.jei.category.accelerator_cooling=Accelerator Cooling
-qmd.gui.jei.category.mass_spectrometer=Mass Spectrometer
+//recipe_viewer
+qmd.gui.recipe_viewer.category.accelerator_source=Ion Source
+qmd.gui.recipe_viewer.category.accelerator_cooling=Accelerator Cooling
+qmd.gui.recipe_viewer.category.mass_spectrometer=Mass Spectrometer
 
-qmd.gui.jei.category.target_chamber=Target Chamber
-qmd.gui.jei.category.decay_chamber=Decay Chamber
-qmd.gui.jei.category.beam_dump=Beam Dump
-qmd.gui.jei.category.collision_chamber=Collision Chamber
+qmd.gui.recipe_viewer.category.target_chamber=Target Chamber
+qmd.gui.recipe_viewer.category.decay_chamber=Decay Chamber
+qmd.gui.recipe_viewer.category.beam_dump=Beam Dump
+qmd.gui.recipe_viewer.category.collision_chamber=Collision Chamber
 
-qmd.gui.jei.category.ore_leacher=Ore Leacher
-qmd.gui.jei.category.irradiator=Irradiator
-qmd.gui.jei.category.irradiator_fuel=Irradiator Fuel
+qmd.gui.recipe_viewer.category.ore_leacher=Ore Leacher
+qmd.gui.recipe_viewer.category.irradiator=Irradiator
+qmd.gui.recipe_viewer.category.irradiator_fuel=Irradiator Fuel
 
-qmd.gui.jei.category.neutral_containment=Exotic Containment Chamber
-qmd.gui.jei.category.cell_filling=Cell Filling and Emptying
-qmd.gui.jei.category.nucleosynthesis_chamber=Nucleosynthesis Chamber
-qmd.gui.jei.category.vacuum_chamber_heating=Vacuum Chamber Heating
+qmd.gui.recipe_viewer.category.neutral_containment=Exotic Containment Chamber
+qmd.gui.recipe_viewer.category.cell_filling=Cell Filling and Emptying
+qmd.gui.recipe_viewer.category.nucleosynthesis_chamber=Nucleosynthesis Chamber
+qmd.gui.recipe_viewer.category.vacuum_chamber_heating=Vacuum Chamber Heating
 
-qmd.gui.jei.category.liquefier=Liquefier Liquefaction
-qmd.gui.jei.category.liquefier_coolant=Liquefier Coolant
+qmd.gui.recipe_viewer.category.liquefier=Liquefier Liquefaction
+qmd.gui.recipe_viewer.category.liquefier_coolant=Liquefier Coolant
 
-qmd.gui.jei.category.atmosphere_collector=Atmosphere Collector
-qmd.gui.jei.category.liquid_collector=Liquid Collector
-qmd.gui.jei.category.particle_info=Particle Information
+qmd.gui.recipe_viewer.category.atmosphere_collector=Atmosphere Collector
+qmd.gui.recipe_viewer.category.liquid_collector=Liquid Collector
+qmd.gui.recipe_viewer.category.particle_info=Particle Information
 
-qmd.gui.jei.accelerator_cooling.heat_required=Heating Required:
-qmd.gui.jei.accelerator_cooling.temperature=Temperature:
-qmd.gui.jei.vacuum_chamber_heating.heat_required=Heating Required:
+qmd.gui.recipe_viewer.accelerator_cooling.heat_required=Heating Required:
+qmd.gui.recipe_viewer.accelerator_cooling.temperature=Temperature:
+qmd.gui.recipe_viewer.vacuum_chamber_heating.heat_required=Heating Required:
 
-qmd.gui.jei.liquefier.base_energy=Base Energy:
-qmd.gui.jei.liquefier.base_heat=Base Heat:
-qmd.gui.jei.liquefier.inversion_temp=Inversion Temperature:
-qmd.gui.jei.liquefier.compressed_gas_temp=Hot Gas Temperature:
-qmd.gui.jei.liquefier.pressure_coefficient=Pressure Coefficient:
+qmd.gui.recipe_viewer.liquefier.base_energy=Base Energy:
+qmd.gui.recipe_viewer.liquefier.base_heat=Base Heat:
+qmd.gui.recipe_viewer.liquefier.inversion_temp=Inversion Temperature:
+qmd.gui.recipe_viewer.liquefier.compressed_gas_temp=Hot Gas Temperature:
+qmd.gui.recipe_viewer.liquefier.pressure_coefficient=Pressure Coefficient:
 
-qmd.gui.jei.liquefier_coolant.heat_required=Heating Required:
-qmd.gui.jei.liquefier_coolant.input_temp=Input Temperature:
-qmd.gui.jei.liquefier_coolant.output_temp=Output Temperature:
+qmd.gui.recipe_viewer.liquefier_coolant.heat_required=Heating Required:
+qmd.gui.recipe_viewer.liquefier_coolant.input_temp=Input Temperature:
+qmd.gui.recipe_viewer.liquefier_coolant.output_temp=Output Temperature:
 
-gui.qmd.jei.collector.blocks=Valid Blocks: %s
-gui.qmd.jei.collector.biomes=Valid Biomes: %s
-gui.qmd.jei.collector.dimensions=Valid Dimensions: %s
-gui.qmd.jei.collector.any=Any
-
-gui.qmd.jei.particle.mass=Mass: %s
-gui.qmd.jei.particle.charge=Charge: %s
-gui.qmd.jei.particle.spin=Spin: %s
-gui.qmd.jei.particle.colour=Feels Strong Force: %s
-gui.qmd.jei.particle.weak=Feels Weak Force: %s
-gui.qmd.jei.particle.components=Made of:
-gui.qmd.jei.particle.focus=Minimum Focus: %s
-gui.qmd.jei.reaction.range=Range: %s
-gui.qmd.jei.reaction.energy_released=Released Energy: %s
-gui.qmd.jei.reaction.cross_section=Cross Section: %s%%
-gui.qmd.jei.reaction.heat_released=Heat Released: %s
-gui.qmd.jei.reaction.max_energy=Maximum Energy: %s
-
-
+gui.qmd.recipe_viewer.particle.mass=Mass: %s
+gui.qmd.recipe_viewer.particle.charge=Charge: %s
+gui.qmd.recipe_viewer.particle.spin=Spin: %s
+gui.qmd.recipe_viewer.particle.colour=Feels Strong Force: %s
+gui.qmd.recipe_viewer.particle.weak=Feels Weak Force: %s
+gui.qmd.recipe_viewer.particle.components=Made of:
+gui.qmd.recipe_viewer.particle.focus=Minimum Focus: %s
+gui.qmd.recipe_viewer.reaction.range=Range: %s
+gui.qmd.recipe_viewer.reaction.energy_released=Released Energy: %s
+gui.qmd.recipe_viewer.reaction.cross_section=Cross Section: %s%%
+gui.qmd.recipe_viewer.reaction.heat_released=Heat Released: %s
+gui.qmd.recipe_viewer.reaction.max_energy=Maximum Energy: %s
 
 //tabs
 itemGroup.qmd.items=Quantum Minecraft Dynamics Items

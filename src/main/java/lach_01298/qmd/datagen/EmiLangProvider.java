@@ -14,5 +14,7 @@ public class EmiLangProvider extends LanguageProvider {
     protected void addTranslations() {
         add("emi.category." + ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "ore_leacher").toLanguageKey(), "Ore Leacher");
         add("emi.category." + ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "irradiator").toLanguageKey(), "Irradiator");
+        add("emi.category." + ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "atmosphere_collector").toLanguageKey(), "Atmosphere Collector");
+        add("emi.category." + ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "liquid_collector").toLanguageKey(), "Liquid Collector");
     }
 }

@@ -27,6 +27,7 @@ public class QMDLanguageProvider extends LanguageProvider {
         particles();
         fluids();
         menus();
+        recipeViewer();
         descriptions();
         messages();
         blocks();
@@ -244,6 +245,13 @@ public class QMDLanguageProvider extends LanguageProvider {
         add("gui.qmd.container.creative_particle_source.particle_amount", "Amount (pu/t)");
         add("gui.qmd.container.creative_particle_source.particle_energy", "Energy (keV)");
         add("gui.qmd.container.creative_particle_source.particle_focus", "Focus");
+    }
+
+    private void recipeViewer() {
+        add("gui.qmd.recipe_viewer.collector.blocks", "Valid Blocks: %s");
+        add("gui.qmd.recipe_viewer.collector.biomes", "Valid Biomes: %s");
+        add("gui.qmd.recipe_viewer.collector.dimensions", "Valid Dimensions: %s");
+        add("gui.qmd.recipe_viewer.collector.any", "Any");
     }
 
     private void descriptions() {

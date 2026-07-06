@@ -117,7 +117,7 @@ public class NCRecipeProvider {
         // Fluid Mixer
         new ProcessorRecipeBuilder(FluidMixerRecipe.class, 1, 1).addFluidInput(QMD_FLUIDS.get("mercury"), INGOT_VOLUME).addFluidInput(MOLTEN_MAP.get("sulfur"), GEM_VOLUME).addFluidResult(MOLTEN_MAP.get("redstone"), REDSTONE_DUST_VOLUME).save(recipeOutput);
 
-        //Electrolyzer TODO
+        // Electrolyzer TODO
 //        NCRecipes.electrolyzer.addRecipe(fluidStack("sodium_chloride", GEM_VOLUME), fluidStack("sodium", INGOT_VOLUME), fluidStack("chlorine", BUCKET_VOLUME / 2), new EmptyFluidIngredient(), new EmptyFluidIngredient(), 1D, 1D);
 //        NCRecipes.electrolyzer.addRecipe(fluidStack("sodium_chloride_solution", 2 * GEM_VOLUME), fluidStack("hydrogen", BUCKET_VOLUME), fluidStack("chlorine", BUCKET_VOLUME), fluidStack("sodium_hydroxide_solution", GEM_VOLUME * 2), new EmptyFluidIngredient(), 0.5D, 1D);
 //
