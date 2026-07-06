@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_strontium_dust": {
+      "conditions": {
+        "items": [
+          {
+            "items": "qmd:strontium_dust"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "qmd:strontium_ingot_from_smelting_strontium_dust"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_strontium_dust"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "qmd:strontium_ingot_from_smelting_strontium_dust"
+    ]
+  }
+}

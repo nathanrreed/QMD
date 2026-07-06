@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_elite_processor_semiconductor": {
+      "conditions": {
+        "items": [
+          {
+            "items": "qmd:elite_processor_semiconductor"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "qmd:empty_cell"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_elite_processor_semiconductor"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "qmd:empty_cell"
+    ]
+  }
+}

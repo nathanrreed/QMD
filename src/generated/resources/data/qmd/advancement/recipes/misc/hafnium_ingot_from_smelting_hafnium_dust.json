@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_hafnium_dust": {
+      "conditions": {
+        "items": [
+          {
+            "items": "qmd:hafnium_dust"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "qmd:hafnium_ingot_from_smelting_hafnium_dust"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_hafnium_dust"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "qmd:hafnium_ingot_from_smelting_hafnium_dust"
+    ]
+  }
+}

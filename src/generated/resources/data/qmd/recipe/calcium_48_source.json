@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "nuclearcraftneohaul:bioplastic"
+    },
+    "S": {
+      "tag": "c:isotopes/calcium/48"
+    }
+  },
+  "pattern": [
+    "BSB",
+    "SSS",
+    "BSB"
+  ],
+  "result": {
+    "components": {
+      "minecraft:custom_data": {
+        "particle_storage": {
+          "particle_amount": 5000000,
+          "particle_capacity": 5000000
+        }
+      }
+    },
+    "count": 1,
+    "id": "qmd:calcium_48_source"
+  }
+}

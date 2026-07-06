@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.0,
+  "group": "niobium",
+  "ingredient": {
+    "item": "qmd:niobium_dust"
+  },
+  "result": {
+    "count": 1,
+    "id": "qmd:niobium_ingot"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sulfur_gem_dust": {
+      "conditions": {
+        "items": [
+          {
+            "items": "nuclearcraftneohaul:sulfur_gem_dust"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:gunpowder_from_sulfur_2"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_sulfur_gem_dust"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:gunpowder_from_sulfur_2"
+    ]
+  }
+}

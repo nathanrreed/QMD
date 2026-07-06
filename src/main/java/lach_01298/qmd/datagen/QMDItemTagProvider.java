@@ -19,6 +19,7 @@ import java.util.stream.Stream;
 
 import static com.nred.nuclearcraft.datagen.ModItemTagProvider.isotopeTag;
 import static com.nred.nuclearcraft.helpers.Concat.fluidValues;
+import static lach_01298.qmd.block.QMDBlocks.strontium90;
 import static lach_01298.qmd.item.QMDItems.*;
 
 class QMDItemTagProvider extends ItemTagsProvider {
@@ -36,12 +37,14 @@ class QMDItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.SHOVELS).add(shovel_tungsten_carbide.asItem());
         tag(ItemTags.HOES).add(hoe_tungsten_carbide.asItem());
 
+
         for (var entry : Stream.of(ingots, ingotAlloys).flatMap(e -> e.entrySet().stream()).sorted((a, b) -> a.getKey().getSerializedName().compareTo(b.getKey().getSerializedName())).toList()) {
             simpleTag(entry.getKey().getSerializedName(), entry.getValue().get(), Tags.Items.INGOTS);
         }
         for (var entry : Stream.of(dusts, chemicalDusts).flatMap(e -> e.entrySet().stream()).sorted((a, b) -> a.getKey().getSerializedName().compareTo(b.getKey().getSerializedName())).toList()) {
             simpleTag(entry.getKey().getSerializedName(), entry.getValue().get(), Tags.Items.DUSTS);
         }
+        simpleTag("strontium_90", strontium90.asItem(), Tags.Items.STORAGE_BLOCKS);
 
         for (NCFluid fluid : fluidValues(QMDFluids.QMD_FLUIDS)) {
             tag(Tags.Items.BUCKETS).add(fluid.bucket.get());

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "nuclearcraftneohaul:basic_plating"
+    },
+    "F": {
+      "item": "nuclearcraftneohaul:steel_chassis"
+    },
+    "H": {
+      "tag": "c:ingots/hafnium"
+    }
+  },
+  "pattern": [
+    "BHB",
+    "HFH",
+    "BHB"
+  ],
+  "result": {
+    "count": 4,
+    "id": "qmd:hafnium_shield"
+  }
+}

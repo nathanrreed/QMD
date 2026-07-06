@@ -1,34 +1,43 @@
 package lach_01298.qmd.datagen;
 
-import com.google.common.collect.Lists;
-import com.nred.nuclearcraft.recipe.NCRecipes;
-import lach_01298.qmd.QMDRadSources;
+import lach_01298.qmd.QMD;
 import lach_01298.qmd.block.QMDBlocks;
 import lach_01298.qmd.datagen.recipe.*;
-import lach_01298.qmd.enums.BlockTypes;
-import lach_01298.qmd.enums.MaterialTypes;
+import lach_01298.qmd.enums.BlockTypes.LampType;
+import lach_01298.qmd.enums.MaterialTypes.*;
 import lach_01298.qmd.item.IItemParticleAmount;
 import lach_01298.qmd.item.QMDItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.world.item.Item;
+import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.level.ItemLike;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
+import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
+import vazkii.patchouli.api.PatchouliAPI;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import static lach_01298.qmd.item.QMDItems.dusts;
+import static com.nred.nuclearcraft.datagen.ModItemTagProvider.isotopeTag;
+import static com.nred.nuclearcraft.helpers.RecipeHelpers.tag;
+import static com.nred.nuclearcraft.registration.BlockRegistration.PROCESSOR_MAP;
+import static com.nred.nuclearcraft.registration.BlockRegistration.RTG_MAP;
+import static com.nred.nuclearcraft.registration.ItemRegistration.*;
+import static lach_01298.qmd.block.QMDBlocks.dischargeLamps;
+import static lach_01298.qmd.block.QMDBlocks.strontium90;
+import static lach_01298.qmd.item.QMDItems.*;
+import static net.minecraft.data.recipes.RecipeCategory.MISC;
+import static net.neoforged.neoforge.common.Tags.Items.DUSTS;
+import static net.neoforged.neoforge.common.Tags.Items.INGOTS;
 
 public class QMDRecipeProvider extends RecipeProvider implements IConditionBuilder {
     public QMDRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries);
     }
-
-    public static final List<String> PLASTIC_TYPES = Lists.newArrayList("bioplastic", "sheetPlastic"); // TODO
 
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
@@ -40,389 +49,341 @@ public class QMDRecipeProvider extends RecipeProvider implements IConditionBuild
 
         NCRecipeProvider.buildRecipes(recipeOutput);
 
-//        // Alloy furnace
-//        NCRecipes.alloy_furnace.addAlloyIngotIngotRecipes("Steel", 5, "Chromium", 1, "StainlessSteel", 6, 1D, 1D);
-//        NCRecipes.alloy_furnace.addAlloyIngotIngotRecipes("Niobium", 3, "Tin", 1, "NiobiumTin", 4, 1D, 1D);
-//        NCRecipes.alloy_furnace.addAlloyIngotIngotRecipes("Niobium", 1, "Titanium", 1, "NiobiumTitanium", 2, 1D, 1D);
-//        NCRecipes.alloy_furnace.addAlloyIngotIngotRecipes("Tungsten", 1, "Graphite", 1, "TungstenCarbide", 2, 2D, 2D);
-//        NCRecipes.alloy_furnace.addAlloyIngotIngotRecipes("Osmium", 1, "Iridium", 1, "Osmiridium", 2, 1D, 1D);
-//        NCRecipes.alloy_furnace.addAlloyIngotIngotRecipes("Nickel", 1, "Chromium", 1, "Nichrome", 2, 1D, 1D);
-//        NCRecipes.alloy_furnace.addAlloyIngotIngotRecipes("Nichrome", 2, "NiobiumTitanium", 1, "SuperAlloy", 3, 1D, 1D);
-//        NCRecipes.alloy_furnace.addRecipe("dustZinc", "dustSulfur", "dustZincSulfide", 1D, 1D);
-//
-//
-//        NCRecipes.alloy_furnace.addAlloyIngotIngotRecipes("Uranium238", 9, "Uranium235", 1, "Uranium", 10, 1D, 1D);
-//        NCRecipes.alloy_furnace.addAlloyIngotIngotRecipes("Boron11", 9, "Boron10", 3, "Boron", 12, 1D, 1D);
-//        NCRecipes.alloy_furnace.addAlloyIngotIngotRecipes("Lithium7", 9, "Lithium6", 1, "Lithium", 10, 1D, 1D);
-//        NCRecipes.alloy_furnace.addAlloyIngotIngotRecipes("Magnesium24", 8, "Magnesium26", 1, "Magnesium", 9, 1D, 1D);
-//
-//        // Fluid Infuser
-//        NCRecipes.infuser.addRecipe(new ItemStack(QMDItems.parts.get(MaterialTypes.PartType.DETECTOR_CASING)), fluidStack("liquid_hydrogen", BUCKET_VOLUME), new ItemStack(QMDBlocks.particleChamberDetector, 1, BlockTypes.DetectorType.BUBBLE_CHAMBER.getID()), 1D, 1D);
-//        NCRecipes.infuser.addRecipe(new ItemStack(QMDItems.parts.get(MaterialTypes.PartType.WIRE_CHAMBER_CASING)), fluidStack("argon", BUCKET_VOLUME), new ItemStack(QMDBlocks.particleChamberDetector, 1, BlockTypes.DetectorType.WIRE_CHAMBER.getID()), 1D, 1D);
-//
-////        NCRecipes.infuser.addRecipe(new ItemStack(QMDItems.parts.get(PartType.EMPTY_COOLER)), fluidStack("water", BUCKET_VOLUME), new ItemStack(QMDBlocks.acceleratorCoolers, 1, CoolerType.WATER.getID()), 1D, 1D);
-////        NCRecipes.infuser.addRecipe(new ItemStack(QMDItems.parts.get(PartType.EMPTY_COOLER)), fluidStack("liquid_helium", BUCKET_VOLUME), new ItemStack(QMDBlocks.acceleratorCooler2, 1, CoolerType2.LIQUID_HELIUM.getID()), 1D, 1D);
-////        NCRecipes.infuser.addRecipe(new ItemStack(QMDItems.parts.get(PartType.EMPTY_COOLER)), fluidStack("liquid_nitrogen", BUCKET_VOLUME), new ItemStack(QMDBlocks.acceleratorCooler2, 1, CoolerType2.LIQUID_NITROGEN.getID()), 1D, 1D);
-////        NCRecipes.infuser.addRecipe(new ItemStack(QMDItems.parts.get(PartType.EMPTY_COOLER)), fluidStack("cryotheum", BUCKET_VOLUME), new ItemStack(QMDBlocks.acceleratorCooler2, 1, CoolerType2.CRYOTHEUM.getID()), 1D, 1D);
-////        NCRecipes.infuser.addRecipe(new ItemStack(QMDItems.parts.get(PartType.EMPTY_COOLER)), fluidStack("enderium", INGOT_VOLUME * 4), new ItemStack(QMDBlocks.acceleratorCooler2, 1, CoolerType2.ENDERIUM.getID()), 1D, 1D);
-//
-//        NCRecipes.infuser.addRecipe(new ItemStack(QMDBlocks.dischargeLamp, 1, BlockTypes.LampType.EMPTY.getID()), fluidStack("hydrogen", BUCKET_VOLUME / 4), new ItemStack(QMDBlocks.dischargeLamp, 1, BlockTypes.LampType.HYDROGEN.getID()), 1D, 1D);
-//        NCRecipes.infuser.addRecipe(new ItemStack(QMDBlocks.dischargeLamp, 1, BlockTypes.LampType.EMPTY.getID()), fluidStack("helium", BUCKET_VOLUME / 4), new ItemStack(QMDBlocks.dischargeLamp, 1, BlockTypes.LampType.HELIUM.getID()), 1D, 1D);
-//        NCRecipes.infuser.addRecipe(new ItemStack(QMDBlocks.dischargeLamp, 1, BlockTypes.LampType.EMPTY.getID()), fluidStack("nitrogen", BUCKET_VOLUME / 4), new ItemStack(QMDBlocks.dischargeLamp, 1, BlockTypes.LampType.NITROGEN.getID()), 1D, 1D);
-//        NCRecipes.infuser.addRecipe(new ItemStack(QMDBlocks.dischargeLamp, 1, BlockTypes.LampType.EMPTY.getID()), fluidStack("oxygen", BUCKET_VOLUME / 4), new ItemStack(QMDBlocks.dischargeLamp, 1, BlockTypes.LampType.OXYGEN.getID()), 1D, 1D);
-//        NCRecipes.infuser.addRecipe(new ItemStack(QMDBlocks.dischargeLamp, 1, BlockTypes.LampType.EMPTY.getID()), fluidStack("neon", BUCKET_VOLUME / 4), new ItemStack(QMDBlocks.dischargeLamp, 1, BlockTypes.LampType.NEON.getID()), 1D, 1D);
-//        NCRecipes.infuser.addRecipe(new ItemStack(QMDBlocks.dischargeLamp, 1, BlockTypes.LampType.EMPTY.getID()), fluidStack("argon", BUCKET_VOLUME / 4), new ItemStack(QMDBlocks.dischargeLamp, 1, BlockTypes.LampType.ARGON.getID()), 1D, 1D);
-//        NCRecipes.infuser.addRecipe(new ItemStack(QMDBlocks.dischargeLamp, 1, BlockTypes.LampType.ARGON.getID()), fluidStack("sodium", INGOT_VOLUME), new ItemStack(QMDBlocks.dischargeLamp2, 1, LampType2.SODIUM.getID()), 1D, 1D);
-//        NCRecipes.infuser.addRecipe(new ItemStack(QMDBlocks.dischargeLamp, 1, BlockTypes.LampType.ARGON.getID()), fluidStack("mercury", INGOT_VOLUME), new ItemStack(QMDBlocks.dischargeLamp2, 1, LampType2.MERCURY.getID()), 1D, 1D);
-//
-//        NCRecipes.infuser.addRecipe("dustStrontium", fluidStack("hydrochloric_acid", BUCKET_VOLUME * 2), "dustStrontiumChloride", 1D, 1D);
-//        NCRecipes.infuser.addRecipe("dustIron", fluidStack("hydrofluoric_acid", 1500), "dustIronFluoride", 1D, 1D);
-//        NCRecipes.infuser.addRecipe("ingotIron", fluidStack("hydrofluoric_acid", 1500), "dustIronFluoride", 1D, 1D);
-//
-//        NCRecipes.infuser.addOxidizingRecipe("dustCopper", BUCKET_VOLUME);
-//        NCRecipes.infuser.addOxidizingRecipe("dustTungsten", BUCKET_VOLUME);
-//        NCRecipes.infuser.addOxidizingRecipe("dustHafnium", BUCKET_VOLUME);
-//
-//
-//        // Fluid Enricher
-//        NCRecipes.enricher.addRecipe("dustTungstenOxide", fluidStack("sodium_hydroxide_solution", GEM_VOLUME * 2), fluidStack("sodium_tungstate_solution", GEM_VOLUME), 1D, 1D);
-//        NCRecipes.enricher.addRecipe("dustLead", fluidStack("nitric_acid", GEM_VOLUME * 2), fluidStack("lead_nitrate_solution", GEM_VOLUME), 1D, 1D);
-//        NCRecipes.enricher.addRecipe("ingotYttrium", fluidStack("alumina", 120), fluidStack("yag", 48), 2D, 2D);
-//        NCRecipes.enricher.addRecipe("ingotNeodymium", fluidStack("yag", INGOT_BLOCK_VOLUME), fluidStack("nd_yag", INGOT_BLOCK_VOLUME), 2D, 2D);
-//
-//        NCRecipes.enricher.addRecipe("dustSalt", fluidStack("water", BUCKET_VOLUME), fluidStack("sodium_chloride_solution", GEM_VOLUME), 1D, 1D);
-//
-//
-//        // Chemical reactor
-//        NCRecipes.chemical_reactor.addRecipe(fluidStack("sodium_tungstate_solution", GEM_VOLUME), fluidStack("lead_nitrate_solution", GEM_VOLUME), fluidStack("lead_tungstate_solution", GEM_VOLUME), fluidStack("sodium_nitrate_solution", GEM_VOLUME), 1D, 1D);
-//
-//
-//        NCRecipes.chemical_reactor.addRecipe(fluidStack("hydrogen", BUCKET_VOLUME), fluidStack("chlorine", BUCKET_VOLUME), fluidStack("hydrochloric_acid", 2 * BUCKET_VOLUME), new EmptyFluidIngredient(), 1D, 1D);
-//        NCRecipes.chemical_reactor.addRecipe(fluidStack("liquidhydrogenchloride", BUCKET_VOLUME), fluidStack("water", BUCKET_VOLUME), fluidStack("hydrochloric_acid", BUCKET_VOLUME), new EmptyFluidIngredient(), 1D, 1D);
-//        NCRecipes.chemical_reactor.addRecipe(fluidStack("nitrogen", BUCKET_VOLUME), fluidStack("oxygen", BUCKET_VOLUME), fluidStack("nitric_oxide", BUCKET_VOLUME * 2), new EmptyFluidIngredient(), 1D, 1D);
-//        NCRecipes.chemical_reactor.addRecipe(fluidStack("nitric_oxide", BUCKET_VOLUME * 2), fluidStack("oxygen", BUCKET_VOLUME), fluidStack("nitrogen_dioxide", BUCKET_VOLUME * 2), new EmptyFluidIngredient(), 1D, 1D);
-//        NCRecipes.chemical_reactor.addRecipe(fluidStack("nitrogen_dioxide", BUCKET_VOLUME * 3), fluidStack("water", BUCKET_VOLUME), fluidStack("nitric_acid", BUCKET_VOLUME * 2), fluidStack("nitric_oxide", BUCKET_VOLUME), 1D, 1D);
-//        NCRecipes.chemical_reactor.addRecipe(fluidStack("sodium_hydroxide_solution", GEM_VOLUME), fluidStack("nitric_acid", BUCKET_VOLUME), fluidStack("sodium_nitrate_solution", GEM_VOLUME), new EmptyFluidIngredient(), 1D, 1D);
-//
-//        // Separator
-//        NCRecipes.separator.addRecipe(oreStackList(Lists.newArrayList("ingotMagnesium", "dustMagnesium"), 9), oreStack("ingotMagnesium24", 8), oreStack("ingotMagnesium26", 1), 6D, 1D);
-//        NCRecipes.separator.addRecipe(oreStackList(Lists.newArrayList("ingotCalcium", "dustCalcium"), 8), oreStack("ingotCalcium48", 1), new EmptyItemIngredient(), 6D, 1D);
-//
-//        // Centrifuge
-//        NCRecipes.centrifuge.addRecipe(fluidStack("redstone", REDSTONE_DUST_VOLUME), fluidStack("mercury", INGOT_VOLUME), fluidStack("sulfur", GEM_VOLUME), new EmptyFluidIngredient(), new EmptyFluidIngredient(), new EmptyFluidIngredient(), new EmptyFluidIngredient(), 1D, 1D);
-//        NCRecipes.centrifuge.addRecipe(fluidStack("coal", COAL_DUST_VOLUME), fluidStack("carbon", COAL_DUST_VOLUME), fluidStack("sulfur", GEM_VOLUME / 6), new EmptyFluidIngredient(), new EmptyFluidIngredient(), new EmptyFluidIngredient(), new EmptyFluidIngredient(), 1D, 1D);
-//
-//        // fluid mixer
-//        NCRecipes.salt_mixer.addRecipe(fluidStack("mercury", INGOT_VOLUME), fluidStack("sulfur", GEM_VOLUME), fluidStack("redstone", REDSTONE_DUST_VOLUME), 1D, 1D);
-//
-//
-//        //Electrolyzer
-//        NCRecipes.electrolyzer.addRecipe(fluidStack("sodium_chloride", GEM_VOLUME), fluidStack("sodium", INGOT_VOLUME), fluidStack("chlorine", BUCKET_VOLUME / 2), new EmptyFluidIngredient(), new EmptyFluidIngredient(), 1D, 1D);
-//        NCRecipes.electrolyzer.addRecipe(fluidStack("sodium_chloride_solution", 2 * GEM_VOLUME), fluidStack("hydrogen", BUCKET_VOLUME), fluidStack("chlorine", BUCKET_VOLUME), fluidStack("sodium_hydroxide_solution", GEM_VOLUME * 2), new EmptyFluidIngredient(), 0.5D, 1D);
-//
-//        NCRecipes.multiblock_electrolyzer.addElectrolyte("chloride_solution", fluidStack("sodium_chloride_solution", 1), 1D);
-//        NCRecipes.multiblock_electrolyzer.addRecipe(emptyItemStack(), emptyItemStack(), fluidStack("sodium_chloride_solution", 2 * GEM_VOLUME), emptyFluidStack(), emptyItemStack(), emptyItemStack(), emptyItemStack(), emptyItemStack(), fluidStack("hydrogen", BUCKET_VOLUME), fluidStack("chlorine", BUCKET_VOLUME), fluidStack("sodium_hydroxide_solution", GEM_VOLUME * 2), new EmptyFluidIngredient(), 0.5D, 1D, 0D, "chloride_solution");
-//
-//        // Manufactory
-//        NCRecipes.manufactory.addRecipe("bouleSilicon", oreStack("waferSilicon", 4), 1D, 1D);
-//
-//
-//        // Melter
-//        NCRecipes.melter.addRecipe("ingotMercury", fluidStack("mercury", INGOT_VOLUME), 0.5D, 0D);
-//        NCRecipes.melter.addRecipe("dustIodine", fluidStack("iodine", INGOT_VOLUME));
-//        NCRecipes.melter.addRecipe("dustSamarium", fluidStack("samarium", INGOT_VOLUME));
-//        NCRecipes.melter.addRecipe("dustTerbium", fluidStack("terbium", INGOT_VOLUME));
-//        NCRecipes.melter.addRecipe("dustErbium", fluidStack("erbium", INGOT_VOLUME));
-//        NCRecipes.melter.addRecipe("dustYtterbium", fluidStack("ytterbium", INGOT_VOLUME));
-//        NCRecipes.melter.addRecipe("dustMolybdenum", fluidStack("molybdenum", INGOT_VOLUME));
-//        NCRecipes.melter.addRecipe("dustBismuth", fluidStack("bismuth", INGOT_VOLUME));
-//        NCRecipes.melter.addRecipe("dustPolonium", fluidStack("polonium", INGOT_VOLUME));
-//        NCRecipes.melter.addRecipe("dustRadium", fluidStack("radium", INGOT_VOLUME));
-//
-//
-//        if (FluidRegHelper.fluidExists("brine") && QMDConfig.override_nc_recipes) {
-//            List<IFluidIngredient> fluidIngredients = new ArrayList<IFluidIngredient>();
-//            List<IItemIngredient> itemIngredients = new ArrayList<IItemIngredient>();
-//            itemIngredients.add(oreStack("dustSalt", 1));
-//            NCRecipes.melter.removeRecipe(NCRecipes.melter.getRecipeFromIngredients(itemIngredients, fluidIngredients));
-//            itemIngredients.add(oreStack("itemSalt", 1));
-//            NCRecipes.melter.removeRecipe(NCRecipes.melter.getRecipeFromIngredients(itemIngredients, fluidIngredients));
-//
-//            NCRecipes.melter.addRecipe("dustSalt", fluidStack("sodium_chloride", GEM_VOLUME));
-//        } else if (!FluidRegHelper.fluidExists("brine")) {
-//            NCRecipes.melter.addRecipe("dustSalt", fluidStack("sodium_chloride", GEM_VOLUME));
-//        }
-//
-//
-//        if (QMDConfig.override_nc_recipes) {
-//            List<IFluidIngredient> fluidIngredients = new ArrayList<IFluidIngredient>();
-//            List<IItemIngredient> itemIngredients = new ArrayList<IItemIngredient>();
-//            itemIngredients.add(oreStack("dustGraphite", 1));
-//
-//            NCRecipes.melter.removeRecipe(NCRecipes.melter.getRecipeFromIngredients(itemIngredients, fluidIngredients));
-//
-//            itemIngredients = new ArrayList<IItemIngredient>();
-//            itemIngredients.add(oreStack("dustGraphite", 1));
-//
-//            NCRecipes.melter.removeRecipe(NCRecipes.melter.getRecipeFromIngredients(itemIngredients, fluidIngredients));
-//            NCRecipes.melter.addRecipe(oreStackList(Lists.newArrayList("dustGraphite", "ingotGraphite"), 1), fluidStack("carbon", COAL_DUST_VOLUME));
-//
-//            itemIngredients = new ArrayList<IItemIngredient>();
-//            itemIngredients.add(oreStack("blockGraphite", 1));
-//
-//            NCRecipes.melter.removeRecipe(NCRecipes.melter.getRecipeFromIngredients(itemIngredients, fluidIngredients));
-//            NCRecipes.melter.addRecipe("blockGraphite", fluidStack("carbon", COAL_BLOCK_VOLUME));
-//
-//        }
-//        NCRecipes.melter.addRecipe(oreStackList(Lists.newArrayList("dustCharcoal", "charcoal"), 1), fluidStack("carbon", COAL_DUST_VOLUME));
-//
-//
-//        //ingot former
-//        NCRecipes.ingot_former.addRecipe(fluidStack("carbon", COAL_DUST_VOLUME), "ingotGraphite");
-//
-//        if (QMDConfig.override_nc_recipes) {
-//            List<IFluidIngredient> fluidIngredients = new ArrayList<IFluidIngredient>();
-//            List<IItemIngredient> itemIngredients = new ArrayList<IItemIngredient>();
-//
-//            fluidIngredients.add(fluidStack("coal", COAL_DUST_VOLUME));
-//
-//            NCRecipes.ingot_former.removeRecipe(NCRecipes.ingot_former.getRecipeFromIngredients(itemIngredients, fluidIngredients));
-//            NCRecipes.ingot_former.addRecipe(fluidStack("coal", COAL_DUST_VOLUME), "coal", 0.5D, 1D);
-//        }
-//
-//        // Crystallizer
-//        NCRecipes.crystallizer.addRecipe(fluidStack("silicon", INGOT_BLOCK_VOLUME), "bouleSilicon", 2D, 2D);
-//        NCRecipes.crystallizer.addRecipe(fluidStack("lead_tungstate_solution", GEM_VOLUME), new ItemStack(QMDItems.parts.get(MaterialTypes.PartType.SCINTILLATOR_PWO)), 1D, 1D);
-//        NCRecipes.crystallizer.addRecipe(fluidStack("sodium_nitrate_solution", GEM_VOLUME), "dustSodiumNitrate", 1D, 1D);
-//        NCRecipes.crystallizer.addRecipe(fluidStack("sodium_chloride_solution", GEM_VOLUME), "dustSalt", 1D, 1D);
-//        NCRecipes.crystallizer.addRecipe(fluidStack("nd_yag", INGOT_VOLUME * 3), "rodNdYAG", 2D, 2D);
-//        NCRecipes.crystallizer.addRecipe(fluidStack("salt_water", BUCKET_VOLUME * 10), "dustSalt", 2D, 4D);
-//
-//
-//        NCRecipes.crystallizer.addRecipe(fluidStack("iodine", INGOT_VOLUME), "dustIodine", 0.25D, 0D);
-//        NCRecipes.crystallizer.addRecipe(fluidStack("samarium", INGOT_VOLUME), "dustSamarium", 0.25D, 0D);
-//        NCRecipes.crystallizer.addRecipe(fluidStack("terbium", INGOT_VOLUME), "dustTerbium", 0.25D, 0D);
-//        NCRecipes.crystallizer.addRecipe(fluidStack("erbium", INGOT_VOLUME), "dustErbium", 0.25D, 0D);
-//        NCRecipes.crystallizer.addRecipe(fluidStack("ytterbium", INGOT_VOLUME), "dustYtterbium", 0.25D, 0D);
-//        NCRecipes.crystallizer.addRecipe(fluidStack("molybdenum", INGOT_VOLUME), "dustMolybdenum", 0.25D, 0D);
-//
-//        NCRecipes.crystallizer.addRecipe(fluidStack("bismuth", INGOT_VOLUME), "dustbismuth", 0.25D, 0D);
-//        NCRecipes.crystallizer.addRecipe(fluidStack("radium", INGOT_VOLUME), "dustRadium", 0.25D, 0D);
-//        NCRecipes.crystallizer.addRecipe(fluidStack("polonium", INGOT_VOLUME), "dustPolonium", 0.25D, 0D);
-//        NCRecipes.crystallizer.addRecipe(fluidStack("europium_155", INGOT_VOLUME), "dustEuropium155", 0.25D, 0D);
-//        NCRecipes.crystallizer.addRecipe(fluidStack("ruthenium_106", INGOT_VOLUME), "dustRuthenium106", 0.25D, 0D);
-//        NCRecipes.crystallizer.addRecipe(fluidStack("strontium_90", INGOT_VOLUME), "dustStrontium90", 0.25D, 0D);
-//        NCRecipes.crystallizer.addRecipe(fluidStack("promethium_147", INGOT_VOLUME), "dustPromethium147", 0.25D, 0D);
-//        NCRecipes.crystallizer.addRecipe(fluidStack("caesium_137", INGOT_VOLUME), "dustCaesium137", 0.25D, 0D);
-//
-//        // Pressurizer
-//        NCRecipes.pressurizer.addRecipe((oreStack("dustStrontium90", 9)), "blockStrontium90", 1D, 2D);
-//
-//
-//        // SuperCooler
-//        if (QMDConfig.override_nc_recipes) {
-//            List<IItemIngredient> emptyitems = new ArrayList<IItemIngredient>();
-//            List<IFluidIngredient> helium = new ArrayList<IFluidIngredient>();
-//            helium.add(fluidStack("helium", BUCKET_VOLUME * 8));
-//            List<IFluidIngredient> nitrogen = new ArrayList<IFluidIngredient>();
-//            nitrogen.add(fluidStack("nitrogen", BUCKET_VOLUME * 8));
-//
-//            NCRecipes.supercooler.removeRecipe(NCRecipes.supercooler.getRecipeFromIngredients(emptyitems, helium));
-//            NCRecipes.supercooler.removeRecipe(NCRecipes.supercooler.getRecipeFromIngredients(emptyitems, nitrogen));
-//
-//            NCRecipes.supercooler.addRecipe(fluidStack("helium", 64), fluidStack("liquid_helium", 1), 2D / 150D, 5D);
-//            NCRecipes.supercooler.addRecipe(fluidStack("nitrogen", 64), fluidStack("liquid_nitrogen", 1), 2D / 150D, 2.5D);
-//
-//            NCRecipes.supercooler.addRecipe(fluidStack("hydrogen", 64), fluidStack("liquid_hydrogen", 1), 2D / 150D, 3.75D);
-//            NCRecipes.supercooler.addRecipe(fluidStack("neon", 64), fluidStack("liquid_neon", 1), 2D / 150D, 3.75D);
-//            NCRecipes.supercooler.addRecipe(fluidStack("argon", 64), fluidStack("liquid_argon", 1), 2D / 150D, 2.5D);
-//            NCRecipes.supercooler.addRecipe(fluidStack("oxygen", 64), fluidStack("liquid_oxygen", 1), 2D / 150D, 2.5D);
-//            NCRecipes.supercooler.addRecipe(fluidStack("compressed_air", 64), fluidStack("liquid_air", 1), 2D / 150D, 1D);
-//
-//        } else {
-//            NCRecipes.supercooler.addRecipe(fluidStack("hydrogen", BUCKET_VOLUME * 8), fluidStack("liquid_hydrogen", 25), 1D, 1D);
-//            NCRecipes.supercooler.addRecipe(fluidStack("neon", BUCKET_VOLUME * 8), fluidStack("liquid_neon", 25), 1D, 1D);
-//            NCRecipes.supercooler.addRecipe(fluidStack("argon", BUCKET_VOLUME * 8), fluidStack("liquid_argon", 25), 0.5D, 0.5D);
-//            NCRecipes.supercooler.addRecipe(fluidStack("oxygen", BUCKET_VOLUME * 8), fluidStack("liquid_oxygen", 25), 0.5D, 0.5D);
-//            NCRecipes.supercooler.addRecipe(fluidStack("compressed_air", BUCKET_VOLUME * 8), fluidStack("liquid_air", 25), 0.5D, 0.5D);
-//        }
-//
-//
-//        // Decay Hastener
-//        if (QMDConfig.override_nc_recipes) {
-//            List<IItemIngredient> itemIngredients = new ArrayList<IItemIngredient>();
-//            itemIngredients.add(new ItemIngredient(new ItemStack(NCItems.plutonium, 1, MetaEnums.PlutoniumType._238.getID())));
-//            List<IFluidIngredient> fluidIngredients = new ArrayList<IFluidIngredient>();
-//            NCRecipes.decay_hastener.removeRecipe(NCRecipes.decay_hastener.getRecipeFromIngredients(itemIngredients, fluidIngredients));
-//
-//            NCRecipes.decay_hastener.addDecayRecipes("Plutonium238", "Uranium234", RadSources.PLUTONIUM_238);
-//        }
-//
-//
-//        NCRecipes.decay_hastener.addDecayRecipes("Beryllium7", "Lithium7", QMDRadSources.BERYLLIUM_7);
-//        NCRecipes.decay_hastener.addDecayRecipes("Protactinium231", "Lead", QMDRadSources.PROTACTINIUM_231);
-//
-//        NCRecipes.decay_hastener.addDecayRecipes("Uranium234", "Radium", QMDRadSources.URANIUM_234);
-//        NCRecipes.decay_hastener.addRecipe("ingotCobalt60", "dustNickel", getDecayHastenerTimeMultipler(QMDRadSources.COBALT_60), 1d, QMDRadSources.COBALT_60);
-//        NCRecipes.decay_hastener.addRecipe("ingotIridium192", "dustPlatinum", getDecayHastenerTimeMultipler(QMDRadSources.IRIDIUM_192), 1d, QMDRadSources.IRIDIUM_192);
-//
-//
-//        // Assembler
-//        NCRecipes.assembler.addRecipe(oreStack("dustBSCCO", 3), oreStack("ingotSilver", 6), new EmptyItemIngredient(), new EmptyItemIngredient(), oreStack("wireBSCCO", 6), 1D, 1D);
-//        NCRecipes.assembler.addRecipe(oreStack("dustSSFAF", 3), oreStack("ingotSilver", 6), new EmptyItemIngredient(), new EmptyItemIngredient(), oreStack("wireSSFAF", 6), 1D, 1D);
-//        NCRecipes.assembler.addRecipe(oreStack("dustYBCO", 3), oreStack("ingotSilver", 6), new EmptyItemIngredient(), new EmptyItemIngredient(), oreStack("wireYBCO", 6), 1D, 1D);
-//        NCRecipes.assembler.addRecipe(oreStack("ingotTungsten", 4), oreStack("ingotGold", 2), new EmptyItemIngredient(), new EmptyItemIngredient(), oreStack("wireGoldTungsten", 6), 1D, 1D);
-//        NCRecipes.assembler.addRecipe(oreStack("dustBismuth", 2), oreStack("dustStrontium", 2), oreStack("dustCalcium", 2), oreStack("dustCopperOxide", 3), oreStack("dustBSCCO", 3), 1D, 1D);
-//        NCRecipes.assembler.addRecipe(oreStack("dustSamarium", 1), oreStack("dustStrontium", 1), oreStack("dustIronFluoride", 2), oreStack("dustArsenic", 2), oreStack("dustSSFAF", 6), 1D, 1D);
-//        NCRecipes.assembler.addRecipe(oreStack("dustYttrium", 1), oreStack("dustBarium", 2), oreStack("dustCopperOxide", 3), new EmptyItemIngredient(), oreStack("dustYBCO", 3), 1D, 1D);
-//
-//        NCRecipes.assembler.addRecipe(oreStackList(PLASTIC_TYPES, 2), oreStack("dyeBlue", 1), new EmptyItemIngredient(), new EmptyItemIngredient(), new ItemStack(QMDItems.parts.get(MaterialTypes.PartType.SCINTILLATOR_PLASTIC)), 1D, 1D);
-//        NCRecipes.assembler.addRecipe("siliconNDoped", oreStack("dustRedstone", 4), "ingotGold", "ingotSilver", "processorBasic", 1D, 1D);
-//        NCRecipes.assembler.addRecipe("processorBasic", oreStack("dustRedstone", 4), "dustHafniumOxide", "siliconPDoped", "processorAdvanced", 1D, 1D);
-//        NCRecipes.assembler.addRecipe("processorAdvanced", oreStack("wireBSCCO", 4), "dustHafniumOxide", "ingotPlatinum", "processorElite", 1D, 1D);
-//        NCRecipes.assembler.addRecipe(oreStack("ingotTungsten", 2), new EmptyItemIngredient(), new EmptyItemIngredient(), new EmptyItemIngredient(), IItemParticleAmount.fullItem(new ItemStack(QMDItems.sources.get(MaterialTypes.SourceType.TUNGSTEN_FILAMENT))), 1D, 1D);
-//        NCRecipes.assembler.addRecipe(oreStack("ingotFerroboron", 2), "ingotNeodymium", new EmptyItemIngredient(), new EmptyItemIngredient(), "magnetNeodymium", 1D, 1D);
-//        NCRecipes.assembler.addRecipe("dustPotassium", "dustIodine", new ItemStack(Items.SUGAR, 4), "bioplastic", new ItemStack(QMDItems.potassiumIodineTablet, 4), 1D, 1D);
-//        NCRecipes.assembler.addRecipe(oreStack("ingotCobalt", 2), "dustSamarium", new EmptyItemIngredient(), new EmptyItemIngredient(), "magnetSamariumCobalt", 1D, 1D);
-//
-//        //Fission Irradiator
-//        NCRecipes.fission_irradiator.addRecipe("waferSilicon", "siliconNDoped", 120000, 0d, 0);
-//        NCRecipes.fission_irradiator.addRecipe("ingotUranium234", "ingotUranium235", 1920000, 0d, QMDRadSources.URANIUM_234);
-//        NCRecipes.fission_irradiator.addRecipe("dustProtactinium231", "dustProtactinium233", 3840000, 0d, QMDRadSources.PROTACTINIUM_231);
-//        NCRecipes.fission_irradiator.addRecipe("ingotCobalt", "ingotCobalt60", 1920000, 0d, 0);
-//        //NCRecipes.fission_irradiator.addRecipe(FluidUtil.getFilledBucket(fluidStack("deuterium", 1000).getStack()), FluidUtil.getFilledBucket(fluidStack("tritium", 1000).getStack()),60000,0d,0); //1920000
-//
-//
-//        //fuel reprocessor
-//        NCRecipes.fuel_reprocessor.addRecipe("wasteFissionLight", chanceOreStack("dustStrontium", 1, 20), chanceOreStack("dustStrontium90", 1, 5), chanceOreStack("dustYttrium", 1, 5), chanceOreStack("dustZirconium", 1, 20), chanceOreStack("dustNiobium", 1, 5), chanceOreStack("dustMolybdenum", 1, 30), chanceOreStack("dustRuthenium106", 1, 5), chanceOreStack("dustSilver", 1, 10));
-//        NCRecipes.fuel_reprocessor.addRecipe("wasteFissionHeavy", chanceOreStack("dustNiobium", 1, 4), chanceOreStack("dustMolybdenum", 1, 21), chanceOreStack("dustRuthenium106", 1, 4), chanceOreStack("dustSilver", 1, 7), chanceOreStack("dustTin", 1, 35), chanceOreStack("dustIodine", 1, 7), chanceOreStack("dustCaesium137", 1, 4), chanceOreStack("dustNeodymium", 1, 18));
-//        NCRecipes.fuel_reprocessor.addRecipe("wasteSpallationCalifornium", chanceOreStack("dustThorium", 1, 26), chanceOreStack("dustProtactinium231", 1, 13), chanceOreStack("dustRadium", 1, 12), chanceOreStack("dustPolonium", 1, 9), chanceOreStack("dustBismuth", 1, 20), chanceOreStack("dustLead", 1, 20), new EmptyItemIngredient(), new EmptyItemIngredient());
-//        NCRecipes.fuel_reprocessor.addRecipe("wasteSpallationBerkelium", chanceOreStack("dustRadium", 1, 9), chanceOreStack("dustPolonium", 1, 15), chanceOreStack("dustBismuth", 1, 40), chanceOreStack("dustLead", 1, 35), chanceOreStack("ingotMercury", 1, 1), new EmptyItemIngredient(), new EmptyItemIngredient(), new EmptyItemIngredient());
-//        NCRecipes.fuel_reprocessor.addRecipe("wasteSpallationCurium", chanceOreStack("dustRadium", 1, 13), chanceOreStack("dustPolonium", 1, 17), chanceOreStack("dustBismuth", 1, 16), chanceOreStack("dustLead", 1, 50), chanceOreStack("ingotMercury", 1, 4), new EmptyItemIngredient(), new EmptyItemIngredient(), new EmptyItemIngredient());
-//        NCRecipes.fuel_reprocessor.addRecipe("wasteSpallationAmericium", chanceOreStack("dustPolonium", 1, 22), chanceOreStack("dustBismuth", 1, 15), chanceOreStack("dustLead", 1, 55), chanceOreStack("ingotMercury", 1, 5), chanceOreStack("dustGold", 1, 1), chanceOreStack("dustPlatinum", 1, 2), new EmptyItemIngredient(), new EmptyItemIngredient());
-//        NCRecipes.fuel_reprocessor.addRecipe("wasteSpallationPlutonium", chanceOreStack("dustPolonium", 1, 22), chanceOreStack("dustBismuth", 1, 14), chanceOreStack("dustLead", 1, 55), chanceOreStack("ingotMercury", 1, 5), chanceOreStack("dustGold", 1, 1), chanceOreStack("dustPlatinum", 1, 3), new EmptyItemIngredient(), new EmptyItemIngredient());
-//        NCRecipes.fuel_reprocessor.addRecipe("wasteSpallationNeptunium", chanceOreStack("dustPolonium", 1, 36), chanceOreStack("dustBismuth", 1, 17), chanceOreStack("dustLead", 1, 34), chanceOreStack("ingotMercury", 1, 7), chanceOreStack("dustGold", 1, 2), chanceOreStack("dustPlatinum", 1, 4), new EmptyItemIngredient(), new EmptyItemIngredient());
-//        NCRecipes.fuel_reprocessor.addRecipe("wasteSpallationUranium", chanceOreStack("dustPolonium", 1, 21), chanceOreStack("dustBismuth", 1, 12), chanceOreStack("dustLead", 1, 55), chanceOreStack("ingotMercury", 1, 7), chanceOreStack("dustGold", 1, 1), chanceOreStack("dustPlatinum", 1, 4), new EmptyItemIngredient(), new EmptyItemIngredient());
-//        NCRecipes.fuel_reprocessor.addRecipe("wasteSpallationThorium", chanceOreStack("dustPolonium", 1, 10), chanceOreStack("dustBismuth", 1, 7), chanceOreStack("dustLead", 1, 62), chanceOreStack("ingotMercury", 1, 11), chanceOreStack("dustGold", 1, 2), chanceOreStack("dustPlatinum", 1, 8), new EmptyItemIngredient(), new EmptyItemIngredient());
-//        NCRecipes.fuel_reprocessor.addRecipe("wasteSpallationProtactinium", chanceOreStack("dustPolonium", 1, 36), chanceOreStack("dustBismuth", 1, 6), chanceOreStack("dustLead", 1, 39), chanceOreStack("ingotMercury", 1, 10), chanceOreStack("dustGold", 1, 2), chanceOreStack("dustPlatinum", 1, 7), new EmptyItemIngredient(), new EmptyItemIngredient());
-//        NCRecipes.fuel_reprocessor.addRecipe("wasteSpallationRadium", chanceOreStack("dustLead", 1, 58), chanceOreStack("ingotMercury", 1, 18), chanceOreStack("dustGold", 1, 3), chanceOreStack("dustPlatinum", 1, 10), chanceOreStack("dustIridium", 1, 6), chanceOreStack("dustOsmium", 1, 5), new EmptyItemIngredient(), new EmptyItemIngredient());
-//        NCRecipes.fuel_reprocessor.addRecipe("wasteSpallationPolonium", chanceOreStack("dustIridium", 1, 52), chanceOreStack("dustOsmium", 1, 21), chanceOreStack("dustTungsten", 1, 12), chanceOreStack("dustHafnium", 1, 10), chanceOreStack("dustYtterbium", 1, 5), new EmptyItemIngredient(), new EmptyItemIngredient(), new EmptyItemIngredient());
-//        NCRecipes.fuel_reprocessor.addRecipe("wasteSpallationBismuth", chanceOreStack("dustIridium", 1, 42), chanceOreStack("dustOsmium", 1, 27), chanceOreStack("dustTungsten", 1, 14), chanceOreStack("dustHafnium", 1, 11), chanceOreStack("dustYtterbium", 1, 6), new EmptyItemIngredient(), new EmptyItemIngredient(), new EmptyItemIngredient());
-//        NCRecipes.fuel_reprocessor.addRecipe("wasteSpallationLead", chanceOreStack("dustIridium", 1, 27), chanceOreStack("dustOsmium", 1, 35), chanceOreStack("dustTungsten", 1, 15), chanceOreStack("dustHafnium", 1, 12), chanceOreStack("dustYtterbium", 1, 8), chanceOreStack("dustErbium", 1, 3), new EmptyItemIngredient(), new EmptyItemIngredient());
-//        NCRecipes.fuel_reprocessor.addRecipe("wasteSpallationMercury", chanceOreStack("dustOsmium", 1, 42), chanceOreStack("dustTungsten", 1, 27), chanceOreStack("dustHafnium", 1, 16), chanceOreStack("dustYtterbium", 1, 10), chanceOreStack("dustErbium", 1, 3), new EmptyItemIngredient(), new EmptyItemIngredient(), new EmptyItemIngredient());
-//        NCRecipes.fuel_reprocessor.addRecipe("wasteSpallationGold", chanceOreStack("dustHafnium", 1, 72), chanceOreStack("dustYtterbium", 1, 20), chanceOreStack("dustErbium", 1, 8), new EmptyItemIngredient(), new EmptyItemIngredient(), new EmptyItemIngredient(), new EmptyItemIngredient(), new EmptyItemIngredient());
-//        NCRecipes.fuel_reprocessor.addRecipe("wasteSpallationPlatinum", chanceOreStack("dustTungsten", 1, 30), chanceOreStack("dustHafnium", 1, 44), chanceOreStack("dustYtterbium", 1, 17), chanceOreStack("dustErbium", 1, 7), chanceOreStack("dustTerbium", 1, 2), new EmptyItemIngredient(), new EmptyItemIngredient(), new EmptyItemIngredient());
-//        NCRecipes.fuel_reprocessor.addRecipe("wasteSpallationIridium", chanceOreStack("dustHafnium", 1, 59), chanceOreStack("dustYtterbium", 1, 29), chanceOreStack("dustErbium", 1, 10), chanceOreStack("dustTerbium", 1, 2), new EmptyItemIngredient(), new EmptyItemIngredient(), new EmptyItemIngredient(), new EmptyItemIngredient());
-//        NCRecipes.fuel_reprocessor.addRecipe("wasteSpallationOsmium", chanceOreStack("dustHafnium", 1, 48), chanceOreStack("dustYtterbium", 1, 35), chanceOreStack("dustErbium", 1, 11), chanceOreStack("dustTerbium", 1, 3), chanceOreStack("dustEuropium155", 1, 3), new EmptyItemIngredient(), new EmptyItemIngredient(), new EmptyItemIngredient());
-//        NCRecipes.fuel_reprocessor.addRecipe("wasteSpallationTungsten", chanceOreStack("dustYtterbium", 1, 50), chanceOreStack("dustErbium", 1, 26), chanceOreStack("dustTerbium", 1, 6), chanceOreStack("dustEuropium155", 1, 5), chanceOreStack("dustSamarium", 1, 7), chanceOreStack("dustNeodymium", 1, 6), new EmptyItemIngredient(), new EmptyItemIngredient());
-//        NCRecipes.fuel_reprocessor.addRecipe("wasteSpallationHafnium", chanceOreStack("dustErbium", 1, 32), chanceOreStack("dustTerbium", 1, 16), chanceOreStack("dustEuropium155", 1, 11), chanceOreStack("dustSamarium", 1, 13), chanceOreStack("dustNeodymium", 1, 23), chanceOreStack("dustPromethium147", 1, 5), new EmptyItemIngredient(), new EmptyItemIngredient());
-//
-//
-//        //Collectors
-//        AtmosphereCollectorRecipes.registerRecipes();
-//        LiquidCollectorRecipes.registerRecipes();
-//
-//
-//        // Fission reflector
-//        for (int i = 0; i < NeutronReflectorType.values().length; i++) {
-//            NCRecipes.fission_reflector.addRecipe(new ItemStack(QMDBlocks.fissionReflector, 1, i), QMDConfig.fission_reflector_efficiency[i], QMDConfig.fission_reflector_reflectivity[i]);
-//        }
-//
-//        //Fission fuel recipes
-//        addFissionFuelRecipes();
-//
-//
-//        // Fission Heating
-//        NCRecipes.fission_heating.addRecipe(fluidStack("mercury", 1), fluidStack("high_pressure_mercury", 2), 512);
-//        NCRecipes.fission_heating.addRecipe(fluidStack("hot_mercury", 1), fluidStack("high_pressure_mercury", 2), 256);
-//
-//        // Turbine
-//        NCRecipes.turbine.addRecipe(fluidStack("high_pressure_mercury", 1), fluidStack("exhaust_mercury", 3), 256D, 3.0);
-//
-//        //Heat Exchanger
-//        NCRecipes.heat_exchanger.addRecipe(fluidStack("exhaust_mercury", 6), fluidStack("hot_mercury", 1), 128D, 700, 700);
-//
-//        // Condenser
-//        NCRecipes.condenser.addRecipe(fluidStack("exhaust_mercury", 6), fluidStack("hot_mercury", 1), 128D, 700, 700);
-//        NCRecipes.condenser.addRecipe(fluidStack("hot_mercury", 1), fluidStack("mercury", 1), 256D, 700, 300);
-//        NCRecipes.condenser.addRecipe(fluidStack("condensate_water", 1), fluidStack("water", 1), 32D, 350, 300);
-//
-//
-//        // distiller
-//        NCRecipes.multiblock_distiller.addRecipe(fluidStack("salt_water", 10 * BUCKET_VOLUME), new EmptyFluidIngredient(), fluidStack("sodium_chloride_solution", GEM_VOLUME), fluidStack("water", BUCKET_VOLUME * 9), new EmptyFluidIngredient(), new EmptyFluidIngredient(), new EmptyFluidIngredient(), new EmptyFluidIngredient(), new EmptyFluidIngredient(), new EmptyFluidIngredient(), 1D, 1D);
-//        NCRecipes.multiblock_distiller.addRecipe(fluidStack("liquid_air", 1000), new EmptyFluidIngredient(), fluidStack("nitrogen", 38400), fluidStack("oxygen", 12800), fluidStack("argon", 6400), fluidStack("neon", 5120), fluidStack("helium", 1280), new EmptyFluidIngredient(), new EmptyFluidIngredient(), new EmptyFluidIngredient(), 1D, 1D);
-//
-//        // Crafting
-//        QMDCraftingRecipeHandler.registerCraftingRecipes();
-//
-//        // Furnace
-//        for (var entry : QMDItems.ingots.entrySet()) {
-//            if (entry.getKey().getDust() == null) {
-//                continue;
-//            }
-//            String type = StringHelper.capitalize(entry.getKey().getName());
-//            if (!ore_dict_raw_material_recipes) {
-//                GameRegistry.addSmelting(new ItemStack(dusts.get(entry.getKey().getDust())), OreDictHelper.getPrioritisedCraftingStack(new ItemStack(entry.getValue()), "ingot" + type), 0F);
-//            } else for (ItemStack dust : OreDictionary.getOres("dust" + type)) {
-//                GameRegistry.addSmelting(dust, OreDictHelper.getPrioritisedCraftingStack(new ItemStack(entry.getValue()), "ingot" + type), 0F);
-//            }
-//        }
-//    }
-//
-//
-//    private static void addFissionFuelRecipes() {
-//        NCRecipes.solid_fission.addFuelDepleteRecipes(copernicium_fuel_time, copernicium_heat_generation, copernicium_efficiency, copernicium_criticality, copernicium_intrinsic_flux, copernicium_decay_factor, copernicium_self_priming, copernicium_radiation, "MIX291");
-//        NCRecipes.pebble_fission.addFuelDepleteRecipes(copernicium_fuel_time, copernicium_heat_generation, copernicium_efficiency, copernicium_criticality, copernicium_intrinsic_flux, copernicium_decay_factor, copernicium_self_priming, copernicium_radiation, "MIX291");
-//
-//        NCRecipes.alloy_furnace.addAlloyIngotIngotRecipes("Copernicium291", 1, "Zirconium", 1, "Copernicium291ZA", 1, 1D, 1D);
-//        NCRecipes.alloy_furnace.addAlloyIngotIngotRecipes("Copernicium291", 1, "Graphite", 1, "Copernicium291Carbide", 1, 1D, 1D);
-//
-//        NCRecipes.alloy_furnace.addAlloyIngotIngotRecipes("MIX291", 1, "Zirconium", 1, "MIX291ZA", 1, 1D, 1D);
-//        NCRecipes.alloy_furnace.addAlloyIngotIngotRecipes("MIX291", 1, "Graphite", 1, "MIX291Carbide", 1, 1D, 1D);
-//
-//        NCRecipes.infuser.addRecipe("ingot" + "Copernicium291", fluidStack("oxygen", BUCKET_VOLUME), "ingotCopernicium291Oxide", 1D, 1D);
-//        NCRecipes.infuser.addRecipe("ingot" + "Copernicium291", fluidStack("nitrogen", BUCKET_VOLUME), "ingotCopernicium291Nitride", 1D, 1D);
-//        NCRecipes.infuser.addRecipe("ingot" + "MIX291", fluidStack("oxygen", BUCKET_VOLUME), "ingotMIX291Oxide", 1D, 1D);
-//        NCRecipes.infuser.addRecipe("ingot" + "MIX291", fluidStack("nitrogen", BUCKET_VOLUME), "ingotMIX291Nitride", 1D, 1D);
-//
-//        NCRecipes.assembler.addRecipe(oreStack("ingotMIX291Carbide", 9), "dustGraphite", "ingotPyrolyticCarbon", "ingotSiliconCarbide", oreStack("ingotMIX291TRISO", 9), 1D, 1D);
-//
-//        NCRecipes.fuel_reprocessor.addReprocessingRecipes("MIX291", "Americium243", 4, "Curium243", 2, "Curium245", 1, "Berkelium247", 1, "Ruthenium106", "Europium155", 0.5D, 60);
-//
-//        NCRecipes.separator.addRecipe("ingotCopernicium291Carbide", "ingotCopernicium291", "dustGraphite");
-//        NCRecipes.separator.addRecipe("ingotCopernicium291ZA", "ingotCopernicium291", "dustZirconium");
-//
-//        NCRecipes.separator.addRecipe("ingotMIX291Carbide", "ingotMIX291", "dustGraphite");
-//        NCRecipes.separator.addRecipe("ingotMIX291ZA", "ingotMIX291", "dustZirconium");
-//
-//        NCRecipes.separator.addRecipe("ingotMIX291", "ingotCopernicium291", oreStack("ingotUranium238", 8));
-//        reductionIsotopeRecipes(QMDItems.copernicium, 1);
-//        reductionFissionFuelRecipes(QMDItems.pellet_copernicium, QMDItems.fuel_copernicium, 1);
+        // Crafting
+//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.beamline, 6).pattern("SSS").pattern("").pattern("SSS").define('S', tag(INGOTS, "stainless_steel")) TODO
+//                .unlockedBy(getHasName(ingotAlloys.get(IngotAlloyType.STAINLESS_STEEL)), has(ingotAlloys.get(IngotAlloyType.STAINLESS_STEEL))).save(recipeOutput);
+
+        toolSet(recipeOutput, ingotAlloys.get(IngotAlloyType.TUNGSTEN_CARBIDE), QMDItems.sword_tungsten_carbide, QMDItems.pickaxe_tungsten_carbide, QMDItems.shovel_tungsten_carbide, QMDItems.axe_tungsten_carbide, QMDItems.hoe_tungsten_carbide);
+
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.fissionReflector, 2).pattern("TTT").pattern("TST").pattern("TTT")
+                .define('T', tag(INGOTS, "tungsten_carbide")).define('S', PART_BLOCK_MAP.get("steel_chassis"))
+                .unlockedBy(getHasName(PART_BLOCK_MAP.get("steel_chassis")), has(PART_BLOCK_MAP.get("steel_chassis"))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.oreLeacher, 1).pattern("PRP").pattern("CFC").pattern("PHP")
+                .define('P', PART_MAP.get("elite_plating")).define('F', PART_BLOCK_MAP.get("machine_chassis")).define('C', PROCESSOR_MAP.get("chemical_reactor")).define('R', PROCESSOR_MAP.get("rock_crusher")).define('H', tag(INGOTS, "hard_carbon"))
+                .unlockedBy(getHasName(PROCESSOR_MAP.get("chemical_reactor")), has(PROCESSOR_MAP.get("chemical_reactor"))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.irradiator, 1).pattern("TPT").pattern("PFP").pattern("TPT")
+                .define('P', PART_MAP.get("du_plating")).define('F', PART_BLOCK_MAP.get("machine_chassis")).define('T', tag(INGOTS, "tungsten"))
+                .unlockedBy(getHasName(PART_BLOCK_MAP.get("machine_chassis")), has(PART_BLOCK_MAP.get("machine_chassis"))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.rtgStrontium, 1).pattern("AGA").pattern("GSG").pattern("AGA")
+                .define('S', tag(Tags.Items.STORAGE_BLOCKS, "strontium_90")).define('A', PART_MAP.get("advanced_plating")).define('G', tag(INGOTS, "graphite"))
+                .unlockedBy(getHasName(strontium90), has(strontium90)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, dischargeLamps.get(LampType.EMPTY), 4).pattern("GGG").pattern("GFG").pattern("GRG")
+                .define('F', QMDItems.sources.get(SourceType.TUNGSTEN_FILAMENT).get()).define('R', tag(DUSTS, "redstone")).define('G', Tags.Items.GLASS_PANES)
+                .unlockedBy(getHasName(QMDItems.sources.get(SourceType.TUNGSTEN_FILAMENT)), has(QMDItems.sources.get(SourceType.TUNGSTEN_FILAMENT))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.atmosphereCollector, 1).pattern("ASA").pattern("BMB").pattern("ASA")
+                .define('A', PART_MAP.get("advanced_plating")).define('S', tag(INGOTS, "steel")).define('B', Items.BUCKET).define('M', PART_MAP.get("electric_motor"))
+                .unlockedBy(getHasName(PART_MAP.get("advanced_plating")), has(PART_MAP.get("advanced_plating"))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.liquidCollector, 1).pattern("ASA").pattern("BMB").pattern("ASA")
+                .define('A', PART_MAP.get("advanced_plating")).define('S', tag(INGOTS, "bronze")).define('B', Items.BUCKET).define('M', PART_MAP.get("electric_motor"))
+                .unlockedBy(getHasName(PART_MAP.get("advanced_plating")), has(PART_MAP.get("advanced_plating"))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.fissionShield, 4).pattern("BHB").pattern("HFH").pattern("BHB")
+                .define('B', PART_MAP.get("basic_plating")).define('F', PART_BLOCK_MAP.get("steel_chassis")).define('H', tag(INGOTS, "hafnium"))
+                .unlockedBy(getHasName(PART_BLOCK_MAP.get("steel_chassis")), has(PART_BLOCK_MAP.get("steel_chassis"))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, QMDItems.cells.get(CellType.EMPTY)).pattern("WEW").pattern("O O").pattern("WRW")
+                .define('W', parts.get(PartType.WIRE_BSCCO)).define('O', tag(INGOTS, "osmiridium")).define('R', RTG_MAP.get("rtg_californium")).define('E', semiconductors.get(SemiconductorType.ELITE_PROCESSOR))
+                .unlockedBy(getHasName(semiconductors.get(SemiconductorType.ELITE_PROCESSOR)), has(semiconductors.get(SemiconductorType.ELITE_PROCESSOR))).save(recipeOutput);
+
+//      TODO  ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.ACCELERATING_BARREL.getID()).pattern("WMW").pattern("BEB").pattern("WMW").define('W', new ItemStack(QMDBlocks.RFCavity, 1, BlockTypes.RFCavityType.BSCCO.getID()), 'M', "magnetNeodymium").define('B', QMDBlocks.beamline, 'E', semiconductors.get(SemiconductorType.ELITE_PROCESSOR)});
+
+        ShapedRecipeBuilder.shaped(MISC, parts.get(PartType.LASER_ASSEMBLY)).pattern("ALA").pattern("SRS").pattern("ALA")
+                .define('A', semiconductors.get(SemiconductorType.ADVANCED_PROCESSOR)).define('L', dischargeLamps.get(LampType.ARGON)).define('S', tag(INGOTS, "silver")).define('R', parts.get(PartType.ROD_ND_YAG))
+                .unlockedBy(getHasName(semiconductors.get(SemiconductorType.ADVANCED_PROCESSOR)), has(semiconductors.get(SemiconductorType.ADVANCED_PROCESSOR))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, QMDItems.beamMeter).pattern("FFS").pattern("PPC").pattern("FFB")
+                .define('F', tag(INGOTS, "ferroboron")).define('S', parts.get(PartType.SCINTILLATOR_PLASTIC)).define('P', semiconductors.get(SemiconductorType.BASIC_PROCESSOR)).define('C', tag(INGOTS, "copper")).define('B', PART_MAP.get("bioplastic"))
+                .unlockedBy(getHasName(semiconductors.get(SemiconductorType.BASIC_PROCESSOR)), has(semiconductors.get(SemiconductorType.BASIC_PROCESSOR))).save(recipeOutput);
+// TODO
+//            ShapedRecipeBuilder.shaped(MISC, QMDItems.leptonCannon.pattern("EL ").pattern("OBS").pattern("T  ").define('E', semiconductors.get(SemiconductorType.ELITE_PROCESSOR)).define('L', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.LASER_ASSEMBLY.getID()), 'O', "tag(INGOTS, "osmiridium").define('B', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.ACCELERATING_BARREL.getID()), 'S', "solenoidCopper").define('T', "tag(INGOTS, "super_alloy"});
+//            ShapedRecipeBuilder.shaped(MISC, QMDItems.gluonGun.pattern("TT ").pattern("OBB").pattern("EL ").define('E', semiconductors.get(SemiconductorType.ELITE_PROCESSOR)).define('L', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.LASER_ASSEMBLY.getID()), 'O', "tag(INGOTS, "osmiridium").define('B', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.ACCELERATING_BARREL.getID()), 'T', "tag(INGOTS, "super_alloy"});
+//            ShapedRecipeBuilder.shaped(MISC, QMDItems.antimatterLauncher.pattern("TT ").pattern("LBB").pattern("EO ").define('E', semiconductors.get(SemiconductorType.ELITE_PROCESSOR)).define('L', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.LASER_ASSEMBLY.getID()), 'O', "tag(INGOTS, "osmiridium").define('B', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.ACCELERATING_BARREL.getID()), 'T', "tag(INGOTS, "super_alloy"});
+//            ShapedRecipeBuilder.shaped(MISC, QMDArmour.helm_hev.pattern("SBS").pattern("HAH").pattern("SPS").define('P', semiconductors.get(SemiconductorType.ELITE_PROCESSOR)).define('S', "tag(INGOTS, "super_alloy").define('H', new ItemStack(NCItems.rad_shielding, 1, 2), 'A', NCArmor.helm_boron_nitride, 'B', NCItems.lithium_ion_cell});
+//            ShapedRecipeBuilder.shaped(MISC, QMDArmour.chest_hev.pattern("SBS").pattern("HAH").pattern("SPS").define('P', semiconductors.get(SemiconductorType.ELITE_PROCESSOR)).define('S', "tag(INGOTS, "super_alloy").define('H', new ItemStack(NCItems.rad_shielding, 1, 2), 'A', NCArmor.chest_boron_nitride, 'B', NCItems.lithium_ion_cell});
+//            ShapedRecipeBuilder.shaped(MISC, QMDArmour.legs_hev.pattern("SBS").pattern("HAH").pattern("SPS").define('P', semiconductors.get(SemiconductorType.ELITE_PROCESSOR)).define('S', "tag(INGOTS, "super_alloy").define('H', new ItemStack(NCItems.rad_shielding, 1, 2), 'A', NCArmor.legs_boron_nitride, 'B', NCItems.lithium_ion_cell});
+//            ShapedRecipeBuilder.shaped(MISC, QMDArmour.boots_hev.pattern("SBS").pattern("HAH").pattern("SPS").define('P', semiconductors.get(SemiconductorType.ELITE_PROCESSOR)).define('S', "tag(INGOTS, "super_alloy").define('H', new ItemStack(NCItems.rad_shielding, 1, 2), 'A', NCArmor.boots_boron_nitride, 'B', NCItems.lithium_ion_cell});
+//            ShapedRecipeBuilder.shaped(MISC, QMDItems.basic_drill.pattern(" T ").pattern("TMT").pattern("SBS").define('T', tag(INGOTS, "tungstenCarbide").define('M', "motor").define('S', "tag(INGOTS, "steel").define('B', NCBlocks.voltaic_pile_advanced});
+//            ShapedRecipeBuilder.shaped(MISC, QMDItems.advanced_drill.pattern("NTN").pattern("TMT").pattern("SBS").define('T', tag(INGOTS, "tungstenCarbide").define('M', "motor").define('S', "magnetNeodymium").define('B', NCBlocks.lithium_ion_battery_basic, 'N', "gemBoronNitride"});
+
+        ShapelessRecipeBuilder.shapeless(MISC, Items.GUNPOWDER, 8).requires(tag(DUSTS, "coal")).requires(tag(DUSTS, "coal")).requires(tag(DUSTS, "sulfur")).requires(tag(DUSTS, "sulfur")).requires(tag(DUSTS, "sodium_nitrate")).requires(tag(DUSTS, "sodium_nitrate")).requires(tag(DUSTS, "sodium_nitrate")).requires(tag(DUSTS, "sodium_nitrate"))
+                .unlockedBy(getHasName(GEM_DUST_MAP.get("sulfur")), has(GEM_DUST_MAP.get("sulfur"))).save(recipeOutput, "gunpowder_from_sulfur");
+        ShapelessRecipeBuilder.shapeless(MISC, Items.GUNPOWDER, 8).requires(tag(DUSTS, "charcoal")).requires(tag(DUSTS, "charcoal")).requires(tag(DUSTS, "sulfur")).requires(tag(DUSTS, "sulfur")).requires(tag(DUSTS, "sodium_nitrate")).requires(tag(DUSTS, "sodium_nitrate")).requires(tag(DUSTS, "sodium_nitrate")).requires(tag(DUSTS, "sodium_nitrate"))
+                .unlockedBy(getHasName(GEM_DUST_MAP.get("sulfur")), has(GEM_DUST_MAP.get("sulfur"))).save(recipeOutput, "gunpowder_from_sulfur_2");
+
+        ShapelessRecipeBuilder.shapeless(MISC, luminousPaints.get(LuminousPaintType.GREEN), 16).requires(tag(DUSTS, "zinc_sulfide")).requires(tag(DUSTS, "promethium_147")).requires(tag(DUSTS, "copper"))
+                .unlockedBy(getHasName(COPPER_DUST), has(COPPER_DUST)).save(recipeOutput, "green_luminous_paint_promethium_147");
+        ShapelessRecipeBuilder.shapeless(MISC, luminousPaints.get(LuminousPaintType.GREEN), 16).requires(tag(DUSTS, "zinc_sulfide")).requires(tag(DUSTS, "radium")).requires(tag(DUSTS, "copper"))
+                .unlockedBy(getHasName(COPPER_DUST), has(COPPER_DUST)).save(recipeOutput, "green_luminous_paint_radium");
+
+        ShapelessRecipeBuilder.shapeless(MISC, luminousPaints.get(LuminousPaintType.BLUE), 16).requires(tag(DUSTS, "zinc_sulfide")).requires(tag(DUSTS, "promethium_147")).requires(tag(DUSTS, "silver"))
+                .unlockedBy(getHasName(COPPER_DUST), has(COPPER_DUST)).save(recipeOutput, "blue_luminous_paint_promethium_147");
+        ShapelessRecipeBuilder.shapeless(MISC, luminousPaints.get(LuminousPaintType.BLUE), 16).requires(tag(DUSTS, "zinc_sulfide")).requires(tag(DUSTS, "radium")).requires(tag(DUSTS, "silver"))
+                .unlockedBy(getHasName(COPPER_DUST), has(COPPER_DUST)).save(recipeOutput, "blue_luminous_paint_radium");
+
+        ShapelessRecipeBuilder.shapeless(MISC, luminousPaints.get(LuminousPaintType.ORANGE), 16).requires(tag(DUSTS, "zinc_sulfide")).requires(tag(DUSTS, "promethium_147")).requires(tag(DUSTS, "magnesium"))
+                .unlockedBy(getHasName(COPPER_DUST), has(COPPER_DUST)).save(recipeOutput, "orange_luminous_paint_promethium_147");
+        ShapelessRecipeBuilder.shapeless(MISC, luminousPaints.get(LuminousPaintType.ORANGE), 16).requires(tag(DUSTS, "zinc_sulfide")).requires(tag(DUSTS, "radium")).requires(tag(DUSTS, "magnesium"))
+                .unlockedBy(getHasName(COPPER_DUST), has(COPPER_DUST)).save(recipeOutput, "orange_luminous_paint_radium");
+
+        ShapelessRecipeBuilder.shapeless(MISC, PatchouliAPI.get().getBookStack(ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "guide"))).requires(Items.BOOK).requires(ingotAlloys.get(IngotAlloyType.STAINLESS_STEEL))
+                .unlockedBy(getHasName(Items.BOOK), has(Items.BOOK)).save(recipeOutput.withConditions(new ModLoadedCondition("patchouli")));
+
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.turbineBladeSuperAlloy, 4).pattern("SHS").pattern("SHS").pattern("SHS")
+                .define('S', tag(INGOTS, "super_alloy")).define('H', tag(INGOTS, "hsla_steel"))
+                .unlockedBy(getHasName(ingotAlloys.get(IngotAlloyType.SUPER_ALLOY)), has(ingotAlloys.get(IngotAlloyType.SUPER_ALLOY))).save(recipeOutput);
+
+        // Fuels
+        ShapedRecipeBuilder.shaped(MISC, pellet_copernicium.get(CoperniciumPelletType.MIX_291), 9).pattern("CUU").pattern("UUU").pattern("UUU")
+                .define('C', copernicium.get(CoperniciumType._291)).define('U', URANIUM_MAP.get("238"))
+                .unlockedBy(getHasName(copernicium.get(CoperniciumType._291)), has(copernicium.get(CoperniciumType._291))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, pellet_copernicium.get(CoperniciumPelletType.MIX_291_C), 9).pattern("CUU").pattern("UUU").pattern("UUU")
+                .define('C', copernicium.get(CoperniciumType._291_C)).define('U', URANIUM_MAP.get("238_c"))
+                .unlockedBy(getHasName(copernicium.get(CoperniciumType._291_C)), has(copernicium.get(CoperniciumType._291_C))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, fuel_copernicium.get(CoperniciumFuelType.MIX_291_OX), 9).pattern("CUU").pattern("UUU").pattern("UUU")
+                .define('C', copernicium.get(CoperniciumType._291_OX)).define('U', URANIUM_MAP.get("238_ox"))
+                .unlockedBy(getHasName(copernicium.get(CoperniciumType._291_OX)), has(copernicium.get(CoperniciumType._291_OX))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, fuel_copernicium.get(CoperniciumFuelType.MIX_291_NI), 9).pattern("CUU").pattern("UUU").pattern("UUU")
+                .define('C', copernicium.get(CoperniciumType._291_NI)).define('U', URANIUM_MAP.get("238_ni"))
+                .unlockedBy(getHasName(copernicium.get(CoperniciumType._291_NI)), has(copernicium.get(CoperniciumType._291_NI))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, fuel_copernicium.get(CoperniciumFuelType.MIX_291_ZA), 9).pattern("CUU").pattern("UUU").pattern("UUU")
+                .define('C', copernicium.get(CoperniciumType._291_ZA)).define('U', URANIUM_MAP.get("238_za"))
+                .unlockedBy(getHasName(copernicium.get(CoperniciumType._291_ZA)), has(copernicium.get(CoperniciumType._291_ZA))).save(recipeOutput);
+
+        // Coolers TODO
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDItems.part, 8, MaterialTypes.PartType.EMPTY_COOLER.getID()).pattern("STS").pattern("SHS").pattern("STS").define('S', tag(INGOTS, "stainless_steel").define('T', "tag(INGOTS, "tough").define('H', "tag(INGOTS, "thermoconducting"});
+//        addShapelessOreRecipe(new ItemStack(QMDBlocks.acceleratorCooler1, 1, CoolerType1.WATER.getID()).pattern(new BucketIngredient("water"), new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler1, 1, CoolerType1.IRON.getID()).pattern(" I ").pattern("ICI").pattern(" I ").define('I', "tag(INGOTS, "iron").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler1, 1, CoolerType1.REDSTONE.getID()).pattern("III").pattern("ICI").pattern("III").define('I', "dustRedstone").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler1, 1, CoolerType1.QUARTZ.getID()).pattern("III").pattern("ICI").pattern("III").define('I', "gemQuartz").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler1, 1, CoolerType1.OBSIDIAN.getID()).pattern("DID").pattern("ICI").pattern("DID").define('I', "obsidian").define('D', "dustObsidian").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler1, 1, CoolerType1.NETHER_BRICK.getID()).pattern("DID").pattern("ICI").pattern("DID").define('I', Blocks.NETHER_BRICK, 'D', "ingotBrickNether").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler1, 1, CoolerType1.GLOWSTONE.getID()).pattern("III").pattern("ICI").pattern("III").define('I', "dustGlowstone").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler1, 1, CoolerType1.LAPIS.getID()).pattern("III").pattern("ICI").pattern("III").define('I', "gemLapis").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler1, 1, CoolerType1.GOLD.getID()).pattern(" I ").pattern("ICI").pattern(" I ").define('I', "tag(INGOTS, "gold").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler1, 1, CoolerType1.PRISMARINE.getID()).pattern(" I ").pattern("ICI").pattern(" I ").define('I', "gemPrismarine").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler1, 1, CoolerType1.SLIME.getID()).pattern("III").pattern("ICI").pattern("III").define('I', "slimeball").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler1, 1, CoolerType1.END_STONE.getID()).pattern("DID").pattern("ICI").pattern("DID").define('I', "endstone").define('D', "dustEndstone").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler1, 1, CoolerType1.PURPUR.getID()).pattern("DID").pattern("ICI").pattern("DID").define('I', Blocks.PURPUR_BLOCK, 'D', Items.CHORUS_FRUIT_POPPED, 'C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler1, 1, CoolerType1.DIAMOND.getID()).pattern(" I ").pattern("ICI").pattern(" I ").define('I', "gemDiamond").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler1, 1, CoolerType1.EMERALD.getID()).pattern(" I ").pattern("ICI").pattern(" I ").define('I', "gemEmerald").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler1, 1, CoolerType1.COPPER.getID()).pattern(" I ").pattern("ICI").pattern(" I ").define('I', "tag(INGOTS, "copper").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler2, 1, CoolerType2.TIN.getID()).pattern(" I ").pattern("ICI").pattern(" I ").define('I', "tag(INGOTS, "tin").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler2, 1, CoolerType2.LEAD.getID()).pattern(" I ").pattern("ICI").pattern(" I ").define('I', "tag(INGOTS, "lead").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler2, 1, CoolerType2.BORON.getID()).pattern(" I ").pattern("ICI").pattern(" I ").define('I', "tag(INGOTS, "boron").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler2, 1, CoolerType2.LITHIUM.getID()).pattern(" I ").pattern("ICI").pattern(" I ").define('I', "tag(INGOTS, "lithium").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler2, 1, CoolerType2.MAGNESIUM.getID()).pattern(" I ").pattern("ICI").pattern(" I ").define('I', "tag(INGOTS, "magnesium").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler2, 1, CoolerType2.MANGANESE.getID()).pattern(" I ").pattern("ICI").pattern(" I ").define('I', "tag(INGOTS, "manganese").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler2, 1, CoolerType2.ALUMINUM.getID()).pattern(" I ").pattern("ICI").pattern(" I ").define('I', "tag(INGOTS, "aluminum").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler2, 1, CoolerType2.SILVER.getID()).pattern(" I ").pattern("ICI").pattern(" I ").define('I', "tag(INGOTS, "silver").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler2, 1, CoolerType2.FLUORITE.getID()).pattern("III").pattern("ICI").pattern("III").define('I', "gemFluorite").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler2, 1, CoolerType2.VILLIAUMITE.getID()).pattern("III").pattern("ICI").pattern("III").define('I', "gemVilliaumite").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler2, 1, CoolerType2.CAROBBIITE.getID()).pattern("III").pattern("ICI").pattern("III").define('I', "gemCarobbiite").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCooler2, 1, CoolerType2.ARSENIC.getID()).pattern("III").pattern("ICI").pattern("III").define('I', "dustArsenic").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        addShapelessOreRecipe(new ItemStack(QMDBlocks.acceleratorCooler2, 1, CoolerType2.LIQUID_NITROGEN.getID()).pattern(new BucketIngredient("liquid_nitrogen"), new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        addShapelessOreRecipe(new ItemStack(QMDBlocks.acceleratorCooler2, 1, CoolerType2.LIQUID_HELIUM.getID()).pattern(new BucketIngredient("liquid_helium"), new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//        addShapelessOreRecipe(new ItemStack(QMDBlocks.acceleratorCooler2, 1, CoolerType2.CRYOTHEUM.getID()).pattern(new BucketIngredient("cryotheum"), new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID())});
+//
+//        // Accelerator Controllers
+//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.linearAcceleratorController.pattern("PEP").pattern("BFB").pattern("PEP").define('P', PART_MAP.get("elite_plating"), 'E', "tag(INGOTS, "extreme").define('B', semiconductors.get(SemiconductorType.BASIC_PROCESSOR)).define('F', QMDBlocks.acceleratorCasing});
+//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.ringAcceleratorController.pattern("PEP").pattern("AFA").pattern("PEP").define('P', PART_MAP.get("elite_plating"), 'E', "tag(INGOTS, "extreme").define('A', semiconductors.get(SemiconductorType.ADVANCED_PROCESSOR)).define('F', QMDBlocks.acceleratorCasing});
+//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.beamDiverterController.pattern("PTP").pattern("AFA").pattern("PTP").define('P', "PART_MAP.get("advanced_plating")").define('T', "tag(INGOTS, "tough").define('A', semiconductors.get(SemiconductorType.ADVANCED_PROCESSOR)).define('F', QMDBlocks.acceleratorCasing});
+//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.deceleratorController.pattern("PEP").pattern("AFA").pattern("PEP").define('P', PART_MAP.get("elite_plating"), 'E', "tag(INGOTS, "extreme").define('A', semiconductors.get(SemiconductorType.ELITE_PROCESSOR)).define('F', QMDBlocks.acceleratorCasing});
+//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.beamSplitterController.pattern("PTP").pattern("AFA").pattern("PTP").define('P', "PART_MAP.get("advanced_plating")").define('T', "tag(INGOTS, "super_alloy").define('A', semiconductors.get(SemiconductorType.ADVANCED_PROCESSOR)).define('F', QMDBlocks.acceleratorCasing});
+//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.massSpectrometerController.pattern("PWP").pattern("AFA").pattern("PWP").define('P', PART_MAP.get("elite_plating"), 'W', "wireBSCCO").define('A', semiconductors.get(SemiconductorType.ELITE_PROCESSOR)).define('F', QMDBlocks.acceleratorCasing});
+//
+//        //Accelerator Parts
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorCasing, 16).pattern("STS").pattern("TFT").pattern("STS").define('S', tag(INGOTS, "stainless_steel").define('T', "tag(INGOTS, "tough").define('F', PART_BLOCK_MAP.get("steel_chassis")});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorComputerPort, 1).pattern("STS").pattern("TFT").pattern("STS").define('S', semiconductors.get(SemiconductorType.BASIC_PROCESSOR)).define('T', "tag(INGOTS, "gold").define('F', QMDBlocks.acceleratorCasing});
+//        addShapelessOreRecipe(QMDBlocks.acceleratorCasing.pattern(QMDBlocks.acceleratorGlass});
+//        addShapelessOreRecipe(QMDBlocks.acceleratorGlass.pattern(QMDBlocks.acceleratorCasing, "blockGlass"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorBeamPort, 4).pattern("STS").pattern("BFB").pattern("STS").define('S', tag(INGOTS, "stainless_steel").define('T', "tag(INGOTS, "tough").define('B', QMDBlocks.beamline, 'F', PART_BLOCK_MAP.get("steel_chassis")});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorSynchrotronPort, 4).pattern("STS").pattern("AFA").pattern("STS").define('S', tag(INGOTS, "stainless_steel").define('T', "tag(INGOTS, "tough").define('A', "tag(INGOTS, "aluminum").define('F', PART_BLOCK_MAP.get("steel_chassis")});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorVent, 4).pattern("SIS").pattern("TFT").pattern("STS").define('S', tag(INGOTS, "stainless_steel").define('T', "tag(INGOTS, "tough").define('F', PART_BLOCK_MAP.get("steel_chassis"), 'I', "servo"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorEnergyPort, 4).pattern("SIS").pattern("TFT").pattern("SIS").define('S', tag(INGOTS, "stainless_steel").define('T', "tag(INGOTS, "tough").define('F', PART_BLOCK_MAP.get("steel_chassis"), 'I', "tag(INGOTS, "niobium_tin"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorBeam, 3).pattern("SSS").pattern("BBB").pattern("SSS").define('S', tag(INGOTS, "stainless_steel").define('B', QMDBlocks.beamline});
+//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorSource.pattern("AAA").pattern(" CT").pattern("AAA").define('A', "PART_MAP.get("advanced_plating")").define('C', QMDBlocks.acceleratorCasing, 'T', new ItemStack(QMDItems.source, 1, MaterialTypes.SourceType.TUNGSTEN_FILAMENT.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorLaserIonSource.pattern("LPL").pattern("EIE").pattern("LPL").define('L', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.LASER_ASSEMBLY.getID()), 'P', PART_MAP.get("elite_plating"), 'E', semiconductors.get(SemiconductorType.ELITE_PROCESSOR)).define('I', QMDBlocks.acceleratorSource});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorPort, 4).pattern("SHS").pattern("VFV").pattern("SHS").define('S', tag(INGOTS, "stainless_steel").define('H', Blocks.HOPPER, 'V', "servo").define('F', PART_BLOCK_MAP.get("steel_chassis")});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorRedstonePort, 1).pattern("STS").pattern("TFT").pattern("STS").define('S', "dustRedstone").define('T', "tag(INGOTS, "steel").define('F', QMDBlocks.acceleratorCasing});
+//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorIonCollector.pattern("PCP").pattern("CFC").pattern("PCP").define('C', "tag(INGOTS, "copper").define('P', "PART_MAP.get("advanced_plating")").define('F', QMDBlocks.acceleratorCasing});
+//
+//        //Accelerator magnets
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorMagnet, 2, BlockTypes.MagnetType.COPPER.getID()).pattern("CCC").pattern("STS").pattern("CCC").define('S', tag(INGOTS, "stainless_steel").define('T', "tag(INGOTS, "tough").define('C', "tag(INGOTS, "copper"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorMagnet, 2, BlockTypes.MagnetType.Aluminium.getID()).pattern("CCC").pattern("STS").pattern("CCC").define('S', tag(INGOTS, "stainless_steel").define('T', "tag(INGOTS, "tough").define('C', "tag(INGOTS, "aluminum"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorMagnet, 2, BlockTypes.MagnetType.MAGNESIUM_DIBORIDE.getID()).pattern("CCC").pattern("STS").pattern("CCC").define('S', tag(INGOTS, "stainless_steel").define('T', "tag(INGOTS, "tough").define('C', "tag(INGOTS, "magnesiumDiboride"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorMagnet, 2, BlockTypes.MagnetType.NIOBIUM_TIN.getID()).pattern("CCC").pattern("STS").pattern("CCC").define('S', tag(INGOTS, "stainless_steel").define('T', "tag(INGOTS, "tough").define('C', "tag(INGOTS, "niobium_tin"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorMagnet, 2, BlockTypes.MagnetType.NIOBIUM_TITANIUM.getID()).pattern("CCC").pattern("STS").pattern("CCC").define('S', tag(INGOTS, "stainless_steel").define('T', "tag(INGOTS, "tough").define('C', "tag(INGOTS, "niobium_titanium"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorMagnet, 2, BlockTypes.MagnetType.BSCCO.getID()).pattern("CCC").pattern("STS").pattern("CCC").define('S', tag(INGOTS, "stainless_steel").define('T', "tag(INGOTS, "tough").define('C', "wireBSCCO"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorMagnet, 2, BlockTypes.MagnetType.SSFAF.getID()).pattern("CCC").pattern("STS").pattern("CCC").define('S', tag(INGOTS, "stainless_steel").define('T', "tag(INGOTS, "tough").define('C', "wireSSFAF"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorMagnet, 2, BlockTypes.MagnetType.YBCO.getID()).pattern("CCC").pattern("STS").pattern("CCC").define('S', tag(INGOTS, "stainless_steel").define('T', "tag(INGOTS, "tough").define('C', "wireYBCO"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorYoke, 4).pattern("IBI").pattern("IBI").pattern("IBI").define('I', "tag(INGOTS, "iron").define('B', "bioplastic"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.acceleratorYoke, 4).pattern("IBI").pattern("IBI").pattern("IBI").define('I', "tag(INGOTS, "iron").define('B', "sheetPlastic"});
+//
+//        //Accelerator Cavities
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.RFCavity, 4, BlockTypes.RFCavityType.COPPER.getID()).pattern("CCC").pattern("S S").pattern("CCC").define('S', tag(INGOTS, "stainless_steel").define('C', "tag(INGOTS, "copper"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.RFCavity, 4, BlockTypes.RFCavityType.Aluminium.getID()).pattern("CCC").pattern("S S").pattern("CCC").define('S', tag(INGOTS, "stainless_steel").define('C', "tag(INGOTS, "aluminum"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.RFCavity, 4, BlockTypes.RFCavityType.MAGNESIUM_DIBORIDE.getID()).pattern("CCC").pattern("S S").pattern("CCC").define('S', tag(INGOTS, "stainless_steel").define('C', "tag(INGOTS, "magnesiumDiboride"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.RFCavity, 4, BlockTypes.RFCavityType.NIOBIUM_TIN.getID()).pattern("CCC").pattern("S S").pattern("CCC").define('S', tag(INGOTS, "stainless_steel").define('C', "tag(INGOTS, "niobium_tin"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.RFCavity, 4, BlockTypes.RFCavityType.NIOBIUM_TITANIUM.getID()).pattern("CCC").pattern("S S").pattern("CCC").define('S', tag(INGOTS, "stainless_steel").define('C', "tag(INGOTS, "niobium_titanium"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.RFCavity, 4, BlockTypes.RFCavityType.BSCCO.getID()).pattern("CCC").pattern("S S").pattern("CCC").define('S', tag(INGOTS, "stainless_steel").define('C', "wireBSCCO"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.RFCavity, 4, BlockTypes.RFCavityType.SSFAF.getID()).pattern("CCC").pattern("S S").pattern("CCC").define('S', tag(INGOTS, "stainless_steel").define('C', "wireSSFAF"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.RFCavity, 4, BlockTypes.RFCavityType.YBCO.getID()).pattern("CCC").pattern("S S").pattern("CCC").define('S', tag(INGOTS, "stainless_steel").define('C', "wireYBCO"});
+//
+//        //particle chamber controllers
+//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.targetChamberController.pattern("PTP").pattern("BFB").pattern("PTP").define('P', PART_MAP.get("elite_plating"), 'T', "tag(INGOTS, "tough").define('B', semiconductors.get(SemiconductorType.BASIC_PROCESSOR)).define('F', QMDBlocks.particleChamberCasing});
+//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.decayChamberController.pattern("PTP").pattern("BFB").pattern("PTP").define('P', PART_MAP.get("elite_plating"), 'T', "tag(INGOTS, "tough").define('B', semiconductors.get(SemiconductorType.BASIC_PROCESSOR)).define('F', NCBlocks.decay_hastener});
+//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.beamDumpController.pattern("PTP").pattern("BFB").pattern("PTP").define('P', PART_MAP.get("elite_plating"), 'T', "tag(INGOTS, "tough").define('B', semiconductors.get(SemiconductorType.BASIC_PROCESSOR)).define('F', "blockCopper"});
+//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.collisionChamberController.pattern("PTP").pattern("BFB").pattern("PTP").define('P', PART_MAP.get("elite_plating"), 'T', "tag(INGOTS, "tough").define('B', semiconductors.get(SemiconductorType.ELITE_PROCESSOR)).define('F', QMDBlocks.particleChamberCasing});
+//
+//        //particle chamber parts
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.particleChamberCasing, 16).pattern("STS").pattern("TFT").pattern("STS").define('S', tag(INGOTS, "stainless_steel").define('T', tag(INGOTS, "tungsten").define('F', PART_BLOCK_MAP.get("steel_chassis")});
+//        addShapelessOreRecipe(QMDBlocks.particleChamberCasing.pattern(QMDBlocks.particleChamberGlass});
+//        addShapelessOreRecipe(QMDBlocks.particleChamberGlass.pattern(QMDBlocks.particleChamberCasing, "blockGlass"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.particleChamberPort, 4).pattern("THT").pattern("VFV").pattern("THT").define('T', tag(INGOTS, "tungsten").define('H', Blocks.HOPPER, 'V', "servo").define('F', PART_BLOCK_MAP.get("steel_chassis")});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.particleChamberEnergyPort, 4).pattern("SIS").pattern("TFT").pattern("SIS").define('S', tag(INGOTS, "stainless_steel").define('T', tag(INGOTS, "tungsten").define('F', PART_BLOCK_MAP.get("steel_chassis"), 'I', "tag(INGOTS, "niobium_tin"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.particleChamberBeam, 3).pattern("STS").pattern("BBB").pattern("STS").define('S', tag(INGOTS, "stainless_steel").define('B', QMDBlocks.beamline, 'T', tag(INGOTS, "tungsten"});
+//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.particleChamber.pattern("NSN").pattern("NCN").pattern("NSN").define('S', tag(INGOTS, "stainless_steel").define('C', PART_BLOCK_MAP.get("machine_chassis"), 'N', "tag(INGOTS, "niobium_tin"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.particleChamberBeamPort, 4).pattern("STS").pattern("BFB").pattern("STS").define('S', tag(INGOTS, "stainless_steel").define('T', tag(INGOTS, "tungsten").define('B', QMDBlocks.beamline, 'F', PART_BLOCK_MAP.get("steel_chassis")});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.particleChamberFluidPort, 4).pattern("SIS").pattern("TFT").pattern("STS").define('S', tag(INGOTS, "stainless_steel").define('T', tag(INGOTS, "tungsten").define('F', PART_BLOCK_MAP.get("steel_chassis"), 'I', "servo"});
+
+        // Sources
+        ShapedRecipeBuilder.shaped(MISC, IItemParticleAmount.fullItem(new ItemStack(QMDItems.sources.get(SourceType.SODIUM_22).get()))).pattern("BSB").pattern("SSS").pattern("BSB")
+                .define('S', isotopeTag("sodium/22")).define('B', PART_MAP.get("bioplastic"))
+                .unlockedBy(getHasName(isotopes.get(IsotopeType.SODIUM_22)), has(isotopes.get(IsotopeType.SODIUM_22))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, IItemParticleAmount.fullItem(new ItemStack(QMDItems.sources.get(SourceType.COBALT_60).get()))).pattern("BBB").pattern("BSB").pattern("BBB")
+                .define('S', isotopeTag("cobalt/60")).define('B', PART_MAP.get("bioplastic"))
+                .unlockedBy(getHasName(isotopes.get(IsotopeType.COBALT_60)), has(isotopes.get(IsotopeType.COBALT_60))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, IItemParticleAmount.fullItem(new ItemStack(QMDItems.sources.get(SourceType.IRIDIUM_192).get()))).pattern("BBB").pattern("BSB").pattern("BBB")
+                .define('S', isotopeTag("iridium/192")).define('B', PART_MAP.get("bioplastic"))
+                .unlockedBy(getHasName(isotopes.get(IsotopeType.IRIDIUM_192)), has(isotopes.get(IsotopeType.IRIDIUM_192))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, IItemParticleAmount.fullItem(new ItemStack(QMDItems.sources.get(SourceType.CALCIUM_48).get()))).pattern("BSB").pattern("SSS").pattern("BSB")
+                .define('S', isotopeTag("calcium/48")).define('B', PART_MAP.get("bioplastic"))
+                .unlockedBy(getHasName(isotopes.get(IsotopeType.CALCIUM_48)), has(isotopes.get(IsotopeType.CALCIUM_48))).save(recipeOutput);
+
+// TODO
+//        ShapedRecipeBuilder.shaped(MISC, IItemParticleAmount.fullItem(new ItemStack(QMDItems.source, 1, MaterialTypes.SourceType.SODIUM_22.getID())).pattern("BSB").pattern("SSS").pattern("BSB").define('S', isotopeTag("sodium/22").define('B', "sheetPlastic"});
+//        ShapedRecipeBuilder.shaped(MISC, IItemParticleAmount.fullItem(new ItemStack(QMDItems.source, 1, MaterialTypes.SourceType.COBALT_60.getID())).pattern("BBB").pattern("BSB").pattern("BBB").define('S', isotopeTag("cobalt/60").define('B', "sheetPlastic"});
+//        ShapedRecipeBuilder.shaped(MISC, IItemParticleAmount.fullItem(new ItemStack(QMDItems.source, 1, MaterialTypes.SourceType.IRIDIUM_192.getID())).pattern("BBB").pattern("BSB").pattern("BBB").define('S', isotopeTag("iridium/192").define('B', "sheetPlastic"});
+//        ShapedRecipeBuilder.shaped(MISC, IItemParticleAmount.fullItem(new ItemStack(QMDItems.source, 1, MaterialTypes.SourceType.CALCIUM_48.getID())).pattern("BSB").pattern("SSS").pattern("BSB").define('S', isotopeTag("calcium/48").define('B', "sheetPlastic"});
+//
+//        //detectors
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDItems.part, 4, MaterialTypes.PartType.DETECTOR_CASING.getID()).pattern("STS").pattern("SBS").pattern("STS").define('S', tag(INGOTS, "stainless_steel").define('T', tag(INGOTS, "tungsten").define('B', semiconductors.get(SemiconductorType.BASIC_PROCESSOR)});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.WIRE_CHAMBER_CASING.getID()).pattern("WWW").pattern("ACA").pattern("WWW").define('W', "wireGoldTungsten").define('A', semiconductors.get(SemiconductorType.ADVANCED_PROCESSOR)).define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.DETECTOR_CASING.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.particleChamberDetector, 1, BlockTypes.DetectorType.EM_CALORIMETER.getID()).pattern("SSS").pattern("SCS").pattern("SSS").define('S', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.SCINTILLATOR_PWO.getID()), 'C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.DETECTOR_CASING.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.particleChamberDetector, 1, BlockTypes.DetectorType.HADRON_CALORIMETER.getID()).pattern("SSS").pattern("SCS").pattern("SSS").define('S', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.SCINTILLATOR_PLASTIC.getID()), 'C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.DETECTOR_CASING.getID())});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.particleChamberDetector, 1, BlockTypes.DetectorType.SILLICON_TRACKER.getID()).pattern("BAB").pattern("ACA").pattern("BAB").define('B', semiconductors.get(SemiconductorType.BASIC_PROCESSOR)).define('A', semiconductors.get(SemiconductorType.ADVANCED_PROCESSOR)).define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.DETECTOR_CASING.getID())});
+//
+//        // Containment Controllers
+//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.exoticContainmentController.pattern("PEP").pattern("BFB").pattern("PEP").define('P', PART_MAP.get("elite_plating"), 'E', "tag(INGOTS, "extreme").define('B', semiconductors.get(SemiconductorType.ELITE_PROCESSOR)).define('F', QMDBlocks.vacuumChamberCasing});
+//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.nucleosynthesisChamberController.pattern("PEP").pattern("BFB").pattern("PEP").define('P', PART_MAP.get("elite_plating"), 'E', "tag(INGOTS, "super_alloy").define('B', semiconductors.get(SemiconductorType.ELITE_PROCESSOR)).define('F', QMDBlocks.vacuumChamberCasing});
+//
+//        //Containment Parts
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberCasing, 8).pattern("OTO").pattern("SFS").pattern("OTO").define('S', tag(INGOTS, "stainless_steel").define('T', "tag(INGOTS, "tough").define('F', PART_BLOCK_MAP.get("steel_chassis"), 'O', "tag(INGOTS, "osmiridium"});
+//        addShapelessOreRecipe(QMDBlocks.vacuumChamberCasing.pattern(QMDBlocks.vacuumChamberGlass});
+//        addShapelessOreRecipe(QMDBlocks.vacuumChamberGlass.pattern(QMDBlocks.vacuumChamberCasing, "blockGlass"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberBeamPort, 4).pattern("OTO").pattern("BFB").pattern("OTO").define('O', "tag(INGOTS, "osmiridium").define('T', "tag(INGOTS, "tough").define('B', QMDBlocks.beamline, 'F', PART_BLOCK_MAP.get("steel_chassis")});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberVent, 4).pattern("OIO").pattern("TFT").pattern("OTO").define('O', "tag(INGOTS, "osmiridium").define('T', "tag(INGOTS, "tough").define('F', PART_BLOCK_MAP.get("steel_chassis"), 'I', "servo"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberEnergyPort, 4).pattern("OIO").pattern("TFT").pattern("OIO").define('O', "tag(INGOTS, "osmiridium").define('T', "tag(INGOTS, "tough").define('F', PART_BLOCK_MAP.get("steel_chassis"), 'I', "wireBSCCO"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberCoil, 2).pattern("CCC").pattern("OOO").pattern("CCC").define('O', "tag(INGOTS, "osmiridium").define('C', "wireBSCCO"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberPort, 4).pattern("OHO").pattern("VFV").pattern("OHO").define('O', "tag(INGOTS, "osmiridium").define('H', Blocks.HOPPER, 'V', "servo").define('F', PART_BLOCK_MAP.get("steel_chassis")});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberLaser).pattern("OEO").pattern("ELL").pattern("OEO").define('O', "tag(INGOTS, "osmiridium").define('L', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.LASER_ASSEMBLY.getID()), 'E', PART_MAP.get("elite_plating")});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberHeaterVent, 4).pattern("OTO").pattern("TFT").pattern("OIO").define('O', "tag(INGOTS, "osmiridium").define('T', "tag(INGOTS, "tough").define('F', PART_BLOCK_MAP.get("steel_chassis"), 'I', "servo"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberRedstonePort, 1).pattern("STS").pattern("TFT").pattern("STS").define('S', tag(DUSTS, "redstone").define('T', "tag(INGOTS, "steel").define('F', QMDBlocks.vacuumChamberCasing});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberFluidPort, 2).pattern("SIS").pattern("TFT").pattern("STS").define('S', "tag(INGOTS, "osmiridium").define('T', "tag(INGOTS, "tough").define('F', QMDBlocks.vacuumChamberCasing, 'I', "servo"});
+//
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberBeam, 2).pattern("SBS").pattern("B B").pattern("SBS").define('S', "tag(INGOTS, "super_alloy").define('B', "wireBSCCO"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberPlasmaGlass, 2).pattern("SBS").pattern("BNB").pattern("SBS").define('S', "tag(INGOTS, "super_alloy").define('B', "wireBSCCO").define('N', "gemBoronNitride"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberPlasmaNozzle, 2).pattern("SBS").pattern("BNB").pattern("SBS").define('S', "tag(INGOTS, "super_alloy").define('B', "wireBSCCO").define('N', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.ACCELERATING_BARREL.getID())});
+//
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberHeater, 1, BlockTypes.HeaterType.IRON.getID()).pattern("IOI").pattern("OCO").pattern("IOI").define('I', "tag(INGOTS, "iron").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID()), 'O', "tag(INGOTS, "osmiridium"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberHeater, 1, BlockTypes.HeaterType.REDSTONE.getID()).pattern("IOI").pattern("OCO").pattern("IOI").define('I', tag(DUSTS, "redstone").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID()), 'O', "tag(INGOTS, "osmiridium"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberHeater, 1, BlockTypes.HeaterType.QUARTZ.getID()).pattern("IOI").pattern("OCO").pattern("IOI").define('I', "gemQuartz").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID()), 'O', "tag(INGOTS, "osmiridium"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberHeater, 1, BlockTypes.HeaterType.OBSIDIAN.getID()).pattern("IOI").pattern("OCO").pattern("IOI").define('I', "obsidian").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID()), 'O', "tag(INGOTS, "osmiridium"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberHeater, 1, BlockTypes.HeaterType.GLOWSTONE.getID()).pattern("IOI").pattern("OCO").pattern("IOI").define('I', tag(DUSTS, "glowstone").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID()), 'O', "tag(INGOTS, "osmiridium"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberHeater, 1, BlockTypes.HeaterType.LAPIS.getID()).pattern("IOI").pattern("OCO").pattern("IOI").define('I', "gemLapis").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID()), 'O', "tag(INGOTS, "osmiridium"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberHeater, 1, BlockTypes.HeaterType.GOLD.getID()).pattern("IOI").pattern("OCO").pattern("IOI").define('I', "tag(INGOTS, "gold").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID()), 'O', "tag(INGOTS, "osmiridium"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberHeater, 1, BlockTypes.HeaterType.DIAMOND.getID()).pattern("IOI").pattern("OCO").pattern("IOI").define('I', "gemDiamond").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID()), 'O', "tag(INGOTS, "osmiridium"});
+//
+//        //liquefier parts
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.liquefierController).pattern("ITI").pattern("TCT").pattern("ITI").define('I', "tag(INGOTS, "steel").define('C', new ItemStack(NCBlocks.supercooler), 'T', "tag(INGOTS, "thermoconducting"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.liquefierNozzle, 4).pattern("I I").pattern("SCS").pattern("I I").define('I', "tag(INGOTS, "steel").define('C', PART_BLOCK_MAP.get("steel_chassis"), 'S', tag(INGOTS, "stainless_steel"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.liquefierEnergyPort, 4).pattern("ISI").pattern("SCS").pattern("ISI").define('I', "tag(INGOTS, "steel").define('C', PART_BLOCK_MAP.get("steel_chassis"), 'S', "tag(INGOTS, "copper"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.liquefierPort, 4).pattern("ISI").pattern("MCM").pattern("ISI").define('I', "tag(INGOTS, "steel").define('C', PART_BLOCK_MAP.get("steel_chassis"), 'S', tag(INGOTS, "stainless_steel").define('M', "servo"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.liquefierCompressor, 4, BlockTypes.CompressorType.COPPER.getID()).pattern("ISI").pattern("MCM").pattern("ISI").define('I', "tag(INGOTS, "steel").define('C', PART_BLOCK_MAP.get("steel_chassis"), 'S', "tag(INGOTS, "copper").define('M', "motor"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.liquefierCompressor, 4, BlockTypes.CompressorType.NEODYMIUM.getID()).pattern("ISI").pattern("MCM").pattern("ISI").define('I', "tag(INGOTS, "steel").define('C', PART_BLOCK_MAP.get("steel_chassis"), 'S', "magnetNeodymium").define('M', "motor"});
+//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.liquefierCompressor, 4, BlockTypes.CompressorType.SAMARIUM_COBALT.getID()).pattern("ISI").pattern("MCM").pattern("ISI").define('I', "tag(INGOTS, "steel").define('C', PART_BLOCK_MAP.get("steel_chassis"), 'S', "magnetSamariumCobalt").define('M', "motor"});
+
+        // Furnace
+        for (
+                var entry : QMDItems.ingots.entrySet()) {
+            if (entry.getKey().getDust() == null) {
+                continue;
+            }
+
+            smelting(recipeOutput, RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new, Ingredient.of(dusts.get(entry.getKey().getDust())), entry.getValue(), 0, 200, entry.getKey().getSerializedName(), "from_smelting");
+            smelting(recipeOutput, RecipeSerializer.BLASTING_RECIPE, BlastingRecipe::new, Ingredient.of(dusts.get(entry.getKey().getDust())), entry.getValue(), 0, 200 / 2, entry.getKey().getSerializedName(), "from_blasting");
+        }
     }
 
-//    public static void reductionIsotopeRecipes(Item isotope, int noTypes) { TODO
-//        for (int i = 0; i < noTypes; i++) {
-//            GameRegistry.addSmelting(new ItemStack(isotope, 1, 5 * i + 2), new ItemStack(isotope, 1, 5 * i), 0F);
-//            GameRegistry.addSmelting(new ItemStack(isotope, 1, 5 * i + 3), new ItemStack(isotope, 1, 5 * i), 0F);
-//        }
-//    }
-//
-//    public static void reductionFissionFuelRecipes(Item pellet, Item fuel, int noTypes) {
-//        for (int i = 0; i < noTypes; i++) {
-//            GameRegistry.addSmelting(new ItemStack(fuel, 1, 4 * i + 1), new ItemStack(pellet, 1, 2 * i), 0F);
-//            GameRegistry.addSmelting(new ItemStack(fuel, 1, 4 * i + 2), new ItemStack(pellet, 1, 2 * i), 0F);
-//        }
-//    }
-//
-//    public static double getDecayHastenerTimeMultipler(double radiation) {
-//        double F = Math.log1p(Math.log(2D)), Z = 0.1674477985420331D;
-//        return NCMath.roundTo(Z * (radiation >= 1D ? F / Math.log1p(Math.log1p(radiation)) : Math.log1p(Math.log1p(1D / radiation)) / F), 5D / NCConfig.processor_time[2]);
-//    }
-//
-//
-//    public static FluidIngredient fluidStack(String fluidName, int stackSize) {
-//        if (!FluidRegHelper.fluidExists(fluidName))
-//            return null;
-//        return new FluidIngredient(fluidName, stackSize);
-//    }
+    private <T extends AbstractCookingRecipe> void smelting(RecipeOutput recipeOutput, RecipeSerializer<T> recipeSerializer, AbstractCookingRecipe.Factory<T> factory, Ingredient ingredient, ItemLike pResult, float pExp, int pSmeltTime, String pGroup, String pRecipeName) {
+        SimpleCookingRecipeBuilder.generic(ingredient, RecipeCategory.MISC, pResult, pExp, pSmeltTime, recipeSerializer, factory).group(pGroup)
+                .unlockedBy(getHasName(ingredient.getItems()[0].getItem()), has(ingredient.getItems()[0].getItem()))
+                .save(recipeOutput, QMD.MOD_ID + ":" + getItemName(pResult) + "_" + pRecipeName + "_" + getItemName(ingredient.getItems()[0].getItem()));
+    }
+
+    private void toolSet(RecipeOutput recipeOutput, ItemLike item, ItemLike sword, ItemLike pickaxe, ItemLike shovel, ItemLike axe, ItemLike hoe) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, sword)
+                .define('#', Items.STICK)
+                .define('X', item)
+                .pattern("X")
+                .pattern("X")
+                .pattern("#")
+                .unlockedBy(getHasName(item), has(item))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, pickaxe)
+                .define('#', Items.STICK)
+                .define('X', item)
+                .pattern("XXX")
+                .pattern(" # ")
+                .pattern(" # ")
+                .unlockedBy(getHasName(item), has(item))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, shovel)
+                .define('#', Items.STICK)
+                .define('X', item)
+                .pattern("X")
+                .pattern("#")
+                .pattern("#")
+                .unlockedBy(getHasName(item), has(item))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, axe)
+                .define('#', Items.STICK)
+                .define('X', item)
+                .pattern("XX")
+                .pattern("X#")
+                .pattern(" #")
+                .unlockedBy(getHasName(item), has(item))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, hoe)
+                .define('#', Items.STICK)
+                .define('X', item)
+                .pattern("XX")
+                .pattern(" #")
+                .pattern(" #")
+                .unlockedBy(getHasName(item), has(item))
+                .save(recipeOutput);
+    }
 }

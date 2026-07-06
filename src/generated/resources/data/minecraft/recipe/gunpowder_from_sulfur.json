@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:dusts/coal"
+    },
+    {
+      "tag": "c:dusts/coal"
+    },
+    {
+      "tag": "c:dusts/sulfur"
+    },
+    {
+      "tag": "c:dusts/sulfur"
+    },
+    {
+      "tag": "c:dusts/sodium_nitrate"
+    },
+    {
+      "tag": "c:dusts/sodium_nitrate"
+    },
+    {
+      "tag": "c:dusts/sodium_nitrate"
+    },
+    {
+      "tag": "c:dusts/sodium_nitrate"
+    }
+  ],
+  "result": {
+    "count": 8,
+    "id": "minecraft:gunpowder"
+  }
+}

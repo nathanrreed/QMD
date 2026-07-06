@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_potassium_dust": {
+      "conditions": {
+        "items": [
+          {
+            "items": "qmd:potassium_dust"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "qmd:potassium_ingot_from_blasting_potassium_dust"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_potassium_dust"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "qmd:potassium_ingot_from_blasting_potassium_dust"
+    ]
+  }
+}

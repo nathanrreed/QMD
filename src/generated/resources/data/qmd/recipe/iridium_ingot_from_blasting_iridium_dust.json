@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.0,
+  "group": "iridium",
+  "ingredient": {
+    "item": "qmd:iridium_dust"
+  },
+  "result": {
+    "count": 1,
+    "id": "qmd:iridium_ingot"
+  }
+}

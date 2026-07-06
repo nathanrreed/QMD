@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.0,
+  "group": "osmium",
+  "ingredient": {
+    "item": "qmd:osmium_dust"
+  },
+  "result": {
+    "count": 1,
+    "id": "qmd:osmium_ingot"
+  }
+}

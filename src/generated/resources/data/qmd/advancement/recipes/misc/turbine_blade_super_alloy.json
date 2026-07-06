@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_super_alloy_alloy": {
+      "conditions": {
+        "items": [
+          {
+            "items": "qmd:super_alloy_alloy"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "qmd:turbine_blade_super_alloy"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_super_alloy_alloy"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "qmd:turbine_blade_super_alloy"
+    ]
+  }
+}

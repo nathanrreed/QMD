@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "qmd:advanced_processor_semiconductor"
+    },
+    "L": {
+      "item": "qmd:argon_discharge_lamp"
+    },
+    "R": {
+      "item": "qmd:rod_nd_yag_part"
+    },
+    "S": {
+      "tag": "c:ingots/silver"
+    }
+  },
+  "pattern": [
+    "ALA",
+    "SRS",
+    "ALA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "qmd:laser_assembly_part"
+  }
+}

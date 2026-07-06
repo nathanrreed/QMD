@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "nuclearcraftneohaul:bioplastic"
+    },
+    "C": {
+      "tag": "c:ingots/copper"
+    },
+    "F": {
+      "tag": "c:ingots/ferroboron"
+    },
+    "P": {
+      "item": "qmd:basic_processor_semiconductor"
+    },
+    "S": {
+      "item": "qmd:scintillator_plastic_part"
+    }
+  },
+  "pattern": [
+    "FFS",
+    "PPC",
+    "FFB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "qmd:beam_meter"
+  }
+}

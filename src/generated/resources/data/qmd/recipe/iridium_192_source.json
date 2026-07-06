@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "nuclearcraftneohaul:bioplastic"
+    },
+    "S": {
+      "tag": "c:isotopes/iridium/192"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "BSB",
+    "BBB"
+  ],
+  "result": {
+    "components": {
+      "minecraft:custom_data": {
+        "particle_storage": {
+          "particle_amount": 1000000,
+          "particle_capacity": 1000000
+        }
+      }
+    },
+    "count": 1,
+    "id": "qmd:iridium_192_source"
+  }
+}

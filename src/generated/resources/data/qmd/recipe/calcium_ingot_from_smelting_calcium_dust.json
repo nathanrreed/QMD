@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.0,
+  "group": "calcium",
+  "ingredient": {
+    "item": "qmd:calcium_dust"
+  },
+  "result": {
+    "count": 1,
+    "id": "qmd:calcium_ingot"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_calcium_48_isotope": {
+      "conditions": {
+        "items": [
+          {
+            "items": "qmd:calcium_48_isotope"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "qmd:calcium_48_source"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_calcium_48_isotope"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "qmd:calcium_48_source"
+    ]
+  }
+}

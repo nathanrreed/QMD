@@ -187,6 +187,8 @@ dependencies {
     runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
     compileOnly("dev.emi:emi-neoforge:${emi_version}:api")
     runtimeOnly("dev.emi:emi-neoforge:${emi_version}")
+
+    compileOnly("vazkii.patchouli:Patchouli:${patchouli_version}-NEOFORGE:api")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

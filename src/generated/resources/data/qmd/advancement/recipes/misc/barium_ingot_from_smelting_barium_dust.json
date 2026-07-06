@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_barium_dust": {
+      "conditions": {
+        "items": [
+          {
+            "items": "qmd:barium_dust"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "qmd:barium_ingot_from_smelting_barium_dust"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_barium_dust"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "qmd:barium_ingot_from_smelting_barium_dust"
+    ]
+  }
+}

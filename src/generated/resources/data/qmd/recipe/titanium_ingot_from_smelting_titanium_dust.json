@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.0,
+  "group": "titanium",
+  "ingredient": {
+    "item": "qmd:titanium_dust"
+  },
+  "result": {
+    "count": 1,
+    "id": "qmd:titanium_ingot"
+  }
+}

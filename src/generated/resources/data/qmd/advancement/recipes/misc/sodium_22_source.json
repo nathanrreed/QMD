@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sodium_22_isotope": {
+      "conditions": {
+        "items": [
+          {
+            "items": "qmd:sodium_22_isotope"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "qmd:sodium_22_source"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_sodium_22_isotope"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "qmd:sodium_22_source"
+    ]
+  }
+}

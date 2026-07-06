@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "qmd:copernicium_291_za"
+    },
+    "U": {
+      "item": "nuclearcraftneohaul:uranium_238_za"
+    }
+  },
+  "pattern": [
+    "CUU",
+    "UUU",
+    "UUU"
+  ],
+  "result": {
+    "count": 9,
+    "id": "qmd:copernicium_mix_291_za"
+  }
+}
