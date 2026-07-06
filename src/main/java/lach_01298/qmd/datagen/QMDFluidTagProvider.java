@@ -1,7 +1,6 @@
 package lach_01298.qmd.datagen;
 
 import lach_01298.qmd.QMD;
-import lach_01298.qmd.fluid.QMDFluids;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.FluidTagsProvider;
@@ -14,9 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-import static com.nred.nuclearcraft.datagen.ModFluidTagProvider.ARGON_TAG;
-import static com.nred.nuclearcraft.datagen.ModFluidTagProvider.NEON_TAG;
-import static com.nred.nuclearcraft.registration.FluidRegistration.MOLTEN_MAP;
+import static com.nred.nuclearcraft.datagen.ModFluidTagProvider.*;
 import static lach_01298.qmd.fluid.QMDFluids.QMD_FLUIDS;
 
 public class QMDFluidTagProvider extends FluidTagsProvider {
@@ -43,5 +40,6 @@ public class QMDFluidTagProvider extends FluidTagsProvider {
 
         tag(ARGON_TAG).add(QMD_FLUIDS.get("argon").still.get());
         tag(NEON_TAG).add(QMD_FLUIDS.get("neon").still.get());
+        tag(CHLORINE_TAG).add(QMD_FLUIDS.get("chlorine").still.get());
     }
 }

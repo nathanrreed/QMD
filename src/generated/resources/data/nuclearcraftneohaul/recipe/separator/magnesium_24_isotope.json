@@ -1,0 +1,33 @@
+{
+  "type": "nuclearcraftneohaul:separator_recipe",
+  "itemIngredients": [
+    {
+      "count": 9,
+      "ingredient": [
+        {
+          "tag": "c:ingots/magnesium"
+        },
+        {
+          "tag": "c:dusts/magnesium"
+        }
+      ]
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 8,
+      "ingredient": {
+        "item": "qmd:magnesium_24_isotope"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:magnesium_26_isotope"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 0.0,
+  "timeModifier": 6.0
+}

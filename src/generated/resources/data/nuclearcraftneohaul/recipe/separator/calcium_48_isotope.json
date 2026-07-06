@@ -1,0 +1,27 @@
+{
+  "type": "nuclearcraftneohaul:separator_recipe",
+  "itemIngredients": [
+    {
+      "count": 8,
+      "ingredient": [
+        {
+          "tag": "c:ingots/calcium"
+        },
+        {
+          "tag": "c:dusts/calcium"
+        }
+      ]
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:calcium_48_isotope"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 0.0,
+  "timeModifier": 6.0
+}

@@ -1,0 +1,28 @@
+{
+  "type": "nuclearcraftneohaul:chemical_reactor_recipe",
+  "fluidIngredients": [
+    {
+      "amount": 666,
+      "ingredient": {
+        "fluid": "nuclearcraftneohaul:sodium_hydroxide_solution"
+      }
+    },
+    {
+      "amount": 1000,
+      "ingredient": {
+        "tag": "c:nitric_acid"
+      }
+    }
+  ],
+  "fluidProducts": [
+    {
+      "amount": 666,
+      "ingredient": {
+        "fluid": "qmd:sodium_nitrate_solution"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 0.0,
+  "timeModifier": 1.0
+}

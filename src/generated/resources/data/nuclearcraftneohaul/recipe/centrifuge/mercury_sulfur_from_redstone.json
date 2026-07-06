@@ -1,0 +1,28 @@
+{
+  "type": "nuclearcraftneohaul:centrifuge_recipe",
+  "fluidIngredients": [
+    {
+      "amount": 100,
+      "ingredient": {
+        "fluid": "nuclearcraftneohaul:redstone"
+      }
+    }
+  ],
+  "fluidProducts": [
+    {
+      "amount": 144,
+      "ingredient": {
+        "fluid": "qmd:mercury"
+      }
+    },
+    {
+      "amount": 666,
+      "ingredient": {
+        "fluid": "nuclearcraftneohaul:sulfur"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 0.0,
+  "timeModifier": 1.0
+}

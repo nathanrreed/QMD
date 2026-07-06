@@ -2,7 +2,6 @@ package lach_01298.qmd.config;
 
 import com.google.common.primitives.Booleans;
 import lach_01298.qmd.QMD;
-import lach_01298.qmd.QMDRadSources;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -13,7 +12,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 @EventBusSubscriber(modid = QMD.MOD_ID)
-public class QMDServerConfig {
+public class QMDServerConfig { // TODO cleanup
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
     public static final String CATEGORY_PROCESSORS = "processors";
@@ -137,15 +136,6 @@ public class QMDServerConfig {
     public static double[] fission_shield_heat_per_flux;
     public static double[] fission_shield_efficiency;
 
-    public static int[] copernicium_fuel_time;
-    public static int[] copernicium_heat_generation;
-    public static double[] copernicium_efficiency;
-    public static int[] copernicium_criticality;
-    public static int[] copernicium_intrinsic_flux;
-    public static double[] copernicium_decay_factor;
-    public static boolean[] copernicium_self_priming;
-    public static double[] copernicium_radiation;
-
     public static int[] rtg_power;
 
     public static int beam_scaling;
@@ -153,8 +143,6 @@ public class QMDServerConfig {
     //recipe scale factors
     public static int rsf_target_chamber;
     public static int rsf_nucleosynthesis;
-
-    public static boolean override_nc_recipes;
 
     //public static int item_ticker_chunks_per_tick;
 
@@ -297,17 +285,6 @@ public class QMDServerConfig {
     private static final ModConfigSpec.ConfigValue<List<? extends Double>> propertyFissionShieldHeatPerFlux = add(CATEGORY_FISSION, "shield_heat_per_flux", List.of(15D), 0D, 32767D, true);
     private static final ModConfigSpec.ConfigValue<List<? extends Double>> propertyFissionShieldEfficiency = add(CATEGORY_FISSION, "shield_efficiency", List.of(1D), 0D, 255D, true);
 
-    private static final ModConfigSpec.ConfigValue<List<? extends Integer>> propertyCoperniciumFuelTime = add(CATEGORY_FISSION, "copernicium_fuel_time", List.of(10000, 10000, 12004, 9001), 1, Integer.MAX_VALUE, true);
-    private static final ModConfigSpec.ConfigValue<List<? extends Integer>> propertyCoperniciumHeatGeneration = add(CATEGORY_FISSION, "copernicium_heat_generation", List.of(2000, 2000, 1666, 2222), 0, 32767, true);
-    private static final ModConfigSpec.ConfigValue<List<? extends Double>> propertyCoperniciumEfficiency = add(CATEGORY_FISSION, "copernicium_efficiency", List.of(5.0D, 5.0D, 5.0D, 5.0D), 0D, 32767D, true);
-    private static final ModConfigSpec.ConfigValue<List<? extends Integer>> propertyCoperniciumCriticality = add(CATEGORY_FISSION, "copernicium_criticality", List.of(20, 25, 35, 20), 0, 32767, true);
-    private static final ModConfigSpec.ConfigValue<List<? extends Integer>> propertyCoperniciumIntrinsicFlux = add(CATEGORY_FISSION, "copernicium_intrinsic_flux", List.of(10, 0, 0, 0), 0, 32767, true);
-    private static final ModConfigSpec.ConfigValue<List<? extends Double>> propertyCoperniciumDecayFactor = add(CATEGORY_FISSION, "copernicium_decay_factor", List.of(0.11D, 0.11D, 0.11D, 0.11D), 0, 32767, true);
-    private static final ModConfigSpec.ConfigValue<List<? extends Boolean>> propertyCoperniciumSelfPriming = add(CATEGORY_FISSION, "copernicium_self_priming", List.of(true, true, true, true), true);
-    private static final ModConfigSpec.ConfigValue<List<? extends Double>> propertyCoperniciumRadiation = add(CATEGORY_FISSION, "copernicium_radiation", List.of(QMDRadSources.MIX_291, QMDRadSources.MIX_291, QMDRadSources.MIX_291, QMDRadSources.MIX_291), 0D, 1000D, true);
-
-    private static final ModConfigSpec.BooleanValue propertyOverrideNCRecipes = add(CATEGORY_RECIPES, "override_nc_recipes", true);
-
     private static final ModConfigSpec.IntValue propertyRSFTargetChamber = add(CATEGORY_RECIPES, "rsf_target_chamber", 100, 1, Integer.MAX_VALUE);
 
     private static final ModConfigSpec.IntValue propertyRSFNucleosynthesis = add(CATEGORY_RECIPES, "rsf_nucleosynthesis", 100, 1, Integer.MAX_VALUE);
@@ -435,17 +412,6 @@ public class QMDServerConfig {
         fission_shield_heat_per_flux = readDoubleArray(propertyFissionShieldHeatPerFlux);
         fission_shield_efficiency = readDoubleArray(propertyFissionShieldEfficiency);
 
-        copernicium_fuel_time = readIntegerArray(propertyCoperniciumFuelTime);
-        copernicium_heat_generation = readIntegerArray(propertyCoperniciumHeatGeneration);
-        copernicium_efficiency = readDoubleArray(propertyCoperniciumEfficiency);
-        copernicium_criticality = readIntegerArray(propertyCoperniciumCriticality);
-        copernicium_intrinsic_flux = readIntegerArray(propertyCoperniciumIntrinsicFlux);
-        copernicium_decay_factor = readDoubleArray(propertyCoperniciumDecayFactor);
-        copernicium_self_priming = readBooleanArray(propertyCoperniciumSelfPriming);
-        copernicium_radiation = readDoubleArray(propertyCoperniciumRadiation);
-
-
-        override_nc_recipes = propertyOverrideNCRecipes.getAsBoolean();
         rsf_target_chamber = propertyRSFTargetChamber.getAsInt();
         rsf_nucleosynthesis = propertyRSFNucleosynthesis.getAsInt();
 

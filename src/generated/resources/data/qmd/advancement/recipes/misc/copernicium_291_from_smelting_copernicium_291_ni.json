@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_copernicium_291_ni": {
+      "conditions": {
+        "items": [
+          {
+            "items": "qmd:copernicium_291_ni"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "qmd:copernicium_291_from_smelting_copernicium_291_ni"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_copernicium_291_ni"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "qmd:copernicium_291_from_smelting_copernicium_291_ni"
+    ]
+  }
+}

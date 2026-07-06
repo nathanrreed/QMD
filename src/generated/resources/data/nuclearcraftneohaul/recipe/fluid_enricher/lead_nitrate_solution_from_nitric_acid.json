@@ -1,0 +1,30 @@
+{
+  "type": "nuclearcraftneohaul:enricher_recipe",
+  "fluidIngredients": [
+    {
+      "amount": 1332,
+      "ingredient": {
+        "tag": "c:nitric_acid"
+      }
+    }
+  ],
+  "fluidProducts": [
+    {
+      "amount": 666,
+      "ingredient": {
+        "fluid": "qmd:lead_nitrate_solution"
+      }
+    }
+  ],
+  "itemIngredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/lead"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 0.0,
+  "timeModifier": 1.0
+}

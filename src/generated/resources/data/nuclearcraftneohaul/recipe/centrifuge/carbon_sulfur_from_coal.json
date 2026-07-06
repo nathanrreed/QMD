@@ -1,0 +1,28 @@
+{
+  "type": "nuclearcraftneohaul:centrifuge_recipe",
+  "fluidIngredients": [
+    {
+      "amount": 100,
+      "ingredient": {
+        "fluid": "nuclearcraftneohaul:coal"
+      }
+    }
+  ],
+  "fluidProducts": [
+    {
+      "amount": 100,
+      "ingredient": {
+        "fluid": "qmd:carbon"
+      }
+    },
+    {
+      "amount": 111,
+      "ingredient": {
+        "fluid": "nuclearcraftneohaul:sulfur"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 0.0,
+  "timeModifier": 1.0
+}

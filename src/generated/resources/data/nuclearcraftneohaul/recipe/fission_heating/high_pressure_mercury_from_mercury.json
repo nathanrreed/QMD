@@ -1,0 +1,17 @@
+{
+  "type": "nuclearcraftneohaul:fission_heating_recipe",
+  "fluidIngredient": {
+    "amount": 1,
+    "ingredient": {
+      "fluid": "qmd:mercury"
+    }
+  },
+  "fluidProduct": {
+    "amount": 2,
+    "ingredient": {
+      "fluid": "qmd:high_pressure_mercury"
+    }
+  },
+  "heatPerInputMB": 512,
+  "recipeType": "other"
+}

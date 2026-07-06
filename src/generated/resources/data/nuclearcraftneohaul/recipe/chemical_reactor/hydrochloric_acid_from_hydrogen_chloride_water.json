@@ -1,0 +1,28 @@
+{
+  "type": "nuclearcraftneohaul:chemical_reactor_recipe",
+  "fluidIngredients": [
+    {
+      "amount": 1000,
+      "ingredient": {
+        "tag": "mekanism:hydrogen_chloride"
+      }
+    },
+    {
+      "amount": 1000,
+      "ingredient": {
+        "fluid": "minecraft:water"
+      }
+    }
+  ],
+  "fluidProducts": [
+    {
+      "amount": 1000,
+      "ingredient": {
+        "tag": "c:hydrochloric_acid"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 0.0,
+  "timeModifier": 1.0
+}

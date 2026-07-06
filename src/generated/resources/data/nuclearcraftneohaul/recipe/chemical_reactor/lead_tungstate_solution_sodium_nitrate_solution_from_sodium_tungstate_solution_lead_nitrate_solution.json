@@ -1,0 +1,34 @@
+{
+  "type": "nuclearcraftneohaul:chemical_reactor_recipe",
+  "fluidIngredients": [
+    {
+      "amount": 666,
+      "ingredient": {
+        "fluid": "qmd:sodium_tungstate_solution"
+      }
+    },
+    {
+      "amount": 666,
+      "ingredient": {
+        "fluid": "qmd:lead_nitrate_solution"
+      }
+    }
+  ],
+  "fluidProducts": [
+    {
+      "amount": 666,
+      "ingredient": {
+        "fluid": "qmd:lead_tungstate_solution"
+      }
+    },
+    {
+      "amount": 666,
+      "ingredient": {
+        "fluid": "qmd:sodium_nitrate_solution"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 0.0,
+  "timeModifier": 1.0
+}

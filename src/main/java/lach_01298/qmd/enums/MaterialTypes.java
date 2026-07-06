@@ -3,8 +3,6 @@ package lach_01298.qmd.enums;
 import lach_01298.qmd.QMDConstants;
 import net.minecraft.util.StringRepresentable;
 
-import static lach_01298.qmd.config.QMDStartupConfig.*;
-
 
 public class MaterialTypes {
     public enum DustType implements StringRepresentable {
@@ -440,54 +438,21 @@ public class MaterialTypes {
     }
 
     public enum CoperniciumFuelType implements StringRepresentable {
-        MIX_291_TR("mix_291_tr", 0),
-        MIX_291_OX("mix_291_ox", 1),
-        MIX_291_NI("mix_291_ni", 2),
-        MIX_291_ZA("mix_291_za", 3);
+        MIX_291_TR("mix_291_tr"),
+        MIX_291_OX("mix_291_ox"),
+        MIX_291_NI("mix_291_ni"),
+        MIX_291_ZA("mix_291_za");
 
         private final String name;
-//        private final int fuelTime, heatGen, criticality;
-//        private final double efficiency;
-//        private final boolean selfPriming;
 
-        CoperniciumFuelType(String name, int id) {
+        CoperniciumFuelType(String name) {
             this.name = name;
-//            fuelTime = copernicium_fuel_time[id + id / 4]; TODO
-//            heatGen = copernicium_heat_generation[id + id / 4];
-//            efficiency = copernicium_efficiency[id + id / 4];
-//            criticality = copernicium_criticality[id + id / 4];
-//            selfPriming = copernicium_self_priming[id + id / 4];
         }
 
         @Override
         public String getSerializedName() {
             return name;
         }
-
-//        @Override
-//        public String toString() {
-//            return getSerializedName();
-//        }
-//
-//        public int getBaseTime() { // TODO cleanup
-//            return fuelTime;
-//        }
-//
-//        public int getBaseHeat() {
-//            return heatGen;
-//        }
-//
-//        public double getBaseEfficiency() {
-//            return efficiency;
-//        }
-//
-//        public int getCriticality() {
-//            return criticality;
-//        }
-//
-//        public boolean getSelfPriming() {
-//            return selfPriming;
-//        }
     }
 
     public enum CoperniciumDepletedFuelType implements StringRepresentable {

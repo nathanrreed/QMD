@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "nuclearcraftneohaul:chemical_reactor/lead_tungstate_solution_sodium_nitrate_solution_from_sodium_tungstate_solution_lead_nitrate_solution"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "nuclearcraftneohaul:chemical_reactor/lead_tungstate_solution_sodium_nitrate_solution_from_sodium_tungstate_solution_lead_nitrate_solution"
+    ]
+  }
+}

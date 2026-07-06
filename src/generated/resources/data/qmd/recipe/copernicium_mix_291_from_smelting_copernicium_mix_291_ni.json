@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.0,
+  "group": "copernicium",
+  "ingredient": {
+    "item": "qmd:copernicium_mix_291_ni"
+  },
+  "result": {
+    "count": 1,
+    "id": "qmd:copernicium_mix_291"
+  }
+}

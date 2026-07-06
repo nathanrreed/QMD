@@ -1,0 +1,28 @@
+{
+  "type": "nuclearcraftneohaul:salt_mixer_recipe",
+  "fluidIngredients": [
+    {
+      "amount": 144,
+      "ingredient": {
+        "fluid": "qmd:mercury"
+      }
+    },
+    {
+      "amount": 666,
+      "ingredient": {
+        "fluid": "nuclearcraftneohaul:sulfur"
+      }
+    }
+  ],
+  "fluidProducts": [
+    {
+      "amount": 100,
+      "ingredient": {
+        "fluid": "nuclearcraftneohaul:redstone"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 0.0,
+  "timeModifier": 1.0
+}

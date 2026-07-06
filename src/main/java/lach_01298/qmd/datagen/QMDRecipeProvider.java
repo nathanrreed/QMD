@@ -317,7 +317,7 @@ public class QMDRecipeProvider extends RecipeProvider implements IConditionBuild
 //        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberHeater, 1, BlockTypes.HeaterType.GOLD.getID()).pattern("IOI").pattern("OCO").pattern("IOI").define('I', "tag(INGOTS, "gold").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID()), 'O', "tag(INGOTS, "osmiridium"});
 //        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.vacuumChamberHeater, 1, BlockTypes.HeaterType.DIAMOND.getID()).pattern("IOI").pattern("OCO").pattern("IOI").define('I', "gemDiamond").define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.EMPTY_COOLER.getID()), 'O', "tag(INGOTS, "osmiridium"});
 //
-//        //liquefier parts
+//        // Liquefier parts
 //        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.liquefierController).pattern("ITI").pattern("TCT").pattern("ITI").define('I', "tag(INGOTS, "steel").define('C', new ItemStack(NCBlocks.supercooler), 'T', "tag(INGOTS, "thermoconducting"});
 //        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.liquefierNozzle, 4).pattern("I I").pattern("SCS").pattern("I I").define('I', "tag(INGOTS, "steel").define('C', PART_BLOCK_MAP.get("steel_chassis"), 'S', tag(INGOTS, "stainless_steel"});
 //        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.liquefierEnergyPort, 4).pattern("ISI").pattern("SCS").pattern("ISI").define('I', "tag(INGOTS, "steel").define('C', PART_BLOCK_MAP.get("steel_chassis"), 'S', "tag(INGOTS, "copper"});
@@ -338,7 +338,7 @@ public class QMDRecipeProvider extends RecipeProvider implements IConditionBuild
         }
     }
 
-    private <T extends AbstractCookingRecipe> void smelting(RecipeOutput recipeOutput, RecipeSerializer<T> recipeSerializer, AbstractCookingRecipe.Factory<T> factory, Ingredient ingredient, ItemLike pResult, float pExp, int pSmeltTime, String pGroup, String pRecipeName) {
+    public static <T extends AbstractCookingRecipe> void smelting(RecipeOutput recipeOutput, RecipeSerializer<T> recipeSerializer, AbstractCookingRecipe.Factory<T> factory, Ingredient ingredient, ItemLike pResult, float pExp, int pSmeltTime, String pGroup, String pRecipeName) {
         SimpleCookingRecipeBuilder.generic(ingredient, RecipeCategory.MISC, pResult, pExp, pSmeltTime, recipeSerializer, factory).group(pGroup)
                 .unlockedBy(getHasName(ingredient.getItems()[0].getItem()), has(ingredient.getItems()[0].getItem()))
                 .save(recipeOutput, QMD.MOD_ID + ":" + getItemName(pResult) + "_" + pRecipeName + "_" + getItemName(ingredient.getItems()[0].getItem()));

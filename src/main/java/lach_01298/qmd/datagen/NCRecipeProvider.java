@@ -1,25 +1,49 @@
 package lach_01298.qmd.datagen;
 
+import com.nred.nuclearcraft.datagen.recipes.processor.FuelReprocessorProvider;
+import com.nred.nuclearcraft.info.NCFluid;
+import com.nred.nuclearcraft.recipe.BasicRecipeBuilder;
 import com.nred.nuclearcraft.recipe.ProcessorRecipeBuilder;
+import com.nred.nuclearcraft.recipe.SizedChanceFluidIngredient;
 import com.nred.nuclearcraft.recipe.SizedChanceItemIngredient;
-import com.nred.nuclearcraft.recipe.processor.AlloyFurnaceRecipe;
-import com.nred.nuclearcraft.recipe.processor.FluidInfuserRecipe;
+import com.nred.nuclearcraft.recipe.exchanger.CondenserRecipe;
+import com.nred.nuclearcraft.recipe.exchanger.HeatExchangerRecipe;
+import com.nred.nuclearcraft.recipe.fission.FissionHeatingRecipe;
+import com.nred.nuclearcraft.recipe.fission.PebbleFissionRecipe;
+import com.nred.nuclearcraft.recipe.fission.SolidFissionRecipe;
+import com.nred.nuclearcraft.recipe.machine.MultiblockDistillerRecipe;
+import com.nred.nuclearcraft.recipe.processor.*;
+import com.nred.nuclearcraft.recipe.turbine.TurbineRecipe;
+import lach_01298.qmd.QMDRadSources;
 import lach_01298.qmd.enums.BlockTypes.LampType;
-import lach_01298.qmd.enums.MaterialTypes.ChemicalDustType;
-import lach_01298.qmd.enums.MaterialTypes.IngotAlloyType;
+import lach_01298.qmd.enums.MaterialTypes.*;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.item.crafting.BlastingRecipe;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.SmeltingRecipe;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.common.Tags;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.nred.nuclearcraft.datagen.ModFluidTagProvider.*;
 import static com.nred.nuclearcraft.datagen.ModItemTagProvider.isotopeTag;
 import static com.nred.nuclearcraft.helpers.RecipeHelpers.*;
-import static com.nred.nuclearcraft.registration.ItemRegistration.INGOT_MAP;
-import static com.nred.nuclearcraft.util.FluidStackHelper.BUCKET_VOLUME;
-import static com.nred.nuclearcraft.util.FluidStackHelper.INGOT_VOLUME;
+import static com.nred.nuclearcraft.info.NCFluid.sizedIngredient;
+import static com.nred.nuclearcraft.registration.FluidRegistration.*;
+import static com.nred.nuclearcraft.registration.ItemRegistration.*;
+import static com.nred.nuclearcraft.util.FluidStackHelper.*;
 import static lach_01298.qmd.block.QMDBlocks.dischargeLamps;
-import static lach_01298.qmd.datagen.QMDFluidTagProvider.HYDROCHLORIC_ACID_TAG;
-import static lach_01298.qmd.datagen.QMDFluidTagProvider.MERCURY_TAG;
-import static lach_01298.qmd.item.QMDItems.chemicalDusts;
-import static lach_01298.qmd.item.QMDItems.ingotAlloys;
+import static lach_01298.qmd.datagen.QMDFluidTagProvider.*;
+import static lach_01298.qmd.datagen.QMDRecipeProvider.smelting;
+import static lach_01298.qmd.fluid.QMDFluids.QMD_FLUIDS;
+import static lach_01298.qmd.item.QMDItems.*;
 
 public class NCRecipeProvider {
     public static void buildRecipes(RecipeOutput recipeOutput) {
@@ -58,7 +82,6 @@ public class NCRecipeProvider {
         new ProcessorRecipeBuilder(FluidInfuserRecipe.class, 1, 1).addItemInput(dischargeLamps.get(LampType.ARGON), 1).addFluidInput(SODIUM_TAG, INGOT_VOLUME).addItemResult(dischargeLamps.get(LampType.SODIUM), 1).save(recipeOutput);
         new ProcessorRecipeBuilder(FluidInfuserRecipe.class, 1, 1).addItemInput(dischargeLamps.get(LampType.ARGON), 1).addFluidInput(MERCURY_TAG, INGOT_VOLUME).addItemResult(dischargeLamps.get(LampType.MERCURY), 1).save(recipeOutput);
 
-
         new ProcessorRecipeBuilder(FluidInfuserRecipe.class, 1, 1).addItemInput(dust("strontium", 1)).addFluidInput(HYDROCHLORIC_ACID_TAG, BUCKET_VOLUME * 2).addItemResult(chemicalDusts.get(ChemicalDustType.STRONTIUM_CHLORIDE), 1).save(recipeOutput);
         new ProcessorRecipeBuilder(FluidInfuserRecipe.class, 1, 1).addItemInput(ingotDust("iron", 1)).addFluidInput(HYDROFLUORIC_ACID_TAG, (int) (BUCKET_VOLUME * 1.5)).addItemResult(chemicalDusts.get(ChemicalDustType.IRON_FLUORIDE), 1).save(recipeOutput);
 
@@ -66,36 +89,35 @@ public class NCRecipeProvider {
         new ProcessorRecipeBuilder(FluidInfuserRecipe.class, 1, 1).addItemInput(dust("tungsten", 1)).addFluidInput(OXYGEN_TAG, BUCKET_VOLUME).addItemResult(chemicalDusts.get(ChemicalDustType.TUNGSTEN_OXIDE), 1).save(recipeOutput);
         new ProcessorRecipeBuilder(FluidInfuserRecipe.class, 1, 1).addItemInput(dust("hafnium", 1)).addFluidInput(OXYGEN_TAG, BUCKET_VOLUME).addItemResult(chemicalDusts.get(ChemicalDustType.HAFNIUM_OXIDE), 1).save(recipeOutput);
 
-//        // Fluid Enricher TODO
-//        NCRecipes.enricher.addRecipe("dustTungstenOxide", fluidStack("sodium_hydroxide_solution", GEM_VOLUME * 2), fluidStack("sodium_tungstate_solution", GEM_VOLUME), 1D, 1D);
-//        NCRecipes.enricher.addRecipe("dustLead", fluidStack("nitric_acid", GEM_VOLUME * 2), fluidStack("lead_nitrate_solution", GEM_VOLUME), 1D, 1D);
-//        NCRecipes.enricher.addRecipe("ingotYttrium", fluidStack("alumina", 120), fluidStack("yag", 48), 2D, 2D);
-//        NCRecipes.enricher.addRecipe("ingotNeodymium", fluidStack("yag", INGOT_BLOCK_VOLUME), fluidStack("nd_yag", INGOT_BLOCK_VOLUME), 2D, 2D);
-//
-//        NCRecipes.enricher.addRecipe("dustSalt", fluidStack("water", BUCKET_VOLUME), fluidStack("sodium_chloride_solution", GEM_VOLUME), 1D, 1D);
-//
-//        // Chemical reactor
-//        NCRecipes.chemical_reactor.addRecipe(fluidStack("sodium_tungstate_solution", GEM_VOLUME), fluidStack("lead_nitrate_solution", GEM_VOLUME), fluidStack("lead_tungstate_solution", GEM_VOLUME), fluidStack("sodium_nitrate_solution", GEM_VOLUME), 1D, 1D);
-//
-//        NCRecipes.chemical_reactor.addRecipe(fluidStack("hydrogen", BUCKET_VOLUME), fluidStack("chlorine", BUCKET_VOLUME), fluidStack("hydrochloric_acid", 2 * BUCKET_VOLUME), new EmptyFluidIngredient(), 1D, 1D);
-//        NCRecipes.chemical_reactor.addRecipe(fluidStack("liquidhydrogenchloride", BUCKET_VOLUME), fluidStack("water", BUCKET_VOLUME), fluidStack("hydrochloric_acid", BUCKET_VOLUME), new EmptyFluidIngredient(), 1D, 1D);
-//        NCRecipes.chemical_reactor.addRecipe(fluidStack("nitrogen", BUCKET_VOLUME), fluidStack("oxygen", BUCKET_VOLUME), fluidStack("nitric_oxide", BUCKET_VOLUME * 2), new EmptyFluidIngredient(), 1D, 1D);
-//        NCRecipes.chemical_reactor.addRecipe(fluidStack("nitric_oxide", BUCKET_VOLUME * 2), fluidStack("oxygen", BUCKET_VOLUME), fluidStack("nitrogen_dioxide", BUCKET_VOLUME * 2), new EmptyFluidIngredient(), 1D, 1D);
-//        NCRecipes.chemical_reactor.addRecipe(fluidStack("nitrogen_dioxide", BUCKET_VOLUME * 3), fluidStack("water", BUCKET_VOLUME), fluidStack("nitric_acid", BUCKET_VOLUME * 2), fluidStack("nitric_oxide", BUCKET_VOLUME), 1D, 1D);
-//        NCRecipes.chemical_reactor.addRecipe(fluidStack("sodium_hydroxide_solution", GEM_VOLUME), fluidStack("nitric_acid", BUCKET_VOLUME), fluidStack("sodium_nitrate_solution", GEM_VOLUME), new EmptyFluidIngredient(), 1D, 1D);
-//
-//        // Separator
-//        NCRecipes.separator.addRecipe(oreStackList(Lists.newArrayList("ingotMagnesium", "dustMagnesium"), 9), oreStack("ingotMagnesium24", 8), oreStack("ingotMagnesium26", 1), 6D, 1D);
-//        NCRecipes.separator.addRecipe(oreStackList(Lists.newArrayList("ingotCalcium", "dustCalcium"), 8), oreStack(isotopeTag("calcium/48", 1), new EmptyItemIngredient(), 6D, 1D);
-//
-//        // Centrifuge
-//        NCRecipes.centrifuge.addRecipe(fluidStack("redstone", REDSTONE_DUST_VOLUME), fluidStack("mercury", INGOT_VOLUME), fluidStack("sulfur", GEM_VOLUME), new EmptyFluidIngredient(), new EmptyFluidIngredient(), new EmptyFluidIngredient(), new EmptyFluidIngredient(), 1D, 1D);
-//        NCRecipes.centrifuge.addRecipe(fluidStack("coal", COAL_DUST_VOLUME), fluidStack("carbon", COAL_DUST_VOLUME), fluidStack("sulfur", GEM_VOLUME / 6), new EmptyFluidIngredient(), new EmptyFluidIngredient(), new EmptyFluidIngredient(), new EmptyFluidIngredient(), 1D, 1D);
-//
-//        // fluid mixer
-//        NCRecipes.salt_mixer.addRecipe(fluidStack("mercury", INGOT_VOLUME), fluidStack("sulfur", GEM_VOLUME), fluidStack("redstone", REDSTONE_DUST_VOLUME), 1D, 1D);
-//
-//        //Electrolyzer
+        // Fluid Enricher
+        new ProcessorRecipeBuilder(FluidEnricherRecipe.class, 1, 1).addItemInput(dust("tungsten_oxide", 1)).addFluidInput(SALT_SOLUTION_MAP.get("sodium_hydroxide_solution"), GEM_VOLUME * 2).addFluidResult(QMD_FLUIDS.get("sodium_tungstate_solution"), GEM_VOLUME).save(recipeOutput);
+        new ProcessorRecipeBuilder(FluidEnricherRecipe.class, 1, 1).addItemInput(dust("lead", 1)).addFluidInput(NITRIC_ACID_TAG, GEM_VOLUME * 2).addFluidResult(QMD_FLUIDS.get("lead_nitrate_solution"), GEM_VOLUME).save(recipeOutput);
+        new ProcessorRecipeBuilder(FluidEnricherRecipe.class, 2, 2).addItemInput(ingot("yttrium", 1)).addFluidInput(MOLTEN_MAP.get("alumina"), 120).addFluidResult(QMD_FLUIDS.get("yag"), 48).save(recipeOutput);
+        new ProcessorRecipeBuilder(FluidEnricherRecipe.class, 2, 2).addItemInput(ingot("neodymium", 1)).addFluidInput(QMD_FLUIDS.get("yag"), INGOT_BLOCK_VOLUME).addFluidResult(QMD_FLUIDS.get("nd_yag"), INGOT_BLOCK_VOLUME).save(recipeOutput);
+        new ProcessorRecipeBuilder(FluidEnricherRecipe.class, 1, 1).addItemInput(dust("salt", 1)).addFluidInput(Fluids.WATER, BUCKET_VOLUME).addFluidResult(QMD_FLUIDS.get("sodium_chloride_solution"), GEM_VOLUME).save(recipeOutput);
+
+        // Chemical Reactor
+        new ProcessorRecipeBuilder(ChemicalReactorRecipe.class, 1, 1).addFluidInput(QMD_FLUIDS.get("sodium_tungstate_solution"), GEM_VOLUME).addFluidInput(QMD_FLUIDS.get("lead_nitrate_solution"), GEM_VOLUME).addFluidResult(QMD_FLUIDS.get("lead_tungstate_solution"), GEM_VOLUME).addFluidResult(QMD_FLUIDS.get("sodium_nitrate_solution"), GEM_VOLUME).save(recipeOutput);
+
+        new ProcessorRecipeBuilder(ChemicalReactorRecipe.class, 1, 1).addFluidInput(HYDROGEN_TAG, BUCKET_VOLUME).addFluidInput(CHLORINE_TAG, BUCKET_VOLUME).addFluidResult(HYDROCHLORIC_ACID_TAG, 2 * BUCKET_VOLUME).save(recipeOutput);
+        new ProcessorRecipeBuilder(ChemicalReactorRecipe.class, 1, 1).addFluidInput(FluidTags.create(ResourceLocation.parse("mekanism:hydrogen_chloride")), BUCKET_VOLUME).addFluidInput(Fluids.WATER, BUCKET_VOLUME).addFluidResult(HYDROCHLORIC_ACID_TAG, BUCKET_VOLUME).save(recipeOutput);
+        new ProcessorRecipeBuilder(ChemicalReactorRecipe.class, 1, 1).addFluidInput(NITROGEN_TAG, BUCKET_VOLUME).addFluidInput(OXYGEN_TAG, BUCKET_VOLUME).addFluidResult(NITRIC_ACID_TAG, 2 * BUCKET_VOLUME).save(recipeOutput);
+        new ProcessorRecipeBuilder(ChemicalReactorRecipe.class, 1, 1).addFluidInput(QMD_FLUIDS.get("nitric_oxide"), 2 * BUCKET_VOLUME).addFluidInput(OXYGEN_TAG, BUCKET_VOLUME).addFluidResult(QMD_FLUIDS.get("nitrogen_dioxide"), 2 * BUCKET_VOLUME).save(recipeOutput);
+        new ProcessorRecipeBuilder(ChemicalReactorRecipe.class, 1, 1).addFluidInput(QMD_FLUIDS.get("nitrogen_dioxide"), 3 * BUCKET_VOLUME).addFluidInput(Fluids.WATER, BUCKET_VOLUME).addFluidResult(QMD_FLUIDS.get("nitric_acid"), 2 * BUCKET_VOLUME).addFluidResult(QMD_FLUIDS.get("nitric_oxide"), BUCKET_VOLUME).save(recipeOutput);
+        new ProcessorRecipeBuilder(ChemicalReactorRecipe.class, 1, 1).addFluidInput(SALT_SOLUTION_MAP.get("sodium_hydroxide_solution"), GEM_VOLUME).addFluidInput(NITRIC_ACID_TAG, BUCKET_VOLUME).addFluidResult(QMD_FLUIDS.get("sodium_nitrate_solution"), GEM_VOLUME).save(recipeOutput);
+
+        // Separator
+        new ProcessorRecipeBuilder(SeparatorRecipe.class, 6, 1).addItemInput(ingotDust("magnesium", 9)).addItemResult(isotopes.get(IsotopeType.MAGNESIUM_24), 8).addItemResult(isotopes.get(IsotopeType.MAGNESIUM_26), 1).save(recipeOutput);
+        new ProcessorRecipeBuilder(SeparatorRecipe.class, 6, 1).addItemInput(ingotDust("calcium", 8)).addItemResult(isotopes.get(IsotopeType.CALCIUM_48), 1).save(recipeOutput);
+
+        // Centrifuge
+        new ProcessorRecipeBuilder(CentrifugeRecipe.class, 1, 1).addFluidInput(MOLTEN_MAP.get("redstone"), REDSTONE_DUST_VOLUME).addFluidResult(QMD_FLUIDS.get("mercury"), INGOT_VOLUME).addFluidResult(MOLTEN_MAP.get("sulfur"), GEM_VOLUME).save(recipeOutput);
+        new ProcessorRecipeBuilder(CentrifugeRecipe.class, 1, 1).addFluidInput(MOLTEN_MAP.get("coal"), COAL_DUST_VOLUME).addFluidResult(QMD_FLUIDS.get("carbon"), COAL_DUST_VOLUME).addFluidResult(MOLTEN_MAP.get("sulfur"), GEM_VOLUME / 6).save(recipeOutput);
+
+        // Fluid Mixer
+        new ProcessorRecipeBuilder(FluidMixerRecipe.class, 1, 1).addFluidInput(QMD_FLUIDS.get("mercury"), INGOT_VOLUME).addFluidInput(MOLTEN_MAP.get("sulfur"), GEM_VOLUME).addFluidResult(MOLTEN_MAP.get("redstone"), REDSTONE_DUST_VOLUME).save(recipeOutput);
+
+        //Electrolyzer TODO
 //        NCRecipes.electrolyzer.addRecipe(fluidStack("sodium_chloride", GEM_VOLUME), fluidStack("sodium", INGOT_VOLUME), fluidStack("chlorine", BUCKET_VOLUME / 2), new EmptyFluidIngredient(), new EmptyFluidIngredient(), 1D, 1D);
 //        NCRecipes.electrolyzer.addRecipe(fluidStack("sodium_chloride_solution", 2 * GEM_VOLUME), fluidStack("hydrogen", BUCKET_VOLUME), fluidStack("chlorine", BUCKET_VOLUME), fluidStack("sodium_hydroxide_solution", GEM_VOLUME * 2), new EmptyFluidIngredient(), 0.5D, 1D);
 //
@@ -153,7 +175,7 @@ public class NCRecipeProvider {
 //        NCRecipes.melter.addRecipe(oreStackList(Lists.newArrayList("dustCharcoal", "charcoal"), 1), fluidStack("carbon", COAL_DUST_VOLUME));
 //
 //
-//        //ingot former
+//        // Ingot Former
 //        NCRecipes.ingot_former.addRecipe(fluidStack("carbon", COAL_DUST_VOLUME), "ingotGraphite");
 //
 //        if (QMDConfig.override_nc_recipes) {
@@ -174,7 +196,6 @@ public class NCRecipeProvider {
 //        NCRecipes.crystallizer.addRecipe(fluidStack("nd_yag", INGOT_VOLUME * 3), "rodNdYAG", 2D, 2D);
 //        NCRecipes.crystallizer.addRecipe(fluidStack("salt_water", BUCKET_VOLUME * 10), "dustSalt", 2D, 4D);
 //
-//
 //        NCRecipes.crystallizer.addRecipe(fluidStack("iodine", INGOT_VOLUME), "dustIodine", 0.25D, 0D);
 //        NCRecipes.crystallizer.addRecipe(fluidStack("samarium", INGOT_VOLUME), "dustSamarium", 0.25D, 0D);
 //        NCRecipes.crystallizer.addRecipe(fluidStack("terbium", INGOT_VOLUME), "dustTerbium", 0.25D, 0D);
@@ -193,7 +214,6 @@ public class NCRecipeProvider {
 //
 //        // Pressurizer
 //        NCRecipes.pressurizer.addRecipe((tag(DUSTS, "strontium_90", 9)), "blockStrontium90", 1D, 2D);
-//
 //
 //        // SuperCooler
 //        if (QMDConfig.override_nc_recipes) {
@@ -288,85 +308,72 @@ public class NCRecipeProvider {
 //        NCRecipes.fuel_reprocessor.addRecipe("wasteSpallationTungsten", chanceOreStack("dustYtterbium", 1, 50), chanceOreStack("dustErbium", 1, 26), chanceOreStack("dustTerbium", 1, 6), chanceOreStack("dustEuropium155", 1, 5), chanceOreStack("dustSamarium", 1, 7), chanceOreStack("dustNeodymium", 1, 6), new EmptyItemIngredient(), new EmptyItemIngredient());
 //        NCRecipes.fuel_reprocessor.addRecipe("wasteSpallationHafnium", chanceOreStack("dustErbium", 1, 32), chanceOreStack("dustTerbium", 1, 16), chanceOreStack("dustEuropium155", 1, 11), chanceOreStack("dustSamarium", 1, 13), chanceOreStack("dustNeodymium", 1, 23), chanceOreStack("dustPromethium147", 1, 5), new EmptyItemIngredient(), new EmptyItemIngredient());
 //
-//
-//        //Fission fuel recipes
-//        addFissionFuelRecipes();
-//
-//        // Fission Heating
-//        NCRecipes.fission_heating.addRecipe(fluidStack("mercury", 1), fluidStack("high_pressure_mercury", 2), 512);
-//        NCRecipes.fission_heating.addRecipe(fluidStack("hot_mercury", 1), fluidStack("high_pressure_mercury", 2), 256);
-//
-//        // Turbine
-//        NCRecipes.turbine.addRecipe(fluidStack("high_pressure_mercury", 1), fluidStack("exhaust_mercury", 3), 256D, 3.0);
-//
-//        //Heat Exchanger
-//        NCRecipes.heat_exchanger.addRecipe(fluidStack("exhaust_mercury", 6), fluidStack("hot_mercury", 1), 128D, 700, 700);
-//
-//        // Condenser
-//        NCRecipes.condenser.addRecipe(fluidStack("exhaust_mercury", 6), fluidStack("hot_mercury", 1), 128D, 700, 700);
-//        NCRecipes.condenser.addRecipe(fluidStack("hot_mercury", 1), fluidStack("mercury", 1), 256D, 700, 300);
-//        NCRecipes.condenser.addRecipe(fluidStack("condensate_water", 1), fluidStack("water", 1), 32D, 350, 300);
-//
-//        // distiller
-//        NCRecipes.multiblock_distiller.addRecipe(fluidStack("salt_water", 10 * BUCKET_VOLUME), new EmptyFluidIngredient(), fluidStack("sodium_chloride_solution", GEM_VOLUME), fluidStack("water", BUCKET_VOLUME * 9), new EmptyFluidIngredient(), new EmptyFluidIngredient(), new EmptyFluidIngredient(), new EmptyFluidIngredient(), new EmptyFluidIngredient(), new EmptyFluidIngredient(), 1D, 1D);
-//        NCRecipes.multiblock_distiller.addRecipe(fluidStack("liquid_air", 1000), new EmptyFluidIngredient(), fluidStack("nitrogen", 38400), fluidStack("oxygen", 12800), fluidStack("argon", 6400), fluidStack("neon", 5120), fluidStack("helium", 1280), new EmptyFluidIngredient(), new EmptyFluidIngredient(), new EmptyFluidIngredient(), 1D, 1D);
-//
-//    }
-//
-//
-//    private static void addFissionFuelRecipes() {
-//        NCRecipes.solid_fission.addFuelDepleteRecipes(copernicium_fuel_time, copernicium_heat_generation, copernicium_efficiency, copernicium_criticality, copernicium_intrinsic_flux, copernicium_decay_factor, copernicium_self_priming, copernicium_radiation, "MIX291");
-//        NCRecipes.pebble_fission.addFuelDepleteRecipes(copernicium_fuel_time, copernicium_heat_generation, copernicium_efficiency, copernicium_criticality, copernicium_intrinsic_flux, copernicium_decay_factor, copernicium_self_priming, copernicium_radiation, "MIX291");
-//
-//        NCRecipes.alloy_furnace.addAlloyIngotIngotRecipes("Copernicium291", 1, "Zirconium", 1, "Copernicium291ZA", 1, 1D, 1D);
-//        NCRecipes.alloy_furnace.addAlloyIngotIngotRecipes("Copernicium291", 1, "Graphite", 1, "Copernicium291Carbide", 1, 1D, 1D);
-//
-//        NCRecipes.alloy_furnace.addAlloyIngotIngotRecipes("MIX291", 1, "Zirconium", 1, "MIX291ZA", 1, 1D, 1D);
-//        NCRecipes.alloy_furnace.addAlloyIngotIngotRecipes("MIX291", 1, "Graphite", 1, "MIX291Carbide", 1, 1D, 1D);
-//
-//        NCRecipes.infuser.addRecipe("ingot" + "Copernicium291", fluidStack("oxygen", BUCKET_VOLUME), "ingotCopernicium291Oxide", 1D, 1D);
-//        NCRecipes.infuser.addRecipe("ingot" + "Copernicium291", fluidStack("nitrogen", BUCKET_VOLUME), "ingotCopernicium291Nitride", 1D, 1D);
-//        NCRecipes.infuser.addRecipe("ingot" + "MIX291", fluidStack("oxygen", BUCKET_VOLUME), "ingotMIX291Oxide", 1D, 1D);
-//        NCRecipes.infuser.addRecipe("ingot" + "MIX291", fluidStack("nitrogen", BUCKET_VOLUME), "ingotMIX291Nitride", 1D, 1D);
-//
-//        NCRecipes.assembler.addRecipe(oreStack("ingotMIX291Carbide", 9), "dustGraphite", "ingotPyrolyticCarbon", "ingotSiliconCarbide", oreStack("ingotMIX291TRISO", 9), 1D, 1D);
-//
-//        NCRecipes.fuel_reprocessor.addReprocessingRecipes("MIX291", "Americium243", 4, "Curium243", 2, "Curium245", 1, "Berkelium247", 1, "Ruthenium106", "Europium155", 0.5D, 60);
-//
-//        NCRecipes.separator.addRecipe("ingotCopernicium291Carbide", "ingotCopernicium291", "dustGraphite");
-//        NCRecipes.separator.addRecipe("ingotCopernicium291ZA", "ingotCopernicium291", "dustZirconium");
-//
-//        NCRecipes.separator.addRecipe("ingotMIX291Carbide", "ingotMIX291", "dustGraphite");
-//        NCRecipes.separator.addRecipe("ingotMIX291ZA", "ingotMIX291", "dustZirconium");
-//
-//        NCRecipes.separator.addRecipe("ingotMIX291", "ingotCopernicium291", oreStack("ingotUranium238", 8));
-//        reductionIsotopeRecipes(QMDItems.copernicium, 1);
-//        reductionFissionFuelRecipes(QMDItems.pellet_copernicium, QMDItems.fuel_copernicium, 1);
+        // Fission fuel recipes
+        addFissionFuelRecipes(recipeOutput);
+
+        // Fission Heating
+        new BasicRecipeBuilder<>(new FissionHeatingRecipe(sizedIngredient(QMD_FLUIDS.get("mercury"), 1), sizedIngredient(QMD_FLUIDS.get("high_pressure_mercury"), 2), FissionHeatingRecipe.RecipeHeatingType.OTHER, 512)).save(recipeOutput);
+        new BasicRecipeBuilder<>(new FissionHeatingRecipe(sizedIngredient(QMD_FLUIDS.get("hot_mercury"), 1), sizedIngredient(QMD_FLUIDS.get("high_pressure_mercury"), 2), FissionHeatingRecipe.RecipeHeatingType.OTHER, 256)).save(recipeOutput);
+
+        // Turbine
+        new BasicRecipeBuilder<>(new TurbineRecipe(NCFluid.sizedIngredient(QMD_FLUIDS.get("high_pressure_mercury"), 1), NCFluid.sizedIngredient(QMD_FLUIDS.get("exhaust_mercury"), 3), 256.0, 3.0, 1.0, "cloud", 5D / 116D)).save(recipeOutput);
+
+        //Heat Exchanger
+        new BasicRecipeBuilder<>(new HeatExchangerRecipe(NCFluid.sizedIngredient(QMD_FLUIDS.get("exhaust_mercury"), 6), NCFluid.sizedIngredient(QMD_FLUIDS.get("hot_mercury"), 1), 128D, HeatExchangerRecipe.RecipeHeatingType.OTHER, 700, 700, false, 0, 0.0)).save(recipeOutput);
+
+        // Condenser
+        new BasicRecipeBuilder<>(new CondenserRecipe(NCFluid.sizedIngredient(QMD_FLUIDS.get("exhaust_mercury"), 6), NCFluid.sizedIngredient(QMD_FLUIDS.get("hot_mercury"), 1), 128D, 700, 700, 0, 0.0D)).save(recipeOutput);
+        new BasicRecipeBuilder<>(new CondenserRecipe(NCFluid.sizedIngredient(QMD_FLUIDS.get("hot_mercury"), 1), NCFluid.sizedIngredient(QMD_FLUIDS.get("mercury"), 1), 256D, 700, 300, 0, 0.0D)).save(recipeOutput);
+        new BasicRecipeBuilder<>(new CondenserRecipe(NCFluid.sizedIngredient(CUSTOM_FLUID_MAP.get("condensate_water"), 1), SizedChanceFluidIngredient.of(Fluids.WATER, 1), 32D, 350, 300, 0, 0.0D)).save(recipeOutput);
+
+        // Distiller
+        new BasicRecipeBuilder<>(new MultiblockDistillerRecipe(List.of(NCFluid.sizedIngredient(QMD_FLUIDS.get("salt_water"), 10 * BUCKET_VOLUME)), List.of(NCFluid.sizedIngredient(QMD_FLUIDS.get("sodium_chloride_solution"), GEM_VOLUME), SizedChanceFluidIngredient.of(Fluids.WATER, BUCKET_VOLUME * 9)), 1.0, 1.0)).save(recipeOutput);
+        new BasicRecipeBuilder<>(new MultiblockDistillerRecipe(List.of(NCFluid.sizedIngredient(QMD_FLUIDS.get("liquid_air"), BUCKET_VOLUME)), List.of(
+                NCFluid.sizedIngredient(GAS_MAP.get("nitrogen"), 38400),
+                NCFluid.sizedIngredient(GAS_MAP.get("oxygen"), 12800),
+                NCFluid.sizedIngredient(QMD_FLUIDS.get("argon"), 6400),
+                NCFluid.sizedIngredient(QMD_FLUIDS.get("neon"), 5120),
+                NCFluid.sizedIngredient(GAS_MAP.get("helium"), 1280)
+        ), 1.0, 1.0)).save(recipeOutput);
     }
 
-//    public static void reductionIsotopeRecipes(Item isotope, int noTypes) {
-//        for (int i = 0; i < noTypes; i++) {
-//            GameRegistry.addSmelting(new ItemStack(isotope, 1, 5 * i + 2), new ItemStack(isotope, 1, 5 * i), 0F);
-//            GameRegistry.addSmelting(new ItemStack(isotope, 1, 5 * i + 3), new ItemStack(isotope, 1, 5 * i), 0F);
-//        }
-//    }
-//
-//    public static void reductionFissionFuelRecipes(Item pellet, Item fuel, int noTypes) {
-//        for (int i = 0; i < noTypes; i++) {
-//            GameRegistry.addSmelting(new ItemStack(fuel, 1, 4 * i + 1), new ItemStack(pellet, 1, 2 * i), 0F);
-//            GameRegistry.addSmelting(new ItemStack(fuel, 1, 4 * i + 2), new ItemStack(pellet, 1, 2 * i), 0F);
-//        }
-//    }
-//
-//    public static double getDecayHastenerTimeMultipler(double radiation) {
-//        double F = Math.log1p(Math.log(2D)), Z = 0.1674477985420331D;
-//        return NCMath.roundTo(Z * (radiation >= 1D ? F / Math.log1p(Math.log1p(radiation)) : Math.log1p(Math.log1p(1D / radiation)) / F), 5D / NCConfig.processor_time[2]);
-//    }
-//
-//
-//    public static FluidIngredient fluidStack(String fluidName, int stackSize) {
-//        if (!FluidRegHelper.fluidExists(fluidName))
-//            return null;
-//        return new FluidIngredient(fluidName, stackSize);
-//    }
+    private static void addFissionFuelRecipes(RecipeOutput recipeOutput) {
+        new BasicRecipeBuilder<>(new PebbleFissionRecipe(fuel_copernicium.get(CoperniciumFuelType.MIX_291_TR), depleted_fuel_copernicium.get(CoperniciumDepletedFuelType.MIX_291_TR), 10000, 2000, 5.0D, 20, 10, 0.04, true, QMDRadSources.MIX_291)).save(recipeOutput);
+        new BasicRecipeBuilder<>(new SolidFissionRecipe(fuel_copernicium.get(CoperniciumFuelType.MIX_291_OX), depleted_fuel_copernicium.get(CoperniciumDepletedFuelType.MIX_291_OX), 10000, 2000, 5.0D, 25, 0.11D, true, QMDRadSources.MIX_291)).save(recipeOutput);
+        new BasicRecipeBuilder<>(new SolidFissionRecipe(fuel_copernicium.get(CoperniciumFuelType.MIX_291_NI), depleted_fuel_copernicium.get(CoperniciumDepletedFuelType.MIX_291_NI), 12004, 1666, 5.0D, 25, 0.11D, true, QMDRadSources.MIX_291)).save(recipeOutput);
+        new BasicRecipeBuilder<>(new SolidFissionRecipe(fuel_copernicium.get(CoperniciumFuelType.MIX_291_ZA), depleted_fuel_copernicium.get(CoperniciumDepletedFuelType.MIX_291_ZA), 9001, 2222, 5.0D, 20, 0.11D, true, QMDRadSources.MIX_291)).save(recipeOutput);
+
+        new ProcessorRecipeBuilder(AlloyFurnaceRecipe.class, 1, 1).addItemInput(copernicium.get(CoperniciumType._291), 1).addItemInput(ingotDust("zirconium", 1)).addItemResult(copernicium.get(CoperniciumType._291_ZA), 1).save(recipeOutput);
+        new ProcessorRecipeBuilder(AlloyFurnaceRecipe.class, 1, 1).addItemInput(copernicium.get(CoperniciumType._291), 1).addItemInput(ingotDust("graphite", 1)).addItemResult(copernicium.get(CoperniciumType._291_C), 1).save(recipeOutput);
+
+        new ProcessorRecipeBuilder(AlloyFurnaceRecipe.class, 1, 1).addItemInput(pellet_copernicium.get(CoperniciumPelletType.MIX_291), 1).addItemInput(ingotDust("zirconium", 1)).addItemResult(fuel_copernicium.get(CoperniciumFuelType.MIX_291_ZA), 1).save(recipeOutput);
+        new ProcessorRecipeBuilder(AlloyFurnaceRecipe.class, 1, 1).addItemInput(pellet_copernicium.get(CoperniciumPelletType.MIX_291), 1).addItemInput(ingotDust("graphite", 1)).addItemResult(pellet_copernicium.get(CoperniciumPelletType.MIX_291_C), 1).save(recipeOutput);
+
+        new ProcessorRecipeBuilder(FluidInfuserRecipe.class, 1, 1).addItemInput(copernicium.get(CoperniciumType._291), 1).addFluidInput(OXYGEN_TAG, BUCKET_VOLUME).addItemResult(copernicium.get(CoperniciumType._291_OX), 1).save(recipeOutput);
+        new ProcessorRecipeBuilder(FluidInfuserRecipe.class, 1, 1).addItemInput(copernicium.get(CoperniciumType._291), 1).addFluidInput(NITROGEN_TAG, BUCKET_VOLUME).addItemResult(copernicium.get(CoperniciumType._291_NI), 1).save(recipeOutput);
+        new ProcessorRecipeBuilder(FluidInfuserRecipe.class, 1, 1).addItemInput(pellet_copernicium.get(CoperniciumPelletType.MIX_291), 1).addFluidInput(OXYGEN_TAG, BUCKET_VOLUME).addItemResult(fuel_copernicium.get(CoperniciumFuelType.MIX_291_OX), 1).save(recipeOutput);
+        new ProcessorRecipeBuilder(FluidInfuserRecipe.class, 1, 1).addItemInput(pellet_copernicium.get(CoperniciumPelletType.MIX_291), 1).addFluidInput(NITROGEN_TAG, BUCKET_VOLUME).addItemResult(fuel_copernicium.get(CoperniciumFuelType.MIX_291_NI), 1).save(recipeOutput);
+
+        new ProcessorRecipeBuilder(AssemblerRecipe.class, 1, 1).addItemInput(pellet_copernicium.get(CoperniciumPelletType.MIX_291_C), 9).addItemInput(tag(Tags.Items.DUSTS, "graphite"), 1).addItemInput(PART_MAP.get("pyrolytic_carbon"), 1).addItemInput(ALLOY_MAP.get("silicon_carbide"), 1).addItemResult(fuel_copernicium.get(CoperniciumFuelType.MIX_291_TR), 9).save(recipeOutput);
+
+        FuelReprocessorProvider.addReprocessingRecipes(recipeOutput, "mix_291", depleted_fuel_copernicium.entrySet().stream().collect(Collectors.toMap(e -> e.getKey().getSerializedName(), Map.Entry::getValue)), "Americium243", 4, "Curium243", 2, "Curium245", 1, "Berkelium247", 1, "ruthenium_106", "europium_155", 0.5D, 60);
+
+        new ProcessorRecipeBuilder(SeparatorRecipe.class, 1, 1).addItemInput(copernicium.get(CoperniciumType._291_C), 1).addItemResult(copernicium.get(CoperniciumType._291), 1).addItemResult(DUST_MAP.get("graphite"), 1).save(recipeOutput, "copernicium_from_c");
+        new ProcessorRecipeBuilder(SeparatorRecipe.class, 1, 1).addItemInput(copernicium.get(CoperniciumType._291_ZA), 1).addItemResult(copernicium.get(CoperniciumType._291), 1).addItemResult(DUST_MAP.get("zirconium"), 1).save(recipeOutput, "copernicium_from_za");
+
+        new ProcessorRecipeBuilder(SeparatorRecipe.class, 1, 1).addItemInput(pellet_copernicium.get(CoperniciumPelletType.MIX_291_C), 1).addItemResult(pellet_copernicium.get(CoperniciumPelletType.MIX_291), 1).addItemResult(DUST_MAP.get("graphite"), 1).save(recipeOutput, "mix_291_from_c");
+        new ProcessorRecipeBuilder(SeparatorRecipe.class, 1, 1).addItemInput(fuel_copernicium.get(CoperniciumFuelType.MIX_291_ZA), 1).addItemResult(pellet_copernicium.get(CoperniciumPelletType.MIX_291), 1).addItemResult(DUST_MAP.get("zirconium"), 1).save(recipeOutput, "mix_291_from_za");
+
+        new ProcessorRecipeBuilder(SeparatorRecipe.class, 1, 1).addItemInput(pellet_copernicium.get(CoperniciumPelletType.MIX_291), 1).addItemResult(copernicium.get(CoperniciumType._291), 1).addItemResult(URANIUM_MAP.get("238"), 8).save(recipeOutput);
+
+        reductionRecipes(recipeOutput, copernicium.get(CoperniciumType._291_OX), copernicium.get(CoperniciumType._291), "copernicium");
+        reductionRecipes(recipeOutput, copernicium.get(CoperniciumType._291_NI), copernicium.get(CoperniciumType._291), "copernicium");
+        reductionRecipes(recipeOutput, fuel_copernicium.get(CoperniciumFuelType.MIX_291_OX), pellet_copernicium.get(CoperniciumPelletType.MIX_291), "copernicium");
+        reductionRecipes(recipeOutput, fuel_copernicium.get(CoperniciumFuelType.MIX_291_NI), pellet_copernicium.get(CoperniciumPelletType.MIX_291), "copernicium");
+    }
+
+    public static void reductionRecipes(RecipeOutput recipeOutput, ItemLike isotope, ItemLike isotope_result, String group) {
+        smelting(recipeOutput, RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new, Ingredient.of(isotope), isotope_result, 0, 200, group, "from_smelting");
+        smelting(recipeOutput, RecipeSerializer.BLASTING_RECIPE, BlastingRecipe::new, Ingredient.of(isotope), isotope_result, 0, 200 / 2, group, "from_blasting");
+    }
 }
