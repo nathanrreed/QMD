@@ -1,0 +1,72 @@
+{
+  "type": "nuclearcraftneohaul:fuel_reprocessor_recipe",
+  "itemIngredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:heavy_waste_fission"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "chancePercent": 4,
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:niobium_dust"
+      }
+    },
+    {
+      "chancePercent": 21,
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:molybdenum_dust"
+      }
+    },
+    {
+      "chancePercent": 4,
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:ruthenium_106_dust"
+      }
+    },
+    {
+      "chancePercent": 7,
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:silver_dust"
+      }
+    },
+    {
+      "chancePercent": 35,
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:tin_dust"
+      }
+    },
+    {
+      "chancePercent": 7,
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:iodine_dust"
+      }
+    },
+    {
+      "chancePercent": 4,
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:caesium_137_dust"
+      }
+    },
+    {
+      "chancePercent": 18,
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:neodymium_dust"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 0.0,
+  "timeModifier": 1.0
+}

@@ -1,0 +1,22 @@
+{
+  "type": "nuclearcraftneohaul:decay_hastener_recipe",
+  "itemIngredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:isotopes/iridium/192"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:platinum_dust"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 4.94,
+  "timeModifier": 0.08750000000000001
+}

@@ -1,0 +1,40 @@
+{
+  "type": "nuclearcraftneohaul:assembler_recipe",
+  "itemIngredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:basic_processor_semiconductor"
+      }
+    },
+    {
+      "count": 4,
+      "ingredient": {
+        "tag": "c:dusts/redstone"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/hafnium_oxide"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:silicon_p_doped_semiconductor"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:advanced_processor_semiconductor"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 0.0,
+  "timeModifier": 1.0
+}

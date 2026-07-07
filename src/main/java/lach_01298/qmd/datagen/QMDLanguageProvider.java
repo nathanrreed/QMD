@@ -19,6 +19,7 @@ public class QMDLanguageProvider extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
+        patchouli();
         sounds();
         deathMessages();
         creativeTabs();
@@ -32,6 +33,12 @@ public class QMDLanguageProvider extends LanguageProvider {
         messages();
         blocks();
         items();
+    }
+
+    private void patchouli() {
+        add("qmd.guide_book.name", "QMD Guide");
+        add("qmd.guide_book.edition", "Version 1.5.1");
+        add("qmd.guide_book.desc", "This is a Guide to Quantum Minecraft Dynamics.");
     }
 
     private void sounds() {
@@ -302,7 +309,7 @@ public class QMDLanguageProvider extends LanguageProvider {
         add(dusts.get(DustType.ZINC).get(), "Zinc Dust");
         add(dusts.get(DustType.OSMIUM).get(), "Osmium Dust");
         add(dusts.get(DustType.IRIDIUM).get(), "Iridium Dust");
-        add(dusts.get(DustType.PLATNIUM).get(), "Platinum Dust");
+        add(dusts.get(DustType.PLATINUM).get(), "Platinum Dust");
         add(dusts.get(DustType.SODIUM).get(), "Sodium Dust");
         add(dusts.get(DustType.POTASSIUM).get(), "Potassium Dust");
         add(dusts.get(DustType.CALCIUM).get(), "Calcium Dust");

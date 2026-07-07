@@ -36,7 +36,7 @@ import static lach_01298.qmd.item.QMDItems.ITEMS;
 public class QMDBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(QMD.MOD_ID);
 
-    //    public static Block beamline;
+//    public static Block beamline;
 //
 //    public static Block linearAcceleratorController;
 //    public static Block ringAcceleratorController;

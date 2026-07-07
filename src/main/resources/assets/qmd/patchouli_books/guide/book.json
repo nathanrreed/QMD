@@ -2,6 +2,7 @@
 	"name": "qmd.guide_book.name",
 	"landing_text": "qmd.guide_book.desc",
 	"subtitle": "qmd.guide_book.edition",
+	"creative_tab": "qmd:items",
 	"show_progress": false,
-	"creative_tab": "qmd.items"
+	"use_resource_pack": true
 }

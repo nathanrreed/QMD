@@ -1,0 +1,8 @@
+{
+  "values": {
+    "qmd:sodium_chloride_solution": {
+      "efficiency": 1.0,
+      "group": "chloride_solution"
+    }
+  }
+}

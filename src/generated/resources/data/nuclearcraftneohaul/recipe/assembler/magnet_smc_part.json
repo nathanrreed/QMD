@@ -1,0 +1,28 @@
+{
+  "type": "nuclearcraftneohaul:assembler_recipe",
+  "itemIngredients": [
+    {
+      "count": 2,
+      "ingredient": {
+        "tag": "c:ingots/cobalt"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:samarium_dust"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:magnet_smc_part"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 0.0,
+  "timeModifier": 1.0
+}

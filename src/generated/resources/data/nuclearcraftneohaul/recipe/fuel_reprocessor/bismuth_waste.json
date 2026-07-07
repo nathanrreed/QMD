@@ -1,0 +1,51 @@
+{
+  "type": "nuclearcraftneohaul:fuel_reprocessor_recipe",
+  "itemIngredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:bismuth_waste_spallation"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "chancePercent": 42,
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/iridium"
+      }
+    },
+    {
+      "chancePercent": 27,
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/osmium"
+      }
+    },
+    {
+      "chancePercent": 14,
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:tungsten_dust"
+      }
+    },
+    {
+      "chancePercent": 11,
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:hafnium_dust"
+      }
+    },
+    {
+      "chancePercent": 6,
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:ytterbium_dust"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 0.0,
+  "timeModifier": 1.0
+}

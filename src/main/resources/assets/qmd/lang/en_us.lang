@@ -150,12 +150,6 @@ tile.qmd.liquefier_compressor.neodymium.name=Neodymium Liquefier Compressor
 tile.qmd.liquefier_compressor.samarium_cobalt.name=Samarium Cobalt Liquefier Compressor
 tile.qmd.liquefier_compressor.name=Liquefier Compressor
 
-//guide book
-qmd.guide_book.name=QMD Guide
-qmd.guide_book.edition=Version 1.5.1
-qmd.guide_book.desc=This is a Guide to Quantum Minecraft Dynamics.
-
-
 //block descriptions
 tile.qmd.beamline.desc=Transports particles.
 tile.qmd.ion_source.desc=Makes ions and particles for accelerators.

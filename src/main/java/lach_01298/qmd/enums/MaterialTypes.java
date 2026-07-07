@@ -16,7 +16,7 @@ public class MaterialTypes {
         ZINC("zinc"),
         OSMIUM("osmium"),
         IRIDIUM("iridium"),
-        PLATNIUM("platinum"),
+        PLATINUM("platinum"),
         SODIUM("sodium"),
         POTASSIUM("potassium"),
         CALCIUM("calcium"),
@@ -29,7 +29,6 @@ public class MaterialTypes {
         TERBIUM("terbium"),
         ERBIUM("erbium"),
         YTTERBIUM("ytterbium");
-
 
         private final String name;
 
@@ -117,7 +116,6 @@ public class MaterialTypes {
         }
     }
 
-
     public enum IsotopeType implements StringRepresentable {
         SODIUM_22("sodium_22"),
         BERYLLIUM_7("beryllium_7"),
@@ -145,7 +143,6 @@ public class MaterialTypes {
             return getSerializedName();
         }
     }
-
 
     public enum PartType implements StringRepresentable {
         EMPTY_COOLER("empty_cooler"),
@@ -397,7 +394,6 @@ public class MaterialTypes {
         _291_OX("291_ox"),
         _291_NI("291_ni"),
         _291_ZA("291_za");
-
 
         private final String name;
 

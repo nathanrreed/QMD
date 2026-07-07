@@ -1,0 +1,21 @@
+{
+  "type": "nuclearcraftneohaul:fission_irradiator_recipe",
+  "irradiatorBaseProcessRadiation": 4.07E-6,
+  "irradiatorFluxRequired": 1920000,
+  "irradiatorHeatPerFlux": 0.0,
+  "irradiatorMaxFluxPerTick": -1,
+  "irradiatorMinFluxPerTick": 0,
+  "irradiatorProcessEfficiency": 0.0,
+  "itemIngredient": {
+    "count": 1,
+    "ingredient": {
+      "tag": "c:isotopes/uranium/234"
+    }
+  },
+  "itemProduct": {
+    "count": 1,
+    "ingredient": {
+      "item": "nuclearcraftneohaul:uranium_235"
+    }
+  }
+}

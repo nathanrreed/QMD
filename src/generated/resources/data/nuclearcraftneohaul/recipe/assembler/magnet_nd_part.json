@@ -1,0 +1,28 @@
+{
+  "type": "nuclearcraftneohaul:assembler_recipe",
+  "itemIngredients": [
+    {
+      "count": 2,
+      "ingredient": {
+        "tag": "c:ingots/ferroboron"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ingots/neodymium"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:magnet_nd_part"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 0.0,
+  "timeModifier": 1.0
+}

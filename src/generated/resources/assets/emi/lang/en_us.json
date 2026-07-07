@@ -1,7 +1,6 @@
 {
   "emi.category.qmd.atmosphere_collector": "Atmosphere Collector",
   "emi.category.qmd.irradiator": "Irradiator",
-  "emi.category.qmd.irradiator_fuel": "Irradiator Fuel",
   "emi.category.qmd.liquid_collector": "Liquid Collector",
   "emi.category.qmd.ore_leacher": "Ore Leacher"
 }

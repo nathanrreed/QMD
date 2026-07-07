@@ -1,0 +1,22 @@
+{
+  "type": "nuclearcraftneohaul:crystallizer_recipe",
+  "fluidIngredients": [
+    {
+      "amount": 144,
+      "ingredient": {
+        "fluid": "qmd:bismuth"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:bismuth_dust"
+      }
+    }
+  ],
+  "powerModifier": 0.0,
+  "radiation": 0.0,
+  "timeModifier": 0.25
+}

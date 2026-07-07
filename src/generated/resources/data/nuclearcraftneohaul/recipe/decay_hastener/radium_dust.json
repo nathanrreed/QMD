@@ -1,0 +1,22 @@
+{
+  "type": "nuclearcraftneohaul:decay_hastener_recipe",
+  "itemIngredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:isotopes/uranium/234"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:radium_dust"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 4.07E-6,
+  "timeModifier": 1.0
+}

@@ -1,0 +1,28 @@
+{
+  "type": "nuclearcraftneohaul:assembler_recipe",
+  "itemIngredients": [
+    {
+      "count": 4,
+      "ingredient": {
+        "tag": "c:ingots/tungsten"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "tag": "c:ingots/gold"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 6,
+      "ingredient": {
+        "item": "qmd:wire_gold_tungsten_part"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 0.0,
+  "timeModifier": 1.0
+}

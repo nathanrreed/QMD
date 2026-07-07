@@ -1,0 +1,21 @@
+{
+  "type": "nuclearcraftneohaul:fission_irradiator_recipe",
+  "irradiatorBaseProcessRadiation": 0.0,
+  "irradiatorFluxRequired": 120000,
+  "irradiatorHeatPerFlux": 0.0,
+  "irradiatorMaxFluxPerTick": -1,
+  "irradiatorMinFluxPerTick": 0,
+  "irradiatorProcessEfficiency": 0.0,
+  "itemIngredient": {
+    "count": 1,
+    "ingredient": {
+      "item": "qmd:silicon_wafer_semiconductor"
+    }
+  },
+  "itemProduct": {
+    "count": 1,
+    "ingredient": {
+      "item": "qmd:silicon_n_doped_semiconductor"
+    }
+  }
+}

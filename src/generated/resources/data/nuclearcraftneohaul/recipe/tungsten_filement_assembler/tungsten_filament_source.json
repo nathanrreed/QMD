@@ -1,0 +1,14 @@
+{
+  "type": "qmd:tungsten_filement_assembler_recipe",
+  "itemIngredients": [
+    {
+      "count": 2,
+      "ingredient": {
+        "tag": "c:ingots/tungsten"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 1.0,
+  "timeModifier": 1.0
+}

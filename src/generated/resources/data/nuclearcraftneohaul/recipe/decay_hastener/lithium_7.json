@@ -1,0 +1,22 @@
+{
+  "type": "nuclearcraftneohaul:decay_hastener_recipe",
+  "itemIngredients": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:isotopes/beryllium/7"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:lithium_7"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 6.89,
+  "timeModifier": 1.0
+}

@@ -1,0 +1,8 @@
+{
+	"creative_tab": "qmd:items",
+	"landing_text": "qmd.guide_book.desc",
+	"name": "qmd.guide_book.name",
+	"show_progress": false,
+	"subtitle": "qmd.guide_book.edition",
+	"use_resource_pack": true
+}

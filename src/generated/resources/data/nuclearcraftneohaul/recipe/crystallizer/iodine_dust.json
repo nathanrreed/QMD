@@ -1,0 +1,22 @@
+{
+  "type": "nuclearcraftneohaul:crystallizer_recipe",
+  "fluidIngredients": [
+    {
+      "amount": 144,
+      "ingredient": {
+        "fluid": "qmd:iodine"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:iodine_dust"
+      }
+    }
+  ],
+  "powerModifier": 0.0,
+  "radiation": 0.0,
+  "timeModifier": 0.25
+}

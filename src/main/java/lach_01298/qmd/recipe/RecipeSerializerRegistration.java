@@ -2,6 +2,7 @@ package lach_01298.qmd.recipe;
 
 import com.nred.nuclearcraft.recipe.ProcessorRecipe;
 import lach_01298.qmd.QMD;
+import lach_01298.qmd.datagen.recipe.TungstenFilementAssemblerRecipe;
 import lach_01298.qmd.recipe.types.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -20,6 +21,9 @@ public class RecipeSerializerRegistration {
 
     public static final DeferredHolder<RecipeSerializer<?>, AtmosphereCollectorRecipe.Serializer> ATMOSPHERE_COLLECTOR_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("atmosphere_collector_recipe", AtmosphereCollectorRecipe.Serializer::new);
     public static final DeferredHolder<RecipeSerializer<?>, LiquidCollectorRecipe.Serializer> LIQUID_COLLECTOR_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("liquid_collector_recipe", LiquidCollectorRecipe.Serializer::new);
+
+    // Needs to have ItemStack recipe out
+    public static final DeferredHolder<RecipeSerializer<?>, TungstenFilementAssemblerRecipe.Serializer> TUNGSTEN_FILAMENT_ASSEMBLER_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("tungsten_filement_assembler_recipe", TungstenFilementAssemblerRecipe.Serializer::new);
 
     public static void init() {
     }
