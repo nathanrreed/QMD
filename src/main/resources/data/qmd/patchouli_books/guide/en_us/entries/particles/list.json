@@ -1,6 +1,6 @@
 {
     "name": "List of Particles",
-    "icon": "qmd:textures/particles/alpha.png",
+    "icon": "qmd:textures/gui/sprites/particles/alpha.png",
     "category": "qmd:particles",
     "sortnum": 1,
     "pages": [
@@ -14,8 +14,8 @@
             "text": "Nuclei are the nucleus of atoms. They define what an atom is, the number of protons define the element, and the number of neutrons define the isotope. Atoms are also made up of electrons around the nucleus. If some of these electrons are lost, then the atom gains a charge and is called an Ion."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/alpha.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/alpha.png",
             "header": "Alpha Particle",
             "mass": "3.73 GeV/c^2",
             "charge": "2",
@@ -24,8 +24,8 @@
             "desc": "Alpha particles are another name for helium 4 nuclei. They are very stable and hence are released in a lot of nuclear reactions."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/antialpha.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/antialpha.png",
             "header": "Anti-Alpha Particle",
             "mass": "3.73 GeV/c^2",
             "charge": "-2",
@@ -34,9 +34,9 @@
             "desc": "Anti-Alpha particles are the antimatter partner to Alpha particles."
         },
         {
-            "type": "particle",
+            "type": "qmd:particle",
             "anchor": "boron_ion",
-            "particle": "qmd:textures/particles/boron_ion.png",
+            "particle": "qmd:textures/gui/sprites/particles/boron_ion.png",
             "header": "Boron Ion",
             "mass": "10.3 GeV/c^2",
             "charge": "1",
@@ -45,8 +45,8 @@
             "desc": "A boron ion is an atom of boron with one missing electron. Boron ions can be implanted into semiconductors like silicon as a dopant."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/calcium_48_ion.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/calcium_48_ion.png",
             "header": "Calcium-48 Ion",
             "mass": "44.7 GeV/c^2",
             "charge": "1",
@@ -55,8 +55,8 @@
             "desc": "Calcium-48 is a rare and particularly neutron rich isotope useful in creating super heavy elements."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/deuteron.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/deuteron.png",
             "header": "Deuteron",
             "mass": "1.88 GeV/c^2",
             "charge": "1",
@@ -65,8 +65,8 @@
             "desc": "Deuterons are another name for deuterium (hydrogen-2) nuclei."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/antideuteron.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/antideuteron.png",
             "header": "Anti-Deuteron",
             "mass": "1.88 GeV/c^2",
             "charge": "-1",
@@ -75,8 +75,8 @@
             "desc": "Anti-Deuterons are the antimatter partner to Deuterons."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/helion.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/helion.png",
             "header": "Helion",
             "mass": "2.81 GeV/c^2",
             "charge": "2",
@@ -85,8 +85,8 @@
             "desc": "Helions are Helium 3 nuclei."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/antihelion.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/antihelion.png",
             "header": "Anti-Helion",
             "mass": "2.81 GeV/c^2",
             "charge": "-2",
@@ -95,8 +95,8 @@
             "desc": "Anti-Helions are the antimatter partner to Helions"
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/triton.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/triton.png",
             "header": "Triton",
             "mass": "2.81 GeV/c^2",
             "charge": "1",
@@ -105,8 +105,8 @@
             "desc": "Tritons are tritium (hydrogen-3) nuclei. They are a tiny bit heavier than Helions and thus can decay into them by beta - decay."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/antitriton.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/antitriton.png",
             "header": "Anti-Triton",
             "mass": "2.81 GeV/c^2",
             "charge": "-1",
@@ -124,8 +124,8 @@
             "text": "Quarks come in three sets of almost identical groups called generations. Each generation contains two quarks (and their antiparticles). The properties between the generations are identical except for the mass. The later generations are heavier and therefore can decay into the lighter generations."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/up_quark.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/up_quark.png",
             "header": "Up Quark",
             "mass": "2.3 MeV/c^2",
             "charge": "2/3",
@@ -134,8 +134,8 @@
             "desc": "The up quark is the lightest quark. It is the most common particle that makes up normal matter."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/antiup_quark.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/antiup_quark.png",
             "header": "Anti-Up Quark",
             "mass": "2.3 MeV/c^2",
             "charge": "-2/3",
@@ -144,8 +144,8 @@
             "desc": "The anti-up quark is the antimatter partner of the up quark."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/down_quark.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/down_quark.png",
             "header": "Down Quark",
             "mass": "4.8 MeV/c^2",
             "charge": "-1/3",
@@ -154,8 +154,8 @@
             "desc": "The down quark is the 2nd lightest quark. It with the up quark makes up all the protons and neutrons in all nuclei of normal matter in the universe."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/antidown_quark.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/antidown_quark.png",
             "header": "Anti-Down Quark",
             "mass": "4.8 MeV/c^2",
             "charge": "1/3",
@@ -164,8 +164,8 @@
             "desc": "The anti-down quark is the antimatter partner of the down quark."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/charm_quark.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/charm_quark.png",
             "header": "Charm Quark",
             "mass": "1.28 GeV/c^2",
             "charge": "2/3",
@@ -174,8 +174,8 @@
             "desc": "The charm quark is the 2nd generation equivalent of the up quark though it is much heavier."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/anticharm_quark.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/anticharm_quark.png",
             "header": "Anti-Charm Quark",
             "mass": "1.28 GeV/c^2",
             "charge": "-2/3",
@@ -184,8 +184,8 @@
             "desc": "The anti-charm quark is the antimatter partner of the charm quark."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/strange_quark.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/strange_quark.png",
             "header": "Strange Quark",
             "mass": "95 MeV/c^2",
             "charge": "-1/3",
@@ -194,8 +194,8 @@
             "desc": "The strange quark is the 2nd generation equivalent of the down quark."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/antistrange_quark.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/antistrange_quark.png",
             "header": "Anti-Strange Quark",
             "mass": "95 MeV/c^2",
             "charge": "1/3",
@@ -204,8 +204,8 @@
             "desc": "The anti-strange quark is the antimatter partner of the strange quark."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/top_quark.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/top_quark.png",
             "header": "Top Quark",
             "mass": "173 GeV/c^2",
             "charge": "2/3",
@@ -214,8 +214,8 @@
             "desc": "The top quark is the 3rd generation equivalent of the up quark. It is the most massive fundamental particle. It is so massive it is heavier than an atom of tungsten."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/antitop_quark.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/antitop_quark.png",
             "header": "Anti-Top Quark",
             "mass": "173 GeV/c^2",
             "charge": "-2/3",
@@ -224,8 +224,8 @@
             "desc": "The anti-top quark is the antimatter partner of the top quark."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/bottom_quark.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/bottom_quark.png",
             "header": "Bottom Quark",
             "mass": "4.18 GeV/c^2",
             "charge": "-1/3",
@@ -234,8 +234,8 @@
             "desc": "The bottom quark is the 3rd generation equivalent of the down quark."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/antibottom_quark.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/antibottom_quark.png",
             "header": "Anti-Bottom Quark",
             "mass": "4.18 GeV/c^2",
             "charge": "1/3",
@@ -253,8 +253,8 @@
             "text": "Leptons like quarks come in three generations of identical particles except for mass. Each generation contains one charged lepton and one neutrino (also with both their antiparticles). Neutrinos are very hard to detect particles that only interact via the weak force. They hardly interact and can go through the entire Earth with ease."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/electron.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/electron.png",
             "header": "Electron",
             "mass": "0.511 MeV/c^2",
             "charge": "-1",
@@ -263,8 +263,8 @@
             "desc": "Electrons along with up and down quarks make up all the atoms in the universe. They are the lightest charged lepton and therefore stable."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/positron.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/positron.png",
             "header": "Positron",
             "mass": "0.511 MeV/c^2",
             "charge": "1",
@@ -273,8 +273,8 @@
             "desc": "The positron is the antimatter partner of the electron. They are a common antimatter particle and are released in beta + decay."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/electron_neutrino.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/electron_neutrino.png",
             "header": "Electron Neutrino",
             "mass": "0.12 eV/c^2",
             "charge": "0",
@@ -283,8 +283,8 @@
             "desc": "Electron Neutrinos are the partner of the electron in the first generation of leptons. They are released in beta + decay along with a positron."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/electron_antineutrino.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/electron_antineutrino.png",
             "header": "Electron Antineutrino",
             "mass": "0.12 eV/c^2",
             "charge": "0",
@@ -293,8 +293,8 @@
             "desc": "The Electron Antineutrino is the antimatter partner of the electron neutrino. They are released in beta - decay along with an electron."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/muon.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/muon.png",
             "header": "Muon",
             "mass": "106 MeV/c^2",
             "charge": "-1",
@@ -303,8 +303,8 @@
             "desc": "Muons are the 2nd lepton generation equivalent of the electron."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/antimuon.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/antimuon.png",
             "header": "Anti-Muon",
             "mass": "106 MeV/c^2",
             "charge": "1",
@@ -313,8 +313,8 @@
             "desc": "The anti-muon is the antimatter partner of the muon."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/muon_neutrino.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/muon_neutrino.png",
             "header": "Muon Neutrino",
             "mass": "0.12 eV/c^2",
             "charge": "0",
@@ -323,8 +323,8 @@
             "desc": "The muon neutrino is the 2nd lepton generation equivalent of the electron neutrino."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/muon_antineutrino.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/muon_antineutrino.png",
             "header": "Muon Antineutrino",
             "mass": "0.12 eV/c^2",
             "charge": "0",
@@ -333,8 +333,8 @@
             "desc": "The muon antineutrino is the antimatter partner of the muon neutrino."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/tau.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/tau.png",
             "header": "Tau",
             "mass": "1.78 GeV/c^2",
             "charge": "-1",
@@ -343,8 +343,8 @@
             "desc": "Taus are the 3rd lepton generation equivalent of the electron."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/antitau.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/antitau.png",
             "header": "Anti-Tau",
             "mass": "1.78 GeV/c^2",
             "charge": "1",
@@ -353,8 +353,8 @@
             "desc": "The anti-tau is the antimatter partner of the tau."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/tau_neutrino.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/tau_neutrino.png",
             "header": "Tau Neutrino",
             "mass": "0.12 eV/c^2",
             "charge": "0",
@@ -363,8 +363,8 @@
             "desc": "The tau neutrino is the 3rd lepton generation equivalent of the electron neutrino."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/tau_antineutrino.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/tau_antineutrino.png",
             "header": "Tau Antineutrino",
             "mass": "0.12 eV/c^2",
             "charge": "0",
@@ -382,8 +382,8 @@
             "text": ""
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/proton.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/proton.png",
             "header": "Proton",
             "mass": "938 MeV/c^2",
             "charge": "1",
@@ -392,8 +392,8 @@
             "desc": "The proton is the lightest baryon and as far as we can tell is stable. It along with neutrons make up the nucleus of atoms. They are made from two up quarks and one down quark."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/antiproton.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/antiproton.png",
             "header": "Anti-Proton",
             "mass": "938 MeV/c^2",
             "charge": "-1",
@@ -402,8 +402,8 @@
             "desc": "The anti-proton is the antimatter partner of proton."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/neutron.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/neutron.png",
             "header": "Neutron",
             "mass": "940 MeV/c^2",
             "charge": "0",
@@ -412,8 +412,8 @@
             "desc": "The neutron along with protons make up the nucleus of atoms. It is slightly heavier than the proton and outside a nucleus will decay into a proton in about 15 minutes. Neutrons are used in nuclear fission to split fissile nuclei."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/antineutron.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/antineutron.png",
             "header": "Anti-Neutron",
             "mass": "940 MeV/c^2",
             "charge": "0",
@@ -422,8 +422,8 @@
             "desc": "The anti-neutron is the antimatter partner of neutron."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/delta_plus_plus.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/delta_plus_plus.png",
             "header": "Delta ++",
             "mass": "1.23 GeV/c^2",
             "charge": "2",
@@ -432,8 +432,8 @@
             "desc": "The Delta ++ contains three up quarks. They quickly decay via the strong force."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/antidelta_plus_plus.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/antidelta_plus_plus.png",
             "header": "Anti-Delta ++",
             "mass": "1.23 GeV/c^2",
             "charge": "-2",
@@ -442,8 +442,8 @@
             "desc": "The anti-delta ++ is the antimatter partner of delta ++."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/delta_minus.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/delta_minus.png",
             "header": "Delta -",
             "mass": "1.23 GeV/c^2",
             "charge": "-1",
@@ -452,8 +452,8 @@
             "desc": "The Delta - contains three down quarks. They quickly decay via the strong force."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/antidelta_minus.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/antidelta_minus.png",
             "header": "Anti-Delta -",
             "mass": "1.23 GeV/c^2",
             "charge": "1",
@@ -462,8 +462,8 @@
             "desc": "The anti-delta - is the antimatter partner of delta -."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/sigma_plus.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/sigma_plus.png",
             "header": "Sigma +",
             "mass": "1.19 GeV/c^2",
             "charge": "1",
@@ -472,8 +472,8 @@
             "desc": "The Sigma + contains two up quarks and one strange quark."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/antisigma_plus.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/antisigma_plus.png",
             "header": "Anti-Sigma +",
             "mass": "1.19 GeV/c^2",
             "charge": "-1",
@@ -482,8 +482,8 @@
             "desc": "The anti-sigma + is the antimatter partner of sigma +."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/sigma_minus.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/sigma_minus.png",
             "header": "Sigma -",
             "mass": "1.2 GeV/c^2",
             "charge": "-1",
@@ -492,8 +492,8 @@
             "desc": "The sigma - contains two down quarks and one strange quark."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/antisigma_minus.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/antisigma_minus.png",
             "header": "Anti-Sigma -",
             "mass": "1.2 GeV/c^2",
             "charge": "1",
@@ -511,8 +511,8 @@
             "text": "The quark composition of mesons particularly neutral mesons is complicated to say the least. The compositions used in QMD are a great simplification, in reality they are 'mixed' states of many different compositions. An example is the eta meson, which is actually a mixture of up, down and strange quark-antiquark pairs but is a different particle to the eta prime meson, which is also a mixture up, down and strange quark-antiquark in a different way."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/pion_plus.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/pion_plus.png",
             "header": "Pion +",
             "mass": "140 MeV/c^2",
             "charge": "1",
@@ -521,8 +521,8 @@
             "desc": "Pions keep nuclei together with the strong force, though they aren't colored themselves they distribute the 'residual' strong force."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/pion_minus.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/pion_minus.png",
             "header": "Pion -",
             "mass": "140 MeV/c^2",
             "charge": "-1",
@@ -531,8 +531,8 @@
             "desc": "The pion - is the antimatter partner of pion +. They are made from a down and anti-up quark."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/pion_naught.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/pion_naught.png",
             "header": "Pion 0",
             "mass": "135 MeV/c^2",
             "charge": "0",
@@ -545,8 +545,8 @@
             "text": ""
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/kaon_plus.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/kaon_plus.png",
             "header": "Kaon +",
             "mass": "464 MeV/c^2",
             "charge": "1",
@@ -555,8 +555,8 @@
             "desc": "Kaon + is made from an up and anti-strange quark."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/kaon_minus.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/kaon_minus.png",
             "header": "Kaon -",
             "mass": "464 MeV/c^2",
             "charge": "-1",
@@ -565,8 +565,8 @@
             "desc": "The kaon - is the antimatter partner of kaon +. They are made from a strange and anti-up quark."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/kaon_plus.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/kaon_plus.png",
             "header": "Kaon 0",
             "mass": "498 MeV/c^2",
             "charge": "0",
@@ -575,8 +575,8 @@
             "desc": "Kaon 0 is made from a down and anti-strange quark."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/kaon_minus.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/kaon_minus.png",
             "header": "Anti-Kaon 0",
             "mass": "498 MeV/c^2",
             "charge": "0",
@@ -585,8 +585,8 @@
             "desc": "The anti-kaon 0 is the antimatter partner of kaon 0. They are made from a strange and anti-down quark."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/eta.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/eta.png",
             "header": "Eta",
             "mass": "548 MeV/c^2",
             "charge": "0",
@@ -595,8 +595,8 @@
             "desc": "Eta mesons are mesons made from a down quark-antiquark pair and so are their own antiparticle."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/eta_prime.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/eta_prime.png",
             "header": "Eta Prime",
             "mass": "958 MeV/c^2",
             "charge": "0",
@@ -605,8 +605,8 @@
             "desc": "Eta prime mesons are mesons made from a strange quark-antiquark pair and so are their own antiparticle."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/charmed_eta.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/charmed_eta.png",
             "header": "Charmed Eta",
             "mass": "2.98 GeV/c^2",
             "charge": "0",
@@ -615,8 +615,8 @@
             "desc": "Charmed eta mesons are made from a charm quark-antiquark pairs and so are their own antiparticle."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/bottom_eta.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/bottom_eta.png",
             "header": "Bottom Eta",
             "mass": "9.4 GeV/c^2",
             "charge": "0",
@@ -634,8 +634,8 @@
             "text": "In the standard model which QMD is mostly based on, gravity is not included and hence there is no force carrier for it. There are hypothetical extensions that contain a force carry for gravity called the graviton, but as of yet has never been observed."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/photon.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/photon.png",
             "header": "Photon",
             "mass": "0 eV/c^2",
             "charge": "0",
@@ -644,8 +644,8 @@
             "desc": "Photons are the particles that make up light. They carry the electromagnetic force. Very high energy photons are also called gamma rays."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/gluon.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/gluon.png",
             "header": "Gluon",
             "mass": "0 eV/c^2",
             "charge": "0",
@@ -654,8 +654,8 @@
             "desc": "Gluons carry the strong force, which is responsible for keeping baryons like the proton and mesons like the pion together. They technically come in 8 types and interact with themselves making the strong force quite complicated."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/w_plus_boson.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/w_plus_boson.png",
             "header": "W + Boson",
             "mass": "80.4 GeV/c^2",
             "charge": "1",
@@ -664,8 +664,8 @@
             "desc": "W and Z bosons are the carries of the weak force, which allows for some particles to decay, for example protons and neutrons in beta decay. Unlike the other force carrying bosons they have mass and a lot of it."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/w_minus_boson.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/w_minus_boson.png",
             "header": "W - Boson",
             "mass": "80.4 GeV/c^2",
             "charge": "-1",
@@ -674,8 +674,8 @@
             "desc": "The W - is the antiparticle of the W + unlike the other fundamental bosons which are their own antiparticles."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/z_boson.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/z_boson.png",
             "header": "Z Boson",
             "mass": "91.2 GeV/c^2",
             "charge": "0",
@@ -684,8 +684,8 @@
             "desc": "Z bosons are part of the weak force but are generally hard to observe. They are responsible for elastic neutrino scattering."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/higgs_boson.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/higgs_boson.png",
             "header": "Higgs Boson",
             "mass": "125 GeV/c^2",
             "charge": "0",
@@ -699,8 +699,8 @@
             "text": "Here are the particles that didn't really fit into the other groups of particles."
         },
         {
-            "type": "particle",
-            "particle": "qmd:textures/particles/glueball.png",
+            "type": "qmd:particle",
+            "particle": "qmd:textures/gui/sprites/particles/glueball.png",
             "header": "Glueball",
             "mass": "1.73 GeV/c^2",
             "charge": "0",
