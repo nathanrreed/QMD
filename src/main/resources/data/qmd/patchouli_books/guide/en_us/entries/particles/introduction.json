@@ -1,6 +1,6 @@
 {
     "name": "General Information",
-    "icon": "qmd:textures/particles/proton.png",
+    "icon": "qmd:textures/gui/sprites/particles/proton.png",
     "category": "qmd:particles",
     "sortnum": 0,
     "pages": [

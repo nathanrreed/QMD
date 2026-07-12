@@ -26,7 +26,7 @@ sourceSets.main.resources {
     exclude("src/generated/**/.cache") // datagen cache files
 }
 
-repositories { // TODO cleanup
+repositories {
     mavenLocal()
     maven { // JEI / Patchouli
         name = "Jared's maven"
@@ -59,34 +59,6 @@ repositories { // TODO cleanup
         url = "https://maven.squiddev.cc"
         content {
             includeGroup("cc.tweaked")
-        }
-    }
-    maven { // Curios
-        name = "Illusive Soulworks maven"
-        url = "https://maven.theillusivec4.top/"
-    }
-    maven {// KubeJS
-        url = "https://maven.latvian.dev/releases"
-        content {
-            includeGroup "dev.latvian.mods"
-            includeGroup "dev.latvian.apps"
-        }
-    }
-    maven {// KubeJS
-        url = 'https://jitpack.io'
-        content {
-            includeGroup "com.github.rtyley"
-        }
-    }
-    maven { url = "https://maven.firstdark.dev/snapshots" }
-    maven { url = "https://maven.createmod.net" } // Create, Ponder, Flywheel
-    maven { url = "https://maven.ithundxr.dev/snapshots" } // Registrate
-    exclusiveContent {
-        forRepository {
-            maven { url = "https://maven.ryanhcode.dev/releases" }
-        }
-        filter {
-            includeGroup("dev.ryanhcode.sable-companion")
         }
     }
 }
@@ -178,8 +150,7 @@ configurations {
 }
 
 dependencies {
-//    implementation "maven.modrinth:nuclearcraft-neohaul:UuuTvuHm" //TODO nuclearcraftneohaul-${minecraft_version}-${nc_version}
-    implementation("com.nred.nuclearcraftneohaul:Nuclearcraft-Neohaul:${nc_version}")
+    implementation "maven.modrinth:nuclearcraft-neohaul:${nc_version}"
     implementation "curse.maven:zerocore-247921:${zerocore_version}"
     implementation("com.github.glitchfiend:TerraBlender-neoforge:${minecraft_version}-${terrablender_version}")
 
