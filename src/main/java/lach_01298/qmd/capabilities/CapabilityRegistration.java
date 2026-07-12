@@ -4,6 +4,8 @@ import com.nred.nuclearcraft.block_entity.energy.ITileEnergy;
 import com.nred.nuclearcraft.block_entity.fluid.ITileFluid;
 import com.nred.nuclearcraft.block_entity.inventory.ITileInventory;
 import lach_01298.qmd.QMD;
+import lach_01298.qmd.accelerator.tile.*;
+import lach_01298.qmd.pipe.TileBeamline;
 import lach_01298.qmd.tile.TileCreativeParticleSource;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -34,5 +36,27 @@ public class CapabilityRegistration {
         }
 
         event.registerBlockEntity(CapabilityParticleStackHandler.BLOCK, CREATIVE_PARTICLE_SOURCE_ENTITY_TYPE.get(), TileCreativeParticleSource::getCapability);
+        event.registerBlockEntity(CapabilityParticleStackHandler.BLOCK, TILE_ACCELERATOR_BEAM_PORT.get(), TileAcceleratorBeamPort::getCapability);
+        event.registerBlockEntity(CapabilityParticleStackHandler.BLOCK, TILE_BEAMLINE.get(), TileBeamline::getCapability);
+
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, TILE_ACCELERATOR_ENERGY_PORT.get(), TileAcceleratorEnergyPort::getEnergySideCapability);
+
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, TILE_ACCELERATOR_ION_COLLECTOR.get(), TileAcceleratorIonCollector::getFluidSideCapability);
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, TILE_ACCELERATOR_ION_COLLECTOR.get(), TileAcceleratorIonCollector::getItemSideCapability);
+
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, TILE_ACCELERATOR_ION_SOURCE_BASIC.get(), TileAcceleratorIonSource.Basic::getFluidSideCapability);
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, TILE_ACCELERATOR_ION_SOURCE_BASIC.get(), TileAcceleratorIonSource.Basic::getItemSideCapability);
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, TILE_ACCELERATOR_ION_SOURCE_LASER.get(), TileAcceleratorIonSource.Laser::getFluidSideCapability);
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, TILE_ACCELERATOR_ION_SOURCE_LASER.get(), TileAcceleratorIonSource.Laser::getItemSideCapability);
+
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, TILE_ACCELERATOR_PORT.get(), TileAcceleratorPort::getFluidSideCapability);
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, TILE_ACCELERATOR_PORT.get(), TileAcceleratorPort::getItemSideCapability);
+
+        event.registerBlockEntity(CapabilityParticleStackHandler.BLOCK, TILE_ACCELERATOR_SYNCHROTRON_PORT.get(), TileAcceleratorSynchrotronPort::getCapability);
+
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, TILE_ACCELERATOR_VENT.get(), TileAcceleratorVent::getFluidSideCapability);
+
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, TILE_MASS_SPECTROMETER_CONTROLLER.get(), TileMassSpectrometerController::getItemSideCapability);
+
     }
 }

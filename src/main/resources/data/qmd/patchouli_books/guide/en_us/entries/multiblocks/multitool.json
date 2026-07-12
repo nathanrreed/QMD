@@ -1,12 +1,12 @@
 {
 	"name": "Multitool",
-	"icon": "nuclearcraft:multitool",
+	"icon": "nuclearcraftneohaul:multitool",
 	"category": "qmd:multiblocks",
 	"sortnum": 5,
 	"pages": [
 		{	
 			"type": "spotlight",
-			"item": "nuclearcraft:multitool",
+			"item": "nuclearcraftneohaul:multitool",
 			"text": "The Nuclearcraft multitool is a tool that is used extensively in the configuration of NC and QMD multiblocks."
 		},
 		{	

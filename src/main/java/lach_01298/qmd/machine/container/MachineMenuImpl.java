@@ -64,7 +64,7 @@ public class MachineMenuImpl {
 
     public static class CreativeParticleSourceMenu extends InfoTileMenu<TileCreativeParticleSource, CreativeParticleSourceUpdatePacket, BlockEntityMenuInfo<TileCreativeParticleSource>> {
         public CreativeParticleSourceMenu(int containerId, Inventory inventory, TileCreativeParticleSource tile) {
-            super(CREATIVE_PARTICLE_SOURCE.get(), containerId, inventory, tile);
+            super(CREATIVE_PARTICLE_SOURCE_MENU.get(), containerId, inventory, tile);
         }
 
         // Client Constructor

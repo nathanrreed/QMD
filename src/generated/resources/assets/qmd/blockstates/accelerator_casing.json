@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "nuclearcraftneohaul_frame=false": {
+      "model": "qmd:block/accelerator_casing_casing"
+    },
+    "nuclearcraftneohaul_frame=true": {
+      "model": "qmd:block/accelerator_casing_frame"
+    }
+  }
+}

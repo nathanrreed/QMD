@@ -16,8 +16,11 @@ public class RecipeSerializerRegistration {
 
     public static final DeferredHolder<RecipeSerializer<?>, LiquefierCoolantRecipe.Serializer> LIQUEFIER_COOLANT_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("liquefier_coolant_recipe", LiquefierCoolantRecipe.Serializer::new);
     public static final DeferredHolder<RecipeSerializer<?>, ProcessorRecipe.Serializer> IRRADIATOR_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("irradiator_recipe", () -> new ProcessorRecipe.Serializer(IrradiatorRecipe.class));
-    public static final DeferredHolder<RecipeSerializer<?>, ProcessorRecipe.Serializer> MASS_SPECTROMETER_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("mass_spectrometer_recipe", () -> new ProcessorRecipe.Serializer(MassSpectrometerRecipe.class));
     public static final DeferredHolder<RecipeSerializer<?>, ProcessorRecipe.Serializer> ORE_LEACHER_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("ore_leacher_recipe", () -> new ProcessorRecipe.Serializer(OreLeacherRecipe.class));
+    public static final DeferredHolder<RecipeSerializer<?>, MassSpectrometerRecipe.Serializer> MASS_SPECTROMETER_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("mass_spectrometer_recipe", MassSpectrometerRecipe.Serializer::new);
+
+    public static final DeferredHolder<RecipeSerializer<?>, AcceleratorCoolingRecipe.Serializer> ACCELERATOR_COOLING_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("accelerator_cooling_recipe", AcceleratorCoolingRecipe.Serializer::new);
+    public static final DeferredHolder<RecipeSerializer<?>, AcceleratorSourceRecipe.Serializer> ACCELERATOR_SOURCE_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("accelerator_source_recipe", AcceleratorSourceRecipe.Serializer::new);
 
     public static final DeferredHolder<RecipeSerializer<?>, AtmosphereCollectorRecipe.Serializer> ATMOSPHERE_COLLECTOR_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("atmosphere_collector_recipe", AtmosphereCollectorRecipe.Serializer::new);
     public static final DeferredHolder<RecipeSerializer<?>, LiquidCollectorRecipe.Serializer> LIQUID_COLLECTOR_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("liquid_collector_recipe", LiquidCollectorRecipe.Serializer::new);

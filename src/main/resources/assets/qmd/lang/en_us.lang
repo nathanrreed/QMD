@@ -13,49 +13,6 @@ item . qmd . boots_hev                 . name                 = HEV Boots
 
 
 //blocks
-tile.qmd.beamline.name=Beamline Pipe
-
-tile.qmd.linear_accelerator_controller.name=Linear Accelerator Controller
-tile.qmd.ring_accelerator_controller.name=Synchrotron Accelerator Controller
-tile.qmd.beam_diverter_controller.name=Beam Diverter Controller
-tile.qmd.beam_splitter_controller.name=Beam Splitter Controller
-tile.qmd.decelerator_controller.name=Decelerator Controller
-tile.qmd.mass_spectrometer_controller.name=Mass Spectrometer Controller
-
-tile.qmd.accelerator_beam.name=Accelerator Beam Block
-tile.qmd.accelerator_computer_port.name=Accelerator Computer Port
-tile.qmd.accelerator_redstone_port.name=Accelerator Redstone Port
-tile.qmd.accelerator_port.name=Accelerator Ion Source Port
-tile.qmd.accelerator_casing.name=Accelerator Casing
-tile.qmd.accelerator_glass.name=Accelerator Glass
-tile.qmd.accelerator_vent.name=Accelerator Coolant Vent
-tile.qmd.accelerator_beam_port.name=Accelerator Beam Port
-tile.qmd.accelerator_synchrotron_port.name=Accelerator Synchrotron Port
-tile.qmd.accelerator_energy_port.name=Accelerator Energy Port
-tile.qmd.accelerator_source.name=Accelerator Ion Source
-
-tile.qmd.accelerator_cavity.copper.name=Copper FE Cavity
-tile.qmd.accelerator_cavity.magnesium_diboride.name=Magnesium Diboride FE Cavity
-tile.qmd.accelerator_cavity.niobium_tin.name=Niobium-Tin FE Cavity
-tile.qmd.accelerator_cavity.niobium_titanium.name=Niobium-Titanium FE Cavity
-tile.qmd.accelerator_cavity.bscco.name=BSCCO FE Cavity
-tile.qmd.accelerator_cavity.aluminium.name=Aluminum FE Cavity
-tile.qmd.accelerator_cavity.ssfaf.name=SSFAF FE Cavity
-tile.qmd.accelerator_cavity.ybco.name=YBCO FE Cavity
-
-tile.qmd.accelerator_magnet.copper.name=Copper Accelerator Electromagnet
-tile.qmd.accelerator_magnet.magnesium_diboride.name=Magnesium Diboride Accelerator Electromagnet
-tile.qmd.accelerator_magnet.niobium_tin.name=Niobium-Tin Accelerator Electromagnet
-tile.qmd.accelerator_magnet.niobium_titanium.name=Niobium-Titanium Accelerator Electromagnet
-tile.qmd.accelerator_magnet.bscco.name=BSCCO Accelerator Electromagnet
-tile.qmd.accelerator_magnet.aluminium.name=Aluminum Accelerator Electromagnet
-tile.qmd.accelerator_magnet.ssfaf.name=SSFAF Accelerator Electromagnet
-tile.qmd.accelerator_magnet.ybco.name=YBCO Accelerator Electromagnet
-tile.qmd.accelerator_magnet.name=Accelerator Electromagnet
-
-tile.qmd.accelerator_yoke.name=Accelerator Electromagnet Yoke
-tile.qmd.accelerator_laser_ion_source.name=Accelerator Laser Ion Source
-tile.qmd.accelerator_ion_collector.name=Accelerator Ion Collector
 
 tile.qmd.accelerator_cooler1.water.name=Water Accelerator Cooler
 tile.qmd.accelerator_cooler1.iron.name=Iron Accelerator Cooler
@@ -181,182 +138,7 @@ item.qmd.chest_hev.desc=Allows the wearer to long jump (jump while sprinting).
 item.qmd.legs_hev.desc=Allows the wearer to jump 2.5 blocks and gives a speed boost.
 item.qmd.boots_hev.desc=Gives wearer step assist, reduces fall height by 4 blocks and reduces fall damage by half.
 
-
-
-//multiblock validation
-zerocore.api.nc.multiblock.validation.cannot_be_multiblock_part=This block position cannot be part of the multiblock.
-
-qmd.multiblock_validation.no_inlet=There must be at least 1 Coolant Vent INPUT.
-qmd.multiblock_validation.no_outlet=There must be at least 1 Coolant Vent OUTPUT.
-qmd.multiblock_validation.need_energy_ports=There must be at least 1 Energy Port.
-
-qmd.multiblock_validation.accelerator.wrong_height=Accelerators must be 5 blocks tall.
-qmd.multiblock_validation.accelerator.invalid_beam_port=A Beam Port can not be here.
-qmd.multiblock_validation.accelerator.something_is_wrong=You got a Beam Port with no facing. Well how did you manage to do that?
-qmd.multiblock_validation.accelerator.no_yokes=There cannot be any Electromagnet Yokes in this type of accelerator.
-qmd.multiblock_validation.accelerator.no_synch_ports=There cannot be any Synchrotron Ports on this type of accelerator.
-qmd.multiblock_validation.accelerator.no_rf_cavity=There cannot be any FE Cavities in this type of accelerator.
-qmd.multiblock_validation.accelerator.no_source=There cannot be any Ion Sources on this type of accelerator.
-qmd.multiblock_validation.accelerator.no_ion_collectors=There cannot be any Ion Collectors on this type of accelerator.
-qmd.multiblock_validation.accelerator.no_ion_ports=There cannot be any Ion Source Ports on this type of accelerator.
-
-qmd.multiblock_validation.accelerator.invalid_coolers=There is %s invalid coolers.
-
-
-qmd.multiblock_validation.accelerator.linear.to_short=Linear Accelerator is not long enough.
-qmd.multiblock_validation.accelerator.linear.must_be_5_wide=Linear Accelerators must be 5 blocks wide.
-qmd.multiblock_validation.accelerator.linear.must_be_beam=There must be a straight line of Accelerator Beam blocks down the middle of the Linear Accelerator.
-qmd.multiblock_validation.accelerator.linear.must_have_io=There must be a Accelerator Beam Port INPUT and OUTPUT at either end of the beam.
-qmd.multiblock_validation.accelerator.linear.have_source_and_beam_port=There must be a Ion Source at one end of the beam and a Beam Port at the other.
-qmd.multiblock_validation.accelerator.linear.source_must_face_in=The Ion Source must face inwards at the beam.
-qmd.multiblock_validation.accelerator.linear.only_one_source=There can only be one Ion Source.
-qmd.multiblock_validation.accelerator.linear.to_many_beam_ports=There can only be a Beam Port at the ends of the beam.
-
-
-qmd.multiblock_validation.accelerator.ring.must_be_square=The Accelerator must have the same length in the X and Z direction.
-qmd.multiblock_validation.accelerator.ring.to_short= Synchrotron Accelerator is not large enough.
-qmd.multiblock_validation.accelerator.ring.to_long= Synchrotron Accelerator is too large.
-qmd.multiblock_validation.accelerator.ring.must_be_beam=There must be a square ring of Accelerator Beam blocks down the middle of the Accelerator.
-qmd.multiblock_validation.accelerator.ring.must_be_dipole_in_conner=There must be a dipole in every corner of the accelerator. A dipole is made by placing a Accelerator Electromagnet on the top and bottom of a Accelerator Beam, then surrounding the it with Accelerator Electromagnet Yokes.
-qmd.multiblock_validation.accelerator.ring.must_be_inline_with_beam=Beam Ports must be on the same Y level as the beam ring.
-qmd.multiblock_validation.accelerator.ring.beam_port_must_connect=There must be a Beam Block to Connect the Beam Port.
-qmd.multiblock_validation.accelerator.ring.must_be_dipole=There must be a dipole where a Beam Port enters.
-qmd.multiblock_validation.accelerator.ring.must_have_io=There must be only one INPUT and OUTPUT Beam Port.
-qmd.multiblock_validation.accelerator.ring.to_many_synchrotron_ports=There can only be one Synchrotron Port.
-
-qmd.multiblock_validation.beam_director.must_be_cube=The Beam Diverter must be a 5x5x5 Cube with a dipole in the center.
-qmd.multiblock_validation.beam_director.must_be_beam=There must have a Accelerator Beam Block at the center.
-qmd.multiblock_validation.beam_director.must_be_dipole=There Must be a vertical or horizontal dipole at the center.
-
-qmd.multiblock_validation.accelerator.splitter.must_have_io=There must be one INPUT and two OUTPUT Beam Ports.
-
-qmd.multiblock_validation.accelerator.mass_spectrometer.wrong_height=Mass Spectrometers must be 7 blocks tall.
-qmd.multiblock_validation.accelerator.mass_spectrometer.wrong_width=Mass Spectrometers must be 7 blocks wide in at least one direction.
-qmd.multiblock_validation.accelerator.mass_spectrometer.must_be_odd_length=Mass Spectrometers must be an odd number of blocks long.
-qmd.multiblock_validation.accelerator.mass_spectrometer.need_ion_source_amount=There must be one Ion Source on every second vertical layer along the length of the Mass Spectrometer. For this size Mass Spectrometer there Must be %s Ion Sources.
-qmd.multiblock_validation.accelerator.mass_spectrometer.ion_source_wrong_pos=This is not a valid position for a Ion Source. Ion Sources must be placed one block up on the side of every second vertical layer along the length of the mass spectrometer.
-qmd.multiblock_validation.accelerator.mass_spectrometer.ion_source_wrong_facing=The Ion Source must face inwards.
-qmd.multiblock_validation.accelerator.mass_spectrometer.ion_source_wrong_type=This type of Accelerator Ion Source is not allowed for a Mass Spectrometer.
-qmd.multiblock_validation.accelerator.mass_spectrometer.ion_source_in_layer_already=There is already a Ion Source on this vertical layer.
-qmd.multiblock_validation.accelerator.mass_spectrometer.must_be_ion_collector=This must be an Ion Collector. There must be 4 Ion Collectors above every Ion Source.
-qmd.multiblock_validation.accelerator.mass_spectrometer.ion_collector_wrong_facing=The Ion Collector must face inwards.
-qmd.multiblock_validation.accelerator.mass_spectrometer.need_ion_collector_amount=There must be 4 Ion Collectors above every Ion Source, not anywhere else.
-qmd.multiblock_validation.accelerator.mass_spectrometer.must_be_yoke=This must be an Accelerator Electromagnet Yoke.
-qmd.multiblock_validation.accelerator.mass_spectrometer.must_be_magnet=This must be an Accelerator Electromagnet.
-qmd.multiblock_validation.accelerator.mass_spectrometer.magnet_wrong_type=This type of Accelerator Electromagnet is not allowed for a Mass Spectrometer.
-qmd.multiblock_validation.accelerator.mass_spectrometer.must_be_one_magnet_type=There can only be one type of Accelerator Electromagnet in a Mass Spectrometer.
-qmd.multiblock_validation.accelerator.mass_spectrometer.must_be_beam=This must be an Accelerator Beam Block.
-
-
-
-qmd.multiblock_validation.chamber.no_beams=There cannot be any Particle Chamber Beams in this type of particle chamber.
-qmd.multiblock_validation.chamber.no_detectors=There cannot be any Detectors in this type of particle chamber.
-qmd.multiblock_validation.chamber.no_item_ports=There cannot be any Item Ports on this type of particle chamber.
-qmd.multiblock_validation.chamber.no_fluid_ports=There cannot be any Fluid Ports on this type of particle chamber.
-
-qmd.multiblock_validation.chamber.must_have_target=Must have a Particle Chamber at the center.
-qmd.multiblock_validation.chamber.must_be_beam=There must be a line of Particle Chamber Beam Blocks from each Beam Port to the Particle Chamber.
-qmd.multiblock_validation.chamber.beam_port_wrong_spot=Beam Ports must be at the center of a horizontal face.
-qmd.multiblock_validation.chamber.must_be_square=Chamber must have the same X and Z dimensions.
-qmd.multiblock_validation.chamber.must_be_odd=Chamber must have an odd width.
-qmd.multiblock_validation.chamber.must_have_input_beam=There must be 1 INPUT Beam Port.
-
-qmd.multiblock_validation.chamber.beam_dump.only_input_beam=There can only be 1 INPUT Beam Port on a Beam Dump.
-qmd.multiblock_validation.chamber.beam_dump.must_have_fluid_output=There must be an OUTPUT Fluid Port on a Beam Dump.
-qmd.multiblock_validation.chamber.invalid_detectors=There is %s invalid detectors.
-
-qmd.multiblock_validation.collision_chamber.wrong_length=Collision Chamber must be 17 blocks long.
-qmd.multiblock_validation.collision_chamber.must_be_odd_square=The end faces must be squares of odd side length.
-qmd.multiblock_validation.collision_chamber.must_be_target=There must be a straight line of Particle Chamber blocks down the middle of the Collision chamber.
-qmd.multiblock_validation.collision_chamber.must_be_beam=This must be a Particle Chamber Beam Block.
-qmd.multiblock_validation.collision_chamber.must_be_input_beam_port=This must be an INPUT Particle Chamber Beam Port.
-qmd.multiblock_validation.collision_chamber.must_be_output_beam_port=This must be an OUTPUT Particle Chamber Beam Port.
-qmd.multiblock_validation.collision_chamber.beam_port_wrong_spot=There are too many Beam Ports. There must be 2 INPUT Particle Chamber Beam Ports and 4 OUTPUT Particle Chamber Beam Ports.
-
-qmd.multiblock_validation.vacuum_chamber.no_fluid_ports=There cannot be any Fluid Ports on this type of vacuum chamber.
-qmd.multiblock_validation.vacuum_chamber.no_item_ports=There cannot be any Item Ports on this type of vacuum chamber.
-qmd.multiblock_validation.vacuum_chamber.no_lasers=There cannot be any Vacuum Chamber Lasers in this type of vacuum chamber.
-qmd.multiblock_validation.vacuum_chamber.no_heater_vents=There cannot be any Heater Vents in this type of vacuum chamber.
-qmd.multiblock_validation.vacuum_chamber.invalid_heaters=There is %s invalid heaters.
-
-qmd.multiblock_validation.exotic_containment.must_be_square=Exotic Containment must have the same X and Z dimensions.
-qmd.multiblock_validation.exotic_containment.must_be_odd=Exotic Containment must have an odd width.
-qmd.multiblock_validation.exotic_containment.must_be_coil=There must be a ring of Vacuum Chamber Coils at the top and bottom.
-qmd.multiblock_validation.exotic_containment.beam_port_or_laser=There must be a Beam Port or Laser at the center of the face.
-qmd.multiblock_validation.exotic_containment.must_be_laser=There must be a Laser at the center of the face.
-qmd.multiblock_validation.exotic_containment.must_be_input_beam=There must be a INPUT Beam Port at the center of the face.
-qmd.multiblock_validation.exotic_containment.must_be_empty=This block must be an empty space.
-qmd.multiblock_validation.exotic_containment.must_have_2_lasers=There can only be 2 Vacuum Chamber Lasers.
-qmd.multiblock_validation.exotic_containment.must_have_2_beam_ports=There can only be 2 INPUT Beam Ports.
-
-qmd.multiblock_validation.nucleosynthesis_chamber.size=Nucleosynthesis Chamber must be size 11x5 with height of 7.
-qmd.multiblock_validation.nucleosynthesis_chamber.must_be_beam=This must be a Vacuum Chamber Beam Block.
-qmd.multiblock_validation.nucleosynthesis_chamber.must_be_plasma_glass=This must be a Vacuum Chamber Plasma Glass block.
-qmd.multiblock_validation.nucleosynthesis_chamber.must_be_plasma_nozzle=This must be a Vacuum Chamber Plasma Nozzle block that is facing in.
-qmd.multiblock_validation.nucleosynthesis_chamber.must_be_heater_or_empty=This can only be a Vacuum Chamber Heater block or an empty space.
-qmd.multiblock_validation.nucleosynthesis_chamber.must_be_empty=This must be an empty space.
-qmd.multiblock_validation.nucleosynthesis_chamber.must_be_input_beam=There must be only 1 INPUT Beam Port either here or in the same position on the opposite face.
-qmd.multiblock_validation.nucleosynthesis_chamber.must_be_output_fluid_port=This must be an OUTPUT Fluid Port
-qmd.multiblock_validation.nucleosynthesis_chamber.must_be_input_fluid_port=This must be an INPUT Fluid Port
-qmd.multiblock_validation.nucleosynthesis_chamber.must_have_4_fluid_ports=There must be 2 INPUT Fluid Ports and 2 OUTPUT Fluid Ports.
-qmd.multiblock_validation.nucleosynthesis_chamber.no_heater_inlet=There must be at least 1 INPUT Heater Vent.
-qmd.multiblock_validation.nucleosynthesis_chamber.no_heater_outlet=There must be at least 1 OUTPUT Heater Vent.
-qmd.multiblock_validation.nucleosynthesis_chamber.wrong_amount_of_beam_ports=There must be only 1 INPUT Beam Port and no OUTPUT Beam Ports.
-
-qmd.multiblock_validation.liquefier.invalid_nozzle_network=Each Liquefier Expansion Nozzle must be connected to a compressor by heat exchanger tubes.
-qmd.multiblock_validation.liquefier.must_be_baffle_or_nozzle=The layer above the bottom interior layer must be made of Heat Exchanger Baffles or Liquefier Expansion Nozzles.
-qmd.multiblock_validation.liquefier.must_be_empty_layer=The bottom interior layer must be empty.
-qmd.multiblock_validation.liquefier.compressor_must_be_in_roof=Compressors must be located on the top face of the multiblock.
-qmd.multiblock_validation.liquefier.invalid_compressor_amount=There must be at least the same amount of Liquefier Compressors as Liquefier Nozzles.
-qmd.multiblock_validation.liquefier.must_have_fluid_input=There must be at least one INPUT Liquefier Port.
-qmd.multiblock_validation.liquefier.must_have_fluid_output=There must be at least one OUTPUT Liquefier Port.
-qmd.multiblock_validation.liquefier.must_have_energy_port=There must be at least one Liquefier Energy Port.
-qmd.multiblock_validation.liquefier.inlet_outlet_must_be_in_top_section=Heat Exchanger Inlets and Heat Exchanger Outlets must be above the two bottom interior layers.
-
-
 //gui container
-gui.qmd.container.required_energy=Required Energy: %s
-gui.qmd.container.speed=Speed Multiplier: x%s
-
-gui.qmd.container.heat_stored=Heat Stored: %s/%s
-gui.qmd.container.energy_stored=Energy Stored: %s/%s
-
-gui.qmd.container.cryo.heat_stored=Magnet Heat Stored: %s/%s
-gui.qmd.container.cryo.coolant_stored=Magnet Coolant: %s/%s
-
-gui.qmd.container.temperature=Temperature: %s
-gui.qmd.container.max_temperature=Maximum Temperature: %s
-
-gui.qmd.container.max_heating=Maximum Heating: %s
-gui.qmd.container.heating=Current Heating: %s
-gui.qmd.container.external_heating=Maximum External Heating: %s
-
-gui.qmd.container.cooling=Cooling: %s
-gui.qmd.container.coolant_stored=Coolant: %s/%s
-gui.qmd.container.max_coolant_in=Maximum Coolant Usage: %s
-gui.qmd.container.max_coolant_out=Maximum Hot Coolant Out: %s
-
-gui.qmd.container.linear_accelerator_controller.name=Linear Accelerator
-gui.qmd.container.ring_accelerator_controller.name=Synchrotron Accelerator
-gui.qmd.container.beam_diverter_controller.name=Beam Diverter
-gui.qmd.container.beam_splitter_controller.name=Beam Splitter
-gui.qmd.container.decelerator_controller.name=Decelerator
-gui.qmd.container.mass_spectrometer_controller.name=Mass Spectrometer
-gui.qmd.container.accelerator.cavities=FE Cavities: %s at %s
-gui.qmd.container.accelerator.quadrupoles=Quadrupoles: %s at %s
-gui.qmd.container.accelerator.dipoles=Dipoles: %s at %s
-gui.qmd.container.accelerator.radius=Radius: %s
-gui.qmd.container.accelerator.length=Length: %s
-gui.qmd.container.accelerator.efficiency= (%s%%)
-gui.qmd.container.accelerator.error.1=Too hot
-gui.qmd.container.accelerator.error.2=Does not have enough power
-gui.qmd.container.accelerator.error.3=Focus to low
-gui.qmd.container.accelerator.error.4=Particle energy to low
-gui.qmd.container.accelerator.error.5=Particle energy to high
-gui.qmd.container.beam_diverter.max_energy=Maximum Energy: %s
-gui.qmd.container.beam_diverter.energy_loss=Energy Loss: %s
-gui.qmd.container.accelerator_source=Accelerator Ion Source
-
 gui.qmd.container.target_chamber_controller.name=Target Chamber
 gui.qmd.container.decay_chamber_controller.name=Decay Chamber
 gui.qmd.container.beam_dump_controller.name=Beam Dump
@@ -386,80 +168,6 @@ gui.qmd.container.liquefier.compressor_energy_efficiency=Mean Energy Efficiency:
 gui.qmd.container.liquefier.compressor_heat_efficiency=Mean Heat Efficiency: %s%%
 gui.qmd.container.liquefier.pressure_efficiency=Pressure Efficiency: %s%%
 gui.qmd.container.liquefier.temperature_difference=Temperature Differance: %s
-
-//particle descriptions
-qmd.particle.up_quark.desc=The Up Quark is the lightest quark. Up and Down quarks combine to form Protons and Neutrons
-qmd.particle.antiup_quark.desc=The Anti-Up Quark is the antimatter partner of the Up Quark.
-qmd.particle.down_quark.desc=The Down Quark is the second lightest quark. Up and Down quarks combine to form Protons and Neutrons
-qmd.particle.antidown_quark.desc=The Anti-Down Quark is the antimatter partner of the Up Down.
-qmd.particle.charm_quark.desc=The Charm Quark is a heavy version of the Up Quark.
-qmd.particle.anticharm_quark.desc=The Anti-Charm Quark is the antimatter partner of the Charm Quark.
-qmd.particle.strange_quark.desc=The Strange Quark is a heavy version of the Down Quark.
-qmd.particle.antistrange_quark.desc=The Anti-Strange Quark is the antimatter partner of the Strange Quark.
-qmd.particle.top_quark.desc=The Top Quark is a very heavy version of the Up Quark.
-qmd.particle.antitop_quark.desc=The Anti-Top Quark is the antimatter partner of the Top Quark.
-qmd.particle.bottom_quark.desc=The Bottom Quark is a very heavy version of the Down Quark.
-qmd.particle.antibottom_quark.desc=The Anti-Bottom Quark is the antimatter partner of the Bottom Quark.
-qmd.particle.electron.desc=The Electron is lightest charged lepton. It is commonly found in orbitals around nuclei, forming atoms.
-qmd.particle.positron.desc=The positron is the Antimatter particle of the electron. When a electron and positron meet the annihilate resulting in all there mass being converted into energy in the form of 2 gamma rays.
-qmd.particle.electron_neutrino.desc=The Electron Neutrino is the neutrino partner of the Electron.
-qmd.particle.electron_antineutrino.desc=The Electron Antineutrino is the antimatter partner of the Electron Neutrino.
-qmd.particle.muon.desc=The Muon is basically a heavy electron.
-qmd.particle.antimuon.desc=The Anti-Muon is the antimatter partner of the Muon.
-qmd.particle.muon_neutrino.desc=The Muon Neutrino is the neutrino partner of the Muon.
-qmd.particle.muon_antineutrino.desc=The Muon Antineutrino is the antimatter partner of the Muon Neutrino.
-qmd.particle.tau.desc=The Tau is basically a really heavy electron
-qmd.particle.antitau.desc=The Anti-Tau is the antimatter partner of the Tau.
-qmd.particle.tau_neutrino.desc=The Tau Neutrino is the neutrino partner of the Tau.
-qmd.particle.tau_antineutrino.desc=The Tau Antineutrino is the antimatter partner of the Tau Neutrino.
-qmd.particle.photon.desc=Photons are the particles that make up light. They are the carries of the electromagnetic force. High energy Photons are called gamma rays.
-qmd.particle.gluon.desc=Gluons are the carries of the strong force. The strong force is what keeps quarks bound together to create composite particles like protons and neutrons.
-qmd.particle.w_plus_boson.desc=The Z and W bosons are the carries of the weak force. The weak force is what allows some particles to decay and is responsible for beta decay.
-qmd.particle.w_minus_boson.desc= The Z and W bosons are the carries of the weak force. The weak force is what allows some particles to decay and is responsible for beta decay.
-qmd.particle.z_boson.desc=The Z and W bosons are the carries of the weak force. The weak force is what allows some particles to decay and is responsible for beta decay.
-qmd.particle.higgs_boson.desc=The Higgs Boson is the boson of the Higgs Field which is responsible for giving particles their mass.
-qmd.particle.proton.desc=The Proton is a Nucleon along with the Neutron make up the nucleus of atoms.
-qmd.particle.antiproton.desc=The Anti-Proton is the antimatter partner of the Proton.
-qmd.particle.neutron.desc=The Neutron is a Nucleon along with the Protons make up the nucleus of atoms. The Neutron is used in nuclear fission to split fissile nuclei.
-qmd.particle.antineutron.desc=The Anti-Neutron is the antimatter partner of the Neutron.
-qmd.particle.deuteron.desc=The Deuteron is the nucleus of a Deuterium Atom.
-qmd.particle.antideuteron.desc=The Anti-Deuteron is the antimatter partner of the Deuteron.
-qmd.particle.alpha.desc=Alpha Particle is another name for the nucleus of helium 4. It is commonly released in the decay of heavy elements like uranium and plutonium.
-qmd.particle.antialpha.desc=The Anti-Alpha Particle is the antimatter partner of the Alpha Particle.
-qmd.particle.pion_plus.desc=Pions are the particles that are responsible for holding nuclei together. Although not colored themselves they distribute the "residual" strong force to keep nuclei together.
-qmd.particle.pion_naught.desc=Pions are the particles that are responsible for holding nuclei together. Although not colored themselves they distribute the "residual" strong force to keep nuclei together.
-qmd.particle.pion_minus.desc=Pions are the particles that are responsible for holding nuclei together. Although not colored themselves they distribute the "residual" strong force to keep nuclei together.
-qmd.particle.triton.desc=The Triton is the nucleus of a Tritium Atom.
-qmd.particle.antitriton.desc=The Anti-Triton is the antimatter partner of the Triton.
-qmd.particle.helion.desc=The Helion is the nucleus of a Helium-3 Atom.
-qmd.particle.antihelion.desc=The Anti-Helion is the antimatter partner of the Helion.
-
-qmd.particle.boron_ion.desc=A Boron atom with one electron missing.
-qmd.particle.calcium_48_ion.desc=A Calcium-48 atom with one electron missing. This is a particularly neutron rich atom useful for creating Super heavy elements.
-
-qmd.particle.kaon_plus.desc=The Kaon + is a meson with strangeness of 1.
-qmd.particle.kaon_naught.desc=The Kaon 0 is a meson with strangeness of 1.
-qmd.particle.antikaon_naught.desc=The Anti-Kaon 0 is a meson with strangeness of -1.
-qmd.particle.kaon_minus.desc=The Kaon - is a meson with strangeness of -1.
-
-qmd.particle.eta.desc=Eta Mesons are flavourless mesons meaning their flavor numbers like strangeness and isospin are 0.
-qmd.particle.eta_prime.desc=Eta Mesons are flavorless mesons meaning their flavor numbers like strangeness and isospin are 0.
-qmd.particle.charmed_eta.desc=Eta Mesons are flavorless mesons meaning their flavor numbers like strangeness and isospin are 0.
-qmd.particle.bottom_eta.desc=Eta Mesons are flavorless mesons meaning their flavor numbers like strangeness and isospin are 0.
-qmd.particle.glueball.desc=Glueballs are particle made entirely out of gluons.
-
-qmd.particle.sigma_plus.desc=Sigma Baryons contain one Strange Quark. They are heavier than Protons and Neutrons.
-qmd.particle.antisigma_plus.desc=Anti-Sigma Baryons contain one Anti-Strange Quark. They are heavier than Anti-Protons and Anti-Neutrons.
-qmd.particle.sigma_naught.desc=Sigma Baryons contain one Strange Quark. They are heavier than Protons and Neutrons.
-qmd.particle.antisigma_naught.desc=Anti-Sigma Baryons contain one Anti-Strange Quark. They are heavier than Anti-Protons and Anti-Neutrons.
-qmd.particle.sigma_minus.desc=Sigma Baryons contain one Strange Quark. They are heavier than Protons and Neutrons.
-qmd.particle.antisigma_minus.desc=Anti-Sigma Baryons contain one Anti-Strange Quark. They are heavier than Anti-Protons and Anti-Neutrons.
-
-qmd.particle.delta_plus_plus.desc=Delta ++ is a baryon containing three Up Quarks. They quickly decay via the strong force.
-qmd.particle.antidelta_plus_plus.desc=Anti-Delta ++ is a baryon containing three Anti-Up Quarks. They quickly decay via the strong force.
-
-qmd.particle.delta_minus.desc=Delta - is a baryon containing three Down Quarks. They quickly decay via the strong force.
-qmd.particle.antidelta_minus.desc=Anti-Delta - is a baryon containing three Anti-Down Quarks. They quickly decay via the strong force.
 
 //recipe_viewer
 qmd.gui.recipe_viewer.category.accelerator_source=Ion Source
@@ -521,9 +229,9 @@ itemGroup.qmd.multiblocks=QMD Multiblocks
 
 
 //block settings
-qmd.block.accelerator_port_setting_toggle=Toggled port redstone setting to
+qmd.block.accelerator_port_setting_toggle=Toggled port redstone setting to %s %s
 qmd.block.accelerator_port_setting=Port redstone setting is %s
-qmd.block.port_mode_toggle=Toggled port to
+qmd.block.port_mode_toggle=Toggled port to %s %s
 qmd.block.port_mode.INPUT=INPUT
 qmd.block.port_mode.OUTPUT=OUTPUT
 qmd.block.port_mode.DISABLED=DISABLED
@@ -531,7 +239,7 @@ qmd.block.port.mode=mode!
 qmd.block.particle_chamber_port_setting_toggle=Toggled port output setting to
 qmd.block.particle_chamber_port_setting=Port output setting is %s
 
-qmd.block.redstone_port_toggle=Toggled redstone port to
+qmd.block.redstone_port_toggle=Toggled redstone port to %s %s
 qmd.block.redstone_port_toggle.input=INPUT
 qmd.block.redstone_port_toggle.output=OUTPUT
 qmd.block.redstone_port_toggle.1=FIRST

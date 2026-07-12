@@ -20,6 +20,9 @@ public class RecipeTypeRegistration {
     public static final DeferredHolder<RecipeType<?>, RecipeType<AtmosphereCollectorRecipe>> ATMOSPHERE_COLLECTOR_RECIPE_TYPE = RECIPE_TYPES.register("atmosphere_collector", RecipeType::simple);
     public static final DeferredHolder<RecipeType<?>, RecipeType<LiquidCollectorRecipe>> LIQUID_COLLECTOR_RECIPE_TYPE = RECIPE_TYPES.register("liquid_collector", RecipeType::simple);
 
+    public static final DeferredHolder<RecipeType<?>, RecipeType<AcceleratorCoolingRecipe>> ACCELERATOR_COOLING_RECIPE_TYPE = RECIPE_TYPES.register("accelerator_cooling", RecipeType::simple);
+    public static final DeferredHolder<RecipeType<?>, RecipeType<AcceleratorSourceRecipe>> ACCELERATOR_SOURCE_RECIPE_TYPE = RECIPE_TYPES.register("accelerator_source", RecipeType::simple);
+
     public static void init() {
     }
 

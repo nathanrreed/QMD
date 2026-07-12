@@ -1,0 +1,337 @@
+package lach_01298.qmd.accelerator;
+
+import com.google.common.collect.Lists;
+import it.zerono.mods.zerocore.lib.multiblock.IMultiblockPart;
+import lach_01298.qmd.QMD;
+import lach_01298.qmd.accelerator.tile.*;
+import lach_01298.qmd.capabilities.CapabilityParticleStackHandler;
+import lach_01298.qmd.config.QMDServerConfig;
+import lach_01298.qmd.enums.EnumTypes.IOType;
+import lach_01298.qmd.multiblock.network.AcceleratorUpdatePacket;
+import lach_01298.qmd.multiblock.network.BeamSplitterUpdatePacket;
+import lach_01298.qmd.particle.IParticleStackHandler;
+import lach_01298.qmd.particle.Particle;
+import lach_01298.qmd.particle.ParticleStack;
+import lach_01298.qmd.util.Equations;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class BeamSplitterLogic extends AcceleratorLogic {
+
+    // Multiblock logic
+
+    public BeamSplitterLogic(AcceleratorLogic oldLogic) {
+        super(oldLogic);
+		
+		/*
+		beam 0 = input particle
+		beam 1 = output particle
+		beam 2 = output particle straight
+		tank 0 = input coolant
+		tank 1 = output coolant
+		*/
+    }
+
+    @Override
+    public String getID() {
+        return "beam_splitter";
+    }
+
+    // Accelerator methods
+
+    @Override
+    public int getBeamLength() {
+        return multiblock.getExteriorLengthX();
+    }
+
+    @Override
+    public double getBeamRadius() {
+        return QMDServerConfig.beamDiverterRadius;
+    }
+
+    public long getEnergyLoss() {
+        return Equations.cornerEnergyLoss(multiblock.beams.get(0).getParticleStack(), getBeamRadius());
+    }
+
+    public long getMaxEnergy() {
+        if (this.multiblock.beams.get(0).getParticleStack() != null) {
+            Particle particle = this.multiblock.beams.get(0).getParticleStack().getParticle();
+            return Equations.ringEnergyMaxEnergyFromDipole(multiblock.dipoleStrength, getBeamRadius(), particle.getCharge(), particle.getMass());
+        }
+
+        return 0;
+    }
+
+    public long getAcceleratorMaxEnergy(Particle particle) {
+        if (particle != null) {
+            return Equations.ringEnergyMaxEnergyFromDipole(multiblock.dipoleStrength, getBeamRadius(), particle.getCharge(), particle.getMass());
+        }
+        return 0;
+    }
+
+    // Multiblock validation
+
+    @Override
+    public boolean isMachineWhole() {
+        Accelerator acc = multiblock;
+
+        if (acc.getExteriorLengthX() != getThickness() || acc.getExteriorLengthY() != getThickness() || acc.getExteriorLengthZ() != getThickness()) {
+            multiblock.setLastError(QMD.MOD_ID + ".multiblock_validation.beam_director.must_be_cube");
+            return false;
+        }
+
+        if (!(acc.getWorld().getBlockEntity(acc.getMiddleCoord()) instanceof TileAcceleratorBeam)) {
+            multiblock.setLastError(acc.getMiddleCoord(), QMD.MOD_ID + ".multiblock_validation.beam_director.must_be_beam");
+            return false;
+        }
+
+        if (!acc.isValidDipole(acc.getMiddleCoord(), false) && !acc.isValidDipole(acc.getMiddleCoord(), true)) {
+            multiblock.setLastError(acc.getMiddleCoord(), QMD.MOD_ID + ".multiblock_validation.beam_director.must_be_dipole");
+            return false;
+        }
+
+        //beam ports
+
+        for (TileAcceleratorBeamPort port : getPartMap(TileAcceleratorBeamPort.class).values()) {
+            boolean valid = false;
+            if (port.getBlockPos().asLong() == acc.getMiddleCoord().above(2).asLong()) {
+                valid = true;
+            } else if (port.getBlockPos().asLong() == acc.getMiddleCoord().below(2).asLong()) {
+                valid = true;
+            } else if (port.getBlockPos().asLong() == acc.getMiddleCoord().north(2).asLong()) {
+                valid = true;
+            } else if (port.getBlockPos().asLong() == acc.getMiddleCoord().south(2).asLong()) {
+                valid = true;
+            } else if (port.getBlockPos().asLong() == acc.getMiddleCoord().east(2).asLong()) {
+                valid = true;
+            } else if (port.getBlockPos().asLong() == acc.getMiddleCoord().west(2).asLong()) {
+                valid = true;
+            }
+
+
+            if (!valid) {
+                multiblock.setLastError(port.getBlockPos(), QMD.MOD_ID + ".multiblock_validation.accelerator.invalid_beam_port");
+                return false;
+            }
+        }
+
+
+        int inputs = 0;
+        int outputs = 0;
+        for (TileAcceleratorBeamPort port : getPartMap(TileAcceleratorBeamPort.class).values()) {
+            port.recalculateOutwardsDirection(acc.getMinimumCoord().get(), acc.getMaximumCoord().get());
+            if (port.getOutwardFacing() == null) {
+                multiblock.setLastError(port.getBlockPos(), QMD.MOD_ID + ".multiblock_validation.accelerator.something_is_wrong");
+                return false;
+            }
+
+
+            if (!(acc.getWorld().getBlockEntity(port.getBlockPos().relative(port.getOutwardFacing().getOpposite())) instanceof TileAcceleratorBeam)) {
+                multiblock.setLastError(port.getBlockPos().relative(port.getOutwardFacing().getOpposite()), QMD.MOD_ID + ".multiblock_validation.accelerator.ring.beam_port_must_connect");
+                return false;
+            }
+            if (port.getIOType() == IOType.INPUT) {
+                inputs++;
+            }
+
+            if (port.getIOType() == IOType.OUTPUT) {
+                outputs++;
+            }
+        }
+
+        if (inputs != 1 || outputs != 2) {
+            multiblock.setLastError(QMD.MOD_ID + ".multiblock_validation.accelerator.splitter.must_have_io");
+            return false;
+        }
+        if (containsBlacklistedPart()) {
+            return false;
+        }
+
+        return super.isMachineWhole();
+    }
+
+    public static final List<Pair<Class<? extends  IMultiblockPart<Accelerator>>, String>> PART_BLACKLIST = Lists.newArrayList(
+            Pair.of(TileAcceleratorSynchrotronPort.class, QMD.MOD_ID + ".multiblock_validation.accelerator.no_synch_ports"),
+            Pair.of(TileAcceleratorRFCavity.class, QMD.MOD_ID + ".multiblock_validation.accelerator.no_rf_cavity"),
+            Pair.of(TileAcceleratorIonSource.class, QMD.MOD_ID + ".multiblock_validation.accelerator.no_source"),
+            Pair.of(TileAcceleratorIonCollector.class, QMD.MOD_ID + ".multiblock_validation.accelerator.no_ion_collectors"),
+            Pair.of(TileAcceleratorPort.class, QMD.MOD_ID + ".multiblock_validation.accelerator.no_ion_ports"));
+
+    @Override
+    public List<Pair<Class<? extends IMultiblockPart<Accelerator>>, String>> getPartBlacklist() {
+        return PART_BLACKLIST;
+    }
+
+    // Accelerator formation
+
+    @Override
+    public void onAcceleratorFormed() {
+        Accelerator acc = multiblock;
+
+        if (!getWorld().isClientSide()) {
+            resetBeams();
+
+            Set<BlockPos> postions = new HashSet<>();
+            postions.add(acc.getMiddleCoord().immutable());
+            setBeamlineFunctional(postions);
+            formComponents();
+
+            for (TileAcceleratorBeamPort port : getPartMap(TileAcceleratorBeamPort.class).values()) {
+                if (port.getIOType() == IOType.INPUT) {
+                    port.setIONumber(0);
+                }
+                if (port.getIOType() == IOType.OUTPUT) {
+                    if (multiblock.getWorld().getBlockEntity(port.getBlockPos().relative(port.getOutwardFacing().getOpposite(), getThickness() - 1)) instanceof TileAcceleratorBeamPort) {
+                        TileAcceleratorBeamPort oppositePort = (TileAcceleratorBeamPort) multiblock.getWorld().getBlockEntity(port.getBlockPos().relative(port.getOutwardFacing().getOpposite(), getThickness() - 1));
+                        if (oppositePort.getIOType() == IOType.INPUT) {
+                            port.setIONumber(2);
+                        } else {
+                            port.setIONumber(1);
+                        }
+                    } else {
+                        port.setIONumber(1);
+                    }
+                }
+            }
+
+        }
+
+        refreshStats();
+        super.onAcceleratorFormed();
+        acc.cooling = (long) (2 * (acc.rawHeating + acc.getMaxExternalHeating()));
+    }
+
+    // Accelerator Operation
+
+    @Override
+    public boolean onUpdateServer() {
+        super.onUpdateServer();
+
+        if (multiblock.isControllorOn) {
+            produceBeam();
+        } else {
+            resetOutputBeam();
+        }
+
+        push();
+        multiblock.sendMultiblockUpdatePacketToListeners();
+        return true;
+    }
+
+    @Override
+    protected void refreshBeams() {
+        multiblock.beams.get(0).setParticleStack(null);
+        pull();
+    }
+
+    @Override
+    protected boolean shouldUseEnergy() {
+        if (multiblock.beams.get(0).getParticleStack() != null) {
+            return true;
+        }
+
+        return false;
+    }
+
+    // Beam port IO
+
+    @Override
+    protected void pull() {
+        for (TileAcceleratorBeamPort port : getPartMap(TileAcceleratorBeamPort.class).values()) {
+            if (port.getIOType() == IOType.INPUT) {
+                if (port.getOutwardFacing() != null) {
+                    Direction face = port.getOutwardFacing();
+                    BlockEntity tile = port.getLevel().getBlockEntity(port.getBlockPos().relative(face));
+                    if (tile != null) {
+                        IParticleStackHandler otherStorage = getWorld().getCapability(CapabilityParticleStackHandler.BLOCK, tile.getBlockPos(), face.getOpposite());
+                        if (otherStorage != null) {
+                            ParticleStack stack = otherStorage.extractParticle(face.getOpposite());
+
+                            if (stack != null) {
+                                multiblock.beams.get(0).setMaxEnergy(getAcceleratorMaxEnergy(stack.getParticle()));
+
+                                if (!multiblock.beams.get(0).reciveParticle(face, stack)) {
+                                    if (stack.getMeanEnergy() > multiblock.beams.get(0).getMaxEnergy()) {
+                                        multiblock.errorCode = Accelerator.errorCode_InputParticleEnergyToHigh;
+                                    } else if (stack.getMeanEnergy() < multiblock.beams.get(0).getMinEnergy()) {
+                                        multiblock.errorCode = Accelerator.errorCode_InputParticleEnergyToLow;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void switchIO() {
+
+    }
+
+
+    // Recipe handling
+
+    private void resetOutputBeam() {
+        multiblock.beams.get(1).setParticleStack(null);
+        multiblock.beams.get(2).setParticleStack(null);
+    }
+
+    private void produceBeam() {
+
+        if (multiblock.beams.get(0).getParticleStack() != null) {
+            ParticleStack stackIn = multiblock.beams.get(0).getParticleStack();
+            multiblock.beams.get(1).setParticleStack(stackIn.copy());
+            multiblock.beams.get(1).getParticleStack().setAmount(stackIn.getAmount() / 2);
+
+            multiblock.beams.get(2).setParticleStack(stackIn.copy());
+            multiblock.beams.get(2).getParticleStack().setAmount(stackIn.getAmount() / 2);
+
+
+            if (stackIn.getMeanEnergy() <= getMaxEnergy()) {
+                ParticleStack particleOut = multiblock.beams.get(1).getParticleStack();
+                ParticleStack particleStraightOut = multiblock.beams.get(2).getParticleStack();
+
+                particleOut.addMeanEnergy(-Equations.cornerEnergyLoss(stackIn, getBeamRadius()));
+                particleOut.addFocus(-Equations.focusLoss(getBeamLength(), stackIn));
+                particleStraightOut.addFocus(-Equations.focusLoss(getBeamLength(), stackIn));
+
+                if (particleOut.getFocus() <= 0) {
+                    particleOut = null;
+                    multiblock.errorCode = Accelerator.errorCode_NotEnoughQuadrupoles;
+                }
+                if (particleStraightOut.getFocus() <= 0) {
+                    particleStraightOut = null;
+                    multiblock.errorCode = Accelerator.errorCode_NotEnoughQuadrupoles;
+                }
+            }
+        } else {
+            resetOutputBeam();
+        }
+    }
+
+    // Network
+    @Override
+    public BeamSplitterUpdatePacket getMultiblockUpdatePacket() {
+        return new BeamSplitterUpdatePacket(multiblock.controller.getTilePos(),
+                multiblock.isControllorOn, multiblock.cooling, multiblock.rawHeating, multiblock.currentHeating, multiblock.maxCoolantIn, multiblock.maxCoolantOut, multiblock.maxOperatingTemp,
+                multiblock.requiredEnergy, multiblock.efficiency, multiblock.acceleratingVoltage,
+                multiblock.RFCavityNumber, multiblock.quadrupoleNumber, multiblock.quadrupoleStrength, multiblock.dipoleNumber, multiblock.dipoleStrength, multiblock.errorCode,
+                multiblock.heatBuffer, multiblock.energyStorage, multiblock.tanks, multiblock.beams);
+    }
+
+    @Override
+    public void onMultiblockUpdatePacket(AcceleratorUpdatePacket message) {
+        super.onMultiblockUpdatePacket(message);
+        if (message instanceof BeamSplitterUpdatePacket) {
+            BeamSplitterUpdatePacket packet = (BeamSplitterUpdatePacket) message;
+        }
+    }
+}

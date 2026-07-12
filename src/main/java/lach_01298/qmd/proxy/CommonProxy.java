@@ -3,8 +3,8 @@ package lach_01298.qmd.proxy;
 import com.nred.nuclearcraft.info.NCFluid;
 import lach_01298.qmd.QMDDamageSources;
 import lach_01298.qmd.QMDRadSources;
+import lach_01298.qmd.accelerator.CoolerPlacement;
 import lach_01298.qmd.block.QMDBlocks;
-import lach_01298.qmd.enums.BlockTypes;
 import lach_01298.qmd.fluid.QMDFluids;
 import lach_01298.qmd.init.QMDCreativeTabs;
 import lach_01298.qmd.item.QMDItems;
@@ -30,7 +30,6 @@ import static com.nred.nuclearcraft.registration.CommonSetup.addFluidsMixing;
 @EventBusSubscriber
 public class CommonProxy {
     public static void preInit(IEventBus modEventBus) {
-        BlockTypes.init();
         QMDTileInfoHandler.preInit();
 
         QMDSounds.init();
@@ -44,16 +43,13 @@ public class CommonProxy {
         Particles.init();
 //        QMDArmour.init();
 
-
         Particles.register();
 
         RecipeSerializerRegistration.init();
         RecipeTypeRegistration.init();
 
-//        CoolerPlacement.preInit();
-//        HeaterPlacement.preInit();
-
-//        MinecraftForge.EVENT_BUS.register(new QMDRecipes());
+        CoolerPlacement.preInit();
+//        HeaterPlacement.preInit(); TODO
 
         QMDSounds.register(modEventBus);
         QMDBlocks.register(modEventBus);
@@ -70,8 +66,8 @@ public class CommonProxy {
     @SubscribeEvent
     public static void init(FMLCommonSetupEvent event) {
         QMDRadSources.init();
-//        QMDEntities.register();
-//        CoolerPlacement.init();
+//        QMDEntities.register(); TODO
+        CoolerPlacement.init();
 //        HeaterPlacement.init();
 //        QMDArmour.blacklistShielding();
 //        MinecraftForge.EVENT_BUS.register(new ArmourBonusHandler());
@@ -105,11 +101,10 @@ public class CommonProxy {
 //        QMDArmour.addRadResistance();
         QMDRecipes.postInit(manager);
 
-//        CoolerPlacement.postInit();
+        CoolerPlacement.postInit();
 //        HeaterPlacement.postInit();
     }
-//
-//
+
 //    publicstatic void onIdMapping(FMLModIdMappingEvent idMappingEvent) { TODO
 //        QMDRecipes.refreshRecipeCaches();
 //        QMDRadSources.init();

@@ -9,6 +9,10 @@ public abstract class QMDTileUpdatePacket extends TileUpdatePacket {
         super(pos);
     }
 
+    public QMDTileUpdatePacket(TileUpdatePacket packet) {
+        super(packet);
+    }
+
     public static class Handler extends TileUpdatePacket.Handler<QMDTileUpdatePacket, ITilePacket<QMDTileUpdatePacket>> {
     }
 }

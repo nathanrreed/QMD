@@ -28,7 +28,7 @@ public class QMDBlockLootTableSubProvider extends BlockLootSubProvider {
 
     @Override
     public void generate() {
-        dropSelf(greenLuminousPaint.get()); // TODO Add to?
+        dropSelf(greenLuminousPaint.get());
         dropSelf(blueLuminousPaint.get());
         dropSelf(orangeLuminousPaint.get());
 
@@ -37,6 +37,11 @@ public class QMDBlockLootTableSubProvider extends BlockLootSubProvider {
         dropSelf(turbineBladeSuperAlloy.get());
         dropSelf(rtgStrontium.get());
         dropSelf(strontium90.get());
+
+        dropSelf(beamline.get());
+
+        Stream.of(linearAcceleratorController, ringAcceleratorController, acceleratorBeam, acceleratorCasing, acceleratorGlass, acceleratorVent, acceleratorBeamPort, acceleratorSynchrotronPort, acceleratorYoke, acceleratorSource, acceleratorEnergyPort, beamDiverterController, beamSplitterController, deceleratorController, acceleratorComputerPort, acceleratorPort, acceleratorRedstonePort, massSpectrometerController, acceleratorLaserIonSource, acceleratorIonCollector).forEach(e -> dropSelf(e.get()));
+        Stream.of(acceleratorCoolers, acceleratorMagnets, RFCavities).flatMap(e -> e.values().parallelStream()).map(DeferredHolder::get).forEach(this::dropSelf);
 
         for (DeferredBlock<Block> block : dischargeLamps.values()) {
             dropSelf(block.get());
@@ -51,10 +56,12 @@ public class QMDBlockLootTableSubProvider extends BlockLootSubProvider {
 
     @Override
     protected @NotNull Iterable<Block> getKnownBlocks() {
-        List<Block> all = new ArrayList<>();
-        all.addAll(Stream.of(greenLuminousPaint, blueLuminousPaint, orangeLuminousPaint, rtgStrontium, strontium90, fissionReflector, fissionShield, turbineBladeSuperAlloy, irradiator, oreLeacher, atmosphereCollector, liquidCollector, creativeParticleSource).map(DeferredHolder::get).toList());
-        all.addAll(Stream.of(dischargeLamps).flatMap(e -> e.values().parallelStream()).map(DeferredHolder::get).toList());
-        return all;
+        List<Block> blocks = new ArrayList<>();
+        blocks.addAll(Stream.of(beamline, greenLuminousPaint, blueLuminousPaint, orangeLuminousPaint, rtgStrontium, strontium90, fissionReflector, fissionShield, turbineBladeSuperAlloy, irradiator, oreLeacher, atmosphereCollector, liquidCollector, creativeParticleSource).map(DeferredHolder::get).toList());
+        blocks.addAll(Stream.of(dischargeLamps).flatMap(e -> e.values().parallelStream()).map(DeferredHolder::get).toList());
+        blocks.addAll(Stream.of(linearAcceleratorController, ringAcceleratorController, acceleratorBeam, acceleratorCasing, acceleratorGlass, acceleratorVent, acceleratorBeamPort, acceleratorSynchrotronPort, acceleratorYoke, acceleratorSource, acceleratorEnergyPort, beamDiverterController, beamSplitterController, deceleratorController, acceleratorComputerPort, acceleratorPort, acceleratorRedstonePort, massSpectrometerController, acceleratorLaserIonSource, acceleratorIonCollector).map(DeferredHolder::get).toList());
+        blocks.addAll(Stream.of(acceleratorCoolers, acceleratorMagnets, RFCavities).flatMap(e -> e.values().parallelStream()).map(DeferredHolder::get).toList());
+        return blocks;
     }
 
     private LootTable.Builder createMachineDrop(Block block) {

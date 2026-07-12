@@ -15,25 +15,25 @@
         },
         {
             "type": "spotlight",
-			"title": "Super Alloy Turbine Blade",
+            "title": "Super Alloy Turbine Blade",
             "item": "qmd:turbine_blade_super_alloy",
             "text": "A turbine blade made of super alloy for high efficiencies."
         },
         {
             "type": "spotlight",
-			"title": "Hafnium Neutron Shield",
-            "item": "qmd:fission_shield",
+            "title": "Hafnium Neutron Shield",
+            "item": "qmd:hafnium_shield",
             "text": "A fission shield for reactors made of hafnium for higher efficiencies."
         },
         {
             "type": "spotlight",
-            "item": "qmd:discharge_lamp",
+            "item": "qmd:empty_discharge_lamp",
             "title": "Discharge Lamps",
             "text": "A decorative light that can be turned off with redstone. They come in different colors depending on the element inside."
         },
         {
             "type": "spotlight",
-            "item": "qmd:luminous_paint",
+            "item": "qmd:green_luminous_paint",
             "title": "Radioluminescent Paint",
             "text": "A decorative light layer that comes in three different colors! It can be placed on any side of a block. It also has the benefit that it is radioactive."
         },

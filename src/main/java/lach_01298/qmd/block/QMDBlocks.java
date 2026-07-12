@@ -8,8 +8,10 @@ import com.nred.nuclearcraft.multiblock.turbine.TurbinePartType;
 import com.nred.nuclearcraft.util.InfoHelper;
 import com.nred.nuclearcraft.util.UnitHelper;
 import lach_01298.qmd.QMD;
+import lach_01298.qmd.accelerator.AcceleratorPartType;
 import lach_01298.qmd.config.QMDStartupConfig;
 import lach_01298.qmd.enums.MaterialTypes.LuminousPaintType;
+import lach_01298.qmd.pipe.BeamLinePartType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
@@ -36,33 +38,33 @@ import static lach_01298.qmd.item.QMDItems.ITEMS;
 public class QMDBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(QMD.MOD_ID);
 
-//    public static Block beamline;
-//
-//    public static Block linearAcceleratorController;
-//    public static Block ringAcceleratorController;
-//    public static Block acceleratorBeam;
-//    public static Block acceleratorCasing;
-//    public static Block acceleratorGlass;
-//    public static Block acceleratorVent;
-//    public static Block acceleratorBeamPort;
-//    public static Block acceleratorSynchrotronPort;
-//    public static Block RFCavity;
-//    public static Block acceleratorMagnet;
-//    public static Block acceleratorYoke;
-//    public static Map<CoolerType, Block> acceleratorCoolers = new HashMap<>();
-//    public static Block acceleratorSource;
-//    public static Block acceleratorEnergyPort;
-//    public static Block beamDiverterController;
-//    public static Block beamSplitterController;
-//    public static Block deceleratorController;
-//    public static Block acceleratorComputerPort;
-//    public static Block acceleratorPort;
-//    public static Block acceleratorRedstonePort;
-//    public static Block massSpectrometerController;
-//    public static Block acceleratorLaserIonSource;
-//    public static Block acceleratorIonCollector;
-//
-//    public static Block targetChamberController;
+    public static DeferredBlock<Block> beamline;
+
+    public static DeferredBlock<Block> linearAcceleratorController;
+    public static DeferredBlock<Block> ringAcceleratorController;
+    public static DeferredBlock<Block> acceleratorBeam;
+    public static DeferredBlock<Block> acceleratorCasing;
+    public static DeferredBlock<Block> acceleratorGlass;
+    public static DeferredBlock<Block> acceleratorVent;
+    public static DeferredBlock<Block> acceleratorBeamPort;
+    public static DeferredBlock<Block> acceleratorSynchrotronPort;
+    public static Map<RFCavityType, DeferredBlock<Block>> RFCavities = new HashMap<>();
+    public static Map<MagnetType, DeferredBlock<Block>> acceleratorMagnets = new HashMap<>();
+    public static DeferredBlock<Block> acceleratorYoke;
+    public static Map<CoolerType, DeferredBlock<Block>> acceleratorCoolers = new HashMap<>();
+    public static DeferredBlock<Block> acceleratorSource;
+    public static DeferredBlock<Block> acceleratorEnergyPort;
+    public static DeferredBlock<Block> beamDiverterController;
+    public static DeferredBlock<Block> beamSplitterController;
+    public static DeferredBlock<Block> deceleratorController;
+    public static DeferredBlock<Block> acceleratorComputerPort;
+    public static DeferredBlock<Block> acceleratorPort;
+    public static DeferredBlock<Block> acceleratorRedstonePort;
+    public static DeferredBlock<Block> massSpectrometerController;
+    public static DeferredBlock<Block> acceleratorLaserIonSource;
+    public static DeferredBlock<Block> acceleratorIonCollector;
+
+//    public static Block targetChamberController; TODO
 //    public static Block decayChamberController;
 //    public static Block beamDumpController;
 //    public static Block collisionChamberController;
@@ -88,7 +90,7 @@ public class QMDBlocks {
 
     public static Map<LampType, DeferredBlock<Block>> dischargeLamps = new HashMap<>();
 
-    //    public static Block exoticContainmentController;
+//    public static Block exoticContainmentController; TODO
 //    public static Block nucleosynthesisChamberController;
 //    public static Block vacuumChamberCasing;
 //    public static Block vacuumChamberGlass;
@@ -106,7 +108,7 @@ public class QMDBlocks {
 //    public static Block vacuumChamberHeaterVent;
 //    public static Block vacuumChamberRedstonePort;
 //
-//    public static Block liquefierController;
+//    public static Block liquefierController; TODO
 //    public static Block liquefierNozzle;
 //    public static Block liquefierCompressor;
 //    public static Block liquefierPort;
@@ -120,37 +122,42 @@ public class QMDBlocks {
     public static DeferredBlock<Block> orangeLuminousPaint;
 
     public static void init() {
-//        beamline = withName(new BlockBeamline(), "beamline");
-//
-//        linearAcceleratorController = withName(new BlockLinearAcceleratorController(), "linear_accelerator_controller");
-//        ringAcceleratorController = withName(new BlockRingAcceleratorController(), "ring_accelerator_controller");
-//        acceleratorBeam = withName(new BlockAcceleratorBeam(), "accelerator_beam");
-//        acceleratorCasing = withName(new BlockAcceleratorCasing(), "accelerator_casing");
-//        acceleratorGlass = withName(new BlockAcceleratorGlass(), "accelerator_glass");
-//        acceleratorVent = withName(new BlockAcceleratorVent(), "accelerator_vent");
-//        acceleratorComputerPort = withName(new BlockAcceleratorComputerPort(), "accelerator_computer_port");
-//        acceleratorPort = withName(new BlockAcceleratorPort(), "accelerator_port");
-//        acceleratorRedstonePort = withName(new BlockAcceleratorRedstonePort(), "accelerator_redstone_port");
-//
-//        acceleratorBeamPort = withName(new BlockAcceleratorBeamPort(), "accelerator_beam_port");
-//        acceleratorSynchrotronPort = withName(new BlockAcceleratorSynchrotronPort(), "accelerator_synchrotron_port");
-//        RFCavity = withName(new BlockRFCavity(), "accelerator_cavity");
-//        acceleratorMagnet = withName(new BlockAcceleratorMagnet(), "accelerator_magnet");
-//        acceleratorYoke = withName(new BlockAcceleratorYoke(), "accelerator_yoke");
-//
-//        for (CoolerType type : CoolerType.values()) {
-//            acceleratorCoolers.put(type, withName(new BlockAcceleratorCooler(), type.getName().toLowerCase() + "_accelerator_cooler"));
-//        }
-//
-//        acceleratorSource = withName(new BlockAcceleratorSource(), "accelerator_source");
-//        acceleratorEnergyPort = withName(new BlockAcceleratorEnergyPort(), "accelerator_energy_port");
-//        beamDiverterController = withName(new BlockBeamDiverterController(), "beam_diverter_controller");
-//        beamSplitterController = withName(new BlockBeamSplitterController(), "beam_splitter_controller");
-//        deceleratorController = withName(new BlockDeceleratorController(), "decelerator_controller");
-//        massSpectrometerController = withName(new BlockMassSpectrometerController(), "mass_spectrometer_controller");
-//        acceleratorLaserIonSource = withName(new BlockAcceleratorLaserIonSource(), "accelerator_laser_ion_source");
-//        acceleratorIonCollector = withName(new BlockAcceleratorIonCollector(), "accelerator_ion_collector");
-//
+        beamline = registerBlockItem("beamline", BeamLinePartType.BeamLine::createBlock);
+
+        linearAcceleratorController = registerBlockItem("linear_accelerator_controller", AcceleratorPartType.LinearAcceleratorController::createBlock);
+        ringAcceleratorController = registerBlockItem("ring_accelerator_controller", AcceleratorPartType.RingAcceleratorController::createBlock);
+        beamDiverterController = registerBlockItem("beam_diverter_controller", AcceleratorPartType.BeamDiverterController::createBlock);
+        beamSplitterController = registerBlockItem("beam_splitter_controller", AcceleratorPartType.BeamSplitterController::createBlock);
+        deceleratorController = registerBlockItem("decelerator_controller", AcceleratorPartType.DeceleratorController::createBlock);
+        massSpectrometerController = registerBlockItem("mass_spectrometer_controller", AcceleratorPartType.MassSpectrometerController::createBlock);
+
+        acceleratorBeam = registerBlockItem("accelerator_beam", AcceleratorPartType.AcceleratorBeam::createBlock);
+        acceleratorCasing = registerBlockItem("accelerator_casing", AcceleratorPartType.AcceleratorCasing::createBlock);
+        acceleratorGlass = registerBlockItem("accelerator_glass", AcceleratorPartType.AcceleratorGlass::createBlock);
+        acceleratorVent = registerBlockItem("accelerator_vent", AcceleratorPartType.AcceleratorVent::createBlock);
+        acceleratorComputerPort = registerBlockItem("accelerator_computer_port", AcceleratorPartType.AcceleratorComputerPort::createBlock);
+        acceleratorPort = registerBlockItem("accelerator_port", AcceleratorPartType.AcceleratorPort::createBlock);
+        acceleratorRedstonePort = registerBlockItem("accelerator_redstone_port", AcceleratorPartType.AcceleratorRedstonePort::createBlock);
+
+        acceleratorBeamPort = registerBlockItem("accelerator_beam_port", AcceleratorPartType.AcceleratorBeamPort::createBlock);
+        acceleratorSynchrotronPort = registerBlockItem("accelerator_synchrotron_port", AcceleratorPartType.AcceleratorSynchrotronPort::createBlock);
+        acceleratorYoke = registerBlockItem("accelerator_yoke", AcceleratorPartType.AcceleratorYoke::createBlock);
+
+        for (RFCavityType type : RFCavityType.values()) {
+            RFCavities.put(type, registerBlockItem(type.getName().toLowerCase() + "_accelerator_cavity", () -> AcceleratorPartType.RFCavity.createBlock(type)));
+        }
+        for (MagnetType type : MagnetType.values()) {
+            acceleratorMagnets.put(type, registerBlockItem(type.getName().toLowerCase() + "_accelerator_magnet", () -> AcceleratorPartType.AcceleratorMagnet.createBlock(type)));
+        }
+        for (CoolerType type : CoolerType.values()) {
+            acceleratorCoolers.put(type, registerBlockItem(type.getName().toLowerCase() + "_accelerator_cooler", () -> AcceleratorPartType.AcceleratorCooler.createBlock(type)));
+        }
+
+        acceleratorSource = registerBlockItem("accelerator_source", AcceleratorPartType.AcceleratorSource::createBlock);
+        acceleratorEnergyPort = registerBlockItem("accelerator_energy_port", AcceleratorPartType.AcceleratorEnergyPort::createBlock);
+        acceleratorLaserIonSource = registerBlockItem("accelerator_laser_ion_source", AcceleratorPartType.AcceleratorLaserIonSource::createBlock);
+        acceleratorIonCollector = registerBlockItem("accelerator_ion_collector", AcceleratorPartType.AcceleratorIonCollector::createBlock);
+
 //        targetChamberController = withName(new BlockTargetChamberController(), "target_chamber_controller");
 //        decayChamberController = withName(new BlockDecayChamberController(), "decay_chamber_controller");
 //        beamDumpController = withName(new BlockBeamDumpController(), "beam_dump_controller");

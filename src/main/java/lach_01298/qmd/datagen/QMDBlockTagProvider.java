@@ -13,6 +13,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
+import static com.nred.nuclearcraft.helpers.Concat.blockValues;
 import static lach_01298.qmd.block.QMDBlocks.*;
 
 public class QMDBlockTagProvider extends BlockTagsProvider {
@@ -27,6 +28,9 @@ public class QMDBlockTagProvider extends BlockTagsProvider {
         tag(MINEABLE_WITH_DRILL).addTags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.MINEABLE_WITH_SHOVEL);
 
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(rtgStrontium.get(), strontium90.get(), fissionReflector.get(), fissionShield.get(), turbineBladeSuperAlloy.get(), irradiator.get(), oreLeacher.get(), atmosphereCollector.get(), liquidCollector.get());
+                .add(beamline.get(), rtgStrontium.get(), strontium90.get(), fissionReflector.get(), fissionShield.get(), turbineBladeSuperAlloy.get(), irradiator.get(), oreLeacher.get(), atmosphereCollector.get(), liquidCollector.get())
+                .add(linearAcceleratorController.get(), ringAcceleratorController.get(), acceleratorBeam.get(), acceleratorCasing.get(), acceleratorGlass.get(), acceleratorVent.get(), acceleratorBeamPort.get(), acceleratorSynchrotronPort.get(), acceleratorYoke.get(), acceleratorSource.get(), acceleratorEnergyPort.get(), beamDiverterController.get(), beamSplitterController.get(), deceleratorController.get(), acceleratorComputerPort.get(), acceleratorPort.get(), acceleratorRedstonePort.get(), massSpectrometerController.get(), acceleratorLaserIonSource.get(), acceleratorIonCollector.get())
+                .add(blockValues(acceleratorCoolers, acceleratorMagnets, RFCavities).toArray(Block[]::new))
+        ;
     }
 }

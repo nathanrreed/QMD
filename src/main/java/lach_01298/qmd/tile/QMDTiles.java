@@ -1,8 +1,15 @@
 package lach_01298.qmd.tile;
 
+import it.zerono.mods.zerocore.lib.block.multiblock.MultiblockPartBlock;
 import lach_01298.qmd.QMD;
+import lach_01298.qmd.accelerator.tile.*;
+import lach_01298.qmd.enums.BlockTypes.CoolerType;
+import lach_01298.qmd.enums.BlockTypes.MagnetType;
+import lach_01298.qmd.enums.BlockTypes.RFCavityType;
 import lach_01298.qmd.machine.tile.TileQMDProcessors.OreLeacherEntity;
+import lach_01298.qmd.pipe.TileBeamline;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -23,111 +30,53 @@ public class QMDTiles {
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileCreativeParticleSource>> CREATIVE_PARTICLE_SOURCE_ENTITY_TYPE = BLOCK_ENTITY_TYPES.register("creative_particle_source", () -> BlockEntityType.Builder.of(TileCreativeParticleSource::new, creativeParticleSource.get()).build(null));
 
-//	private static ResourceLocation acceleratorPath = new ResourceLocation(QMD.MOD_ID,"accelerator_"); TODO
-//	private static ResourceLocation magnetPath = new ResourceLocation(QMD.MOD_ID,"accelerator_magnet");
-//	private static ResourceLocation cavityPath = new ResourceLocation(QMD.MOD_ID,"accelerator_cavity");
-//	private static ResourceLocation coolerPath = new ResourceLocation(QMD.MOD_ID,"accelerator_cooler");
+//    private static ResourceLocation acceleratorPath = ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "accelerator_");
+//    private static ResourceLocation magnetPath = ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "accelerator_magnet");
+//    private static ResourceLocation cavityPath = ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "accelerator_cavity");
+//    private static ResourceLocation coolerPath = ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "accelerator_cooler");
 //
-//	private static ResourceLocation chamberPath = new ResourceLocation(QMD.MOD_ID,"particle_chamber_");
-//	private static ResourceLocation detectorPath = new ResourceLocation(QMD.MOD_ID,"particle_chamber_detector_");
-//	private static ResourceLocation containmentPath = new ResourceLocation(QMD.MOD_ID,"containment_");
-//	private static ResourceLocation heaterPath = new ResourceLocation(QMD.MOD_ID,"containment_heater");
+//    private static ResourceLocation chamberPath = ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "particle_chamber_");
+//    private static ResourceLocation detectorPath = ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "particle_chamber_detector_");
+//    private static ResourceLocation containmentPath = ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "containment_");
+//    private static ResourceLocation heaterPath = ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "containment_heater");
 //
-//	private static ResourceLocation compressorPath = new ResourceLocation(QMD.MOD_ID,"liquefier_compressor");
+//    private static ResourceLocation compressorPath = ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "liquefier_compressor");
+
+    // Accelerator parts
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileLinearAcceleratorController>> TILE_LINEAR_ACCELERATOR_CONTROLLER = BLOCK_ENTITY_TYPES.register("accelerator_linear_controller", () -> BlockEntityType.Builder.of(TileLinearAcceleratorController::new, linearAcceleratorController.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileRingAcceleratorController>> TILE_RING_ACCELERATOR_CONTROLLER = BLOCK_ENTITY_TYPES.register("accelerator_ring_controller", () -> BlockEntityType.Builder.of(TileRingAcceleratorController::new, ringAcceleratorController.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileBeamDiverterController>> TILE_BEAM_DIVERTER_CONTROLLER = BLOCK_ENTITY_TYPES.register("accelerator_beam_diverter_controller", () -> BlockEntityType.Builder.of(TileBeamDiverterController::new, beamDiverterController.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileBeamSplitterController>> TILE_BEAM_SPLITTER_CONTROLLER = BLOCK_ENTITY_TYPES.register("accelerator_beam_splitter_controller", () -> BlockEntityType.Builder.of(TileBeamSplitterController::new, beamSplitterController.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileDeceleratorController>> TILE_DECELERATOR_CONTROLLER = BLOCK_ENTITY_TYPES.register("accelerator_decelerator_controller", () -> BlockEntityType.Builder.of(TileDeceleratorController::new, deceleratorController.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileMassSpectrometerController>> TILE_MASS_SPECTROMETER_CONTROLLER = BLOCK_ENTITY_TYPES.register("accelerator_mass_spectrometer_controller", () -> BlockEntityType.Builder.of(TileMassSpectrometerController::new, massSpectrometerController.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileAcceleratorBeam>> TILE_ACCELERATOR_BEAM = BLOCK_ENTITY_TYPES.register("accelerator_beam", () -> BlockEntityType.Builder.of(TileAcceleratorBeam::new, acceleratorBeam.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileAcceleratorCasing>> TILE_ACCELERATOR_CASING = BLOCK_ENTITY_TYPES.register("accelerator_casing", () -> BlockEntityType.Builder.of(TileAcceleratorCasing::new, acceleratorCasing.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileAcceleratorGlass>> TILE_ACCELERATOR_GLASS = BLOCK_ENTITY_TYPES.register("accelerator_glass", () -> BlockEntityType.Builder.of(TileAcceleratorGlass::new, acceleratorGlass.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileAcceleratorVent>> TILE_ACCELERATOR_VENT = BLOCK_ENTITY_TYPES.register("accelerator_vent", () -> BlockEntityType.Builder.of(TileAcceleratorVent::new, acceleratorVent.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileAcceleratorBeamPort>> TILE_ACCELERATOR_BEAM_PORT = BLOCK_ENTITY_TYPES.register("accelerator_beam_port", () -> BlockEntityType.Builder.of(TileAcceleratorBeamPort::new, acceleratorBeamPort.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileAcceleratorSynchrotronPort>> TILE_ACCELERATOR_SYNCHROTRON_PORT = BLOCK_ENTITY_TYPES.register("accelerator_synchrotron_port", () -> BlockEntityType.Builder.of(TileAcceleratorSynchrotronPort::new, acceleratorSynchrotronPort.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileAcceleratorIonSource.Basic>> TILE_ACCELERATOR_ION_SOURCE_BASIC = BLOCK_ENTITY_TYPES.register("accelerator_basic_ion_source", () -> BlockEntityType.Builder.of(TileAcceleratorIonSource.Basic::new, acceleratorSource.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileAcceleratorIonSource.Laser>> TILE_ACCELERATOR_ION_SOURCE_LASER = BLOCK_ENTITY_TYPES.register("accelerator_laser_ion_source", () -> BlockEntityType.Builder.of(TileAcceleratorIonSource.Laser::new, acceleratorLaserIonSource.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileAcceleratorIonCollector>> TILE_ACCELERATOR_ION_COLLECTOR = BLOCK_ENTITY_TYPES.register("accelerator_ion_collector", () -> BlockEntityType.Builder.of(TileAcceleratorIonCollector::new, acceleratorIonCollector.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileAcceleratorYoke>> TILE_ACCELERATOR_YOKE = BLOCK_ENTITY_TYPES.register("accelerator_yoke", () -> BlockEntityType.Builder.of(TileAcceleratorYoke::new, acceleratorYoke.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileAcceleratorEnergyPort>> TILE_ACCELERATOR_ENERGY_PORT = BLOCK_ENTITY_TYPES.register("accelerator_energy_port", () -> BlockEntityType.Builder.of(TileAcceleratorEnergyPort::new, acceleratorEnergyPort.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileAcceleratorComputerPort>> TILE_ACCELERATOR_COMPUTER_PORT = BLOCK_ENTITY_TYPES.register("accelerator_computer_port", () -> BlockEntityType.Builder.of(TileAcceleratorComputerPort::new, acceleratorComputerPort.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileAcceleratorPort>> TILE_ACCELERATOR_PORT = BLOCK_ENTITY_TYPES.register("accelerator_port", () -> BlockEntityType.Builder.of(TileAcceleratorPort::new, acceleratorPort.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileAcceleratorRedstonePort>> TILE_ACCELERATOR_REDSTONE_PORT = BLOCK_ENTITY_TYPES.register("accelerator_redstone_port", () -> BlockEntityType.Builder.of(TileAcceleratorRedstonePort::new, acceleratorRedstonePort.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileAcceleratorCooler>> TILE_ACCELERATOR_COOLER = BLOCK_ENTITY_TYPES.register("accelerator_cooler", () -> BlockEntityType.Builder.of((pos, state) -> new TileAcceleratorCooler(pos, state, ((CoolerType) ((MultiblockPartBlock<?, ?>) state.getBlock()).getMultiblockVariant().get())), acceleratorCoolers.values().stream().map(DeferredHolder::get).toArray(Block[]::new)).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileAcceleratorMagnet>> TILE_ACCELERATOR_MAGNET = BLOCK_ENTITY_TYPES.register("accelerator_magnet", () -> BlockEntityType.Builder.of((pos, state) -> new TileAcceleratorMagnet(pos, state, ((MagnetType) ((MultiblockPartBlock<?, ?>) state.getBlock()).getMultiblockVariant().get())), acceleratorMagnets.values().stream().map(DeferredHolder::get).toArray(Block[]::new)).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileAcceleratorRFCavity>> TILE_ACCELERATOR_RF_CAVITY = BLOCK_ENTITY_TYPES.register("accelerator_rf_cavity", () -> BlockEntityType.Builder.of((pos, state) -> new TileAcceleratorRFCavity(pos, state, ((RFCavityType) ((MultiblockPartBlock<?, ?>) state.getBlock()).getMultiblockVariant().get())), RFCavities.values().stream().map(DeferredHolder::get).toArray(Block[]::new)).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileBeamline>> TILE_BEAMLINE = BLOCK_ENTITY_TYPES.register("beamline", () -> BlockEntityType.Builder.of(TileBeamline::new, beamline.get()).build(null));
 
     public static void init() {
     }
 
     public static void register(IEventBus modEventBus) {
         BLOCK_ENTITY_TYPES.register(modEventBus);
-//		//other TODO
-//		GameRegistry.registerTileEntity(TileBeamline.class,new ResourceLocation(QMD.MOD_ID,"beamline"));
-//		GameRegistry.registerTileEntity(QMDTileRTG.Strontium.class,new ResourceLocation(QMD.MOD_ID,"rtg_strontium"));
-//		GameRegistry.registerTileEntity(QMDTileFissionShield.Hafnium.class,new ResourceLocation(QMD.MOD_ID,"fission_shield_hafnium"));
-//		GameRegistry.registerTileEntity(TileCreativeParticleSource.class,new ResourceLocation(QMD.MOD_ID,"creative_particle_source"));
-//		GameRegistry.registerTileEntity(QMDTileTurbineBlade.SuperAlloy.class,new ResourceLocation(QMD.MOD_ID,"turbine_blade_super_alloy"));
-//
-//		//Accelerator parts
-//		GameRegistry.registerTileEntity(TileLinearAcceleratorController.class,Util.appendPath(acceleratorPath, "linear_controller"));
-//		GameRegistry.registerTileEntity(TileRingAcceleratorController.class,Util.appendPath(acceleratorPath, "ring_controller"));
-//		GameRegistry.registerTileEntity(TileBeamDiverterController.class,Util.appendPath(acceleratorPath, "beam_diverter_controller"));
-//		GameRegistry.registerTileEntity(TileBeamSplitterController.class,Util.appendPath(acceleratorPath, "beam_splitter_controller"));
-//		GameRegistry.registerTileEntity(TileDeceleratorController.class,Util.appendPath(acceleratorPath, "decelerator_controller"));
-//		GameRegistry.registerTileEntity(TileMassSpectrometerController.class,Util.appendPath(acceleratorPath, "mass_spectrometer_controller"));
-//		GameRegistry.registerTileEntity(TileAcceleratorBeam.class,Util.appendPath(acceleratorPath, "beam"));
-//		GameRegistry.registerTileEntity(TileAcceleratorCasing.class,Util.appendPath(acceleratorPath, "casing"));
-//		GameRegistry.registerTileEntity(TileAcceleratorGlass.class,Util.appendPath(acceleratorPath, "glass"));
-//		GameRegistry.registerTileEntity(TileAcceleratorVent.class,Util.appendPath(acceleratorPath, "vent"));
-//		GameRegistry.registerTileEntity(TileAcceleratorBeamPort.class,Util.appendPath(acceleratorPath, "beam_port"));
-//		GameRegistry.registerTileEntity(TileAcceleratorSynchrotronPort.class,Util.appendPath(acceleratorPath, "synchrotron_port"));
-//		GameRegistry.registerTileEntity(TileAcceleratorIonSource.class,Util.appendPath(acceleratorPath, "source"));
-//		GameRegistry.registerTileEntity(TileAcceleratorIonSource.Basic.class,Util.appendPath(acceleratorPath, "basic_ion_source"));
-//		GameRegistry.registerTileEntity(TileAcceleratorIonSource.Laser.class,Util.appendPath(acceleratorPath, "laser_ion_source"));
-//
-//		GameRegistry.registerTileEntity(TileAcceleratorIonCollector.class,Util.appendPath(acceleratorPath, "ion_collector"));
-//		GameRegistry.registerTileEntity(TileAcceleratorYoke.class,Util.appendPath(acceleratorPath, "yoke"));
-//		GameRegistry.registerTileEntity(TileAcceleratorEnergyPort.class,Util.appendPath(acceleratorPath, "energy_port"));
-//		GameRegistry.registerTileEntity(TileAcceleratorComputerPort.class,Util.appendPath(acceleratorPath, "computer_port"));
-//		GameRegistry.registerTileEntity(TileAcceleratorPort.class,Util.appendPath(acceleratorPath, "port"));
-//		GameRegistry.registerTileEntity(TileAcceleratorRedstonePort.class,Util.appendPath(acceleratorPath, "redstone_port"));
-//
-//		//magnets
-//		GameRegistry.registerTileEntity(TileAcceleratorMagnet.class, Util.appendPath(magnetPath, "magnet"));
-//		GameRegistry.registerTileEntity(TileAcceleratorMagnet.Copper.class, Util.appendPath(magnetPath, MagnetType.COPPER.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorMagnet.MagnesiumDiboride.class, Util.appendPath(magnetPath, MagnetType.MAGNESIUM_DIBORIDE.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorMagnet.NiobiumTin.class, Util.appendPath(magnetPath, MagnetType.NIOBIUM_TIN.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorMagnet.NiobiumTitanium.class, Util.appendPath(magnetPath, MagnetType.NIOBIUM_TITANIUM.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorMagnet.BSCCO.class, Util.appendPath(magnetPath, MagnetType.BSCCO.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorMagnet.Aluminium.class, Util.appendPath(magnetPath, MagnetType.Aluminium.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorMagnet.SSFAF.class, Util.appendPath(magnetPath, MagnetType.SSFAF.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorMagnet.YBCO.class, Util.appendPath(magnetPath, MagnetType.YBCO.getName()));
-//
-//		//RF Cavities
-//		GameRegistry.registerTileEntity(TileAcceleratorRFCavity.class, Util.appendPath(cavityPath, "rf_cavity"));
-//		GameRegistry.registerTileEntity(TileAcceleratorRFCavity.Copper.class, Util.appendPath(cavityPath, RFCavityType.COPPER.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorRFCavity.MagnesiumDiboride.class, Util.appendPath(cavityPath, RFCavityType.MAGNESIUM_DIBORIDE.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorRFCavity.NiobiumTin.class, Util.appendPath(cavityPath, RFCavityType.NIOBIUM_TIN.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorRFCavity.NiobiumTitanium.class, Util.appendPath(cavityPath, RFCavityType.NIOBIUM_TITANIUM.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorRFCavity.BSCCO.class, Util.appendPath(cavityPath, RFCavityType.BSCCO.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorRFCavity.Aluminium.class, Util.appendPath(cavityPath, RFCavityType.Aluminium.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorRFCavity.SSFAF.class, Util.appendPath(cavityPath, RFCavityType.SSFAF.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorRFCavity.YBCO.class, Util.appendPath(cavityPath, RFCavityType.YBCO.getName()));
-//
-//		//coolers
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.class, Util.appendPath(coolerPath, "cooler"));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Water.class, Util.appendPath(coolerPath, CoolerType.WATER.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Iron.class, Util.appendPath(coolerPath, CoolerType.IRON.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Redstone.class, Util.appendPath(coolerPath, CoolerType.REDSTONE.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Quartz.class, Util.appendPath(coolerPath, CoolerType.QUARTZ.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Obsidian.class, Util.appendPath(coolerPath, CoolerType.OBSIDIAN.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.NetherBrick.class, Util.appendPath(coolerPath, CoolerType.NETHER_BRICK.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Glowstone.class,Util.appendPath(coolerPath, CoolerType.GLOWSTONE.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Lapis.class, Util.appendPath(coolerPath, CoolerType.LAPIS.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Gold.class,Util.appendPath(coolerPath, CoolerType.GOLD.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Prismarine.class, Util.appendPath(coolerPath, CoolerType.PRISMARINE.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Slime.class, Util.appendPath(coolerPath, CoolerType.SLIME.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.EndStone.class, Util.appendPath(coolerPath, CoolerType.END_STONE.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Purpur.class, Util.appendPath(coolerPath, CoolerType.PURPUR.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Diamond.class, Util.appendPath(coolerPath, CoolerType.DIAMOND.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Emerald.class, Util.appendPath(coolerPath, CoolerType.EMERALD.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Copper.class, Util.appendPath(coolerPath, CoolerType.COPPER.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Tin.class,  Util.appendPath(coolerPath, CoolerType2.TIN.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Lead.class, Util.appendPath(coolerPath, CoolerType2.LEAD.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Boron.class, Util.appendPath(coolerPath, CoolerType2.BORON.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Lithium.class, Util.appendPath(coolerPath, CoolerType2.LITHIUM.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Magnesium.class, Util.appendPath(coolerPath, CoolerType2.MAGNESIUM.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Manganese.class, Util.appendPath(coolerPath, CoolerType2.MANGANESE.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Aluminum.class, Util.appendPath(coolerPath, CoolerType2.ALUMINUM.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Silver.class, Util.appendPath(coolerPath, CoolerType2.SILVER.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Fluorite.class, Util.appendPath(coolerPath, CoolerType2.FLUORITE.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Villiaumite.class, Util.appendPath(coolerPath, CoolerType2.VILLIAUMITE.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Carobbiite.class, Util.appendPath(coolerPath, CoolerType2.CAROBBIITE.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Arsenic.class, Util.appendPath(coolerPath, CoolerType2.ARSENIC.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.LiquidNitrogen.class, Util.appendPath(coolerPath, CoolerType2.LIQUID_NITROGEN.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.LiquidHelium.class, Util.appendPath(coolerPath, CoolerType2.LIQUID_HELIUM.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Enderium.class, Util.appendPath(coolerPath, CoolerType2.ENDERIUM.getName()));
-//		GameRegistry.registerTileEntity(TileAcceleratorCooler.Cryotheum.class, Util.appendPath(coolerPath, CoolerType2.CRYOTHEUM.getName()));
-//
+
 //		//Particle Chamber Parts
 //		GameRegistry.registerTileEntity(TileTargetChamberController.class,Util.appendPath(chamberPath, "target_chamber_controller"));
 //		GameRegistry.registerTileEntity(TileDecayChamberController.class,Util.appendPath(chamberPath, "decay_chamber_controller"));

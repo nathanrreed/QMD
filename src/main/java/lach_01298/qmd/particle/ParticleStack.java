@@ -1,21 +1,60 @@
 package lach_01298.qmd.particle;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.nred.nuclearcraft.util.NCMath;
 import lach_01298.qmd.config.QMDServerConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import org.jspecify.annotations.NonNull;
 
 public class ParticleStack {
     private Particle particle;
     private int amount;
     private long meanEnergy;
     private double focus;            //Basically inverse area of the beam
+    public static final Codec<ParticleStack> CODEC = RecordCodecBuilder.create(inst -> inst.group(
+            Codec.STRING.fieldOf("particle").forGetter(ParticleStack::getParticleString),
+            Codec.INT.fieldOf("amount").forGetter(ParticleStack::getAmount),
+            Codec.LONG.fieldOf("meanEnergy").forGetter(ParticleStack::getMeanEnergy),
+            Codec.DOUBLE.fieldOf("focus").forGetter(ParticleStack::getFocus)
+    ).apply(inst, ParticleStack::new));
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, ParticleStack> STREAM_CODEC = new StreamCodec<>() {
+        public @NonNull ParticleStack decode(RegistryFriendlyByteBuf buf) {
+            ParticleStack particleStack = new ParticleStack();
+
+            particleStack.setParticle(Particles.getParticleFromName(buf.readUtf(30)));
+            particleStack.setAmount(buf.readInt());
+            particleStack.setMeanEnergy(buf.readLong());
+            particleStack.setFocus(buf.readDouble());
+
+            return particleStack;
+        }
+
+        public void encode(RegistryFriendlyByteBuf buf, ParticleStack particleStack) {
+            if (particleStack.getParticle() == null) {
+                buf.writeUtf("");
+            } else {
+                buf.writeUtf(particleStack.getParticle().name);
+            }
+            buf.writeInt(particleStack.amount);
+            buf.writeLong(particleStack.meanEnergy);
+            buf.writeDouble(particleStack.focus);
+        }
+    };
 
     public ParticleStack() {
         this.particle = null;
         this.amount = 0;
         this.meanEnergy = 0;
         this.focus = 0;
+    }
+
+    public ParticleStack(String particle, int amount, long meanEnergy, double focus) {
+        this(Particles.getParticleFromName(particle), amount, meanEnergy, focus);
     }
 
     public ParticleStack(Particle particle, int amount, long meanEnergy, double focus) {
@@ -48,6 +87,10 @@ public class ParticleStack {
 
     public Particle getParticle() {
         return particle;
+    }
+
+    public String getParticleString() {
+        return particle.getName();
     }
 
     public long getMeanEnergy() {
@@ -97,7 +140,6 @@ public class ParticleStack {
     public void addFocus(double add) {
         this.focus += add;
     }
-
 
     public CompoundTag writeToNBT(CompoundTag nbt) {
         if (particle != null) {

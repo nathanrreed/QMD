@@ -7,6 +7,7 @@ import com.nred.nuclearcraft.block_entity.NCTile;
 import com.nred.nuclearcraft.handler.BlockEntityInfoHandler;
 import com.nred.nuclearcraft.handler.BlockEntityMenuInfo;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import lach_01298.qmd.QMD;
 import lach_01298.qmd.capabilities.CapabilityParticleStackHandler;
 import lach_01298.qmd.machine.container.MachineMenuImpl.CreativeParticleSourceMenu;
 import lach_01298.qmd.machine.network.CreativeParticleSourceUpdatePacket;
@@ -80,7 +81,6 @@ public class TileCreativeParticleSource extends NCTile implements ITileParticleS
                             otherStorage.reciveParticle(face.getOpposite(), this.particleBeams.get(0).getParticleStack());
                         }
                     }
-
                 }
             }
         }
@@ -96,7 +96,6 @@ public class TileCreativeParticleSource extends NCTile implements ITileParticleS
             if (particleBeams.get(0).getParticleStack().getParticle() != null) {
                 return particleBeams.get(0).getParticleStack().getParticle().getName();
             }
-
         }
 
         return "";
@@ -170,7 +169,7 @@ public class TileCreativeParticleSource extends NCTile implements ITileParticleS
 
     @Override
     public Component getDisplayName() {
-        return getTileBlockDisplayName();
+        return Component.translatable(QMD.MOD_ID + ".menu.title.creative_particle_source");
     }
 
     @Override

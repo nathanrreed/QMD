@@ -4,12 +4,14 @@ import com.nred.nuclearcraft.block_entity.processor.ProcessorEntityImpl.BasicEne
 import com.nred.nuclearcraft.block_entity.processor.ProcessorEntityImpl.BasicUpgradableEnergyProcessorEntity;
 import com.nred.nuclearcraft.payload.processor.EnergyProcessorUpdatePacket;
 import com.nred.nuclearcraft.recipe.ProcessorRecipe;
+import lach_01298.qmd.QMD;
 import lach_01298.qmd.config.QMDServerConfig;
 import lach_01298.qmd.datamap.IrradiatorFuel;
 import lach_01298.qmd.item.IItemParticleAmount;
 import lach_01298.qmd.machine.network.IrradiatorUpdatePacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,6 +26,11 @@ public class TileQMDProcessors {
     public static class OreLeacherEntity extends BasicUpgradableEnergyProcessorEntity<ProcessorRecipe, OreLeacherEntity> {
         public OreLeacherEntity(BlockPos pos, BlockState blockState) {
             super(ORE_LEACHER_ENTITY_TYPE.get(), pos, blockState, "ore_leacher");
+        }
+
+        @Override
+        public Component getDisplayName() {
+            return Component.translatable(QMD.MOD_ID + ".menu.title.ore_leacher");
         }
     }
 
@@ -89,6 +96,11 @@ public class TileQMDProcessors {
                 return true;
             }
             return super.canPlaceItem(slot, stack);
+        }
+
+        @Override
+        public Component getDisplayName() {
+            return Component.translatable(QMD.MOD_ID + ".menu.title.irradiator");
         }
     }
 }

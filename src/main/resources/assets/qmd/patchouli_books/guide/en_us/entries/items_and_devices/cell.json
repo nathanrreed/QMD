@@ -1,6 +1,6 @@
 {
     "name": "Cells",
-    "icon": "qmd:cell",
+    "icon": "qmd:empty_cell",
     "category": "qmd:items_and_devices",
     "sortnum": 2,
     "pages": [

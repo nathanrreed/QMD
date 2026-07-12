@@ -1,9 +1,11 @@
 package lach_01298.qmd.item;
 
 import com.nred.nuclearcraft.item.NCItem;
+import lach_01298.qmd.accelerator.tile.TileAcceleratorBeamPort;
 import lach_01298.qmd.capabilities.CapabilityParticleStackHandler;
 import lach_01298.qmd.particle.IParticleStackHandler;
 import lach_01298.qmd.particle.ParticleStack;
+import lach_01298.qmd.pipe.TileBeamline;
 import lach_01298.qmd.util.Equations;
 import lach_01298.qmd.util.Units;
 import net.minecraft.ChatFormatting;
@@ -46,24 +48,16 @@ public class ItemBeamMeter extends NCItem {
 //                            return EnumActionResult.SUCCESS;
 //                        }
 //                    }
-//                    if (tile instanceof TileAcceleratorBeamPort) {
-//                        TileAcceleratorBeamPort port = (TileAcceleratorBeamPort) tile;
-//                        ChatFormatting colour;
-//                        switch (port.getSetting()) {
-//                            case INPUT:
-//                                colour = ChatFormatting.DARK_AQUA;
-//                                break;
-//                            case OUTPUT:
-//                                colour = ChatFormatting.RED;
-//                                break;
-//                            default:
-//                                colour = ChatFormatting.GRAY;
-//                                break;
-//                        }
-//                        TextComponentString message = new TextComponentString(Lang.localize("qmd.block.accelerator_port_setting", colour + Lang.localize("qmd.block.port_mode." + port.getSetting().name())));
-//                        player.sendMessage(message);
-//                        return EnumActionResult.SUCCESS;
-//                    }
+                    if (tile instanceof TileAcceleratorBeamPort port) {
+                        ChatFormatting colour = switch (port.getSetting()) {
+                            case INPUT -> ChatFormatting.DARK_AQUA;
+                            case OUTPUT -> ChatFormatting.RED;
+                            default -> ChatFormatting.GRAY;
+                        };
+                        Component message = Component.translatable("qmd.block.accelerator_port_setting", Component.translatable("qmd.block.port_mode." + port.getSetting().name()).withStyle(colour));
+                        player.sendSystemMessage(message);
+                        return InteractionResult.SUCCESS;
+                    }
                 } else {
                     for (Direction face : Direction.values()) {
                         IParticleStackHandler particleStorage = level.getCapability(CapabilityParticleStackHandler.BLOCK, tile.getBlockPos(), face);
@@ -71,12 +65,11 @@ public class ItemBeamMeter extends NCItem {
                             ParticleStack particles = particleStorage.getParticle();
 
                             if (particles != null) {
-//                                if (tile instanceof TileBeamline) { TODO
-//                                    TileBeamline beam = (TileBeamline) tile;
-//                                    if (beam.getMultiblock() != null) {
-//                                        particles.addFocus(-Equations.focusLoss(beam.getMultiblock().length(), particles));
-//                                    }
-//                                }
+                                if (tile instanceof TileBeamline beam) {
+                                    if (beam.getMultiblockController().isPresent()) {
+                                        particles.addFocus(-Equations.focusLoss(beam.getMultiblockController().get().length(), particles));
+                                    }
+                                }
 
                                 DecimalFormat df = new DecimalFormat("#.####");
                                 DecimalFormat df2 = new DecimalFormat("#.#");

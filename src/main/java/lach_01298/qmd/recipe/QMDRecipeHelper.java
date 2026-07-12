@@ -1,36 +1,22 @@
-//package lach_01298.qmd.recipe;
-//
-//import com.google.common.collect.Lists;
-//import com.nred.nuclearcraft.block_entity.internal.fluid.Tank;
-//import com.nred.nuclearcraft.recipe.IngredientMatchResult;
-//import com.nred.nuclearcraft.recipe.IngredientSorption;
-//import com.nred.nuclearcraft.recipe.SizedChanceFluidIngredient;
-//import com.nred.nuclearcraft.recipe.SizedChanceItemIngredient;
-//import com.nred.nuclearcraft.util.CollectionHelper;
-//import it.unimi.dsi.fastutil.ints.IntArrayList;
-//import it.unimi.dsi.fastutil.ints.IntList;
-//import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-//import lach_01298.qmd.particle.Particle;
-//import lach_01298.qmd.particle.ParticleStack;
-//import lach_01298.qmd.particle.Particles;
-//import lach_01298.qmd.recipe.ingredient.IParticleIngredient;
-//import net.minecraft.world.item.Item;
-//import net.minecraft.world.item.ItemStack;
-//import net.minecraft.world.level.block.Block;
-//import net.minecraft.world.level.material.Fluid;
-//import net.neoforged.neoforge.fluids.FluidStack;
-//
-//import javax.annotation.Nullable;
-//import java.util.ArrayList;
-//import java.util.Iterator;
-//import java.util.List;
-//import java.util.Set;
-//
-//import static com.nred.nuclearcraft.recipe.RecipeHelper.matchFluidIngredient;
-//import static com.nred.nuclearcraft.recipe.RecipeHelper.matchIngredient;
-//
-//public class QMDRecipeHelper {
-//    public static boolean containsItemIngredient(List<SizedChanceItemIngredient> list, SizedChanceItemIngredient ingredient) {
+package lach_01298.qmd.recipe;
+
+import com.nred.nuclearcraft.recipe.IngredientMatchResult;
+import com.nred.nuclearcraft.recipe.IngredientSorption;
+import com.nred.nuclearcraft.recipe.SizedChanceFluidIngredient;
+import com.nred.nuclearcraft.recipe.SizedChanceItemIngredient;
+import com.nred.nuclearcraft.util.CollectionHelper;
+import it.unimi.dsi.fastutil.ints.IntList;
+import lach_01298.qmd.particle.ParticleStack;
+import lach_01298.qmd.recipe.types.QMDParticleRecipe;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.nred.nuclearcraft.recipe.RecipeHelper.matchFluidIngredient;
+import static com.nred.nuclearcraft.recipe.RecipeHelper.matchIngredient;
+
+public class QMDRecipeHelper {
+//    public static boolean containsItemIngredient(List<SizedChanceItemIngredient> list, SizedChanceItemIngredient ingredient) { TODO
 //        for (SizedChanceItemIngredient i : list) {
 //            if (i == null)
 //                continue;
@@ -50,8 +36,8 @@
 //        return false;
 //    }
 //
-//    public static boolean containsParticleIngredient(List<IParticleIngredient> list, IParticleIngredient ingredient) {
-//        for (IParticleIngredient i : list) {
+//    public static boolean containsParticleIngredient(List<ParticleStack> list, ParticleStack ingredient) {
+//        for (ParticleStack i : list) {
 //            if (i == null)
 //                continue;
 //            if (i.match(ingredient, IngredientSorption.NEUTRAL).matches())
@@ -144,7 +130,7 @@
 //        return values;
 //    }
 //
-//    public static List<List<ParticleStack>> getParticleInputLists(List<IParticleIngredient> ingredientList) {
+//    public static List<List<ParticleStack>> getParticleInputLists(List<ParticleStack> ingredientList) {
 //        List<List<ParticleStack>> values = new ArrayList<List<ParticleStack>>();
 //        ingredientList.forEach(ingredient -> values.add(ingredient.getInputStackList()));
 //        return values;
@@ -162,7 +148,7 @@
 //        return values;
 //    }
 //
-//    public static List<List<ParticleStack>> getParticleOutputLists(List<IParticleIngredient> ingredientList) {
+//    public static List<List<ParticleStack>> getParticleOutputLists(List<ParticleStack> ingredientList) {
 //        List<List<ParticleStack>> values = new ArrayList<List<ParticleStack>>();
 //        ingredientList.forEach(ingredient -> values.add(getParticleOutputStackList(ingredient)));
 //        return values;
@@ -182,7 +168,7 @@
 //            return Lists.newArrayList(ingredient.getStack());
 //    }
 //
-//    public static List<ParticleStack> getParticleOutputStackList(IParticleIngredient ingredient) {
+//    public static List<ParticleStack> getParticleOutputStackList(ParticleStack ingredient) {
 //        return Lists.newArrayList(ingredient.getStack());
 //    }
 //
@@ -209,7 +195,7 @@
 //    }
 //
 //    @Nullable
-//    public static List<ParticleStack> getParticleOutputList(List<IParticleIngredient> list) {
+//    public static List<ParticleStack> getParticleOutputList(List<ParticleStack> list) {
 //        if (list.contains(null))
 //            return new ArrayList<ParticleStack>();
 //        List stacks = new ArrayList<ParticleStack>();
@@ -238,9 +224,9 @@
 //    }
 //
 //    @Nullable
-//    public static ParticleStack getParticleStackFromIngredientList(List<IParticleIngredient> list, int pos) {
+//    public static ParticleStack getParticleStackFromIngredientList(List<ParticleStack> list, int pos) {
 //        if (!list.isEmpty() && pos < list.size()) {
-//            IParticleIngredient object = list.get(pos);
+//            ParticleStack object = list.get(pos);
 //            return object.getStack();
 //        }
 //        return null;
@@ -331,21 +317,21 @@
 //    }
 //
 //    @Nullable
-//    public static IParticleIngredient buildParticleIngredient(Object object) {
+//    public static ParticleStack buildParticleIngredient(Object object) {
 //        if (AbstractQMDRecipeHandler.requiresParticleFixing(object)) {
 //            object = QMDRecipeHelper.fixParticleStack(object);
 //        }
-//        if (object instanceof IParticleIngredient) {
-//            return checkedParticleIngredient((IParticleIngredient) object);
+//        if (object instanceof ParticleStack) {
+//            return checkedParticleIngredient((ParticleStack) object);
 //        } else if (object instanceof List) {
 //            List list = (List) object;
-//            List<IParticleIngredient> buildList = new ArrayList<IParticleIngredient>();
+//            List<ParticleStack> buildList = new ArrayList<ParticleStack>();
 //            if (!list.isEmpty()) {
 //                for (Object listObject : list) {
-//                    if (listObject instanceof IParticleIngredient) {
-//                        buildList.add((IParticleIngredient) listObject);
+//                    if (listObject instanceof ParticleStack) {
+//                        buildList.add((ParticleStack) listObject);
 //                    } else if (listObject != null) {
-//                        IParticleIngredient recipeObject = checkedParticleIngredient(
+//                        ParticleStack recipeObject = checkedParticleIngredient(
 //                                buildParticleIngredient(listObject));
 //                        if (recipeObject != null)
 //                            buildList.add(recipeObject);
@@ -367,7 +353,7 @@
 //    }
 //
 //    @Nullable
-//    public static IParticleIngredient checkedParticleIngredient(IParticleIngredient ingredient) {
+//    public static ParticleStack checkedParticleIngredient(ParticleStack ingredient) {
 //        return ingredient == null || !ingredient.isValid() ? null : ingredient;
 //    }
 //
@@ -396,77 +382,83 @@
 //
 //        return fluidStackList;
 //    }
-//
-//    public static QMDRecipeMatchResult matchIngredients(IngredientSorption sorption, List<SizedChanceItemIngredient> itemIngredients, List<SizedChanceFluidIngredient> fluidIngredients, List<IParticleIngredient> particleIngredients, List<SizedChanceItemIngredient> items, List<SizedChanceFluidIngredient> fluids, List<IParticleIngredient> particles) {
-//        int itemCount = items.size(), fluidCount = fluids.size(), particleCount = particles.size();
-//        if (itemIngredients.size() != items.size() || fluidIngredients.size() != fluids.size() || particleIngredients.size() != particles.size()) {
-//            items = items.stream().filter(itemIngredient -> !itemIngredient.isEmpty()).toList();
-//            fluids = fluids.stream().filter(fluidIngredient -> !fluidIngredient.isEmpty()).toList();
-//            // TODO particle?
-//            itemCount = items.size();
-//            fluidCount = fluids.size();
-//            if (itemIngredients.size() != items.size() || fluidIngredients.size() != fluids.size() || particleIngredients.size() != particles.size()) {
-//                return QMDRecipeMatchResult.FAIL;
-//            }
-//        }
-//
-//        IntList itemInputOrder = CollectionHelper.increasingList(itemCount);
-//        IntList fluidInputOrder = CollectionHelper.increasingList(fluidCount);
-//        IntList particleInputOrder = CollectionHelper.increasingList(particleCount);
-//
-//        List<SizedChanceItemIngredient> itemIngredientsRemaining = new ArrayList<>(itemIngredients);
-//        itemInputs:
-//        for (int i = 0; i < items.size(); i++) {
-//            SizedChanceItemIngredient item = items.get(i);
-//            for (int j = 0; j < itemIngredients.size(); j++) {
-//                SizedChanceItemIngredient itemIngredient = itemIngredientsRemaining.get(j);
-//                if (itemIngredient == null)
-//                    continue;
-//                IngredientMatchResult matchResult = matchIngredient(itemIngredient, item, sorption);
-//                if (matchResult.matches()) {
-//                    itemIngredientsRemaining.set(j, null);
-//                    itemInputOrder.set(i, j);
-//                    continue itemInputs;
-//                }
-//            }
-//            return QMDRecipeMatchResult.FAIL;
-//        }
-//        List<SizedChanceFluidIngredient> fluidIngredientsRemaining = new ArrayList<>(fluidIngredients);
-//        fluidInputs:
-//        for (int i = 0; i < fluids.size(); i++) {
-//            SizedChanceFluidIngredient fluid = fluids.get(i);
-//            for (int j = 0; j < fluidIngredients.size(); j++) {
-//                SizedChanceFluidIngredient fluidIngredient = fluidIngredientsRemaining.get(j);
-//                if (fluidIngredient == null)
-//                    continue;
-//                IngredientMatchResult matchResult = matchFluidIngredient(fluidIngredient, fluid, sorption);
-//                if (matchResult.matches()) {
-//                    fluidIngredientsRemaining.set(j, null);
-//                    fluidInputOrder.set(i, j);
-//                    continue fluidInputs;
-//                }
-//            }
-//            return QMDRecipeMatchResult.FAIL;
-//        }
-//        List<IParticleIngredient> particleIngredientsRemaining = new ArrayList(particleIngredients);
-//        particleInputs:
-//        for (int i = 0; i < particles.size(); i++) {
-//            for (int j = 0; j < particleIngredients.size(); j++) {
-//                IParticleIngredient particleIngredient = particleIngredientsRemaining.get(j);
-//                if (particleIngredient == null)
-//                    continue;
-//                IngredientMatchResult matchResult = particleIngredient.matchWithData(particles.get(i), sorption, extras);
-//                if (matchResult.matches()) {
-//                    particleIngredientsRemaining.set(j, null);
-//                    particleInputOrder.set(i, j);
-//                    continue particleInputs;
-//                }
-//            }
-//            return QMDRecipeMatchResult.FAIL;
-//        }
-//        return new QMDRecipeMatchResult(true, itemInputOrder, fluidInputOrder, particleInputOrder);
-//    }
-//
+
+    public static QMDRecipeMatchResult matchIngredients(IngredientSorption sorption, List<SizedChanceItemIngredient> itemIngredients, List<SizedChanceFluidIngredient> fluidIngredients, List<ParticleStack> particleIngredients, List<SizedChanceItemIngredient> items, List<SizedChanceFluidIngredient> fluids, List<ParticleStack> particles, QMDRecipe recipe) {
+        int itemCount = items.size(), fluidCount = fluids.size(), particleCount = particles.size();
+        if (itemIngredients.size() != items.size() || fluidIngredients.size() != fluids.size() || particleIngredients.size() != particles.size()) {
+            items = items.stream().filter(itemIngredient -> !itemIngredient.isEmpty()).toList();
+            fluids = fluids.stream().filter(fluidIngredient -> !fluidIngredient.isEmpty()).toList();
+            itemCount = items.size();
+            fluidCount = fluids.size();
+            if (itemIngredients.size() != items.size() || fluidIngredients.size() != fluids.size() || particleIngredients.size() != particles.size()) {
+                return QMDRecipeMatchResult.FAIL;
+            }
+        }
+
+        IntList itemInputOrder = CollectionHelper.increasingList(itemCount);
+        IntList fluidInputOrder = CollectionHelper.increasingList(fluidCount);
+        IntList particleInputOrder = CollectionHelper.increasingList(particleCount);
+
+        List<SizedChanceItemIngredient> itemIngredientsRemaining = new ArrayList<>(itemIngredients);
+        itemInputs:
+        for (int i = 0; i < items.size(); i++) {
+            SizedChanceItemIngredient item = items.get(i);
+            for (int j = 0; j < itemIngredients.size(); j++) {
+                SizedChanceItemIngredient itemIngredient = itemIngredientsRemaining.get(j);
+                if (itemIngredient == null)
+                    continue;
+                IngredientMatchResult matchResult = matchIngredient(itemIngredient, item, sorption);
+                if (matchResult.matches()) {
+                    itemIngredientsRemaining.set(j, null);
+                    itemInputOrder.set(i, j);
+                    continue itemInputs;
+                }
+            }
+            return QMDRecipeMatchResult.FAIL;
+        }
+        List<SizedChanceFluidIngredient> fluidIngredientsRemaining = new ArrayList<>(fluidIngredients);
+        fluidInputs:
+        for (int i = 0; i < fluids.size(); i++) {
+            SizedChanceFluidIngredient fluid = fluids.get(i);
+            for (int j = 0; j < fluidIngredients.size(); j++) {
+                SizedChanceFluidIngredient fluidIngredient = fluidIngredientsRemaining.get(j);
+                if (fluidIngredient == null)
+                    continue;
+                IngredientMatchResult matchResult = matchFluidIngredient(fluidIngredient, fluid, sorption);
+                if (matchResult.matches()) {
+                    fluidIngredientsRemaining.set(j, null);
+                    fluidInputOrder.set(i, j);
+                    continue fluidInputs;
+                }
+            }
+            return QMDRecipeMatchResult.FAIL;
+        }
+        List<ParticleStack> particleIngredientsRemaining = new ArrayList<>(particleIngredients);
+        particleInputs:
+        for (int i = 0; i < particles.size(); i++) {
+            for (int j = 0; j < particleIngredients.size(); j++) {
+                ParticleStack particleIngredient = particleIngredientsRemaining.get(j);
+                if (particleIngredient == null)
+                    continue;
+                IngredientMatchResult matchResult = matchParticleStack(particleIngredient, particles.get(i), sorption, recipe);
+                if (matchResult.matches()) {
+                    particleIngredientsRemaining.set(j, null);
+                    particleInputOrder.set(i, j);
+                    continue particleInputs;
+                }
+            }
+            return QMDRecipeMatchResult.FAIL;
+        }
+        return new QMDRecipeMatchResult(true, itemInputOrder, fluidInputOrder, particleInputOrder);
+    }
+
+    public static IngredientMatchResult matchParticleStack(ParticleStack stack, ParticleStack other, IngredientSorption type, QMDRecipe recipe) {
+        if (!(recipe instanceof QMDParticleRecipe particleRecipe) || !stack.isInRange(other, particleRecipe.getMaxEnergy())) {
+            return IngredientMatchResult.FAIL;
+        }
+        return new IngredientMatchResult(type.checkStackSize(stack.getAmount(), stack.getAmount()));
+    }
+
 //    public static List<String> getItemIngredientNames(List<SizedChanceItemIngredient> ingredientList) {
 //        List<String> ingredientNames = new ArrayList<String>();
 //        for (SizedChanceItemIngredient ingredient : ingredientList) {
@@ -493,9 +485,9 @@
 //        return ingredientNames;
 //    }
 //
-//    public static List<String> getParticleIngredientNames(List<IParticleIngredient> ingredientList) {
+//    public static List<String> getParticleIngredientNames(List<ParticleStack> ingredientList) {
 //        List<String> ingredientNames = new ArrayList<String>();
-//        for (IParticleIngredient ingredient : ingredientList) {
+//        for (ParticleStack ingredient : ingredientList) {
 //            if (ingredient == null || ingredient instanceof EmptyParticleIngredient)
 //                ingredientNames.add("null");
 //            else if (ingredient instanceof ParticleArrayIngredient)
@@ -507,15 +499,15 @@
 //    }
 //
 //    public static String getAllIngredientNamesConcat(List<SizedChanceItemIngredient> itemIngredientList,
-//                                                     List<SizedChanceFluidIngredient> fluidIngredientList, List<IParticleIngredient> particleIngredientList) {
+//                                                     List<SizedChanceFluidIngredient> fluidIngredientList, List<ParticleStack> particleIngredientList) {
 //        return StringHelper.stringListConcat(getItemIngredientNames(itemIngredientList),
 //                getFluidIngredientNames(fluidIngredientList), getParticleIngredientNames(particleIngredientList));
 //    }
 //
 //    public static String getRecipeString(List<SizedChanceItemIngredient> itemIngredientList,
-//                                         List<SizedChanceFluidIngredient> fluidIngredientList, List<IParticleIngredient> particleIngredientList,
+//                                         List<SizedChanceFluidIngredient> fluidIngredientList, List<ParticleStack> particleIngredientList,
 //                                         List<SizedChanceItemIngredient> itemProductList, List<SizedChanceFluidIngredient> fluidProductList,
-//                                         List<IParticleIngredient> particleProductList) {
+//                                         List<ParticleStack> particleProductList) {
 //        return getAllIngredientNamesConcat(itemIngredientList, fluidIngredientList, particleIngredientList) + " -> "
 //                + getAllIngredientNamesConcat(itemProductList, fluidProductList, particleProductList);
 //    }
@@ -664,4 +656,4 @@
 //            super(FAKE_CONTAINER, width, height);
 //        }
 //    }
-//}
+}

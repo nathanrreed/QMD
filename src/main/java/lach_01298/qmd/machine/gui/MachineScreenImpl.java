@@ -11,6 +11,7 @@ import lach_01298.qmd.machine.tile.TileQMDProcessors.OreLeacherEntity;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 
@@ -29,6 +30,12 @@ public class MachineScreenImpl {
         @Override
         protected List<Component> energyInfo(IEnergyStorage energyStorage) {
             return List.of();
+        }
+
+        @Override
+        protected void drawProgressBar(GuiGraphics guiGraphics) {
+            super.drawProgressBar(guiGraphics);
+            guiGraphics.blitSprite(this.guiTextures, 256, 256, this.info.progressBarGuiU, this.info.progressBarGuiV + info.progressBarGuiH, this.leftPos + this.info.progressBarGuiX + 6, this.topPos + this.info.progressBarGuiY - 20, 40, (int) Mth.clamp(getProgressBarWidth() / (double) info.progressBarGuiW * 19, 0.0, 19.0));
         }
     }
 

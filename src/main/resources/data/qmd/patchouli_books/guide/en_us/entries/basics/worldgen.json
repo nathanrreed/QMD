@@ -1,6 +1,6 @@
 {
 	"name": "World Generation",
-	"icon": "minecraft:grass",
+	"icon": "minecraft:grass_block",
 	"category": "qmd:basics",
 	"sortnum": 2,
 	"pages": [

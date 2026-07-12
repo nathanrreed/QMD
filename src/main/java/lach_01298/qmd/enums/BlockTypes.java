@@ -1,21 +1,24 @@
 package lach_01298.qmd.enums;
 
+import com.nred.nuclearcraft.multiblock.PlacementRule;
 import com.nred.nuclearcraft.multiblock.fisson.FissionNeutronShieldType;
 import com.nred.nuclearcraft.multiblock.rtg.RTGType;
 import com.nred.nuclearcraft.multiblock.turbine.TurbineRotorBladeType;
 import com.nred.nuclearcraft.radiation.RadSources;
+import it.zerono.mods.zerocore.lib.multiblock.variant.IMultiblockVariant;
+import lach_01298.qmd.accelerator.Accelerator;
+import lach_01298.qmd.accelerator.CoolerPlacement;
+import lach_01298.qmd.accelerator.tile.TileAcceleratorPart;
 import lach_01298.qmd.config.QMDStartupConfig;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class BlockTypes {
     public static final RTGType STRONTIUM_RTG = new RTGType("qmd:strontium", () -> QMDStartupConfig.rtg_power[0], RadSources.STRONTIUM_90 / 8D);
     public static final TurbineRotorBladeType SUPER_ALLOY = new TurbineRotorBladeType("qmd:super_alloy", () -> QMDStartupConfig.turbine_blade_efficiency[0], () -> QMDStartupConfig.turbine_blade_expansion[0]);
     public static final FissionNeutronShieldType HAFNIUM = new FissionNeutronShieldType("qmd:hafnium", () -> QMDStartupConfig.fission_shield_heat_per_flux[0], () -> QMDStartupConfig.fission_shield_efficiency[0]);
 
-    public static void init() {
-    }
-
-    public enum CoolerType implements StringRepresentable, ICoolerEnum {
+    public enum CoolerType implements StringRepresentable, IMultiblockVariant, ICoolerEnum {
         WATER("water", QMDStartupConfig.cooler_heat_removed[0]),
         IRON("iron", QMDStartupConfig.cooler_heat_removed[1]),
         REDSTONE("redstone", QMDStartupConfig.cooler_heat_removed[2]),
@@ -52,34 +55,6 @@ public class BlockTypes {
         private String name;
         private int heat;
 
-//        @Override TODO
-//        public int getHarvestLevel() {
-//            return 0;
-//        }
-//
-//        @Override
-//        public String getHarvestTool() {
-//            return "pickaxe";
-//        }
-//
-//        @Override
-//        public float getHardness() {
-//            return 2;
-//        }
-//
-//        @Override
-//        public float getResistance() {
-//            return 10;
-//        }
-//
-//        @Override
-//        public int getLightValue() {
-//            if (this == GLOWSTONE) {
-//                return 15;
-//            }
-//            return 0;
-//        }
-
         CoolerType(String name, int heat) {
             this.name = name;
             this.heat = heat;
@@ -99,9 +74,36 @@ public class BlockTypes {
         public int getHeatRemoved() {
             return heat;
         }
+
+        @Override
+        public int getId() {
+            return ordinal();
+        }
+
+        @Override
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public String getTranslationKey() {
+            return "";
+        }
+
+        public PlacementRule<Accelerator, TileAcceleratorPart> getRule() {
+            return CoolerPlacement.RULE_MAP.get(this.name + "_cooler");
+        }
+
+        @Override
+        public BlockBehaviour.Properties getBlockProperties() {
+            if (this == GLOWSTONE) {
+                return this.getDefaultBlockProperties().lightLevel(e -> 15);
+            }
+            return this.getDefaultBlockProperties();
+        }
     }
 
-    public enum RFCavityType implements StringRepresentable {
+    public enum RFCavityType implements StringRepresentable, IMultiblockVariant {
         COPPER("copper", QMDStartupConfig.RF_cavity_voltage[0], QMDStartupConfig.RF_cavity_efficiency[0], QMDStartupConfig.RF_cavity_heat_generated[0], QMDStartupConfig.RF_cavity_base_power[0], QMDStartupConfig.RF_cavity_max_temp[0]),
         MAGNESIUM_DIBORIDE("magnesium_diboride", QMDStartupConfig.RF_cavity_voltage[1], QMDStartupConfig.RF_cavity_efficiency[1], QMDStartupConfig.RF_cavity_heat_generated[1], QMDStartupConfig.RF_cavity_base_power[1], QMDStartupConfig.RF_cavity_max_temp[1]),
         NIOBIUM_TIN("niobium_tin", QMDStartupConfig.RF_cavity_voltage[2], QMDStartupConfig.RF_cavity_efficiency[2], QMDStartupConfig.RF_cavity_heat_generated[2], QMDStartupConfig.RF_cavity_base_power[2], QMDStartupConfig.RF_cavity_max_temp[2]),
@@ -118,7 +120,7 @@ public class BlockTypes {
         private int basePower;
         private int maxTemp;
 
-        private RFCavityType(String name, int voltage, double efficiency, int heat, int basePower, int maxTemp) {
+        RFCavityType(String name, int voltage, double efficiency, int heat, int basePower, int maxTemp) {
             this.name = name;
             this.voltage = voltage;
             this.efficiency = efficiency;
@@ -156,33 +158,29 @@ public class BlockTypes {
         public int getMaxOperatingTemp() {
             return maxTemp;
         }
-//        @Override
-//        public int getHarvestLevel() { TODO
-//            return 0;
-//        }
-//
-//        @Override
-//        public String getHarvestTool() {
-//            return "pickaxe";
-//        }
-//
-//        @Override
-//        public float getHardness() {
-//            return 2;
-//        }
-//
-//        @Override
-//        public float getResistance() {
-//            return 10;
-//        }
-//
-//        @Override
-//        public int getLightValue() {
-//            return 0;
-//        }
+
+        @Override
+        public int getId() {
+            return ordinal();
+        }
+
+        @Override
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public String getTranslationKey() {
+            return "";
+        }
+
+        @Override
+        public BlockBehaviour.Properties getBlockProperties() {
+            return getDefaultBlockProperties();
+        }
     }
 
-    public enum MagnetType implements StringRepresentable {
+    public enum MagnetType implements StringRepresentable, IMultiblockVariant {
         COPPER("copper", QMDStartupConfig.magnet_strength[0], QMDStartupConfig.magnet_efficiency[0], QMDStartupConfig.magnet_heat_generated[0], QMDStartupConfig.magnet_base_power[0], QMDStartupConfig.magnet_max_temp[0]),
         MAGNESIUM_DIBORIDE("magnesium_diboride", QMDStartupConfig.magnet_strength[1], QMDStartupConfig.magnet_efficiency[1], QMDStartupConfig.magnet_heat_generated[1], QMDStartupConfig.magnet_base_power[1], QMDStartupConfig.magnet_max_temp[1]),
         NIOBIUM_TIN("niobium_tin", QMDStartupConfig.magnet_strength[2], QMDStartupConfig.magnet_efficiency[2], QMDStartupConfig.magnet_heat_generated[2], QMDStartupConfig.magnet_base_power[2], QMDStartupConfig.magnet_max_temp[2]),
@@ -238,32 +236,26 @@ public class BlockTypes {
             return maxTemp;
         }
 
-//        @Override TODO
-//        public int getHarvestLevel() {
-//            return 0;
-//        }
-//
-//        @Override
-//        public String getHarvestTool() {
-//            return "pickaxe";
-//        }
-//
-//        @Override
-//        public float getHardness() {
-//            return 2;
-//        }
-//
-//        @Override
-//        public float getResistance() {
-//            return 10;
-//        }
-//
-//        @Override
-//        public int getLightValue() {
-//            return 0;
-//        }
-    }
+        @Override
+        public int getId() {
+            return ordinal();
+        }
 
+        @Override
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public String getTranslationKey() {
+            return "";
+        }
+
+        @Override
+        public BlockBehaviour.Properties getBlockProperties() {
+            return getDefaultBlockProperties();
+        }
+    }
 
     public enum DetectorType implements StringRepresentable {
         BUBBLE_CHAMBER("bubble_chamber", QMDStartupConfig.detector_efficiency[0], QMDStartupConfig.detector_base_power[0]),

@@ -18,7 +18,6 @@ import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
-import vazkii.patchouli.api.PatchouliAPI;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -50,8 +49,8 @@ public class QMDRecipeProvider extends RecipeProvider implements IConditionBuild
         NCRecipeProvider.buildRecipes(recipeOutput);
 
         // Crafting
-//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.beamline, 6).pattern("SSS").pattern("").pattern("SSS").define('S', tag(INGOTS, "stainless_steel")) TODO
-//                .unlockedBy(getHasName(ingotAlloys.get(IngotAlloyType.STAINLESS_STEEL)), has(ingotAlloys.get(IngotAlloyType.STAINLESS_STEEL))).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.beamline, 6).pattern("SSS").pattern("   ").pattern("SSS").define('S', tag(INGOTS, "stainless_steel"))
+                .unlockedBy(getHasName(ingotAlloys.get(IngotAlloyType.STAINLESS_STEEL)), has(ingotAlloys.get(IngotAlloyType.STAINLESS_STEEL))).save(recipeOutput);
 
         toolSet(recipeOutput, ingotAlloys.get(IngotAlloyType.TUNGSTEN_CARBIDE), QMDItems.sword_tungsten_carbide, QMDItems.pickaxe_tungsten_carbide, QMDItems.shovel_tungsten_carbide, QMDItems.axe_tungsten_carbide, QMDItems.hoe_tungsten_carbide);
 
@@ -131,7 +130,7 @@ public class QMDRecipeProvider extends RecipeProvider implements IConditionBuild
         ShapelessRecipeBuilder.shapeless(MISC, luminousPaints.get(LuminousPaintType.ORANGE), 16).requires(tag(DUSTS, "zinc_sulfide")).requires(tag(DUSTS, "radium")).requires(tag(DUSTS, "magnesium"))
                 .unlockedBy(getHasName(COPPER_DUST), has(COPPER_DUST)).save(recipeOutput, "orange_luminous_paint_radium");
 
-        ShapelessRecipeBuilder.shapeless(MISC, PatchouliAPI.get().getBookStack(ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "guide"))).requires(Items.BOOK).requires(ingotAlloys.get(IngotAlloyType.STAINLESS_STEEL))
+        ShapelessRecipeBuilder.shapeless(MISC, vazkii.patchouli.api.PatchouliAPI.get().getBookStack(ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "guide"))).requires(Items.BOOK).requires(ingotAlloys.get(IngotAlloyType.STAINLESS_STEEL))
                 .unlockedBy(getHasName(Items.BOOK), has(Items.BOOK)).save(recipeOutput.withConditions(new ModLoadedCondition("patchouli")));
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.turbineBladeSuperAlloy, 4).pattern("SHS").pattern("SHS").pattern("SHS")

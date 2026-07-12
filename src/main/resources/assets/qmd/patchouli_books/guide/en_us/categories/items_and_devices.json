@@ -1,6 +1,6 @@
 {
 	"name": "Items and Devices",
 	"description": "All the item Gizmos",
-	"icon": "qmd:cell:1",
+	"icon": "qmd:empty_cell",
 	"sortnum": 3
 }

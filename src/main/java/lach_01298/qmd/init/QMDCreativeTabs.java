@@ -38,12 +38,36 @@ public class QMDCreativeTabs {
 
     public static DeferredHolder<CreativeModeTab, CreativeModeTab> MULTI_BLOCKS_TAB = CREATIVE_MODE_TABS.register(QMD.MOD_ID + "_multiblocks_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup." + QMD.MOD_ID + ".multiblocks"))
-            .icon(() -> sources.get(SourceType.SODIUM_22).get().getDefaultInstance()) // TODO linearAcceleratorController
+            .icon(() -> linearAcceleratorController.get().asItem().getDefaultInstance())
             .withTabsBefore(ITEMS_TAB.getId())
             .displayItems((parameters, output) -> {
                 output.accept(turbineBladeSuperAlloy);
                 output.accept(fissionShield);
                 output.accept(fissionReflector);
+
+                output.accept(linearAcceleratorController);
+                output.accept(ringAcceleratorController);
+                output.accept(acceleratorBeam);
+                output.accept(acceleratorCasing);
+                output.accept(acceleratorGlass);
+                output.accept(acceleratorVent);
+                output.accept(acceleratorBeamPort);
+                output.accept(acceleratorSynchrotronPort);
+                output.accept(acceleratorYoke);
+                output.accept(acceleratorSource);
+                output.accept(acceleratorEnergyPort);
+                output.accept(beamDiverterController);
+                output.accept(beamSplitterController);
+                output.accept(deceleratorController);
+                output.accept(acceleratorComputerPort);
+                output.accept(acceleratorPort);
+                output.accept(acceleratorRedstonePort);
+                output.accept(massSpectrometerController);
+                output.accept(acceleratorLaserIonSource);
+                output.accept(acceleratorIonCollector);
+                output.acceptAll(RFCavities.values().stream().map(e -> e.get().asItem().getDefaultInstance()).toList());
+                output.acceptAll(acceleratorMagnets.values().stream().map(e -> e.get().asItem().getDefaultInstance()).toList());
+                output.acceptAll(acceleratorCoolers.values().stream().map(e -> e.get().asItem().getDefaultInstance()).toList());
             }).build());
 
     public static DeferredHolder<CreativeModeTab, CreativeModeTab> BLOCKS_TAB = CREATIVE_MODE_TABS.register(QMD.MOD_ID + "_blocks_tab", () -> CreativeModeTab.builder()
@@ -52,7 +76,7 @@ public class QMDCreativeTabs {
             .withTabsBefore(MULTI_BLOCKS_TAB.getId())
             .displayItems((parameters, output) -> {
                 output.accept(creativeParticleSource);
-                // TODO pipe
+                output.accept(beamline);
                 output.accept(oreLeacher);
                 output.accept(irradiator);
                 output.accept(atmosphereCollector);

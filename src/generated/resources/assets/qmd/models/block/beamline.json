@@ -1,0 +1,7 @@
+{
+  "parent": "qmd:block/pipe",
+  "textures": {
+    "end": "qmd:block/beamline/end",
+    "side": "qmd:block/beamline/side"
+  }
+}
