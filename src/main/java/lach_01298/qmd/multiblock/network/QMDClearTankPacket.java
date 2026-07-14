@@ -72,6 +72,7 @@ public class QMDClearTankPacket extends QMDPacket {
                     List<Tank> tanks = mbTanks.getTanks();
                     if (tanks.size() > message.tankID) {
                         tanks.get(message.tankID).setFluid(FluidStack.EMPTY);
+                        tile.setChanged();
                     } else {
                         QMD.LOGGER.error("cannot clear multiblock tank {} as multiblock only has {} tanks", message.tankID, tanks.size());
                     }

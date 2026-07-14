@@ -94,6 +94,10 @@ public class BlockTypes {
             return CoolerPlacement.RULE_MAP.get(this.name + "_cooler");
         }
 
+        public String getTooltipRule() {
+            return CoolerPlacement.TOOLTIP_MAP.get(this.name + "_cooler");
+        }
+
         @Override
         public BlockBehaviour.Properties getBlockProperties() {
             if (this == GLOWSTONE) {

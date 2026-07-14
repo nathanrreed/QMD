@@ -99,7 +99,9 @@ public abstract class TileCuboidalOrToroidalMultiblockPart<MULTIBLOCK extends Cu
     @Override
     public void onAttached(MULTIBLOCK newMultiblock) {
         super.onAttached(newMultiblock);
-        recalculateOutwardsDirection(newMultiblock.getMinimumCoord().get(), newMultiblock.getMaximumCoord().get());
+        if (newMultiblock.getPartsCount() > 1) {
+            recalculateOutwardsDirection(newMultiblock.getMinimumCoord().get(), newMultiblock.getMaximumCoord().get());
+        }
     }
 
     @Override

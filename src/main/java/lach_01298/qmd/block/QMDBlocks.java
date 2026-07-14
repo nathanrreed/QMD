@@ -138,25 +138,25 @@ public class QMDBlocks {
         acceleratorVent = registerBlockItem("accelerator_vent", AcceleratorPartType.AcceleratorVent::createBlock);
         acceleratorComputerPort = registerBlockItem("accelerator_computer_port", AcceleratorPartType.AcceleratorComputerPort::createBlock);
         acceleratorPort = registerBlockItem("accelerator_port", AcceleratorPartType.AcceleratorPort::createBlock);
-        acceleratorRedstonePort = registerBlockItemWithTooltip("accelerator_redstone_port", AcceleratorPartType.AcceleratorRedstonePort::createBlock, false, Component.translatable("tile.qmd.accelerator_yoke.desc"));
+        acceleratorRedstonePort = registerBlockItem("accelerator_redstone_port", AcceleratorPartType.AcceleratorRedstonePort::createBlock);
 
         acceleratorBeamPort = registerBlockItem("accelerator_beam_port", AcceleratorPartType.AcceleratorBeamPort::createBlock);
         acceleratorSynchrotronPort = registerBlockItem("accelerator_synchrotron_port", AcceleratorPartType.AcceleratorSynchrotronPort::createBlock);
-        acceleratorYoke = registerBlockItem("accelerator_yoke", AcceleratorPartType.AcceleratorYoke::createBlock);
+        acceleratorYoke = registerBlockItemWithTooltip("accelerator_yoke", AcceleratorPartType.AcceleratorYoke::createBlock, false, Component.translatable("tile.qmd.accelerator_yoke.desc"));
 
         for (RFCavityType type : RFCavityType.values()) {
-            RFCavities.put(type, registerBlockItemWithFixedTooltip(type.getName().toLowerCase() + "_accelerator_cavity", () -> AcceleratorPartType.RFCavity.createBlock(type), QMDInfo.RFCavityFixedInfo(type), ChatFormatting.GREEN, QMDInfo.RFCavityInfo()));
+            RFCavities.put(type, registerBlockItemWithFixedTooltip(type.getName().toLowerCase() + "_accelerator_cavity", () -> AcceleratorPartType.RFCavity.createBlock(type), QMDInfo.RFCavityFixedInfo(type), ChatFormatting.GREEN, true, QMDInfo.RFCavityInfo()));
         }
         for (MagnetType type : MagnetType.values()) {
-            acceleratorMagnets.put(type, registerBlockItemWithFixedTooltip(type.getName().toLowerCase() + "_accelerator_magnet", () -> AcceleratorPartType.AcceleratorMagnet.createBlock(type), QMDInfo.magnetFixedInfo(type), ChatFormatting.GREEN, QMDInfo.magnetInfo(type)));
+            acceleratorMagnets.put(type, registerBlockItemWithFixedTooltip(type.getName().toLowerCase() + "_accelerator_magnet", () -> AcceleratorPartType.AcceleratorMagnet.createBlock(type), QMDInfo.magnetFixedInfo(type), ChatFormatting.GREEN, true, QMDInfo.magnetInfo(type)));
         }
         for (CoolerType type : CoolerType.values()) {
-            acceleratorCoolers.put(type, registerBlockItemWithFixedTooltip(type.getName().toLowerCase() + "_accelerator_cooler", () -> AcceleratorPartType.AcceleratorCooler.createBlock(type), QMDInfo.coolerFixedInfo(type), ChatFormatting.BLUE));
+            acceleratorCoolers.put(type, registerBlockItemWithFixedTooltip(type.getName().toLowerCase() + "_accelerator_cooler", () -> AcceleratorPartType.AcceleratorCooler.createBlock(type), QMDInfo.coolerFixedInfo(type), ChatFormatting.BLUE, false));
         }
 
-        acceleratorSource = registerBlockItemWithFixedTooltip("accelerator_source", AcceleratorPartType.AcceleratorSource::createBlock, QMDInfo.ionSourceFixedInfo(0), ChatFormatting.GREEN, QMDInfo.ionSourceInfo());
+        acceleratorSource = registerBlockItemWithFixedTooltip("accelerator_source", AcceleratorPartType.AcceleratorSource::createBlock, QMDInfo.ionSourceFixedInfo(0), ChatFormatting.GREEN, true, QMDInfo.ionSourceInfo());
         acceleratorEnergyPort = registerBlockItem("accelerator_energy_port", AcceleratorPartType.AcceleratorEnergyPort::createBlock);
-        acceleratorLaserIonSource = registerBlockItemWithFixedTooltip("accelerator_laser_ion_source", AcceleratorPartType.AcceleratorLaserIonSource::createBlock, QMDInfo.ionSourceFixedInfo(1), ChatFormatting.GREEN, QMDInfo.ionSourceInfo());
+        acceleratorLaserIonSource = registerBlockItemWithFixedTooltip("accelerator_laser_ion_source", AcceleratorPartType.AcceleratorLaserIonSource::createBlock, QMDInfo.ionSourceFixedInfo(1), ChatFormatting.GREEN, true, QMDInfo.ionSourceInfo());
         acceleratorIonCollector = registerBlockItem("accelerator_ion_collector", AcceleratorPartType.AcceleratorIonCollector::createBlock);
 
 //        targetChamberController = withName(new BlockTargetChamberController(), "target_chamber_controller");
@@ -251,9 +251,9 @@ public class QMDBlocks {
         return toReturn;
     }
 
-    public static <T extends Block> DeferredBlock<Block> registerBlockItemWithFixedTooltip(String name, Supplier<T> block, Component[] fixed, ChatFormatting fixedColour, Component... tooltip) {
+    public static <T extends Block> DeferredBlock<Block> registerBlockItemWithFixedTooltip(String name, Supplier<T> block, Component[] fixed, ChatFormatting fixedColour, boolean hasInfo, Component... tooltip) {
         DeferredBlock<Block> toReturn = BLOCKS.register(name, block);
-        ITEMS.register(name, () -> new NCItemBlock(toReturn.get(), fixedColour, fixed, true, ChatFormatting.AQUA, tooltip));
+        ITEMS.register(name, () -> new NCItemBlock(toReturn.get(), fixedColour, fixed, true, ChatFormatting.AQUA, hasInfo, tooltip));
         return toReturn;
     }
 

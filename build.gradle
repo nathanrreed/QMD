@@ -163,6 +163,9 @@ dependencies {
     compileOnly("dev.emi:emi-neoforge:${emi_version}:api")
     runtimeOnly("dev.emi:emi-neoforge:${emi_version}")
 
+    implementation "maven.modrinth:jade:${jade_version}+neoforge"
+    localRuntime "maven.modrinth:jade-addons-forge:${jade_addons_version}+neoforge"
+
     compileOnly("vazkii.patchouli:Patchouli:${patchouli_version}-NEOFORGE:api")
     runtimeOnly("vazkii.patchouli:Patchouli:${patchouli_version}-NEOFORGE")
 
@@ -172,6 +175,10 @@ dependencies {
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
 
+    runtimeOnly("mekanism:Mekanism:${minecraft_version}-${mekanism_version}")            // Mekanism
+    runtimeOnly("mekanism:Mekanism:${minecraft_version}-${mekanism_version}:additions")  // Mekanism: Additions
+    runtimeOnly("mekanism:Mekanism:${minecraft_version}-${mekanism_version}:generators") // Mekanism: Generators
+    runtimeOnly("mekanism:Mekanism:${minecraft_version}-${mekanism_version}:tools")      // Mekanism: Tools
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

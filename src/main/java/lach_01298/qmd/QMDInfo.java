@@ -18,13 +18,8 @@ public class QMDInfo { // TODO should QMDServerConfig be used here instead?
         };
     }
 
-    public static Component[] RFCavityInfo() {
-        RFCavityType[] values = RFCavityType.values();
-        Component[] info = new Component[values.length];
-        for (int i = 0; i < values.length; i++) {
-            info[i] = Component.translatable("tile." + QMD.MOD_ID + ".rf_cavity.desc");
-        }
-        return info;
+    public static Component RFCavityInfo() {
+        return Component.translatable("tile." + QMD.MOD_ID + ".rf_cavity.desc");
     }
 
     // Magnet info

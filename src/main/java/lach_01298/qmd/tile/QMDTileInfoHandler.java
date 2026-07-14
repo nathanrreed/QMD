@@ -43,6 +43,8 @@ public class QMDTileInfoHandler {
         registerBlockTileInfo(new SimpleTileInfoBlock<>("atmosphere_collector", TileAtmosphereCollector.class, TileAtmosphereCollector::new));
         registerBlockTileInfo(new SimpleTileInfoBlock<>("liquid_collector", TileLiquidCollector.class, TileLiquidCollector::new));
 
+        registerContainerInfo(new BlockEntityMenuInfo<>("ion_source", TileAcceleratorIonSource.class, ContainerAcceleratorIonSource::new));
+
         registerContainerInfo(new BlockEntityMenuInfo<>("linear_accelerator_controller", TileLinearAcceleratorController.class, ContainerLinearAcceleratorController::new));
         registerContainerInfo(new BlockEntityMenuInfo<>("ring_accelerator_controller", TileRingAcceleratorController.class, ContainerRingAcceleratorController::new));
         registerContainerInfo(new BlockEntityMenuInfo<>("beam_diverter_controller", TileBeamDiverterController.class, ContainerBeamDiverterController::new));

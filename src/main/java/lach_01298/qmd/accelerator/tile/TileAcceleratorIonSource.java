@@ -9,6 +9,7 @@ import com.nred.nuclearcraft.block_entity.internal.inventory.InventoryConnection
 import com.nred.nuclearcraft.block_entity.internal.inventory.ItemOutputSetting;
 import com.nred.nuclearcraft.block_entity.internal.inventory.ItemSorption;
 import com.nred.nuclearcraft.block_entity.inventory.ITileInventory;
+import com.nred.nuclearcraft.handler.BlockEntityInfoHandler;
 import com.nred.nuclearcraft.handler.BlockEntityMenuInfo;
 import com.nred.nuclearcraft.util.NBTHelper;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
@@ -51,7 +52,7 @@ public abstract class TileAcceleratorIonSource extends TileAcceleratorPart imple
     private IAcceleratorController<?> controller;
 
     private @Nonnull InventoryConnection[] inventoryConnections = ITileInventory.inventoryConnectionAll(Arrays.asList(ItemSorption.NON, ItemSorption.NON));
-    private final @Nonnull NonNullList<ItemStack> inventoryStacks = NonNullList.<ItemStack>withSize(2, ItemStack.EMPTY);
+    private final @Nonnull NonNullList<ItemStack> inventoryStacks = NonNullList.withSize(2, ItemStack.EMPTY);
 
     private final @Nonnull List<Tank> backupTanks = Lists.newArrayList(new Tank(QMDServerConfig.accelerator_base_input_tank_capacity * 1000, new HashSet<>()));
     private @Nonnull FluidConnection[] fluidConnections = ITileFluid.fluidConnectionAll(Lists.newArrayList(TankSorption.NON));
@@ -72,7 +73,6 @@ public abstract class TileAcceleratorIonSource extends TileAcceleratorPart imple
         this.outputFocus = outputFocus;
         this.basePower = basePower;
         this.name = name;
-
 
         fluidSides = ITileFluid.getDefaultFluidSides(this);
         this.IONumber = 0;
@@ -298,6 +298,7 @@ public abstract class TileAcceleratorIonSource extends TileAcceleratorPart imple
 
     @Override
     public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory inventory, Player player) {
+        this.setChanged(); // Fixes tank having wrong capacity
         return new ContainerAcceleratorIonSource(containerId, inventory, this);
     }
 
@@ -307,7 +308,7 @@ public abstract class TileAcceleratorIonSource extends TileAcceleratorPart imple
 
     @Override
     public BlockEntityMenuInfo<TileAcceleratorIonSource> getContainerInfo() {
-        return null; // TODO add
+        return BlockEntityInfoHandler.getTileContainerInfo("ion_source");
     }
 
     @Override

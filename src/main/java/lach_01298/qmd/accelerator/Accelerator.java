@@ -21,7 +21,6 @@ import lach_01298.qmd.multiblock.IMultiBlockTank;
 import lach_01298.qmd.multiblock.IQMDPacketMultiblock;
 import lach_01298.qmd.multiblock.network.AcceleratorUpdatePacket;
 import lach_01298.qmd.particle.ParticleStorageAccelerator;
-import lach_01298.qmd.recipe.QMDRecipe;
 import lach_01298.qmd.recipe.QMDRecipeInfo;
 import lach_01298.qmd.recipe.QMDRecipes;
 import lach_01298.qmd.recipe.types.AcceleratorCoolingRecipe;
@@ -57,7 +56,11 @@ public class Accelerator extends CuboidalOrToroidalMultiblock<Accelerator> imple
     public List<Tank> tanks = Lists.newArrayList(
             new Tank(QMDServerConfig.accelerator_base_input_tank_capacity, QMDRecipes.accelerator_cooling.getValidFluids(getWorld(), 0)),
             new Tank(QMDServerConfig.accelerator_base_output_tank_capacity, null),
-            new Tank(1, null), new Tank(1, null), new Tank(1, null), new Tank(1, null), new Tank(1, null));
+            new Tank(1, null),
+            new Tank(1, null),
+            new Tank(1, null),
+            new Tank(1, null),
+            new Tank(1, null));
     public final List<ParticleStorageAccelerator> beams = Lists.newArrayList(new ParticleStorageAccelerator(), new ParticleStorageAccelerator(), new ParticleStorageAccelerator());
 
     public boolean isControllorOn = false; //for controller blockstate
@@ -501,7 +504,6 @@ public class Accelerator extends CuboidalOrToroidalMultiblock<Accelerator> imple
         energyStorage.readFromNBT(data, registries, "energyStorage");
         readTanks(tanks, data, registries, "tanks");
         readBeams(beams, data);
-
 
         isControllorOn = data.getBoolean("isAcceleratorOn");
         cooling = data.getLong("cooling");

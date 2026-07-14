@@ -1,6 +1,5 @@
 package lach_01298.qmd.accelerator.tile;
 
-import com.nred.nuclearcraft.multiblock.PlacementRule;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import it.zerono.mods.zerocore.lib.multiblock.cuboid.PartPosition;
@@ -14,7 +13,6 @@ import static lach_01298.qmd.tile.QMDTiles.TILE_ACCELERATOR_COOLER;
 
 public class TileAcceleratorCooler extends TileAcceleratorPart implements IAcceleratorComponent {
     public final CoolerType coolerType;
-    public PlacementRule<Accelerator, TileAcceleratorPart> placementRule;
 
     public boolean isSearched = false, isInValidPosition = false;
 
@@ -61,8 +59,8 @@ public class TileAcceleratorCooler extends TileAcceleratorPart implements IAccel
     public boolean isCoolerValid(final Long2ObjectMap<TileAcceleratorCooler> partFailCache, final Long2ObjectMap<TileAcceleratorCooler> assumedValidCache) {
         if (partFailCache.containsKey(worldPosition.asLong())) {
             return isInValidPosition = false;
-        } else if (placementRule.requiresRecheck()) {
-            isInValidPosition = placementRule.satisfied(this, false);
+        } else if (coolerType.getRule().requiresRecheck()) {
+            isInValidPosition = coolerType.getRule().satisfied(this, false);
             if (isInValidPosition) {
                 assumedValidCache.put(worldPosition.asLong(), this);
             }
@@ -70,11 +68,11 @@ public class TileAcceleratorCooler extends TileAcceleratorPart implements IAccel
         } else if (isInValidPosition) {
             return true;
         }
-        return isInValidPosition = placementRule.satisfied(this, false);
+        return isInValidPosition = coolerType.getRule().satisfied(this, false);
     }
 
     public boolean isSearchRoot() {
-        for (String dep : placementRule.getDependencies()) {
+        for (String dep : coolerType.getRule().getDependencies()) {
             if (dep.equals("magnet") || dep.equals("cavity") || dep.equals("yoke") || dep.equals("beam"))
                 return true;
         }

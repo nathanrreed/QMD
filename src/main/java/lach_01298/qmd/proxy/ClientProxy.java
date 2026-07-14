@@ -1,6 +1,7 @@
 package lach_01298.qmd.proxy;
 
 import com.nred.nuclearcraft.info.NCFluid;
+import lach_01298.qmd.QMDTooltipHandler;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -8,6 +9,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import net.neoforged.neoforge.common.NeoForge;
 
 import static com.nred.nuclearcraft.helpers.Concat.fluidValues;
 import static lach_01298.qmd.fluid.QMDFluids.QMD_FLUIDS;
@@ -32,21 +34,16 @@ public class ClientProxy {
     /// /            }
     /// /        }, QMDArmour.helm_hev, QMDArmour.chest_hev, QMDArmour.legs_hev, QMDArmour.boots_hev);
     /// /    }
-//
-//    @Override
-//    public void postInit(FMLPostInitializationEvent postEvent) {
-//        super.postInit(postEvent);
-//        MinecraftForge.EVENT_BUS.register(new QMDTooltipHandler());
-//        MinecraftForge.EVENT_BUS.register(new ArmPositionHandler());
+
+    @SubscribeEvent
+    public static void postInit(FMLClientSetupEvent event) {
+        NeoForge.EVENT_BUS.register(new QMDTooltipHandler());
+//        MinecraftForge.EVENT_BUS.register(new ArmPositionHandler()); TODO
 //        MinecraftForge.EVENT_BUS.register(new BeamRenderer());
 //        ((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager()).registerReloadListener(DrillBlockRenderHandler.INSTANCE);
-//    }
-//
-//
-//    @Override
-//    public Player getPlayerClient() {
-//        return Minecraft.getInstance().player;
-//    }
+    }
+
+
     @SubscribeEvent
     public static void fluidLoad(RegisterClientExtensionsEvent event) {
         for (NCFluid fluid : fluidValues(QMD_FLUIDS)) {
