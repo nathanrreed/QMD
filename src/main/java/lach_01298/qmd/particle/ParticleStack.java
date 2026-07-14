@@ -15,6 +15,7 @@ public class ParticleStack {
     private int amount;
     private long meanEnergy;
     private double focus;            //Basically inverse area of the beam
+
     public static final Codec<ParticleStack> CODEC = RecordCodecBuilder.create(inst -> inst.group(
             Codec.STRING.fieldOf("particle").forGetter(ParticleStack::getParticleString),
             Codec.INT.fieldOf("amount").forGetter(ParticleStack::getAmount),

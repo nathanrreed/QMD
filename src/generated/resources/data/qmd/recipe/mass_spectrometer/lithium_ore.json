@@ -1,0 +1,36 @@
+{
+  "type": "qmd:mass_spectrometer_recipe",
+  "fluidInput": [],
+  "fluidProducts": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ores/lithium"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 4,
+      "ingredient": {
+        "tag": "c:dusts/lithium"
+      }
+    },
+    {
+      "chancePercent": 20,
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/sodium"
+      }
+    },
+    {
+      "chancePercent": 40,
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/aluminum"
+      }
+    }
+  ],
+  "timeMultiplier": 1.0
+}

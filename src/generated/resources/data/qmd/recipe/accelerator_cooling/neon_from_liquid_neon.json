@@ -1,0 +1,16 @@
+{
+  "type": "qmd:accelerator_cooling_recipe",
+  "fluidInput": {
+    "amount": 1,
+    "ingredient": {
+      "tag": "c:liquid_neon"
+    }
+  },
+  "fluidProduct": {
+    "amount": 64,
+    "ingredient": {
+      "fluid": "qmd:neon"
+    }
+  },
+  "timeMultiplier": 27
+}

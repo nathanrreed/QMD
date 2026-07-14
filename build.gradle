@@ -61,6 +61,10 @@ repositories {
             includeGroup("cc.tweaked")
         }
     }
+    maven { // Curios
+        name = "Illusive Soulworks maven"
+        url = "https://maven.theillusivec4.top/"
+    }
 }
 
 base {
@@ -160,9 +164,14 @@ dependencies {
     runtimeOnly("dev.emi:emi-neoforge:${emi_version}")
 
     compileOnly("vazkii.patchouli:Patchouli:${patchouli_version}-NEOFORGE:api")
+    runtimeOnly("vazkii.patchouli:Patchouli:${patchouli_version}-NEOFORGE")
 
     compileOnly("cc.tweaked:cc-tweaked-${minecraft_version}-forge-api:${cct_version}")
     runtimeOnly("cc.tweaked:cc-tweaked-${minecraft_version}-forge:${cct_version}")
+
+    compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
+    runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

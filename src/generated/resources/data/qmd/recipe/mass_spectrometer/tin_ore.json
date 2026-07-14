@@ -1,0 +1,35 @@
+{
+  "type": "qmd:mass_spectrometer_recipe",
+  "fluidInput": [],
+  "fluidProducts": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ores/tin"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/zirconium"
+      }
+    },
+    {
+      "count": 4,
+      "ingredient": {
+        "tag": "c:dusts/tin"
+      }
+    },
+    {
+      "chancePercent": 40,
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/tungsten"
+      }
+    }
+  ],
+  "timeMultiplier": 1.0
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "qmd:wire_ybco_part"
+    },
+    "S": {
+      "tag": "c:ingots/stainless_steel"
+    },
+    "T": {
+      "tag": "c:ingots/tough"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "STS",
+    "CCC"
+  ],
+  "result": {
+    "count": 2,
+    "id": "qmd:ybco_accelerator_magnet"
+  }
+}

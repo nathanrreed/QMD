@@ -1,0 +1,33 @@
+{
+  "type": "qmd:mass_spectrometer_recipe",
+  "fluidInput": [],
+  "fluidProducts": [],
+  "itemInput": [
+    {
+      "count": 9,
+      "ingredient": [
+        {
+          "tag": "c:ingots/magnesium"
+        },
+        {
+          "tag": "c:dusts/magnesium"
+        }
+      ]
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 8,
+      "ingredient": {
+        "item": "qmd:magnesium_24_isotope"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:magnesium_26_isotope"
+      }
+    }
+  ],
+  "timeMultiplier": 1.0
+}

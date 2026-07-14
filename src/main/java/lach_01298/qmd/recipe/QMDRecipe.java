@@ -41,6 +41,10 @@ public class QMDRecipe implements IQMDRecipe, Recipe<QMDRecipeInput> {
         return fluidIngredients.getFirst();
     }
 
+    public SizedChanceItemIngredient getItemIngredient() {
+        return itemIngredients.getFirst();
+    }
+
     @Override
     public List<ParticleStack> getParticleIngredients() {
         return particleIngredients;
@@ -60,9 +64,13 @@ public class QMDRecipe implements IQMDRecipe, Recipe<QMDRecipeInput> {
         return fluidProducts.getFirst();
     }
 
+    public SizedChanceItemIngredient getItemProduct() {
+        return itemProducts.getFirst();
+    }
+
     @Override
     public List<ParticleStack> getParticleProducts() {
-        return particleProducts;
+        return particleProducts.stream().map(ParticleStack::copy).toList(); // Prevent changes in focus
     }
 
     public ParticleStack getParticleProduct() {

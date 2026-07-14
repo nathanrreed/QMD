@@ -1,0 +1,36 @@
+{
+  "type": "qmd:mass_spectrometer_recipe",
+  "fluidInput": [],
+  "fluidProducts": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ores/copper"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 4,
+      "ingredient": {
+        "tag": "c:dusts/copper"
+      }
+    },
+    {
+      "chancePercent": 20,
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/zinc"
+      }
+    },
+    {
+      "chancePercent": 4,
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/iridium"
+      }
+    }
+  ],
+  "timeMultiplier": 1.0
+}

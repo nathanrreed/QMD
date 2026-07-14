@@ -510,7 +510,9 @@ public class MassSpectrometerLogic extends AcceleratorLogic {
 
             }
 
-            InventoryHelper.removeItem(0, recipeInfo.recipe.getItemIngredients().get(0).count(), inv.getInventoryStacks(), inv);
+            if (!recipeInfo.recipe.getItemIngredients().isEmpty()) {
+                InventoryHelper.removeItem(0, recipeInfo.recipe.getItemIngredients().get(0).count(), inv.getInventoryStacks(), inv);
+            }
 
             List<SizedChanceFluidIngredient> productFluids = recipeInfo.recipe.getFluidProducts();
             for (int i = 0; i < productFluids.size(); i++) {
@@ -523,7 +525,7 @@ public class MassSpectrometerLogic extends AcceleratorLogic {
 
             }
 
-            FluidStack ingredientFluid = recipeInfo.recipe.getFluidIngredients().get(0).getStack();
+            FluidStack ingredientFluid = !recipeInfo.recipe.getFluidIngredients().isEmpty() ? recipeInfo.recipe.getFluidIngredients().get(0).getStack() : null;
             if (ingredientFluid != null) {
                 multiblock.tanks.get(2).drain(ingredientFluid, EXECUTE);
             }
@@ -534,10 +536,10 @@ public class MassSpectrometerLogic extends AcceleratorLogic {
 
     protected void refreshRecipe() {
         TileMassSpectrometerController cont = (TileMassSpectrometerController) multiblock.controller;
-        ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+        ArrayList<ItemStack> items = new ArrayList<>();
         ItemStack item = cont.getInventoryStacks().get(0).copy();
         items.add(item);
-        ArrayList<Tank> tanks = new ArrayList<Tank>();
+        ArrayList<Tank> tanks = new ArrayList<>();
         tanks.add(multiblock.tanks.get(2));
 
         recipeInfo = mass_spectrometer.getRecipeInfoFromInputs(getWorld(), items, tanks, new ArrayList<>());

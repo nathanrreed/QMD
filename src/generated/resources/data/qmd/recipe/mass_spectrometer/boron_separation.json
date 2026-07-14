@@ -1,0 +1,28 @@
+{
+  "type": "qmd:mass_spectrometer_recipe",
+  "fluidInput": [],
+  "fluidProducts": [],
+  "itemInput": [
+    {
+      "count": 12,
+      "ingredient": {
+        "tag": "c:ingots/boron"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 3,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:boron_10"
+      }
+    },
+    {
+      "count": 9,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:boron_11"
+      }
+    }
+  ],
+  "timeMultiplier": 1.0
+}

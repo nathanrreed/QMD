@@ -1,0 +1,28 @@
+{
+  "type": "qmd:mass_spectrometer_recipe",
+  "fluidInput": [
+    {
+      "amount": 100,
+      "ingredient": {
+        "fluid": "nuclearcraftneohaul:coal"
+      }
+    }
+  ],
+  "fluidProducts": [
+    {
+      "amount": 100,
+      "ingredient": {
+        "fluid": "qmd:carbon"
+      }
+    },
+    {
+      "amount": 111,
+      "ingredient": {
+        "fluid": "nuclearcraftneohaul:sulfur"
+      }
+    }
+  ],
+  "itemInput": [],
+  "itemProducts": [],
+  "timeMultiplier": 1.0
+}

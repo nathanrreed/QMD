@@ -1,0 +1,40 @@
+{
+  "type": "qmd:mass_spectrometer_recipe",
+  "fluidInput": [],
+  "fluidProducts": [
+    {
+      "amount": 1000,
+      "chancePercent": 48,
+      "increment": 10,
+      "ingredient": {
+        "fluid": "nuclearcraftneohaul:hydrogen"
+      }
+    },
+    {
+      "amount": 1000,
+      "chancePercent": 24,
+      "increment": 10,
+      "ingredient": {
+        "fluid": "nuclearcraftneohaul:oxygen"
+      }
+    }
+  ],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "chancePercent": 26,
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:graphite_dust"
+      }
+    }
+  ],
+  "timeMultiplier": 1.0
+}

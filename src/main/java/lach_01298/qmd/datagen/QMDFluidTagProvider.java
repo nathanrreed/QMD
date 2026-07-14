@@ -13,7 +13,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-import static com.nred.nuclearcraft.datagen.ModFluidTagProvider.*;
+import static com.nred.nuclearcraft.datagen.ModFluidTagProvider.ARGON_TAG;
+import static com.nred.nuclearcraft.datagen.ModFluidTagProvider.NEON_TAG;
 import static lach_01298.qmd.fluid.QMDFluids.QMD_FLUIDS;
 
 public class QMDFluidTagProvider extends FluidTagsProvider {
@@ -21,8 +22,6 @@ public class QMDFluidTagProvider extends FluidTagsProvider {
         super(output, provider, QMD.MOD_ID, existingFileHelper);
     }
 
-    public static final TagKey<Fluid> LIQUID_HELIUM_TAG = FluidTags.create(ResourceLocation.parse("c:liquid_helium"));
-    public static final TagKey<Fluid> LIQUID_NITROGEN_TAG = FluidTags.create(ResourceLocation.parse("c:liquid_nitrogen"));
     public static final TagKey<Fluid> LIQUID_NEON_TAG = FluidTags.create(ResourceLocation.parse("c:liquid_neon"));
     public static final TagKey<Fluid> LIQUID_ARGON_TAG = FluidTags.create(ResourceLocation.parse("c:liquid_argon"));
 
@@ -30,6 +29,8 @@ public class QMDFluidTagProvider extends FluidTagsProvider {
     public static final TagKey<Fluid> HYDROCHLORIC_ACID_TAG = FluidTags.create(ResourceLocation.parse("c:hydrochloric_acid"));
 
     public static final TagKey<Fluid> MERCURY_TAG = FluidTags.create(ResourceLocation.parse("c:mercury"));
+    public static final TagKey<Fluid> CHLORINE_TAG = FluidTags.create(ResourceLocation.parse("c:chlorine"));
+    public static final TagKey<Fluid> DIBORANE_TAG = FluidTags.create(ResourceLocation.parse("c:diborane"));
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
@@ -41,5 +42,8 @@ public class QMDFluidTagProvider extends FluidTagsProvider {
         tag(ARGON_TAG).add(QMD_FLUIDS.get("argon").still.get());
         tag(NEON_TAG).add(QMD_FLUIDS.get("neon").still.get());
         tag(CHLORINE_TAG).add(QMD_FLUIDS.get("chlorine").still.get());
+
+        tag(LIQUID_NEON_TAG).add(QMD_FLUIDS.get("liquid_neon").still.get());
+        tag(LIQUID_ARGON_TAG).add(QMD_FLUIDS.get("liquid_argon").still.get());
     }
 }

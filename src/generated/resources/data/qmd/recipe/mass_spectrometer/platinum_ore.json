@@ -1,0 +1,45 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ores/platinum"
+      }
+    }
+  ],
+  "type": "qmd:mass_spectrometer_recipe",
+  "fluidInput": [],
+  "fluidProducts": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ores/platinum"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "chancePercent": 40,
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/osmium"
+      }
+    },
+    {
+      "chancePercent": 40,
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/iridium"
+      }
+    },
+    {
+      "count": 4,
+      "ingredient": {
+        "tag": "c:dusts/platinum"
+      }
+    }
+  ],
+  "timeMultiplier": 1.0
+}

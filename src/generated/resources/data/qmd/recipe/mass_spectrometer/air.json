@@ -1,0 +1,40 @@
+{
+  "type": "qmd:mass_spectrometer_recipe",
+  "fluidInput": [],
+  "fluidProducts": [
+    {
+      "amount": 1000,
+      "chancePercent": 4,
+      "increment": 10,
+      "ingredient": {
+        "fluid": "nuclearcraftneohaul:hydrogen"
+      }
+    },
+    {
+      "amount": 1000,
+      "chancePercent": 59,
+      "increment": 10,
+      "ingredient": {
+        "fluid": "nuclearcraftneohaul:oxygen"
+      }
+    }
+  ],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:bone"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "chancePercent": 23,
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:calcium_dust"
+      }
+    }
+  ],
+  "timeMultiplier": 1.0
+}

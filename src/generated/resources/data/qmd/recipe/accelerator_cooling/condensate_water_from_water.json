@@ -1,0 +1,16 @@
+{
+  "type": "qmd:accelerator_cooling_recipe",
+  "fluidInput": {
+    "amount": 1,
+    "ingredient": {
+      "fluid": "minecraft:water"
+    }
+  },
+  "fluidProduct": {
+    "amount": 1,
+    "ingredient": {
+      "fluid": "nuclearcraftneohaul:condensate_water"
+    }
+  },
+  "timeMultiplier": 300
+}

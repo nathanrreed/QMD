@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_accelerator_source": {
+      "conditions": {
+        "items": [
+          {
+            "items": "qmd:accelerator_source"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "qmd:accelerator_laser_ion_source"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_accelerator_source"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "qmd:accelerator_laser_ion_source"
+    ]
+  }
+}

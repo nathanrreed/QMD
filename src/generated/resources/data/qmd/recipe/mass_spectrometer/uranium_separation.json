@@ -1,0 +1,28 @@
+{
+  "type": "qmd:mass_spectrometer_recipe",
+  "fluidInput": [],
+  "fluidProducts": [],
+  "itemInput": [
+    {
+      "count": 10,
+      "ingredient": {
+        "tag": "c:ingots/uranium"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:uranium_235"
+      }
+    },
+    {
+      "count": 9,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:uranium_238"
+      }
+    }
+  ],
+  "timeMultiplier": 1.0
+}

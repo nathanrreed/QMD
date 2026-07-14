@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "qmd:block/diamond_accelerator_cooler"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:buckets/cryotheum"
+    },
+    {
+      "item": "qmd:empty_cooler_part"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "qmd:cryotheum_accelerator_cooler"
+  }
+}

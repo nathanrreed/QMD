@@ -9,7 +9,7 @@
   "fluidProduct": {
     "amount": 64,
     "ingredient": {
-      "tag": "c:neon"
+      "fluid": "qmd:neon"
     }
   },
   "heatRequired": 1000,

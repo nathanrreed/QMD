@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": {
+      "item": "qmd:elite_processor_semiconductor"
+    },
+    "I": {
+      "item": "qmd:accelerator_source"
+    },
+    "L": {
+      "item": "qmd:laser_assembly_part"
+    },
+    "P": {
+      "item": "nuclearcraftneohaul:elite_plating"
+    }
+  },
+  "pattern": [
+    "LPL",
+    "EIE",
+    "LPL"
+  ],
+  "result": {
+    "count": 1,
+    "id": "qmd:accelerator_laser_ion_source"
+  }
+}

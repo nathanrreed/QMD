@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "qmd:block/copper_accelerator_cooler"
+    }
+  }
+}

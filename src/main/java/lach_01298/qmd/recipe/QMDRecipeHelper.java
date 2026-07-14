@@ -1,13 +1,13 @@
 package lach_01298.qmd.recipe;
 
-import com.nred.nuclearcraft.recipe.IngredientMatchResult;
-import com.nred.nuclearcraft.recipe.IngredientSorption;
-import com.nred.nuclearcraft.recipe.SizedChanceFluidIngredient;
-import com.nred.nuclearcraft.recipe.SizedChanceItemIngredient;
+import com.nred.nuclearcraft.block_entity.internal.fluid.Tank;
+import com.nred.nuclearcraft.recipe.*;
 import com.nred.nuclearcraft.util.CollectionHelper;
 import it.unimi.dsi.fastutil.ints.IntList;
 import lach_01298.qmd.particle.ParticleStack;
 import lach_01298.qmd.recipe.types.QMDParticleRecipe;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -589,27 +589,21 @@ public class QMDRecipeHelper {
 //        List<String> oreNames = OreDictHelper.getOreNamesFromStacks(stackList);
 //        return oreNames.size() == 1 ? new OreIngredient(oreNames.get(0), stackSize) : null;
 //    }
-//
-//    public static long hashMaterialsRaw(List<ItemStack> items, List<Tank> fluids, List<ParticleStack> particles) {
-//        long hash = 1L;
-//        Iterator<ItemStack> itemIter = items.iterator();
-//        while (itemIter.hasNext()) {
-//            ItemStack stack = itemIter.next();
-//            hash = 31L * hash + (stack == null ? 0L : RecipeItemHelper.pack(stack));
-//        }
-//        Iterator<Tank> fluidIter = fluids.iterator();
-//        while (fluidIter.hasNext()) {
-//            Tank tank = fluidIter.next();
-//            hash = 31L * hash + (tank == null ? 0L : tank.getFluid() == null ? 0L : tank.getFluid().getFluid().getName().hashCode());
-//        }
-//        Iterator<ParticleStack> particleIter = particles.iterator();
-//        while (particleIter.hasNext()) {
-//            ParticleStack stack = particleIter.next();
-//            hash = 31L * hash + (stack == null ? 0L : stack.getParticle().getName().hashCode());
-//        }
-//        return hash;
-//    }
-//
+
+    public static long hashMaterialsRaw(List<ItemStack> items, List<Tank> fluids, List<ParticleStack> particles) {
+        long hash = 1L;
+        for (ItemStack stack : items) {
+            hash = 31L * hash + (stack == null ? 0L : RecipeHelper.pack(stack));
+        }
+        for (Tank tank : fluids) {
+            hash = 31L * hash + (tank == null ? 0L : tank.getFluid() == FluidStack.EMPTY ? 0L : RecipeHelper.pack(tank.getFluid()));
+        }
+        for (ParticleStack stack : particles) {
+            hash = 31L * hash + (stack == null ? 0L : stack.getParticle().getName().hashCode());
+        }
+        return hash;
+    }
+
 //    public static long hashMaterials(List<ItemStack> items, List<FluidStack> fluids, List<ParticleStack> particles) {
 //        long hash = 1L;
 //        Iterator<ItemStack> itemIter = items.iterator();

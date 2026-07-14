@@ -9,7 +9,7 @@
   "fluidProduct": {
     "amount": 64,
     "ingredient": {
-      "tag": "c:helium"
+      "fluid": "nuclearcraftneohaul:helium"
     }
   },
   "heatRequired": 1000,

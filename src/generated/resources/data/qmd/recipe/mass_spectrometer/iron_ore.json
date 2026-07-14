@@ -1,0 +1,37 @@
+{
+  "type": "qmd:mass_spectrometer_recipe",
+  "fluidInput": [],
+  "fluidProducts": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ores/iron"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "chancePercent": 40,
+      "count": 3,
+      "ingredient": {
+        "tag": "c:dusts/chromium"
+      },
+      "minStackSize": 2
+    },
+    {
+      "chancePercent": 20,
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/manganese"
+      }
+    },
+    {
+      "count": 4,
+      "ingredient": {
+        "tag": "c:dusts/iron"
+      }
+    }
+  ],
+  "timeMultiplier": 1.0
+}

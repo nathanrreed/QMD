@@ -1,0 +1,44 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ores/titanium"
+      }
+    }
+  ],
+  "type": "qmd:mass_spectrometer_recipe",
+  "fluidInput": [],
+  "fluidProducts": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ores/titanium"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 4,
+      "ingredient": {
+        "tag": "c:dusts/titanium"
+      }
+    },
+    {
+      "chancePercent": 40,
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/manganese"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/iron"
+      }
+    }
+  ],
+  "timeMultiplier": 1.0
+}

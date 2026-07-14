@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "qmd:block/bscco_accelerator_magnet"
+    }
+  }
+}

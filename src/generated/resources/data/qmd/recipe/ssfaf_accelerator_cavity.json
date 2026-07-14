@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "qmd:wire_ssfaf_part"
+    },
+    "S": {
+      "tag": "c:ingots/stainless_steel"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "S S",
+    "CCC"
+  ],
+  "result": {
+    "count": 4,
+    "id": "qmd:ssfaf_accelerator_cavity"
+  }
+}

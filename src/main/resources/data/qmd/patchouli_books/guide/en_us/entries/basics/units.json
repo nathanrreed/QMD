@@ -10,7 +10,7 @@
 		},
 		{
 			"type": "text",
-			"text": "Units are used extensively throughout QMD and modded minecraft in general. Your probably familiar with some like $(l)millibuckets$(): mB or $(l)Forge Energy$(): FE. Nuclearcraft adds more units like $(l)heat$(): H or $(l)Rads per tick$(): Rad/t and so does QMD.$(br2)An important thing to know is units can have prefixes. We have already seen one $(l)milli$() : m in millibuckets. Prefixes are the symbol that comes before the unit that tells you how to scale the unit."
+			"text": "Units are used extensively throughout QMD and modded minecraft in general. Your probably familiar with some like $(l)millibuckets$(): mB or $(l)Forge Energy$(): RF. Nuclearcraft adds more units like $(l)heat$(): H or $(l)Rads per tick$(): Rad/t and so does QMD.$(br2)An important thing to know is units can have prefixes. We have already seen one $(l)milli$() : m in millibuckets. Prefixes are the symbol that comes before the unit that tells you how to scale the unit."
 		},
 		{
 			"type": "text",

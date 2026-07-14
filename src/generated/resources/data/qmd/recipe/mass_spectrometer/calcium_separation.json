@@ -1,0 +1,27 @@
+{
+  "type": "qmd:mass_spectrometer_recipe",
+  "fluidInput": [],
+  "fluidProducts": [],
+  "itemInput": [
+    {
+      "count": 8,
+      "ingredient": [
+        {
+          "tag": "c:ingots/calcium"
+        },
+        {
+          "tag": "c:dusts/calcium"
+        }
+      ]
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:calcium_48_isotope"
+      }
+    }
+  ],
+  "timeMultiplier": 1.0
+}

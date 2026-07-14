@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "qmd:block/niobium_tin_accelerator_cavity"
+    }
+  }
+}

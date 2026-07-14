@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_accelerator_casing": {
+      "conditions": {
+        "items": [
+          {
+            "items": "qmd:accelerator_casing"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "qmd:accelerator_computer_port"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_accelerator_casing"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "qmd:accelerator_computer_port"
+    ]
+  }
+}

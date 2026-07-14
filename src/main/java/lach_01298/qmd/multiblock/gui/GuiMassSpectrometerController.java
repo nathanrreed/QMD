@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GuiMassSpectrometerController extends LogicMultiblockControllerScreen<Accelerator, AcceleratorLogic, AcceleratorUpdatePacket, TileMassSpectrometerController, BlockEntityMenuInfo<TileMassSpectrometerController>, MassSpectrometerLogic, ContainerMassSpectrometerController> {
-    protected static final ResourceLocation gui_texture = ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "screen/accelerator_controller");
+    protected static final ResourceLocation gui_texture = ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "screen/mass_spectrometer_controller");
 
     public GuiMassSpectrometerController(ContainerMassSpectrometerController menu, Inventory inventory, Component title) {
         super(menu, inventory, title, gui_texture);
@@ -70,6 +70,8 @@ public class GuiMassSpectrometerController extends LogicMultiblockControllerScre
 
     @Override
     public void renderTooltip(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        super.renderTooltip(guiGraphics, mouseX, mouseY);
+
         drawFluidTooltip(guiGraphics, multiblock.tanks.get(2), mouseX, mouseY, 46, 33, 16, 16);
         drawFluidTooltip(guiGraphics, multiblock.tanks.get(3), mouseX, mouseY, 82, 33, 16, 16);
         drawFluidTooltip(guiGraphics, multiblock.tanks.get(4), mouseX, mouseY, 101, 33, 16, 16);
@@ -83,8 +85,8 @@ public class GuiMassSpectrometerController extends LogicMultiblockControllerScre
 
     public List<Component> energyInfo() {
         List<Component> info = new ArrayList<>();
-        info.add(Component.translatable("gui.qmd.container.energy_stored", Units.getSIFormat(multiblock.energyStorage.getEnergyStored(), "FE"), Units.getSIFormat(multiblock.energyStorage.getMaxEnergyStored(), "FE")).withStyle(ChatFormatting.YELLOW));
-        info.add(Component.translatable("gui.qmd.container.required_energy", Units.getSIFormat(multiblock.requiredEnergy, "FE/t")).withStyle(ChatFormatting.RED));
+        info.add(Component.translatable("gui.qmd.container.energy_stored", Units.getSIFormat(multiblock.energyStorage.getEnergyStored(), "RF"), Units.getSIFormat(multiblock.energyStorage.getMaxEnergyStored(), "RF")).withStyle(ChatFormatting.YELLOW));
+        info.add(Component.translatable("gui.qmd.container.required_energy", Units.getSIFormat(multiblock.requiredEnergy, "RF/t")).withStyle(ChatFormatting.RED));
         return info;
     }
 
@@ -112,22 +114,22 @@ public class GuiMassSpectrometerController extends LogicMultiblockControllerScre
     @Override
     public void init() {
         super.init();
-        clearAllButton = this.addRenderableWidget(new MultiblockButton.ClearAllMaterial(getGuiLeft() + 150, getGuiTop() + 20, (btn) -> {
+        clearAllButton = this.addRenderableWidget(new MultiblockButton.ClearAllMaterial(getGuiLeft() + 30, getGuiTop() + 80, (btn) -> {
             if (NCUtil.isModifierKeyDown()) new ClearAllMaterialPacket(tile.getBlockPos()).sendToServer();
         }));
-        this.addRenderableWidget(new NCButton.ClearTank(1, leftPos + 46, topPos + 33, 16, 16, (btn, button) -> {
+        this.addWidget(new NCButton.ClearTank(1, leftPos + 46, topPos + 33, 16, 16, (btn, button) -> {
             new QMDClearTankPacket(tile.getTilePos(), 2).sendToServer();
         }));
-        this.addRenderableWidget(new NCButton.ClearTank(2, leftPos + 82, topPos + 33, 16, 16, (btn, button) -> {
+        this.addWidget(new NCButton.ClearTank(2, leftPos + 82, topPos + 33, 16, 16, (btn, button) -> {
             new QMDClearTankPacket(tile.getTilePos(), 3).sendToServer();
         }));
-        this.addRenderableWidget(new NCButton.ClearTank(3, leftPos + 101, topPos + 33, 16, 16, (btn, button) -> {
+        this.addWidget(new NCButton.ClearTank(3, leftPos + 101, topPos + 33, 16, 16, (btn, button) -> {
             new QMDClearTankPacket(tile.getTilePos(), 4).sendToServer();
         }));
-        this.addRenderableWidget(new NCButton.ClearTank(4, leftPos + 120, topPos + 33, 16, 16, (btn, button) -> {
+        this.addWidget(new NCButton.ClearTank(4, leftPos + 120, topPos + 33, 16, 16, (btn, button) -> {
             new QMDClearTankPacket(tile.getTilePos(), 5).sendToServer();
         }));
-        this.addRenderableWidget(new NCButton.ClearTank(5, leftPos + 139, topPos + 33, 16, 16, (btn, button) -> {
+        this.addWidget(new NCButton.ClearTank(5, leftPos + 139, topPos + 33, 16, 16, (btn, button) -> {
             new QMDClearTankPacket(tile.getTilePos(), 6).sendToServer();
         }));
     }

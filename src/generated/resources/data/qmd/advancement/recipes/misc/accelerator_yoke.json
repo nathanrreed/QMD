@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bioplastic": {
+      "conditions": {
+        "items": [
+          {
+            "items": "nuclearcraftneohaul:bioplastic"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "qmd:accelerator_yoke"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_bioplastic"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "qmd:accelerator_yoke"
+    ]
+  }
+}

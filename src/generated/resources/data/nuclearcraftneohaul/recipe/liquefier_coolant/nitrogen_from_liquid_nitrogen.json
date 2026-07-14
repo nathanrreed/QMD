@@ -9,7 +9,7 @@
   "fluidProduct": {
     "amount": 64,
     "ingredient": {
-      "tag": "c:nitrogen"
+      "fluid": "nuclearcraftneohaul:nitrogen"
     }
   },
   "heatRequired": 1000,

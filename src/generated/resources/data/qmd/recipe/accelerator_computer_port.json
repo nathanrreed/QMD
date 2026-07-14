@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "qmd:accelerator_casing"
+    },
+    "S": {
+      "item": "qmd:basic_processor_semiconductor"
+    },
+    "T": {
+      "tag": "c:ingots/gold"
+    }
+  },
+  "pattern": [
+    "STS",
+    "TFT",
+    "STS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "qmd:accelerator_computer_port"
+  }
+}

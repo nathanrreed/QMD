@@ -47,6 +47,7 @@ import static com.nred.nuclearcraft.util.FluidStackHelper.*;
 import static lach_01298.qmd.block.QMDBlocks.dischargeLamps;
 import static lach_01298.qmd.block.QMDBlocks.strontium90;
 import static lach_01298.qmd.datagen.QMDFluidTagProvider.*;
+import static lach_01298.qmd.datagen.QMDFluidTagProvider.CHLORINE_TAG;
 import static lach_01298.qmd.datagen.QMDRecipeProvider.smelting;
 import static lach_01298.qmd.fluid.QMDFluids.QMD_FLUIDS;
 import static lach_01298.qmd.item.QMDItems.*;

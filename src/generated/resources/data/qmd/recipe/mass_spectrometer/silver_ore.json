@@ -1,0 +1,37 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ores/silver"
+      }
+    }
+  ],
+  "type": "qmd:mass_spectrometer_recipe",
+  "fluidInput": [],
+  "fluidProducts": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ores/silver"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 4,
+      "ingredient": {
+        "tag": "c:dusts/silver"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/lead"
+      }
+    }
+  ],
+  "timeMultiplier": 1.0
+}

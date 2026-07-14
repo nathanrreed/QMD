@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "qmd:block/iron_accelerator_cooler"
+    }
+  }
+}

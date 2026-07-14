@@ -1,6 +1,5 @@
 package lach_01298.qmd.recipe_viewer.emi;
 
-import com.nred.nuclearcraft.NuclearcraftNeohaul;
 import com.nred.nuclearcraft.info.NCFluid;
 import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiInitRegistry;
@@ -12,9 +11,7 @@ import dev.emi.emi.api.stack.EmiStack;
 import lach_01298.qmd.QMD;
 import lach_01298.qmd.fluid.QMDFluids;
 import lach_01298.qmd.particle.Particles;
-import lach_01298.qmd.recipe_viewer.emi.EmiRecipeViewerImpl.EmiIrradiatorRecipe;
-import lach_01298.qmd.recipe_viewer.emi.EmiRecipeViewerImpl.EmiOreLeacherRecipe;
-import net.minecraft.ChatFormatting;
+import lach_01298.qmd.recipe_viewer.emi.EmiRecipeViewerImpl.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -31,7 +28,6 @@ import java.util.function.Function;
 
 import static com.nred.nuclearcraft.compat.emi.ModEmiPlugin.createDataMapCategory;
 import static lach_01298.qmd.block.QMDBlocks.*;
-import static lach_01298.qmd.datamap.QMDDatamaps.IRRADIATOR_FUELS;
 import static lach_01298.qmd.recipe.RecipeTypeRegistration.*;
 
 @EmiEntrypoint
@@ -49,12 +45,26 @@ public class QMDEmiPlugin implements EmiPlugin {
     private static final EmiStack LIQUID_COLLECTOR_WORKSTATION = EmiStack.of(liquidCollector);
     public static final EmiRecipeCategory EMI_LIQUID_COLLECTOR_CATEGORY = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "liquid_collector"), LIQUID_COLLECTOR_WORKSTATION);
 
+    private static final EmiStack ACCELERATOR_COOLING_WORKSTATION = EmiStack.of(linearAcceleratorController);
+    public static final EmiRecipeCategory EMI_ACCELERATOR_COOLING_CATEGORY = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "accelerator_cooling"), ACCELERATOR_COOLING_WORKSTATION);
+
+    private static final EmiStack ACCELERATOR_SOURCE_WORKSTATION = EmiStack.of(acceleratorSource);
+    public static final EmiRecipeCategory EMI_ACCELERATOR_SOURCE_CATEGORY = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "accelerator_source"), ACCELERATOR_SOURCE_WORKSTATION);
+
+    private static final EmiStack MASS_SPECTROMETER_WORKSTATION = EmiStack.of(massSpectrometerController);
+    public static final EmiRecipeCategory EMI_MASS_SPECTROMETER_CATEGORY = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "mass_spectrometer"), MASS_SPECTROMETER_WORKSTATION);
+
+    public static final EmiRecipeCategory EMI_PARTICLE_INFO_CATEGORY = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "particle_info"), new ParticleEmiStack(Particles.getParticleFromName("alpha"), 0));
+
     @Override
     public void register(EmiRegistry registry) {
         RecipeManager manager = registry.getRecipeManager();
 
+        registry.addCategory(EMI_PARTICLE_INFO_CATEGORY);
         Particles.getRegisteredParticles().forEach(particle -> {
-            registry.addEmiStack(new ParticleEmiStack(particle, 1));
+            ParticleEmiStack stack = new ParticleEmiStack(particle, 1);
+            registry.addEmiStack(stack);
+            registry.addRecipe(new EmiParticleInfo(stack));
         });
 
         for (NCFluid entry : QMDFluids.QMD_FLUIDS.values()) {
@@ -63,6 +73,11 @@ public class QMDEmiPlugin implements EmiPlugin {
 
         addCategory(registry, manager, EMI_IRRADIATOR_CATEGORY, IRRADIATOR_WORKSTATION, IRRADIATOR_RECIPE_TYPE.get(), EmiIrradiatorRecipe::new);
         addCategory(registry, manager, EMI_ORE_LEACHER_CATEGORY, ORE_LEACHER_WORKSTATION, ORE_LEACHER_RECIPE_TYPE.get(), EmiOreLeacherRecipe::new);
+
+        List<ItemLike> cooling = List.of(linearAcceleratorController, ringAcceleratorController, beamDiverterController, deceleratorController, massSpectrometerController); // TODO add exoticContainmentController, nucleosynthesisChamberController
+        addCategory(registry, manager, EMI_ACCELERATOR_COOLING_CATEGORY, cooling.stream().map(EmiStack::of).toList(), ACCELERATOR_COOLING_RECIPE_TYPE.get(), EmiAcceleratorCoolingRecipe::new);
+        addCategory(registry, manager, EMI_ACCELERATOR_SOURCE_CATEGORY, List.of(ACCELERATOR_SOURCE_WORKSTATION, EmiStack.of(acceleratorLaserIonSource)), ACCELERATOR_SOURCE_RECIPE_TYPE.get(), EmiAcceleratorSourceRecipe::new);
+        addCategory(registry, manager, EMI_MASS_SPECTROMETER_CATEGORY, MASS_SPECTROMETER_WORKSTATION, MASS_SPECTROMETER_RECIPE_TYPE.get(), EmiMassSpectrometerRecipe::new);
 
         addCategory(registry, manager, EMI_ATMOSPHERE_COLLECTOR_CATEGORY, ATMOSPHERE_COLLECTOR_WORKSTATION, ATMOSPHERE_COLLECTOR_RECIPE_TYPE.get(), EmiAtmosphereCollectorRecipe::new);
         addCategory(registry, manager, EMI_LIQUID_COLLECTOR_CATEGORY, LIQUID_COLLECTOR_WORKSTATION, LIQUID_COLLECTOR_RECIPE_TYPE.get(), EmiLiquidCollectorRecipe::new);

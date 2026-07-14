@@ -11,6 +11,7 @@ import net.neoforged.neoforge.common.Tags;
 
 import static com.nred.nuclearcraft.datagen.ModFluidTagProvider.SULFURIC_ACID_TAG;
 import static com.nred.nuclearcraft.helpers.RecipeHelpers.dustExists;
+import static com.nred.nuclearcraft.helpers.RecipeHelpers.tagExists;
 import static com.nred.nuclearcraft.registration.ItemRegistration.COPPER_DUST;
 import static com.nred.nuclearcraft.registration.ItemRegistration.DUST_MAP;
 import static lach_01298.qmd.datagen.QMDFluidTagProvider.HYDROCHLORIC_ACID_TAG;
@@ -91,46 +92,66 @@ public class OreLeacherProvider {
                 .addItemResult(DUST_MAP.get("boron"), 3).addItemResult(dustTag("salt"), 2, 50, 1)
                 .save(recipeOutput, "boron_leaching");
 
-//
-//        //other mod ores
-//
-//        new ProcessorRecipeBuilder(OreLeacherRecipe.class, 1, 1) ("oreOsmium", .addFluidInput(NITRIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
-//                .addFluidInput(HYDROCHLORIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
-//                .addFluidInput(SULFURIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
-//                .addItemResult(dustTag("Osmium", 3).addItemResult(dustTag("Platinum", 1, 10).addItemResult(dustTag("Iridium", 1, 10)
-//
-//        new ProcessorRecipeBuilder(OreLeacherRecipe.class, 1, 1) ("oreIridium", .addFluidInput(NITRIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
-//                .addFluidInput(HYDROCHLORIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
-//                .addFluidInput(SULFURIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
-//                .addItemResult(dustTag("Iridium", 3).addItemResult(dustTag("Platinum", 1, 10).addItemResult(dustTag("Osmium", 1, 10)
-//
-//        new ProcessorRecipeBuilder(OreLeacherRecipe.class, 1, 1) ("orePlatinum", .addFluidInput(NITRIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
-//                .addFluidInput(HYDROCHLORIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
-//                .addFluidInput(SULFURIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
-//                .addItemResult(dustTag("Platinum", 3).addItemResult(dustTag("Iridium", 1, 10).addItemResult(dustTag("Osmium", 1, 10)
-//
-//        new ProcessorRecipeBuilder(OreLeacherRecipe.class, 1, 1) ("oreNickel", .addFluidInput(NITRIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
-//                .addFluidInput(HYDROCHLORIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
-//                .addFluidInput(SULFURIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
-//                .addItemResult(dustTag("Nickel", 3).addItemResult(dustTag("Iron", 1, 25).addItemResult(dustTag("Aluminum", 1, 10)
-//
-//        new ProcessorRecipeBuilder(OreLeacherRecipe.class, 1, 1) ("oreTitanium", .addFluidInput(NITRIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
-//                .addFluidInput(HYDROCHLORIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
-//                .addFluidInput(SULFURIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
-//                .addItemResult(dustTag("Titanium", 3).addItemResult(dustTag("Iron", 1, 25).addItemResult(dustTag("Manganese", 1, 10)
-//
-//        new ProcessorRecipeBuilder(OreLeacherRecipe.class, 1, 1) ("oreSilver", .addFluidInput(NITRIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
-//                .addFluidInput(HYDROCHLORIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
-//                .addFluidInput(SULFURIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
-//                .addItemResult(dustTag("Silver", 3).addItemResult(dustTag("Lead", 1, 25)
-//
-//        new ProcessorRecipeBuilder(OreLeacherRecipe.class, 1, 1) ("oreAluminum", .addFluidInput(NITRIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
-//                .addFluidInput(HYDROCHLORIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
-//                .addFluidInput(SULFURIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
-//                .addItemResult(dustTag("Aluminum", 3).addItemResult(dustTag("Iron", 1, 25)
+        // Other mod's ores
+        new ProcessorRecipeBuilder(OreLeacherRecipe.class, 1, 1).addItemInput(OSMIUM_TAG, 1)
+                .addFluidInput(NITRIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
+                .addFluidInput(HYDROCHLORIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
+                .addFluidInput(SULFURIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
+                .addItemResult(dustTag("osmium"), 3).addItemResult(dustTag("platinum"), 1, 10).addItemResult(dustTag("iridium"), 1, 10)
+                .save(tagExists(recipeOutput, OSMIUM_TAG), "osmium_leaching");
+
+        new ProcessorRecipeBuilder(OreLeacherRecipe.class, 1, 1).addItemInput(IRIDIUM_TAG, 1)
+                .addFluidInput(NITRIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
+                .addFluidInput(HYDROCHLORIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
+                .addFluidInput(SULFURIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
+                .addItemResult(dustTag("iridium"), 3).addItemResult(dustTag("platinum"), 1, 10).addItemResult(dustTag("osmium"), 1, 10)
+                .save(tagExists(recipeOutput, IRIDIUM_TAG), "iridium_leaching");
+
+
+        new ProcessorRecipeBuilder(OreLeacherRecipe.class, 1, 1).addItemInput(PLATINUM_TAG, 1)
+                .addFluidInput(NITRIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
+                .addFluidInput(HYDROCHLORIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
+                .addFluidInput(SULFURIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
+                .addItemResult(dustTag("platinum"), 3).addItemResult(dustTag("iridium"), 1, 10).addItemResult(dustTag("osmium"), 1, 10)
+                .save(tagExists(recipeOutput, PLATINUM_TAG), "platinum_leaching");
+
+        new ProcessorRecipeBuilder(OreLeacherRecipe.class, 1, 1).addItemInput(NICKEL_TAG, 1)
+                .addFluidInput(NITRIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
+                .addFluidInput(HYDROCHLORIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
+                .addFluidInput(SULFURIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
+                .addItemResult(dusts.get(NICKEL), 3).addItemResult(dustTag("iron"), 1, 25).addItemResult(DUST_MAP.get("aluminum"), 1, 10)
+                .save(tagExists(recipeOutput, NICKEL_TAG), "nickel_leaching");
+
+        new ProcessorRecipeBuilder(OreLeacherRecipe.class, 1, 1).addItemInput(TITANIUM_TAG, 1)
+                .addFluidInput(NITRIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
+                .addFluidInput(HYDROCHLORIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
+                .addFluidInput(SULFURIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
+                .addItemResult(dusts.get(TITANIUM), 3).addItemResult(dustTag("iron"), 1, 25).addItemResult(DUST_MAP.get("manganese"), 1, 10)
+                .save(tagExists(recipeOutput, TITANIUM_TAG), "titanium_leaching");
+        new ProcessorRecipeBuilder(OreLeacherRecipe.class, 1, 1).addItemInput(SILVER_TAG, 1)
+                .addFluidInput(NITRIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
+                .addFluidInput(HYDROCHLORIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
+                .addFluidInput(SULFURIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
+                .addItemResult(DUST_MAP.get("silver"), 3).addItemResult(DUST_MAP.get("lead"), 1, 25)
+                .save(tagExists(recipeOutput, SILVER_TAG), "silver_leaching");
+
+        new ProcessorRecipeBuilder(OreLeacherRecipe.class, 1, 1).addItemInput(ALUMINUM_TAG, 1)
+                .addFluidInput(NITRIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
+                .addFluidInput(HYDROCHLORIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
+                .addFluidInput(SULFURIC_ACID_TAG, FluidStackHelper.NUGGET_VOLUME)
+                .addItemResult(DUST_MAP.get("aluminum"), 3).addItemResult(dustTag("iron"), 1, 25)
+                .save(tagExists(recipeOutput, ALUMINUM_TAG), "aluminum_leaching");
     }
 
-    private TagKey<Item> oreTag(String name) {
+    public static TagKey<Item> OSMIUM_TAG = oreTag("osmium");
+    public static TagKey<Item> IRIDIUM_TAG = oreTag("iridium");
+    public static TagKey<Item> PLATINUM_TAG = oreTag("platinum");
+    public static TagKey<Item> NICKEL_TAG = oreTag("nickel");
+    public static TagKey<Item> TITANIUM_TAG = oreTag("titanium");
+    public static TagKey<Item> SILVER_TAG = oreTag("silver");
+    public static TagKey<Item> ALUMINUM_TAG = oreTag("aluminum");
+
+    public static TagKey<Item> oreTag(String name) {
         return ItemTags.create(Tags.Items.ORES.location().withSuffix("/" + name));
     }
 

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "qmd:block/arsenic_accelerator_cooler"
+    }
+  }
+}

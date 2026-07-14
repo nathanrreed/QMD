@@ -4,10 +4,8 @@ import com.nred.nuclearcraft.NuclearcraftNeohaul;
 import com.nred.nuclearcraft.compat.emi.EmiRecipeViewerRecipe;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.widget.WidgetHolder;
-import lach_01298.qmd.recipe.types.IrradiatorRecipe;
-import lach_01298.qmd.recipe.types.OreLeacherRecipe;
-import lach_01298.qmd.recipe_viewer.RecipeViewerImpl.IrradiatorRecipeViewer;
-import lach_01298.qmd.recipe_viewer.RecipeViewerImpl.OreLeacherRecipeViewer;
+import lach_01298.qmd.recipe.types.*;
+import lach_01298.qmd.recipe_viewer.QMDRecipeViewerImpl.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -19,8 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static lach_01298.qmd.datamap.QMDDatamaps.IRRADIATOR_FUELS;
-import static lach_01298.qmd.recipe_viewer.emi.QMDEmiPlugin.EMI_IRRADIATOR_CATEGORY;
-import static lach_01298.qmd.recipe_viewer.emi.QMDEmiPlugin.EMI_ORE_LEACHER_CATEGORY;
+import static lach_01298.qmd.recipe_viewer.emi.QMDEmiPlugin.*;
 
 public class EmiRecipeViewerImpl {
     public static class EmiIrradiatorRecipe extends EmiRecipeViewerRecipe {
@@ -45,6 +42,24 @@ public class EmiRecipeViewerImpl {
     public static class EmiOreLeacherRecipe extends EmiRecipeViewerRecipe {
         public EmiOreLeacherRecipe(ResourceLocation id, OreLeacherRecipe recipe) {
             super("ore_leacher", EMI_ORE_LEACHER_CATEGORY, id, new OreLeacherRecipeViewer(recipe));
+        }
+    }
+
+    public static class EmiAcceleratorCoolingRecipe extends EmiQMDRecipeViewerRecipe {
+        public EmiAcceleratorCoolingRecipe(ResourceLocation id, AcceleratorCoolingRecipe recipe) {
+            super("accelerator_cooling", EMI_ACCELERATOR_COOLING_CATEGORY, id, new AcceleratorCoolingRecipeViewer(recipe));
+        }
+    }
+
+    public static class EmiAcceleratorSourceRecipe extends EmiQMDRecipeViewerRecipe {
+        public EmiAcceleratorSourceRecipe(ResourceLocation id, AcceleratorSourceRecipe recipe) {
+            super("accelerator_source", EMI_ACCELERATOR_SOURCE_CATEGORY, id, new AcceleratorSourceRecipeViewer(recipe));
+        }
+    }
+
+    public static class EmiMassSpectrometerRecipe extends EmiQMDRecipeViewerRecipe {
+        public EmiMassSpectrometerRecipe(ResourceLocation id, MassSpectrometerRecipe recipe) {
+            super("mass_spectrometer", EMI_MASS_SPECTROMETER_CATEGORY, id, new MassSpectrometerRecipeViewer(recipe));
         }
     }
 }

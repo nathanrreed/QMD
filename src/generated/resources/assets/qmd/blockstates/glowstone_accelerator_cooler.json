@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "qmd:block/glowstone_accelerator_cooler"
+    }
+  }
+}

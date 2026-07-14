@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "io=disabled": {
+      "model": "qmd:block/accelerator_beam_port_disabled"
+    },
+    "io=input": {
+      "model": "qmd:block/accelerator_beam_port_input"
+    },
+    "io=output": {
+      "model": "qmd:block/accelerator_beam_port_output"
+    }
+  }
+}

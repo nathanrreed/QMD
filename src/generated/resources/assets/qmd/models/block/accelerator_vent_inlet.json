@@ -1,0 +1,10 @@
+{
+  "parent": "nuclearcraftneohaul:block/machine",
+  "textures": {
+    "back": "qmd:block/accelerator/casing",
+    "bottom": "qmd:block/accelerator/casing",
+    "front": "qmd:block/accelerator/inlet",
+    "side": "qmd:block/accelerator/casing",
+    "top": "qmd:block/accelerator/casing"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "type": "qmd:mass_spectrometer_recipe",
+  "fluidInput": [],
+  "fluidProducts": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:coal"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:graphite_dust"
+      }
+    },
+    {
+      "chancePercent": 15,
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:sulfur_gem_dust"
+      }
+    }
+  ],
+  "timeMultiplier": 1.0
+}

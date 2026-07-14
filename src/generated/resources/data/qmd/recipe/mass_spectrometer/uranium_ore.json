@@ -1,0 +1,43 @@
+{
+  "type": "qmd:mass_spectrometer_recipe",
+  "fluidInput": [],
+  "fluidProducts": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ores/uranium"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "chancePercent": 40,
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/niobium"
+      }
+    },
+    {
+      "chancePercent": 5,
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/radium"
+      }
+    },
+    {
+      "chancePercent": 40,
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/thorium"
+      }
+    },
+    {
+      "count": 4,
+      "ingredient": {
+        "tag": "c:dusts/uranium"
+      }
+    }
+  ],
+  "timeMultiplier": 1.0
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "qmd:block/gold_accelerator_cooler"
+    }
+  }
+}

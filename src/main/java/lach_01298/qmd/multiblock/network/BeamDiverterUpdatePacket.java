@@ -7,7 +7,6 @@ import com.nred.nuclearcraft.handler.BlockEntityMenuInfo;
 import com.nred.nuclearcraft.payload.multiblock.MultiblockUpdatePacket;
 import lach_01298.qmd.accelerator.Accelerator;
 import lach_01298.qmd.accelerator.tile.TileBeamDiverterController;
-import lach_01298.qmd.accelerator.tile.TileRingAcceleratorController;
 import lach_01298.qmd.particle.ParticleStorageAccelerator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -53,7 +52,7 @@ public class BeamDiverterUpdatePacket extends AcceleratorUpdatePacket {
         public static void handleOnClient(BeamDiverterUpdatePacket payload, IPayloadContext context) {
             context.enqueueWork(() -> {
                 BlockEntity tile = context.player().level().getBlockEntity(payload.pos);
-                if (tile instanceof TileRingAcceleratorController entity) {
+                if (tile instanceof TileBeamDiverterController entity) {
                     Optional<Accelerator> multiblock = entity.getMultiblockController();
                     multiblock.ifPresent((accelerator) -> onPacket(payload, accelerator));
                 }

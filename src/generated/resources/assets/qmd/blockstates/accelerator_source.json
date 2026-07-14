@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "qmd:block/accelerator_source_off",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "qmd:block/accelerator_source_off",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "qmd:block/accelerator_source_off"
+    },
+    "facing=south": {
+      "model": "qmd:block/accelerator_source_off",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "qmd:block/accelerator_source_off",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "qmd:block/accelerator_source_off",
+      "y": 270
+    }
+  }
+}

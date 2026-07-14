@@ -1,0 +1,50 @@
+{
+  "variants": {
+    "facing=down,nuclearcraftneohaul_active=false": {
+      "model": "qmd:block/accelerator_computer_port_",
+      "x": 90
+    },
+    "facing=down,nuclearcraftneohaul_active=true": {
+      "model": "qmd:block/accelerator_computer_port_",
+      "x": 90
+    },
+    "facing=east,nuclearcraftneohaul_active=false": {
+      "model": "qmd:block/accelerator_computer_port_",
+      "y": 90
+    },
+    "facing=east,nuclearcraftneohaul_active=true": {
+      "model": "qmd:block/accelerator_computer_port_",
+      "y": 90
+    },
+    "facing=north,nuclearcraftneohaul_active=false": {
+      "model": "qmd:block/accelerator_computer_port_"
+    },
+    "facing=north,nuclearcraftneohaul_active=true": {
+      "model": "qmd:block/accelerator_computer_port_"
+    },
+    "facing=south,nuclearcraftneohaul_active=false": {
+      "model": "qmd:block/accelerator_computer_port_",
+      "y": 180
+    },
+    "facing=south,nuclearcraftneohaul_active=true": {
+      "model": "qmd:block/accelerator_computer_port_",
+      "y": 180
+    },
+    "facing=up,nuclearcraftneohaul_active=false": {
+      "model": "qmd:block/accelerator_computer_port_",
+      "x": 270
+    },
+    "facing=up,nuclearcraftneohaul_active=true": {
+      "model": "qmd:block/accelerator_computer_port_",
+      "x": 270
+    },
+    "facing=west,nuclearcraftneohaul_active=false": {
+      "model": "qmd:block/accelerator_computer_port_",
+      "y": 270
+    },
+    "facing=west,nuclearcraftneohaul_active=true": {
+      "model": "qmd:block/accelerator_computer_port_",
+      "y": 270
+    }
+  }
+}

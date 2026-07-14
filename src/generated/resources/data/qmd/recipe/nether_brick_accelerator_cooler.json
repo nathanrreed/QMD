@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "qmd:empty_cooler_part"
+    },
+    "D": {
+      "tag": "c:bricks/nether"
+    },
+    "I": {
+      "item": "minecraft:nether_bricks"
+    }
+  },
+  "pattern": [
+    "DID",
+    "ICI",
+    "DID"
+  ],
+  "result": {
+    "count": 1,
+    "id": "qmd:nether_brick_accelerator_cooler"
+  }
+}

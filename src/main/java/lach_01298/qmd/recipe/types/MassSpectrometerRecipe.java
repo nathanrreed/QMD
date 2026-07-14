@@ -21,8 +21,8 @@ import static lach_01298.qmd.recipe.RecipeTypeRegistration.MASS_SPECTROMETER_REC
 public class MassSpectrometerRecipe extends QMDRecipe {
     private final double timeMultiplier;
 
-    public MassSpectrometerRecipe(List<SizedChanceItemIngredient> itemInputs, List<SizedChanceFluidIngredient> fluidInputs, List<SizedChanceItemIngredient> itemResults, double timeMultiplier) {
-        super(itemInputs, fluidInputs, List.of(), itemResults, List.of(), List.of());
+    public MassSpectrometerRecipe(List<SizedChanceItemIngredient> itemInputs, List<SizedChanceFluidIngredient> fluidInputs, List<SizedChanceItemIngredient> itemResults, List<SizedChanceFluidIngredient> fluidResults, double timeMultiplier) {
+        super(itemInputs, fluidInputs, List.of(), itemResults, fluidResults, List.of());
         this.timeMultiplier = timeMultiplier;
     }
 
@@ -49,7 +49,8 @@ public class MassSpectrometerRecipe extends QMDRecipe {
                 inst.group(
                         SizedChanceItemIngredient.FLAT_CODEC.listOf(0, 1).fieldOf("itemInput").forGetter(MassSpectrometerRecipe::getItemIngredients),
                         SizedChanceFluidIngredient.FLAT_CODEC.listOf(0, 1).fieldOf("fluidInput").forGetter(MassSpectrometerRecipe::getFluidIngredients),
-                        SizedChanceItemIngredient.FLAT_CODEC.listOf(1, 4).fieldOf("itemProducts").forGetter(MassSpectrometerRecipe::getItemProducts),
+                        SizedChanceItemIngredient.FLAT_CODEC.listOf(0, 4).fieldOf("itemProducts").forGetter(MassSpectrometerRecipe::getItemProducts),
+                        SizedChanceFluidIngredient.FLAT_CODEC.listOf(0, 4).fieldOf("fluidProducts").forGetter(MassSpectrometerRecipe::getFluidProducts),
                         Codec.DOUBLE.fieldOf("timeMultiplier").forGetter(MassSpectrometerRecipe::getTimeMultiplier)
                 ).apply(inst, MassSpectrometerRecipe::new));
 
@@ -57,6 +58,7 @@ public class MassSpectrometerRecipe extends QMDRecipe {
                 StreamCodecsHelper.SIZED_ITEM_INGREDIENT_LIST_STREAM_CODEC, MassSpectrometerRecipe::getItemIngredients,
                 StreamCodecsHelper.SIZED_FLUID_INGREDIENT_LIST_STREAM_CODEC, MassSpectrometerRecipe::getFluidIngredients,
                 StreamCodecsHelper.SIZED_ITEM_INGREDIENT_LIST_STREAM_CODEC, MassSpectrometerRecipe::getItemProducts,
+                StreamCodecsHelper.SIZED_FLUID_INGREDIENT_LIST_STREAM_CODEC, MassSpectrometerRecipe::getFluidProducts,
                 ByteBufCodecs.DOUBLE, MassSpectrometerRecipe::getTimeMultiplier,
                 MassSpectrometerRecipe::new
         );

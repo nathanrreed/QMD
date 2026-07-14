@@ -31,8 +31,10 @@ public class GUIAcceleratorIonSource extends NCScreen<ContainerAcceleratorIonSou
     }
 
     @Override
-    protected void renderTooltip(GuiGraphics guiGraphics, int x, int y) {
-        drawFluidTooltip(guiGraphics, ((TileAcceleratorIonSource) menu.tile).getTanks().get(0), x, y, 80, 43, 16, 16);
+    protected void renderTooltip(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        super.renderTooltip(guiGraphics, mouseX, mouseY);
+
+        drawFluidTooltip(guiGraphics, ((TileAcceleratorIonSource) menu.tile).getTanks().get(0), mouseX, mouseY, 80, 43, 16, 16);
     }
 
     @Override

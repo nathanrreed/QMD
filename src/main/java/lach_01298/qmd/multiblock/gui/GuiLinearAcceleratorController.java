@@ -81,6 +81,8 @@ public class GuiLinearAcceleratorController extends LogicMultiblockControllerScr
 
     @Override
     public void renderTooltip(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        super.renderTooltip(guiGraphics, mouseX, mouseY);
+
         drawTooltip(guiGraphics, energyInfo(), mouseX, mouseY, 8, 5, 8, 96);
         drawTooltip(guiGraphics, heatInfo(), mouseX, mouseY, 18, 5, 8, 96);
         drawTooltip(guiGraphics, coolantInfo(), mouseX, mouseY, 28, 5, 8, 96);
@@ -100,9 +102,9 @@ public class GuiLinearAcceleratorController extends LogicMultiblockControllerScr
 
     public List<Component> energyInfo() {
         List<Component> info = new ArrayList<>();
-        info.add(Component.translatable("gui.qmd.container.energy_stored", Units.getSIFormat(multiblock.energyStorage.getEnergyStored(), "FE"), Units.getSIFormat(multiblock.energyStorage.getMaxEnergyStored(), "FE")).withStyle(ChatFormatting.YELLOW));
+        info.add(Component.translatable("gui.qmd.container.energy_stored", Units.getSIFormat(multiblock.energyStorage.getEnergyStored(), "RF"), Units.getSIFormat(multiblock.energyStorage.getMaxEnergyStored(), "RF")).withStyle(ChatFormatting.YELLOW));
         info.add(Component.translatable("nc.sf.two_args",
-                Component.translatable("gui.qmd.container.required_energy", Units.getSIFormat(multiblock.requiredEnergy, "FE/t")),
+                Component.translatable("gui.qmd.container.required_energy", Units.getSIFormat(multiblock.requiredEnergy, "RF/t")),
                 Component.translatable("gui.qmd.container.accelerator.efficiency", String.format("%.2f", (1 / multiblock.efficiency) * 100))
         ).withStyle(ChatFormatting.RED));
         return info;

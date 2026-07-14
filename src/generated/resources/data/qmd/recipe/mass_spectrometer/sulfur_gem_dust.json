@@ -1,0 +1,29 @@
+{
+  "type": "qmd:mass_spectrometer_recipe",
+  "fluidInput": [],
+  "fluidProducts": [
+    {
+      "amount": 144,
+      "ingredient": {
+        "fluid": "qmd:mercury"
+      }
+    }
+  ],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/redstone"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:sulfur_gem_dust"
+      }
+    }
+  ],
+  "timeMultiplier": 1.0
+}

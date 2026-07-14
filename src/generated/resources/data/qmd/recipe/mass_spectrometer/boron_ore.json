@@ -1,0 +1,28 @@
+{
+  "type": "qmd:mass_spectrometer_recipe",
+  "fluidInput": [],
+  "fluidProducts": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ores/boron"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 4,
+      "ingredient": {
+        "tag": "c:dusts/boron"
+      }
+    },
+    {
+      "count": 3,
+      "ingredient": {
+        "tag": "c:dusts/sodium"
+      }
+    }
+  ],
+  "timeMultiplier": 1.0
+}

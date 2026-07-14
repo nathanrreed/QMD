@@ -1,0 +1,28 @@
+{
+  "type": "qmd:mass_spectrometer_recipe",
+  "fluidInput": [],
+  "fluidProducts": [],
+  "itemInput": [
+    {
+      "count": 10,
+      "ingredient": {
+        "tag": "c:ingots/lithium"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:lithium_6"
+      }
+    },
+    {
+      "count": 9,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:lithium_7"
+      }
+    }
+  ],
+  "timeMultiplier": 1.0
+}

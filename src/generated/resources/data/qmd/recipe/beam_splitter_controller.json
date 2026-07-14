@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "qmd:advanced_processor_semiconductor"
+    },
+    "F": {
+      "item": "qmd:accelerator_casing"
+    },
+    "P": {
+      "item": "nuclearcraftneohaul:advanced_plating"
+    },
+    "T": {
+      "tag": "c:ingots/super_alloy"
+    }
+  },
+  "pattern": [
+    "PTP",
+    "AFA",
+    "PTP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "qmd:beam_splitter_controller"
+  }
+}

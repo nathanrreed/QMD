@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "qmd:block/fluorite_accelerator_cooler"
+    }
+  }
+}

@@ -81,3 +81,10 @@ A Nuclearcraft addon that aims to bring particle accelerators and particle physi
     ordering="NONE"
     side="BOTH"
 
+[[dependencies.${mod_id}]]
+    modId="emi"
+    type="optional"
+    versionRange="[1.1.12+1.21.1,)"
+    ordering="NONE"
+    side="BOTH"
+

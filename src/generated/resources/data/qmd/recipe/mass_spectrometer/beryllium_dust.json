@@ -1,0 +1,41 @@
+{
+  "type": "qmd:mass_spectrometer_recipe",
+  "fluidInput": [],
+  "fluidProducts": [
+    {
+      "amount": 9000,
+      "ingredient": {
+        "fluid": "nuclearcraftneohaul:oxygen"
+      }
+    }
+  ],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/emerald"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 3,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:beryllium_dust"
+      }
+    },
+    {
+      "count": 6,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:silicon_gem"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:aluminum_dust"
+      }
+    }
+  ],
+  "timeMultiplier": 1.0
+}

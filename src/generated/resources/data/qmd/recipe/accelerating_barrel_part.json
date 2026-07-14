@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "qmd:beamline"
+    },
+    "E": {
+      "item": "qmd:elite_processor_semiconductor"
+    },
+    "M": {
+      "item": "qmd:magnet_nd_part"
+    },
+    "W": {
+      "item": "qmd:bscco_accelerator_cavity"
+    }
+  },
+  "pattern": [
+    "WMW",
+    "BEB",
+    "WMW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "qmd:accelerating_barrel_part"
+  }
+}

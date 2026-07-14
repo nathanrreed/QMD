@@ -1,0 +1,18 @@
+{
+  "type": "qmd:accelerator_source_recipe",
+  "fluidInput": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:calcium_48_source"
+      }
+    }
+  ],
+  "particleProduct": {
+    "amount": 10000,
+    "focus": 0.0,
+    "meanEnergy": 0,
+    "particle": "calcium_48_ion"
+  }
+}

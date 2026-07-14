@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "qmd:empty_cooler_part"
+    },
+    "I": {
+      "tag": "c:ingots/manganese"
+    }
+  },
+  "pattern": [
+    " I ",
+    "ICI",
+    " I "
+  ],
+  "result": {
+    "count": 1,
+    "id": "qmd:manganese_accelerator_cooler"
+  }
+}

@@ -35,7 +35,8 @@ public abstract class AbstractQMDRecipeHandler<RECIPE extends QMDRecipe> {
         return recipeList;
     }
 
-    public @Nullable QMDRecipeInfo<RECIPE> getRecipeInfoFromInputs(Level level, List<ItemStack> itemInputs, List<Tank> fluidInputs, List<ParticleStack> particleInputs) { // TODO readd caching
+    // TODO readd caching
+    public @Nullable QMDRecipeInfo<RECIPE> getRecipeInfoFromInputs(Level level, List<ItemStack> itemInputs, List<Tank> fluidInputs, List<ParticleStack> particleInputs) {
         List<SizedChanceItemIngredient> itemIngredients = itemInputs.stream().map(itemStack -> SizedChanceItemIngredient.of(itemStack.getItem(), itemStack.getCount())).toList(); // Tries without filtering
         List<SizedChanceFluidIngredient> fluidIngredients = fluidInputs.stream().map(tank -> tank.isEmpty() ? SizedChanceFluidIngredient.EMPTY : SizedChanceFluidIngredient.of(tank.getFluid())).toList();
         RECIPE recipe = getRecipeFromIngredients(level, itemIngredients, fluidIngredients, particleInputs);

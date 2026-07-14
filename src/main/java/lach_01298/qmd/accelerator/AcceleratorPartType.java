@@ -1,7 +1,6 @@
 package lach_01298.qmd.accelerator;
 
 import com.nred.nuclearcraft.block.GenericActiveDirectionalTooltipDeviceBlock;
-import com.nred.nuclearcraft.block.GenericDirectionalTooltipDeviceBlock;
 import com.nred.nuclearcraft.block.GenericTooltipDeviceBlock;
 import it.zerono.mods.zerocore.base.multiblock.part.GlassBlock;
 import it.zerono.mods.zerocore.lib.block.multiblock.MultiblockPartBlock;
@@ -26,20 +25,20 @@ public enum AcceleratorPartType implements IAcceleratorPartType {
     MassSpectrometerController(() -> TILE_MASS_SPECTROMETER_CONTROLLER::get, GenericActiveDirectionalTooltipDeviceBlock::new),
     AcceleratorBeam(() -> TILE_ACCELERATOR_BEAM::get, GenericTooltipDeviceBlock::new),
     AcceleratorCasing(() -> TILE_ACCELERATOR_CASING::get, BlockAcceleratorCasing::new),
-    AcceleratorGlass(() -> TILE_ACCELERATOR_GLASS::get, GlassBlock::new),
+    AcceleratorGlass(() -> TILE_ACCELERATOR_GLASS::get, GlassBlock::new, GlassBlock::addGlassProperties),
     AcceleratorVent(() -> TILE_ACCELERATOR_VENT::get, BlockAcceleratorVent::new),
     AcceleratorBeamPort(() -> TILE_ACCELERATOR_BEAM_PORT::get, BlockAcceleratorBeamPort::new),
     AcceleratorSynchrotronPort(() -> TILE_ACCELERATOR_SYNCHROTRON_PORT::get, GenericTooltipDeviceBlock::new),
     AcceleratorSource(() -> TILE_ACCELERATOR_ION_SOURCE_BASIC::get, BlockAcceleratorSource::new),
     AcceleratorLaserIonSource(() -> TILE_ACCELERATOR_ION_SOURCE_LASER::get, BlockAcceleratorSource::new),
-    AcceleratorIonCollector(() -> TILE_ACCELERATOR_ION_COLLECTOR::get, GenericDirectionalTooltipDeviceBlock::new),
+    AcceleratorIonCollector(() -> TILE_ACCELERATOR_ION_COLLECTOR::get, BlockAcceleratorIonCollector::new),
     AcceleratorYoke(() -> TILE_ACCELERATOR_YOKE::get, GenericTooltipDeviceBlock::new),
     AcceleratorCooler(() -> TILE_ACCELERATOR_COOLER::get, GenericTooltipDeviceBlock::new),
     AcceleratorMagnet(() -> TILE_ACCELERATOR_MAGNET::get, GenericTooltipDeviceBlock::new),
     RFCavity(() -> TILE_ACCELERATOR_RF_CAVITY::get, GenericTooltipDeviceBlock::new),
 
     AcceleratorEnergyPort(() -> TILE_ACCELERATOR_ENERGY_PORT::get, GenericTooltipDeviceBlock::new),
-    AcceleratorComputerPort(() -> TILE_ACCELERATOR_COMPUTER_PORT::get, GenericActiveDirectionalTooltipDeviceBlock::new),
+    AcceleratorComputerPort(() -> TILE_ACCELERATOR_COMPUTER_PORT::get, BlockAcceleratorComputerPort::new),
     AcceleratorRedstonePort(() -> TILE_ACCELERATOR_REDSTONE_PORT::get, BlockAcceleratorRedstonePort::new),
     AcceleratorPort(() -> TILE_ACCELERATOR_PORT::get, GenericTooltipDeviceBlock::new),
     ;

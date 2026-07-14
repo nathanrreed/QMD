@@ -107,26 +107,6 @@ tile.qmd.liquefier_compressor.neodymium.name=Neodymium Liquefier Compressor
 tile.qmd.liquefier_compressor.samarium_cobalt.name=Samarium Cobalt Liquefier Compressor
 tile.qmd.liquefier_compressor.name=Liquefier Compressor
 
-//block descriptions
-tile.qmd.beamline.desc=Transports particles.
-tile.qmd.ion_source.desc=Makes ions and particles for accelerators.
-
-tile.qmd.accelerator.cooler.cooling_rate=Cooling Rate:
-
-tile.qmd.rf_cavity.desc=Accelerates charged particles with a Radio Frequency electric field. Must be made as a ring of 8 FE cavities of the same type surrounding a beam. Cannot be next to another FE cavity.
-tile.qmd.accelerator_magnet.desc=Bends the path of charged particles with a strong magnetic field. Can be used to make a Quadrupole or Dipole magnet. For a Quadrupole magnet a beam must be surrounded by 4 of the same type of electromagnets.
-tile.qmd.accelerator_yoke.desc=Shapes and strengthens the magnetic field of an electromagnet. Used to make a Dipole magnet. For a dipole magnet a beam must have a electromagnet on the top and bottom then all space not taken by beams in a 3x3 around the central beam must be filled with electromagnet yokes.
-
-tile.qmd.particle_chamber.detector.bubble_chamber.desc=Must be placed within 2 blocks of a Particle Chamber.
-tile.qmd.particle_chamber.detector.wire_chamber.desc=Must be placed within 2 blocks of a Particle Chamber.
-tile.qmd.particle_chamber.detector.silicon_tracker.desc=Must be placed next to a Particle Chamber.
-tile.qmd.particle_chamber.detector.em_calorimeter.desc=Must be placed within 3 blocks of a Particle Chamber.
-tile.qmd.particle_chamber.detector.hadron_calorimeter.desc=Must be placed within 5 blocks of a Particle Chamber.
-tile.qmd.particle_chamber.detector.in.desc=Must be placed within %s blocks of a Particle Chamber.
-tile.qmd.particle_chamber.detector.out.desc=Must be placed equal or more than %s blocks away from a Particle Chamber.
-
-tile.qmd.liquefier_compressor.desc= Compresses gas to be then expanded and cooled into a liquid. Must be place on the top of the liquefier.
-
 
 //item descriptions
 item.qmd.lepton_cannon.desc=A powerful beam weapon that can go through blocks and armor.
@@ -169,173 +149,6 @@ gui.qmd.container.liquefier.compressor_heat_efficiency=Mean Heat Efficiency: %s%
 gui.qmd.container.liquefier.pressure_efficiency=Pressure Efficiency: %s%%
 gui.qmd.container.liquefier.temperature_difference=Temperature Differance: %s
 
-//recipe_viewer
-qmd.gui.recipe_viewer.category.accelerator_source=Ion Source
-qmd.gui.recipe_viewer.category.accelerator_cooling=Accelerator Cooling
-qmd.gui.recipe_viewer.category.mass_spectrometer=Mass Spectrometer
-
-qmd.gui.recipe_viewer.category.target_chamber=Target Chamber
-qmd.gui.recipe_viewer.category.decay_chamber=Decay Chamber
-qmd.gui.recipe_viewer.category.beam_dump=Beam Dump
-qmd.gui.recipe_viewer.category.collision_chamber=Collision Chamber
-
-qmd.gui.recipe_viewer.category.ore_leacher=Ore Leacher
-qmd.gui.recipe_viewer.category.irradiator=Irradiator
-qmd.gui.recipe_viewer.category.irradiator_fuel=Irradiator Fuel
-
-qmd.gui.recipe_viewer.category.neutral_containment=Exotic Containment Chamber
-qmd.gui.recipe_viewer.category.cell_filling=Cell Filling and Emptying
-qmd.gui.recipe_viewer.category.nucleosynthesis_chamber=Nucleosynthesis Chamber
-qmd.gui.recipe_viewer.category.vacuum_chamber_heating=Vacuum Chamber Heating
-
-qmd.gui.recipe_viewer.category.liquefier=Liquefier Liquefaction
-qmd.gui.recipe_viewer.category.liquefier_coolant=Liquefier Coolant
-
-qmd.gui.recipe_viewer.category.atmosphere_collector=Atmosphere Collector
-qmd.gui.recipe_viewer.category.liquid_collector=Liquid Collector
-qmd.gui.recipe_viewer.category.particle_info=Particle Information
-
-qmd.gui.recipe_viewer.accelerator_cooling.heat_required=Heating Required:
-qmd.gui.recipe_viewer.accelerator_cooling.temperature=Temperature:
-qmd.gui.recipe_viewer.vacuum_chamber_heating.heat_required=Heating Required:
-
-qmd.gui.recipe_viewer.liquefier.base_energy=Base Energy:
-qmd.gui.recipe_viewer.liquefier.base_heat=Base Heat:
-qmd.gui.recipe_viewer.liquefier.inversion_temp=Inversion Temperature:
-qmd.gui.recipe_viewer.liquefier.compressed_gas_temp=Hot Gas Temperature:
-qmd.gui.recipe_viewer.liquefier.pressure_coefficient=Pressure Coefficient:
-
-qmd.gui.recipe_viewer.liquefier_coolant.heat_required=Heating Required:
-qmd.gui.recipe_viewer.liquefier_coolant.input_temp=Input Temperature:
-qmd.gui.recipe_viewer.liquefier_coolant.output_temp=Output Temperature:
-
-gui.qmd.recipe_viewer.particle.mass=Mass: %s
-gui.qmd.recipe_viewer.particle.charge=Charge: %s
-gui.qmd.recipe_viewer.particle.spin=Spin: %s
-gui.qmd.recipe_viewer.particle.colour=Feels Strong Force: %s
-gui.qmd.recipe_viewer.particle.weak=Feels Weak Force: %s
-gui.qmd.recipe_viewer.particle.components=Made of:
-gui.qmd.recipe_viewer.particle.focus=Minimum Focus: %s
-gui.qmd.recipe_viewer.reaction.range=Range: %s
-gui.qmd.recipe_viewer.reaction.energy_released=Released Energy: %s
-gui.qmd.recipe_viewer.reaction.cross_section=Cross Section: %s%%
-gui.qmd.recipe_viewer.reaction.heat_released=Heat Released: %s
-gui.qmd.recipe_viewer.reaction.max_energy=Maximum Energy: %s
-
-//tabs
-itemGroup.qmd.items=Quantum Minecraft Dynamics Items
-itemGroup.qmd.blocks=Quantum Minecraft Dynamics Blocks
-itemGroup.qmd.multiblocks=QMD Multiblocks
-
-
-//block settings
-qmd.block.accelerator_port_setting_toggle=Toggled port redstone setting to %s %s
-qmd.block.accelerator_port_setting=Port redstone setting is %s
-qmd.block.port_mode_toggle=Toggled port to %s %s
-qmd.block.port_mode.INPUT=INPUT
-qmd.block.port_mode.OUTPUT=OUTPUT
-qmd.block.port_mode.DISABLED=DISABLED
-qmd.block.port.mode=mode!
-qmd.block.particle_chamber_port_setting_toggle=Toggled port output setting to
-qmd.block.particle_chamber_port_setting=Port output setting is %s
-
-qmd.block.redstone_port_toggle=Toggled redstone port to %s %s
-qmd.block.redstone_port_toggle.input=INPUT
-qmd.block.redstone_port_toggle.output=OUTPUT
-qmd.block.redstone_port_toggle.1=FIRST
-qmd.block.redstone_port_toggle.2=SECOND
-qmd.block.redstone_port_toggle.mode=mode!
-
-//String Formatting
-
-nc.sf.different.two=two different
-nc.sf.different.three=three different
-nc.sf.different.four=four different
-nc.sf.different.five=five different
-nc.sf.different.six=six different
-
-nc.sf.beam0=%s functional beam block
-nc.sf.beam1=%s functional beam blocks
-nc.sf.cavity0=%s functional FE cavity
-nc.sf.cavity1=%s functional FE cavities
-nc.sf.magnet0=%s functional electromagnet
-nc.sf.magnet1=%s functional electromagnets
-nc.sf.yoke0=%s functional electromagnet yoke
-nc.sf.yoke1=%s functional electromagnet yokes
-
-nc.sf.any_cooler0=%s of any cooler
-nc.sf.any_cooler1=any %s coolers
-nc.sf.water_cooler0=%s valid water cooler
-nc.sf.water_cooler1=%s valid water coolers
-nc.sf.iron_cooler0=%s valid iron cooler
-nc.sf.iron_cooler1=%s valid iron coolers
-nc.sf.redstone_cooler0=%s valid redstone cooler
-nc.sf.redstone_cooler1=%s valid redstone coolers
-nc.sf.quartz_cooler0=%s valid quartz cooler
-nc.sf.quartz_cooler1=%s valid quartz coolers
-nc.sf.obsidian_cooler0=%s valid obsidian cooler
-nc.sf.obsidian_cooler1=%s valid obsidian coolers
-nc.sf.nether_brick_cooler0=%s valid nether brick cooler
-nc.sf.nether_brick_cooler1=%s valid nether brick coolers
-nc.sf.glowstone_cooler0=%s valid glowstone cooler
-nc.sf.glowstone_cooler1=%s valid glowstone coolers
-nc.sf.lapis_cooler0=%s valid lapis cooler
-nc.sf.lapis_cooler1=%s valid lapis coolers
-nc.sf.gold_cooler0=%s valid gold cooler
-nc.sf.gold_cooler1=%s valid gold coolers
-nc.sf.prismarine_cooler0=%s valid prismarine cooler
-nc.sf.prismarine_cooler1=%s valid prismarine coolers
-nc.sf.slime_cooler0=%s valid slime cooler
-nc.sf.slime_cooler1=%s valid slime coolers
-nc.sf.end_stone_cooler0=%s valid end stone cooler
-nc.sf.end_stone_cooler1=%s valid end stone coolers
-nc.sf.purpur_cooler0=%s valid purpur cooler
-nc.sf.purpur_cooler1=%s valid purpur coolers
-nc.sf.diamond_cooler0=%s valid diamond cooler
-nc.sf.diamond_cooler1=%s valid diamond coolers
-nc.sf.emerald_cooler0=%s valid emerald cooler
-nc.sf.emerald_cooler1=%s valid emerald coolers
-nc.sf.copper_cooler0=%s valid copper cooler
-nc.sf.copper_cooler1=%s valid copper coolers
-nc.sf.tin_cooler0=%s valid tin cooler
-nc.sf.tin_cooler1=%s valid tin coolers
-nc.sf.lead_cooler0=%s valid lead cooler
-nc.sf.lead_cooler1=%s valid lead coolers
-nc.sf.boron_cooler0=%s valid boron cooler
-nc.sf.boron_cooler1=%s valid boron coolers
-nc.sf.lithium_cooler0=%s valid lithium cooler
-nc.sf.lithium_cooler1=%s valid lithium coolers
-nc.sf.magnesium_cooler0=%s valid magnesium cooler
-nc.sf.magnesium_cooler1=%s valid magnesium coolers
-nc.sf.manganese_cooler0=%s valid manganese cooler
-nc.sf.manganese_cooler1=%s valid manganese coolers
-nc.sf.aluminum_cooler0=%s valid aluminum cooler
-nc.sf.aluminum_cooler1=%s valid aluminum coolers
-nc.sf.silver_cooler0=%s valid silver cooler
-nc.sf.silver_cooler1=%s valid silver coolers
-nc.sf.fluorite_cooler0=%s valid fluorite cooler
-nc.sf.fluorite_cooler1=%s valid fluorite coolers
-nc.sf.villiaumite_cooler0=%s valid villiaumite cooler
-nc.sf.villiaumite_cooler1=%s valid villiaumite coolers
-nc.sf.carobbiite_cooler0=%s valid carobbiite cooler
-nc.sf.carobbiite_cooler1=%s valid carobbiite coolers
-nc.sf.arsenic_cooler0=%s valid arsenic cooler
-nc.sf.arsenic_cooler1=%s valid arsenic coolers
-nc.sf.liquid_nitrogen_cooler0=%s valid liquid nitrogen cooler
-nc.sf.liquid_nitrogen_cooler1=%s valid liquid nitrogen coolers
-nc.sf.liquid_helium_cooler0=%s valid liquid helium cooler
-nc.sf.liquid_helium_cooler1=%s valid liquid helium coolers
-nc.sf.enderium_cooler0=%s valid enderium cooler
-nc.sf.enderium_cooler1=%s valid enderium coolers
-nc.sf.cryotheum_cooler0=%s valid cryotheum cooler
-nc.sf.cryotheum_cooler1=%s valid cryotheum coolers
-nc.sf.vacuum_chamber_casing0=%s vacuum chamber casing
-nc.sf.vacuum_chamber_casing1=%s vacuum chamber casings
-nc.sf.plasma_glass0=%s plasma glass
-nc.sf.plasma_glass1=%s plasma glass
-nc.sf.nozzle0=%s plasma nozzle
-nc.sf.nozzle1=%s plasma nozzles
-
 //Configs
 gui.qmd.config.main_title=QMD Configs
 
@@ -370,7 +183,7 @@ gui.qmd.config.category.other=Other
 gui.qmd.config.category.other.tooltip=Other configs
 
 gui.qmd.config.processors.power=Machine Power Usage
-gui.qmd.config.processors.power.comment=The default amount of FE/t a machine uses. Order:[Ore Leacher, atmosphere collector, liquid collector].
+gui.qmd.config.processors.power.comment=The default amount of RF/t a machine uses. Order:[Ore Leacher, atmosphere collector, liquid collector].
 
 gui.qmd.config.processors.time=Machine Process Time
 gui.qmd.config.processors.time.comment=The default time a machine takes to process in ticks. Order:[Ore Leacher, Irradiator, Mass Spectrometer].
@@ -400,7 +213,7 @@ gui.qmd.config.accelerator.accelerator_base_heat_capacity=Accelerator Base Heat 
 gui.qmd.config.accelerator.accelerator_base_heat_capacity.comment=The base heat capacity of an accelerator. This is per block volume.
 
 gui.qmd.config.accelerator.accelerator_base_energy_capacity=Accelerator Base Energy Capacity
-gui.qmd.config.accelerator.accelerator_base_energy_capacity.comment=The base Energy (FE) capacity of an accelerator. This is per block volume.
+gui.qmd.config.accelerator.accelerator_base_energy_capacity.comment=The base Energy (RF) capacity of an accelerator. This is per block volume.
 
 gui.qmd.config.accelerator.accelerator_base_input_tank_capacity=Accelerator Base Input Tank Capacity
 gui.qmd.config.accelerator.accelerator_base_input_tank_capacity.comment=The base capacity (mB) of the input tank of an accelerator. This is per block volume.
@@ -418,7 +231,7 @@ gui.qmd.config.accelerator.ion_source_output=Base Ion source Output
 gui.qmd.config.accelerator.ion_source_output.comment=The base ion source pu/t output. Increasing this makes recipes go faster.
 
 gui.qmd.config.accelerator.ion_source_power=Ion source Power
-gui.qmd.config.accelerator.ion_source_power.comment=The amount of FE/t each ion source type uses. Order: [Basic, Laser].
+gui.qmd.config.accelerator.ion_source_power.comment=The amount of RF/t each ion source type uses. Order: [Basic, Laser].
 
 gui.qmd.config.accelerator.ion_source_output_multiplier=Ion source Output Multiplier
 gui.qmd.config.accelerator.ion_source_output_multiplier.comment=The value the base ion source output is multiplied by for each ion source type. Order: [Basic, Laser].
@@ -438,19 +251,19 @@ gui.qmd.config.accelerator.mass_spectrometer_valid_magnets.comment=The list of m
 gui.qmd.config.accelerator.mass_spectrometer_valid_sources=Valid Mass Spectrometer Sources
 gui.qmd.config.accelerator.mass_spectrometer_valid_sources.comment=The list of ion sources that are valid to form a mass spectrometer.
 
-gui.qmd.config.accelerator.RF_cavity_voltage=FE Cavity Voltage
+gui.qmd.config.accelerator.RF_cavity_voltage=RF Cavity Voltage
 gui.qmd.config.accelerator.RF_cavity_voltage.comment=The accelerating voltage of each cavity in kV. Order: [Copper, Magnesium Diboride, Niobium-Tin, Niobium-Titanium, BSCCO, Aluminum, SSFAF, YBCO].
 
-gui.qmd.config.accelerator.RF_cavity_efficiency=FE Cavity Power Efficiency
+gui.qmd.config.accelerator.RF_cavity_efficiency=RF Cavity Power Efficiency
 gui.qmd.config.accelerator.RF_cavity_efficiency.comment=The power Efficiency of each cavity. Order: [Copper, Magnesium Diboride, Niobium-Tin, Niobium-Titanium, BSCCO, Aluminum, SSFAF, YBCO].
 
-gui.qmd.config.accelerator.RF_cavity_heat_generated=FE Cavity Heat
+gui.qmd.config.accelerator.RF_cavity_heat_generated=RF Cavity Heat
 gui.qmd.config.accelerator.RF_cavity_heat_generated.comment=The heat per tick each cavity generates. Order: [Copper, Magnesium Diboride, Niobium-Tin, Niobium-Titanium, BSCCO, Aluminum, SSFAF, YBCO].
 
-gui.qmd.config.accelerator.RF_cavity_base_power=FE Cavity Base Power
-gui.qmd.config.accelerator.RF_cavity_base_power.comment=The base FE/t each cavity uses. Order: [Copper, Magnesium Diboride, Niobium-Tin, Niobium-Titanium, BSCCO, Aluminum, SSFAF, YBCO].
+gui.qmd.config.accelerator.RF_cavity_base_power=RF Cavity Base Power
+gui.qmd.config.accelerator.RF_cavity_base_power.comment=The base RF/t each cavity uses. Order: [Copper, Magnesium Diboride, Niobium-Tin, Niobium-Titanium, BSCCO, Aluminum, SSFAF, YBCO].
 
-gui.qmd.config.accelerator.RF_cavity_max_temp=FE Cavity Max Temperature
+gui.qmd.config.accelerator.RF_cavity_max_temp=RF Cavity Max Temperature
 gui.qmd.config.accelerator.RF_cavity_max_temp.comment=The maximum operating temperature for each cavity in K. Order: [Copper, Magnesium Diboride, Niobium-Tin, Niobium-Titanium, BSCCO, Aluminum, SSFAF, YBCO].
 
 gui.qmd.config.accelerator.magnet_strength=Magnet Strength
@@ -463,7 +276,7 @@ gui.qmd.config.accelerator.magnet_heat_generated=Magnet Heat
 gui.qmd.config.accelerator.magnet_heat_generated.comment=The heat per tick each magnet generates. Order: [Copper, Magnesium Diboride, Niobium-Tin, Niobium-Titanium, BSCCO, Aluminum, SSFAF, YBCO].
 
 gui.qmd.config.accelerator.magnet_base_power=Magnet Base Power
-gui.qmd.config.accelerator.magnet_base_power.comment=The base FE/t each magnet uses. Order: [Copper, Magnesium Diboride, Niobium-Tin, Niobium-Titanium, BSCCO, Aluminum, SSFAF, YBCO].
+gui.qmd.config.accelerator.magnet_base_power.comment=The base RF/t each magnet uses. Order: [Copper, Magnesium Diboride, Niobium-Tin, Niobium-Titanium, BSCCO, Aluminum, SSFAF, YBCO].
 
 gui.qmd.config.accelerator.magnet_max_temp=Magnet Max Temperature
 gui.qmd.config.accelerator.magnet_max_temp.comment=The maximum operating temperature for each magnet in K. Order: [Copper, Magnesium Diboride, Niobium-Tin, Niobium-Titanium, BSCCO, Aluminum, SSFAF, YBCO].
@@ -478,19 +291,19 @@ gui.qmd.config.accelerator.accelerator_explosion=Accelerator Explosions
 gui.qmd.config.accelerator.accelerator_explosion.comment=Whether accelerators cause overheating components to explode (quenching events).
 
 gui.qmd.config.particle_chamber.target_chamber_power=Target Chamber Power
-gui.qmd.config.particle_chamber.target_chamber_power.comment=The Base FE/t the Target Chamber uses.
+gui.qmd.config.particle_chamber.target_chamber_power.comment=The Base RF/t the Target Chamber uses.
 
 gui.qmd.config.particle_chamber.decay_chamber_power=Decay Chamber Power
-gui.qmd.config.particle_chamber.decay_chamber_power.comment=The Base FE/t the Decay Chamber uses.
+gui.qmd.config.particle_chamber.decay_chamber_power.comment=The Base RF/t the Decay Chamber uses.
 
 gui.qmd.config.particle_chamber.beam_dump_power=Beam Dump Power
-gui.qmd.config.particle_chamber.beam_dump_power.comment=The Base FE/t the Beam Dump uses.
+gui.qmd.config.particle_chamber.beam_dump_power.comment=The Base RF/t the Beam Dump uses.
 
 gui.qmd.config.particle_chamber.collision_chamber_power=Collision Chamber Power
-gui.qmd.config.particle_chamber.collision_chamber_power.comment=The Base FE/t the Collision Chamber uses.
+gui.qmd.config.particle_chamber.collision_chamber_power.comment=The Base RF/t the Collision Chamber uses.
 
 gui.qmd.config.particle_chamber.particle_chamber_base_energy_capacity=Particle Chamber Base Energy Capacity
-gui.qmd.config.particle_chamber.particle_chamber_base_energy_capacity.comment=The base Energy (FE) capacity of a particle chamber. This is per block volume.
+gui.qmd.config.particle_chamber.particle_chamber_base_energy_capacity.comment=The base Energy (RF) capacity of a particle chamber. This is per block volume.
 
 gui.qmd.config.particle_chamber.particle_chamber_base_input_tank_capacity=Particle Chamber Input Tank Capacity
 gui.qmd.config.particle_chamber.particle_chamber_base_input_tank_capacity.comment=The base capacity (mB) of the input tank of a particle chamber. This is per block volume.
@@ -502,10 +315,10 @@ gui.qmd.config.particle_chamber.detector_efficiency=Detector Efficiency
 gui.qmd.config.particle_chamber.detector_efficiency.comment=The efficiency of each type of Detector. Order:[Bubble Chamber, Silicon Tracker, Multi-wire Chamber, Electromagnetic Calorimeter, Hadron Calorimeter].
 
 gui.qmd.config.particle_chamber.detector_base_power=Detector Power Usage
-gui.qmd.config.particle_chamber.detector_base_power.comment=The amount of FE/t each detector uses. Order:[Bubble Chamber, Silicon Tracker, Multi-wire Chamber, Electromagnetic Calorimeter, Hadron Calorimeter].
+gui.qmd.config.particle_chamber.detector_base_power.comment=The amount of RF/t each detector uses. Order:[Bubble Chamber, Silicon Tracker, Multi-wire Chamber, Electromagnetic Calorimeter, Hadron Calorimeter].
 
 gui.qmd.config.vacuum_chamber.part_power=Vacuum Chamber Part Power
-gui.qmd.config.vacuum_chamber.part_power.comment=The amount of FE/t each type of Vacuum Chamber part uses. Order:[coil, Laser, Beam, Plasma Glass, Plasma Nozzle].
+gui.qmd.config.vacuum_chamber.part_power.comment=The amount of RF/t each type of Vacuum Chamber part uses. Order:[coil, Laser, Beam, Plasma Glass, Plasma Nozzle].
 
 gui.qmd.config.vacuum_chamber.part_heat=Vacuum Chamber Part Heat
 gui.qmd.config.vacuum_chamber.part_heat.comment=The amount of heat per tick each type of Vacuum Chamber part makes. Order:[coil, Laser, Beam, Plasma Glass, Plasma Nozzle].
@@ -514,7 +327,7 @@ gui.qmd.config.vacuum_chamber.part_max_temp=Vacuum Chamber Part Max Temp
 gui.qmd.config.vacuum_chamber.part_max_temp.comment=The maximum operating temperature of each type of part in a Vacuum Chamber. Order:[coil, Laser, Beam, Plasma Glass, Plasma Nozzle].
 
 gui.qmd.config.vacuum_chamber.vacuum_chamber_base_energy_capacity=Vacuum Chamber Base Energy Capacity
-gui.qmd.config.vacuum_chamber.vacuum_chamber_base_energy_capacity.comment=The base Energy (FE) capacity of a vacuum chamber. This is per block volume.
+gui.qmd.config.vacuum_chamber.vacuum_chamber_base_energy_capacity.comment=The base Energy (RF) capacity of a vacuum chamber. This is per block volume.
 
 gui.qmd.config.vacuum_chamber.vacuum_chamber_base_input_tank_capacity=Vacuum Chamber Input Tank Capacity
 gui.qmd.config.vacuum_chamber.vacuum_chamber_base_input_tank_capacity.comment=The base capacity (mB) of the input tank of a vacuum chamber. This is not the cryogenic cooling tanks, that is bound to the accelerator base input tank capacity.
@@ -545,7 +358,7 @@ gui.qmd.config.vacuum_chamber.heater_rule.comment=The placement rules of each Va
 
 
 gui.qmd.config.heat_exchanger.liquefier_base_energy_capacity=Liquefier Base Energy Capacity
-gui.qmd.config.heat_exchanger.liquefier_base_energy_capacity.comment=The Base Energy (FE) Capacity of a Liquefier. This is per block volume.
+gui.qmd.config.heat_exchanger.liquefier_base_energy_capacity.comment=The Base Energy (RF) Capacity of a Liquefier. This is per block volume.
 
 gui.qmd.config.heat_exchanger.liquefier_input_tank_capacity=Liquefier Base Input Tank Capacity
 gui.qmd.config.heat_exchanger.liquefier_input_tank_capacity.comment=The base capacity (mB) of the input tank of a Liquefier. This is per block volume. This is for the gas input tank not the coolant input tank which size is based on the Heat Exchanger tank size.
@@ -581,10 +394,10 @@ gui.qmd.config.tools.tool_enchantability=Tool Enchantability
 gui.qmd.config.tools.tool_enchantability.comment=The enchantability of tool types. Order:[Tungsten Carbide].
 
 gui.qmd.config.tools.drill_energy_usage=Drill Energy Usage
-gui.qmd.config.tools.drill_energy_usage.comment=The amount of FE per block drills use.
+gui.qmd.config.tools.drill_energy_usage.comment=The amount of RF per block drills use.
 
 gui.qmd.config.tools.drill_energy_capacity=Drill Energy Capacity
-gui.qmd.config.tools.drill_energy_capacity.comment=The FE capacity of each drill. Order:[Electric Drill, Advanced Electric Drill].
+gui.qmd.config.tools.drill_energy_capacity.comment=The RF capacity of each drill. Order:[Electric Drill, Advanced Electric Drill].
 
 gui.qmd.config.tools.drill_radius=Drill Mining Radius
 gui.qmd.config.tools.drill_radius.comment=The square radius each drill mines. 0 is 1x1, 1 is 3x3 etc. Order:[Electric Drill, Advanced Electric Drill].
@@ -650,13 +463,13 @@ gui.qmd.config.tools.hev_rad_res=HEV Radiation Resistance
 gui.qmd.config.tools.hev_rad_res.comment=The amount of radiation resistance each piece of the HEV Suit has. Order:[Boots, Leggings, Chestplate, Helmet].
 
 gui.qmd.config.tools.hev_energy=HEV Energy Capacity
-gui.qmd.config.tools.hev_energy.comment=The FE capacity of each piece of the HEV Suit has. Order:[Boots, Leggings, Chestplate, Helmet].
+gui.qmd.config.tools.hev_energy.comment=The RF capacity of each piece of the HEV Suit has. Order:[Boots, Leggings, Chestplate, Helmet].
 
 gui.qmd.config.tools.ki_time=Potassium Iodine Immunity Time
 gui.qmd.config.tools.ki_time.comment=The amount of time in ticks that the potassium iodine tablet gives radiation immunity for. This is the base value, stacking tablets has diminishing returns on time added.
 
 gui.qmd.config.tools.hev_power=HEV Power Consumption
-gui.qmd.config.tools.hev_power.comment=The amount of FE certain operations of the HEV Suit take. Order:[per damage taken, per jump boost, per long jump, per fall damage reduction, per wither/poison reduction].
+gui.qmd.config.tools.hev_power.comment=The amount of RF certain operations of the HEV Suit take. Order:[per damage taken, per jump boost, per long jump, per fall damage reduction, per wither/poison reduction].
 
 gui.qmd.config.fission.reflector_efficiency=Neutron Reflector Efficiency
 gui.qmd.config.fission.reflector_efficiency.comment= The efficiency of each type of neutron reflector. Order:[Tungsten Carbide].
@@ -704,7 +517,7 @@ gui.qmd.config.recipes.rsf_nucleosynthesis=Nucleosynthesis Recipe Scale Factor
 gui.qmd.config.recipes.rsf_nucleosynthesis.comment=Scales the amount of input particles in default QMD Nucleosynthesis Chamber Recipes
 
 gui.qmd.config.other.rtg_power=RTG Power
-gui.qmd.config.other.rtg_power.comment=The Amount of FE/t generated by each RTG type. Order:[Strontium-90].
+gui.qmd.config.other.rtg_power.comment=The Amount of RF/t generated by each RTG type. Order:[Strontium-90].
 
 gui.qmd.config.other.beam_scaling=Beam Scaling Factor
 gui.qmd.config.other.beam_scaling.comment=The scaling factor for the beam attenuation equation.

@@ -1,0 +1,36 @@
+{
+  "type": "qmd:mass_spectrometer_recipe",
+  "fluidInput": [],
+  "fluidProducts": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ores/magnesium"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 4,
+      "ingredient": {
+        "tag": "c:dusts/magnesium"
+      }
+    },
+    {
+      "chancePercent": 20,
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/potassium"
+      }
+    },
+    {
+      "chancePercent": 40,
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/calcium"
+      }
+    }
+  ],
+  "timeMultiplier": 1.0
+}

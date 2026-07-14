@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "qmd:block/nether_brick_accelerator_cooler"
+    }
+  }
+}

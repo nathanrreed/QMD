@@ -1,0 +1,40 @@
+{
+  "type": "qmd:mass_spectrometer_recipe",
+  "fluidInput": [],
+  "fluidProducts": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/lapis"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "qmd:calcium_dust"
+      }
+    },
+    {
+      "count": 3,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:aluminum_dust"
+      }
+    },
+    {
+      "count": 3,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:silicon_gem"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:sulfur_gem_dust"
+      }
+    }
+  ],
+  "timeMultiplier": 1.0
+}

@@ -3,7 +3,12 @@ package lach_01298.qmd.datagen;
 import com.nred.nuclearcraft.info.NCFluid;
 import com.nred.nuclearcraft.multiblock.turbine.TurbineRotorBladeUtil;
 import lach_01298.qmd.QMD;
+import lach_01298.qmd.block.BlockProperties;
 import lach_01298.qmd.enums.BlockTypes;
+import lach_01298.qmd.enums.BlockTypes.CoolerType;
+import lach_01298.qmd.enums.BlockTypes.MagnetType;
+import lach_01298.qmd.enums.BlockTypes.RFCavityType;
+import lach_01298.qmd.enums.EnumTypes.IOType;
 import lach_01298.qmd.fluid.QMDFluids;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -17,7 +22,6 @@ import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
-import org.joml.Vector2i;
 
 import java.util.Map;
 import java.util.function.Function;
@@ -78,8 +82,26 @@ public class QMDBlockStateProvider extends BlockStateProvider {
         blockWithItem("beam", acceleratorBeam, "accelerator");
         booleanBlock("", "frame", "casing", acceleratorCasing, "accelerator", FRAME, false);
         blockWithItemCutout("glass", acceleratorGlass, "accelerator");
-
-//        booleanBlock("californium", false, "source_back", true, "source", "_on", "_off", FISSION_REACTOR_MAP.get("californium_source"), "fission/source", ACTIVE, Directional);
+        facingBlock("", "casing", "outlet", "inlet", acceleratorVent, "accelerator", ACTIVE);
+        beamPort(acceleratorBeamPort, "accelerator/beam_port");
+        blockWithItem("synchrotron", acceleratorSynchrotronPort, "accelerator/beam_port");
+        frontBackBlock("source", acceleratorSource, "accelerator");
+        frontBackBlock("laser_ion_source", acceleratorLaserIonSource, "accelerator");
+        frontBackBlock("ion_collector", acceleratorIonCollector, "accelerator");
+        blockWithItem("yoke", acceleratorYoke, "accelerator");
+        for (CoolerType type : CoolerType.values()) {
+            blockWithItem(type.getName(), acceleratorCoolers.get(type), "accelerator/cooler");
+        }
+        for (MagnetType type : MagnetType.values()) {
+            blockWithItem(type.getName(), acceleratorMagnets.get(type), "accelerator/magnet");
+        }
+        for (RFCavityType type : RFCavityType.values()) {
+            blockWithItem(type.getName(), RFCavities.get(type), "accelerator/cavity");
+        }
+        blockWithItem("energy_port", acceleratorEnergyPort, "accelerator");
+        facingBlock("computer", "casing", "", "", acceleratorComputerPort, "accelerator", ACTIVE);
+        facingBlock("redstone", "casing", "_out", "_in", acceleratorRedstonePort, "accelerator", ACTIVE);
+        blockWithItem("port", acceleratorPort, "accelerator");
     }
 
     private void luminousPaint(String name, DeferredBlock<Block> deferredBlock) {
@@ -87,12 +109,6 @@ public class QMDBlockStateProvider extends BlockStateProvider {
         ModelFile modelFile = models().withExistingParent(BuiltInRegistries.BLOCK.getKey(block).getPath(), modLoc("block/block_luminous_paint")).texture("main", modLoc("block/other/" + name));
         directionalBlock(block, modelFile);
     }
-
-    private static final Map<Direction.Axis, Vector2i> axisMap = Map.of(
-            Direction.Axis.Y, new Vector2i(90, 0),
-            Direction.Axis.Z, new Vector2i(0, 0),
-            Direction.Axis.X, new Vector2i(0, 90)
-    );
 
     private void beamline(DeferredBlock<Block> deferredBlock) {
         Block block = deferredBlock.get();
@@ -196,6 +212,47 @@ public class QMDBlockStateProvider extends BlockStateProvider {
 
         directionalBlock(block, state -> state.getValue(property) ? modelOn : modelOff);
         simpleBlockItem(block, modelOff);
+    }
+
+    private void frontBackBlock(String name, DeferredBlock<Block> deferredBlock, String folder) {
+        Block block = deferredBlock.get();
+        String base = BLOCK_FOLDER + "/" + folder + "/" + name;
+        String casing = BLOCK_FOLDER + "/" + folder + "/casing";
+        ModelFile model = models().withExistingParent(BuiltInRegistries.BLOCK.getKey(block).getPath() + "_off", ncLoc("block/machine")).texture("top", modLoc(casing)).texture("bottom", modLoc(casing)).texture("side", modLoc(casing)).texture("back", modLoc(base + "_back")).texture("front", modLoc(base + "_front"));
+
+        directionalBlock(block, model);
+        simpleBlockItem(block, model);
+    }
+
+    private void beamPort(DeferredBlock<Block> deferredBlock, String folder) {
+        Block block = deferredBlock.get();
+        String base = BLOCK_FOLDER + "/" + folder + "/";
+        ModelFile modelIn = models().cubeAll(BuiltInRegistries.BLOCK.getKey(block).getPath() + "_input", modLoc(base + "input"));
+        ModelFile modelOut = models().cubeAll(BuiltInRegistries.BLOCK.getKey(block).getPath() + "_output", modLoc(base + "output"));
+        ModelFile modelOff = models().cubeAll(BuiltInRegistries.BLOCK.getKey(block).getPath() + "_disabled", modLoc(base + "disabled"));
+
+        getVariantBuilder(block)
+                .forAllStates(state -> {
+                    IOType type = state.getValue(BlockProperties.IO);
+                    return ConfiguredModel.builder()
+                            .modelFile(type == IOType.INPUT ? modelIn : type == IOType.OUTPUT ? modelOut : modelOff)
+                            .build();
+                });
+        simpleBlockItem(block, modelIn);
+    }
+
+    private void facingBlock(String front, String name, String nameTrue, String nameFalse, DeferredBlock<Block> deferredBlock, String folder, BooleanProperty property) {
+        Block block = deferredBlock.get();
+        String base = BLOCK_FOLDER + "/" + folder + "/";
+        ModelFile modelTrue;
+        ModelFile modelFalse;
+
+        String side = base + name;
+        modelTrue = models().withExistingParent(BuiltInRegistries.BLOCK.getKey(block).getPath() + "_" + nameTrue, ncLoc("block/machine")).texture("top", modLoc(side)).texture("bottom", modLoc(side)).texture("side", modLoc(side)).texture("back", modLoc(side)).texture("front", modLoc(base + front + nameTrue));
+        modelFalse = models().withExistingParent(BuiltInRegistries.BLOCK.getKey(block).getPath() + "_" + nameFalse, ncLoc("block/machine")).texture("top", modLoc(side)).texture("bottom", modLoc(side)).texture("side", modLoc(side)).texture("back", modLoc(side)).texture("front", modLoc(base + front + nameFalse));
+
+        directionalBlock(block, state -> state.getValue(property) ? modelTrue : modelFalse);
+        simpleBlockItem(block, modelFalse);
     }
 
     private void blockWithItemRenderType(String name, DeferredBlock<Block> deferredBlock, String folder, String renderType) {

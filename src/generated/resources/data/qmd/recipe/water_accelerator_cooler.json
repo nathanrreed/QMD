@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:buckets/water"
+    },
+    {
+      "item": "qmd:empty_cooler_part"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "qmd:water_accelerator_cooler"
+  }
+}

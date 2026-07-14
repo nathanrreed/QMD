@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_basic_processor_semiconductor": {
+      "conditions": {
+        "items": [
+          {
+            "items": "qmd:basic_processor_semiconductor"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "qmd:linear_accelerator_controller"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_basic_processor_semiconductor"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "qmd:linear_accelerator_controller"
+    ]
+  }
+}

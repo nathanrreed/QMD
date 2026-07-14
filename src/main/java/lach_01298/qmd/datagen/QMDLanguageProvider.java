@@ -39,6 +39,9 @@ public class QMDLanguageProvider extends LanguageProvider {
         blocks();
         items();
         multiblock_validation();
+        block_settings();
+        block_desc();
+        string_formatting();
     }
 
     private void patchouli() {
@@ -364,7 +367,7 @@ public class QMDLanguageProvider extends LanguageProvider {
         add(QMD.MOD_ID + ".menu.title.decelerator_controller", "Decelerator");
         add(QMD.MOD_ID + ".menu.title.mass_spectrometer_controller", "Mass Spectrometer");
 
-        add("gui.qmd.container.accelerator.cavities", "FE Cavities: %s at %s");
+        add("gui.qmd.container.accelerator.cavities", "RF Cavities: %s at %s");
         add("gui.qmd.container.accelerator.quadrupoles", "Quadrupoles: %s at %s");
         add("gui.qmd.container.accelerator.dipoles", "Dipoles: %s at %s");
         add("gui.qmd.container.accelerator.radius", "Radius: %s");
@@ -385,6 +388,33 @@ public class QMDLanguageProvider extends LanguageProvider {
         add("gui.qmd.recipe_viewer.collector.biomes", "Valid Biomes: %s");
         add("gui.qmd.recipe_viewer.collector.dimensions", "Valid Dimensions: %s");
         add("gui.qmd.recipe_viewer.collector.any", "Any");
+
+        add("qmd.gui.recipe_viewer.accelerator_cooling.heat_required", "Heating Required: %s");
+        add("qmd.gui.recipe_viewer.accelerator_cooling.temperature", "Temperature: %s");
+        add("qmd.gui.recipe_viewer.vacuum_chamber_heating.heat_required", "Heating Required: %s");
+
+        add("qmd.gui.recipe_viewer.liquefier.base_energy", "Base Energy: %s");
+        add("qmd.gui.recipe_viewer.liquefier.base_heat", "Base Heat: %s");
+        add("qmd.gui.recipe_viewer.liquefier.inversion_temp", "Inversion Temperature: %s");
+        add("qmd.gui.recipe_viewer.liquefier.compressed_gas_temp", "Hot Gas Temperature: %s");
+        add("qmd.gui.recipe_viewer.liquefier.pressure_coefficient", "Pressure Coefficient: %s");
+
+        add("qmd.gui.recipe_viewer.liquefier_coolant.heat_required", "Heating Required: %s");
+        add("qmd.gui.recipe_viewer.liquefier_coolant.input_temp", "Input Temperature: %s");
+        add("qmd.gui.recipe_viewer.liquefier_coolant.output_temp", "Output Temperature: %s");
+
+        add("gui.qmd.recipe_viewer.particle.mass", "Mass: %s");
+        add("gui.qmd.recipe_viewer.particle.charge", "Charge: %s");
+        add("gui.qmd.recipe_viewer.particle.spin", "Spin: %s");
+        add("gui.qmd.recipe_viewer.particle.colour", "Feels Strong Force: %s");
+        add("gui.qmd.recipe_viewer.particle.weak", "Feels Weak Force: %s");
+        add("gui.qmd.recipe_viewer.particle.components", "Made of:");
+        add("gui.qmd.recipe_viewer.particle.focus", "Minimum Focus: %s");
+        add("gui.qmd.recipe_viewer.reaction.range", "Range: %s");
+        add("gui.qmd.recipe_viewer.reaction.energy_released", "Released Energy: %s");
+        add("gui.qmd.recipe_viewer.reaction.cross_section", "Cross Section: %s%%");
+        add("gui.qmd.recipe_viewer.reaction.heat_released", "Heat Released: %s");
+        add("gui.qmd.recipe_viewer.reaction.max_energy", "Maximum Energy: %s");
     }
 
     private void descriptions() {
@@ -447,14 +477,14 @@ public class QMDLanguageProvider extends LanguageProvider {
         add(acceleratorLaserIonSource.get(), "Accelerator Laser Ion Source");
         add(acceleratorIonCollector.get(), "Accelerator Ion Collector");
 
-        add(RFCavities.get(RFCavityType.COPPER).get(), "Copper FE Cavity");
-        add(RFCavities.get(RFCavityType.MAGNESIUM_DIBORIDE).get(), "Magnesium Diboride  FE Cavity");
-        add(RFCavities.get(RFCavityType.NIOBIUM_TIN).get(), "Niobium-Tin FE Cavity");
-        add(RFCavities.get(RFCavityType.NIOBIUM_TITANIUM).get(), "Niobium-Titanium FE Cavity");
-        add(RFCavities.get(RFCavityType.BSCCO).get(), "BSCCO FE Cavity");
-        add(RFCavities.get(RFCavityType.Aluminium).get(), "Aluminum FE Cavity");
-        add(RFCavities.get(RFCavityType.SSFAF).get(), "SSFAF FE Cavity");
-        add(RFCavities.get(RFCavityType.YBCO).get(), "YBCO FE Cavity");
+        add(RFCavities.get(RFCavityType.COPPER).get(), "Copper RF Cavity");
+        add(RFCavities.get(RFCavityType.MAGNESIUM_DIBORIDE).get(), "Magnesium Diboride  RF Cavity");
+        add(RFCavities.get(RFCavityType.NIOBIUM_TIN).get(), "Niobium-Tin RF Cavity");
+        add(RFCavities.get(RFCavityType.NIOBIUM_TITANIUM).get(), "Niobium-Titanium RF Cavity");
+        add(RFCavities.get(RFCavityType.BSCCO).get(), "BSCCO RF Cavity");
+        add(RFCavities.get(RFCavityType.Aluminium).get(), "Aluminum RF Cavity");
+        add(RFCavities.get(RFCavityType.SSFAF).get(), "SSFAF RF Cavity");
+        add(RFCavities.get(RFCavityType.YBCO).get(), "YBCO RF Cavity");
 
         add(acceleratorMagnets.get(MagnetType.COPPER).get(), "Copper Accelerator Electromagnet");
         add(acceleratorMagnets.get(MagnetType.MAGNESIUM_DIBORIDE).get(), "Magnesium Diboride Accelerator Electromagnet");
@@ -658,7 +688,7 @@ public class QMDLanguageProvider extends LanguageProvider {
         add("qmd.multiblock_validation.accelerator.something_is_wrong", "You got a Beam Port with no facing. Well how did you manage to do that?");
         add("qmd.multiblock_validation.accelerator.no_yokes", "There cannot be any Electromagnet Yokes in this type of accelerator.");
         add("qmd.multiblock_validation.accelerator.no_synch_ports", "There cannot be any Synchrotron Ports on this type of accelerator.");
-        add("qmd.multiblock_validation.accelerator.no_rf_cavity", "There cannot be any FE Cavities in this type of accelerator.");
+        add("qmd.multiblock_validation.accelerator.no_rf_cavity", "There cannot be any RF Cavities in this type of accelerator.");
         add("qmd.multiblock_validation.accelerator.no_source", "There cannot be any Ion Sources on this type of accelerator.");
         add("qmd.multiblock_validation.accelerator.no_ion_collectors", "There cannot be any Ion Collectors on this type of accelerator.");
         add("qmd.multiblock_validation.accelerator.no_ion_ports", "There cannot be any Ion Source Ports on this type of accelerator.");
@@ -771,5 +801,135 @@ public class QMDLanguageProvider extends LanguageProvider {
         add("qmd.multiblock_validation.liquefier.must_have_fluid_output", "There must be at least one OUTPUT Liquefier Port.");
         add("qmd.multiblock_validation.liquefier.must_have_energy_port", "There must be at least one Liquefier Energy Port.");
         add("qmd.multiblock_validation.liquefier.inlet_outlet_must_be_in_top_section", "Heat Exchanger Inlets and Heat Exchanger Outlets must be above the two bottom interior layers.");
+    }
+
+    private void block_desc() {
+        add("tile.qmd.beamline.desc", "Transports particles.");
+        add("tile.qmd.ion_source.desc", "Makes ions and particles for accelerators.");
+
+        add("tile.qmd.accelerator.cooler.cooling_rate", "Cooling Rate: %s");
+
+        add("tile.qmd.rf_cavity.desc", "Accelerates charged particles with a Radio Frequency electric field. Must be made as a ring of 8 RF cavities of the same type surrounding a beam. Cannot be next to another RF cavity.");
+        add("tile.qmd.accelerator_magnet.desc", "Bends the path of charged particles with a strong magnetic field. Can be used to make a Quadrupole or Dipole magnet. For a Quadrupole magnet a beam must be surrounded by 4 of the same type of electromagnets.");
+        add("tile.qmd.accelerator_yoke.desc", "Shapes and strengthens the magnetic field of an electromagnet. Used to make a Dipole magnet. For a dipole magnet a beam must have a electromagnet on the top and bottom then all space not taken by beams in a 3x3 around the central beam must be filled with electromagnet yokes.");
+
+        add("tile.qmd.particle_chamber.detector.bubble_chamber.desc", "Must be placed within 2 blocks of a Particle Chamber.");
+        add("tile.qmd.particle_chamber.detector.wire_chamber.desc", "Must be placed within 2 blocks of a Particle Chamber.");
+        add("tile.qmd.particle_chamber.detector.silicon_tracker.desc", "Must be placed next to a Particle Chamber.");
+        add("tile.qmd.particle_chamber.detector.em_calorimeter.desc", "Must be placed within 3 blocks of a Particle Chamber.");
+        add("tile.qmd.particle_chamber.detector.hadron_calorimeter.desc", "Must be placed within 5 blocks of a Particle Chamber.");
+        add("tile.qmd.particle_chamber.detector.in.desc", "Must be placed within %s blocks of a Particle Chamber.");
+        add("tile.qmd.particle_chamber.detector.out.desc", "Must be placed equal or more than %s blocks away from a Particle Chamber.");
+
+        add("tile.qmd.liquefier_compressor.desc", " Compresses gas to be then expanded and cooled into a liquid. Must be place on the top of the liquefier.");
+    }
+
+    private void block_settings() {
+        add("qmd.block.accelerator_port_setting_toggle", "Toggled port redstone setting to %s %s");
+        add("qmd.block.accelerator_port_setting", "Port redstone setting is %s");
+        add("qmd.block.port_mode_toggle", "Toggled port to %s %s");
+        add("qmd.block.port_mode.INPUT", "INPUT");
+        add("qmd.block.port_mode.OUTPUT", "OUTPUT");
+        add("qmd.block.port_mode.DISABLED", "DISABLED");
+        add("qmd.block.port.mode", "mode!");
+        add("qmd.block.particle_chamber_port_setting_toggle", "Toggled port output setting to");
+        add("qmd.block.particle_chamber_port_setting", "Port output setting is %s");
+
+        add("qmd.block.redstone_port_toggle", "Toggled redstone port to %s %s");
+        add("qmd.block.redstone_port_toggle.input", "INPUT");
+        add("qmd.block.redstone_port_toggle.output", "OUTPUT");
+        add("qmd.block.redstone_port_toggle.1", "FIRST");
+        add("qmd.block.redstone_port_toggle.2", "SECOND");
+        add("qmd.block.redstone_port_toggle.mode", "mode!");
+    }
+
+    private void string_formatting() {
+        add("nc.sf.different.two", "two different");
+        add("nc.sf.different.three", "three different");
+        add("nc.sf.different.four", "four different");
+        add("nc.sf.different.five", "five different");
+        add("nc.sf.different.six", "six different");
+
+        add("nc.sf.beam0", "%s functional beam block");
+        add("nc.sf.beam1", "%s functional beam blocks");
+        add("nc.sf.cavity0", "%s functional RF cavity");
+        add("nc.sf.cavity1", "%s functional RF cavities");
+        add("nc.sf.magnet0", "%s functional electromagnet");
+        add("nc.sf.magnet1", "%s functional electromagnets");
+        add("nc.sf.yoke0", "%s functional electromagnet yoke");
+        add("nc.sf.yoke1", "%s functional electromagnet yokes");
+
+        add("nc.sf.any_cooler0", "%s of any cooler");
+        add("nc.sf.any_cooler1", "any %s coolers");
+        add("nc.sf.water_cooler0", "%s valid water cooler");
+        add("nc.sf.water_cooler1", "%s valid water coolers");
+        add("nc.sf.iron_cooler0", "%s valid iron cooler");
+        add("nc.sf.iron_cooler1", "%s valid iron coolers");
+        add("nc.sf.redstone_cooler0", "%s valid redstone cooler");
+        add("nc.sf.redstone_cooler1", "%s valid redstone coolers");
+        add("nc.sf.quartz_cooler0", "%s valid quartz cooler");
+        add("nc.sf.quartz_cooler1", "%s valid quartz coolers");
+        add("nc.sf.obsidian_cooler0", "%s valid obsidian cooler");
+        add("nc.sf.obsidian_cooler1", "%s valid obsidian coolers");
+        add("nc.sf.nether_brick_cooler0", "%s valid nether brick cooler");
+        add("nc.sf.nether_brick_cooler1", "%s valid nether brick coolers");
+        add("nc.sf.glowstone_cooler0", "%s valid glowstone cooler");
+        add("nc.sf.glowstone_cooler1", "%s valid glowstone coolers");
+        add("nc.sf.lapis_cooler0", "%s valid lapis cooler");
+        add("nc.sf.lapis_cooler1", "%s valid lapis coolers");
+        add("nc.sf.gold_cooler0", "%s valid gold cooler");
+        add("nc.sf.gold_cooler1", "%s valid gold coolers");
+        add("nc.sf.prismarine_cooler0", "%s valid prismarine cooler");
+        add("nc.sf.prismarine_cooler1", "%s valid prismarine coolers");
+        add("nc.sf.slime_cooler0", "%s valid slime cooler");
+        add("nc.sf.slime_cooler1", "%s valid slime coolers");
+        add("nc.sf.end_stone_cooler0", "%s valid end stone cooler");
+        add("nc.sf.end_stone_cooler1", "%s valid end stone coolers");
+        add("nc.sf.purpur_cooler0", "%s valid purpur cooler");
+        add("nc.sf.purpur_cooler1", "%s valid purpur coolers");
+        add("nc.sf.diamond_cooler0", "%s valid diamond cooler");
+        add("nc.sf.diamond_cooler1", "%s valid diamond coolers");
+        add("nc.sf.emerald_cooler0", "%s valid emerald cooler");
+        add("nc.sf.emerald_cooler1", "%s valid emerald coolers");
+        add("nc.sf.copper_cooler0", "%s valid copper cooler");
+        add("nc.sf.copper_cooler1", "%s valid copper coolers");
+        add("nc.sf.tin_cooler0", "%s valid tin cooler");
+        add("nc.sf.tin_cooler1", "%s valid tin coolers");
+        add("nc.sf.lead_cooler0", "%s valid lead cooler");
+        add("nc.sf.lead_cooler1", "%s valid lead coolers");
+        add("nc.sf.boron_cooler0", "%s valid boron cooler");
+        add("nc.sf.boron_cooler1", "%s valid boron coolers");
+        add("nc.sf.lithium_cooler0", "%s valid lithium cooler");
+        add("nc.sf.lithium_cooler1", "%s valid lithium coolers");
+        add("nc.sf.magnesium_cooler0", "%s valid magnesium cooler");
+        add("nc.sf.magnesium_cooler1", "%s valid magnesium coolers");
+        add("nc.sf.manganese_cooler0", "%s valid manganese cooler");
+        add("nc.sf.manganese_cooler1", "%s valid manganese coolers");
+        add("nc.sf.aluminum_cooler0", "%s valid aluminum cooler");
+        add("nc.sf.aluminum_cooler1", "%s valid aluminum coolers");
+        add("nc.sf.silver_cooler0", "%s valid silver cooler");
+        add("nc.sf.silver_cooler1", "%s valid silver coolers");
+        add("nc.sf.fluorite_cooler0", "%s valid fluorite cooler");
+        add("nc.sf.fluorite_cooler1", "%s valid fluorite coolers");
+        add("nc.sf.villiaumite_cooler0", "%s valid villiaumite cooler");
+        add("nc.sf.villiaumite_cooler1", "%s valid villiaumite coolers");
+        add("nc.sf.carobbiite_cooler0", "%s valid carobbiite cooler");
+        add("nc.sf.carobbiite_cooler1", "%s valid carobbiite coolers");
+        add("nc.sf.arsenic_cooler0", "%s valid arsenic cooler");
+        add("nc.sf.arsenic_cooler1", "%s valid arsenic coolers");
+        add("nc.sf.liquid_nitrogen_cooler0", "%s valid liquid nitrogen cooler");
+        add("nc.sf.liquid_nitrogen_cooler1", "%s valid liquid nitrogen coolers");
+        add("nc.sf.liquid_helium_cooler0", "%s valid liquid helium cooler");
+        add("nc.sf.liquid_helium_cooler1", "%s valid liquid helium coolers");
+        add("nc.sf.enderium_cooler0", "%s valid enderium cooler");
+        add("nc.sf.enderium_cooler1", "%s valid enderium coolers");
+        add("nc.sf.cryotheum_cooler0", "%s valid cryotheum cooler");
+        add("nc.sf.cryotheum_cooler1", "%s valid cryotheum coolers");
+        add("nc.sf.vacuum_chamber_casing0", "%s vacuum chamber casing");
+        add("nc.sf.vacuum_chamber_casing1", "%s vacuum chamber casings");
+        add("nc.sf.plasma_glass0", "%s plasma glass");
+        add("nc.sf.plasma_glass1", "%s plasma glass");
+        add("nc.sf.nozzle0", "%s plasma nozzle");
+        add("nc.sf.nozzle1", "%s plasma nozzles");
     }
 }
