@@ -1,0 +1,40 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 1.0,
+  "energyReleased": 9560,
+  "fluidInput": [],
+  "fluidProduct": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ingots/beryllium"
+      }
+    }
+  ],
+  "itemProduct": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:boron_11"
+      }
+    }
+  ],
+  "maxEnergy": 7000,
+  "particleInput": [
+    {
+      "amount": 1000000,
+      "focus": 0.0,
+      "meanEnergy": 1000,
+      "particle": "triton"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "neutron"
+    }
+  ]
+}

@@ -116,7 +116,6 @@
 //		drawTexturedModalRect(guiLeft + 114 - right, guiTop + 33, 216 - right, 6, right, 6);
 //
 //		GuiFluidRenderer.renderGuiTank(multiblock.tanks.get(2), guiLeft + 71, guiTop + 20, zLevel, 32, 32);
-//		GL11.glColor4ub((byte) 255, (byte) 255, (byte) 255, (byte) 255);
 //
 //		guiParticle.drawParticleStack(multiblock.beams.get(0).getParticleStack(), guiLeft + 27, guiTop + 28);
 //		guiParticle.drawParticleStack(multiblock.beams.get(1).getParticleStack(), guiLeft + 131, guiTop + 28);

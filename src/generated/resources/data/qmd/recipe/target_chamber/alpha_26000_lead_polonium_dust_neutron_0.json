@@ -1,0 +1,40 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 1.0,
+  "energyReleased": -19500,
+  "fluidInput": [],
+  "fluidProduct": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ingots/lead"
+      }
+    }
+  ],
+  "itemProduct": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:polonium_dust"
+      }
+    }
+  ],
+  "maxEnergy": 32000,
+  "particleInput": [
+    {
+      "amount": 1000000,
+      "focus": 0.0,
+      "meanEnergy": 26000,
+      "particle": "alpha"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 2,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "neutron"
+    }
+  ]
+}

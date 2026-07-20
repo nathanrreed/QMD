@@ -1,0 +1,46 @@
+{
+  "type": "qmd:collision_chamber_recipe",
+  "crossSection": 0.1,
+  "energyReleased": -415000,
+  "maxEnergy": 686000,
+  "particleInputs": [
+    {
+      "amount": 1,
+      "focus": 5.0,
+      "meanEnergy": 457000,
+      "particle": "proton"
+    },
+    {
+      "amount": 1,
+      "focus": 5.0,
+      "meanEnergy": 457000,
+      "particle": "proton"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 5.0,
+      "meanEnergy": 457000,
+      "particle": "proton"
+    },
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "pion_plus"
+    },
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "pion_minus"
+    },
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "pion_naught"
+    }
+  ]
+}

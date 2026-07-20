@@ -1,0 +1,33 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 1.0,
+  "energyReleased": 0,
+  "fluidInput": [],
+  "fluidProduct": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:silicon_wafer_semiconductor"
+      }
+    }
+  ],
+  "itemProduct": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:silicon_p_doped_semiconductor"
+      }
+    }
+  ],
+  "maxEnergy": 1000,
+  "particleInput": [
+    {
+      "amount": 1000000,
+      "focus": 2.0,
+      "meanEnergy": 600,
+      "particle": "boron_ion"
+    }
+  ],
+  "particleProducts": []
+}

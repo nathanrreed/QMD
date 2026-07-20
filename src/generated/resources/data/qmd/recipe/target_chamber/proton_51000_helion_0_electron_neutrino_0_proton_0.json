@@ -1,0 +1,52 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.16,
+  "energyReleased": -18500,
+  "fluidInput": [],
+  "fluidProduct": [
+    {
+      "amount": 500,
+      "ingredient": {
+        "fluid": "qmd:chlorine"
+      }
+    }
+  ],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ingots/calcium"
+      }
+    }
+  ],
+  "itemProduct": [],
+  "maxEnergy": 67000,
+  "particleInput": [
+    {
+      "amount": 6250000,
+      "focus": 0.0,
+      "meanEnergy": 51000,
+      "particle": "proton"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "helion"
+    },
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "electron_neutrino"
+    },
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "proton"
+    }
+  ]
+}

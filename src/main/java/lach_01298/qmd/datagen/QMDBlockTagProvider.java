@@ -30,7 +30,8 @@ public class QMDBlockTagProvider extends BlockTagsProvider {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(beamline.get(), rtgStrontium.get(), strontium90.get(), fissionReflector.get(), fissionShield.get(), turbineBladeSuperAlloy.get(), irradiator.get(), oreLeacher.get(), atmosphereCollector.get(), liquidCollector.get())
                 .add(linearAcceleratorController.get(), ringAcceleratorController.get(), acceleratorBeam.get(), acceleratorCasing.get(), acceleratorGlass.get(), acceleratorVent.get(), acceleratorBeamPort.get(), acceleratorSynchrotronPort.get(), acceleratorYoke.get(), acceleratorSource.get(), acceleratorEnergyPort.get(), beamDiverterController.get(), beamSplitterController.get(), deceleratorController.get(), acceleratorComputerPort.get(), acceleratorPort.get(), acceleratorRedstonePort.get(), massSpectrometerController.get(), acceleratorLaserIonSource.get(), acceleratorIonCollector.get())
-                .add(blockValues(acceleratorCoolers, acceleratorMagnets, RFCavities).toArray(Block[]::new))
+                .add(blockValues(acceleratorCoolers, acceleratorMagnets, RFCavities, particleChamberDetectors).toArray(Block[]::new))
+                .add(targetChamberController.get(), decayChamberController.get(), beamDumpController.get(), collisionChamberController.get(), particleChamberBeam.get(), particleChamberCasing.get(), particleChamberGlass.get(), particleChamberBeamPort.get(), particleChamberEnergyPort.get(), particleChamber.get(), particleChamberPort.get(), particleChamberFluidPort.get())
         ;
     }
 }

@@ -1,0 +1,40 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.064,
+  "energyReleased": -16000,
+  "fluidInput": [],
+  "fluidProduct": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/graphite"
+      }
+    }
+  ],
+  "itemProduct": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:boron_11"
+      }
+    }
+  ],
+  "maxEnergy": 50000,
+  "particleInput": [
+    {
+      "amount": 15625000,
+      "focus": 0.0,
+      "meanEnergy": 40000,
+      "particle": "proton"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 2,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "proton"
+    }
+  ]
+}

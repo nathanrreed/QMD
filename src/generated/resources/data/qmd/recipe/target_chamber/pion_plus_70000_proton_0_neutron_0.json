@@ -1,0 +1,46 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.04,
+  "energyReleased": 114000,
+  "fluidInput": [
+    {
+      "amount": 1000,
+      "ingredient": {
+        "tag": "c:argon"
+      }
+    }
+  ],
+  "fluidProduct": [
+    {
+      "amount": 500,
+      "ingredient": {
+        "fluid": "qmd:chlorine"
+      }
+    }
+  ],
+  "itemInput": [],
+  "itemProduct": [],
+  "maxEnergy": 320000,
+  "particleInput": [
+    {
+      "amount": 25000000,
+      "focus": 0.0,
+      "meanEnergy": 70000,
+      "particle": "pion_plus"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 2,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "proton"
+    },
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "neutron"
+    }
+  ]
+}

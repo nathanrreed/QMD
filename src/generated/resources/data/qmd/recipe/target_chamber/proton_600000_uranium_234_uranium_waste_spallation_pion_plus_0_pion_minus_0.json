@@ -1,0 +1,46 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.2,
+  "energyReleased": -279000,
+  "fluidInput": [],
+  "fluidProduct": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:isotopes/uranium/234"
+      }
+    }
+  ],
+  "itemProduct": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:uranium_waste_spallation"
+      }
+    }
+  ],
+  "maxEnergy": 5000000,
+  "particleInput": [
+    {
+      "amount": 5000000,
+      "focus": 0.0,
+      "meanEnergy": 600000,
+      "particle": "proton"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "pion_plus"
+    },
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "pion_minus"
+    }
+  ]
+}

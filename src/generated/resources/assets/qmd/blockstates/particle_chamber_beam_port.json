@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "io=disabled": {
+      "model": "qmd:block/particle_chamber_beam_port_disabled"
+    },
+    "io=input": {
+      "model": "qmd:block/particle_chamber_beam_port_input"
+    },
+    "io=output": {
+      "model": "qmd:block/particle_chamber_beam_port_output"
+    }
+  }
+}

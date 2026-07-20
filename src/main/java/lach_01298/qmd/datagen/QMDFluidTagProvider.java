@@ -22,15 +22,19 @@ public class QMDFluidTagProvider extends FluidTagsProvider {
         super(output, provider, QMD.MOD_ID, existingFileHelper);
     }
 
-    public static final TagKey<Fluid> LIQUID_NEON_TAG = FluidTags.create(ResourceLocation.parse("c:liquid_neon"));
-    public static final TagKey<Fluid> LIQUID_ARGON_TAG = FluidTags.create(ResourceLocation.parse("c:liquid_argon"));
+    public static final TagKey<Fluid> LIQUID_HYDROGEN_TAG = fluidTag("liquid_hydrogen");
+    public static final TagKey<Fluid> LIQUID_ARGON_TAG = fluidTag("liquid_argon");
+    public static final TagKey<Fluid> LIQUID_NEON_TAG = fluidTag("liquid_neon");
+    public static final TagKey<Fluid> LIQUID_OXYGEN_TAG = fluidTag("liquid_oxygen");
 
-    public static final TagKey<Fluid> NITRIC_ACID_TAG = FluidTags.create(ResourceLocation.parse("c:nitric_acid"));
-    public static final TagKey<Fluid> HYDROCHLORIC_ACID_TAG = FluidTags.create(ResourceLocation.parse("c:hydrochloric_acid"));
+    public static final TagKey<Fluid> NITRIC_ACID_TAG = fluidTag("nitric_acid");
+    public static final TagKey<Fluid> HYDROCHLORIC_ACID_TAG = fluidTag("hydrochloric_acid");
 
-    public static final TagKey<Fluid> MERCURY_TAG = FluidTags.create(ResourceLocation.parse("c:mercury"));
-    public static final TagKey<Fluid> CHLORINE_TAG = FluidTags.create(ResourceLocation.parse("c:chlorine"));
-    public static final TagKey<Fluid> DIBORANE_TAG = FluidTags.create(ResourceLocation.parse("c:diborane"));
+    public static final TagKey<Fluid> MERCURY_TAG = fluidTag("mercury");
+    public static final TagKey<Fluid> CHLORINE_TAG = fluidTag("chlorine");
+    public static final TagKey<Fluid> DIBORANE_TAG = fluidTag("diborane");
+
+    public static final TagKey<Fluid> ENDERIUM_TAG = fluidTag("enderium");
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
@@ -43,7 +47,13 @@ public class QMDFluidTagProvider extends FluidTagsProvider {
         tag(NEON_TAG).add(QMD_FLUIDS.get("neon").still.get());
         tag(CHLORINE_TAG).add(QMD_FLUIDS.get("chlorine").still.get());
 
-        tag(LIQUID_NEON_TAG).add(QMD_FLUIDS.get("liquid_neon").still.get());
+        tag(LIQUID_HYDROGEN_TAG).add(QMD_FLUIDS.get("liquid_hydrogen").still.get());
         tag(LIQUID_ARGON_TAG).add(QMD_FLUIDS.get("liquid_argon").still.get());
+        tag(LIQUID_NEON_TAG).add(QMD_FLUIDS.get("liquid_neon").still.get());
+        tag(LIQUID_OXYGEN_TAG).add(QMD_FLUIDS.get("liquid_oxygen").still.get());
+    }
+
+    public static TagKey<Fluid> fluidTag(String name) {
+        return FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", name));
     }
 }

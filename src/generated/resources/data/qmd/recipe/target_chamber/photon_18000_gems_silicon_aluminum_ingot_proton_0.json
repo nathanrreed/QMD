@@ -1,0 +1,40 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.08,
+  "energyReleased": -11600,
+  "fluidInput": [],
+  "fluidProduct": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:gems/silicon"
+      }
+    }
+  ],
+  "itemProduct": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:aluminum_ingot"
+      }
+    }
+  ],
+  "maxEnergy": 23000,
+  "particleInput": [
+    {
+      "amount": 12500000,
+      "focus": 0.0,
+      "meanEnergy": 18000,
+      "particle": "photon"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "proton"
+    }
+  ]
+}

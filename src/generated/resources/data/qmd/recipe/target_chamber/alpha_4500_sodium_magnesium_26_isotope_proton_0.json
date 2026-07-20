@@ -1,0 +1,40 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.16,
+  "energyReleased": 1820,
+  "fluidInput": [],
+  "fluidProduct": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ingots/sodium"
+      }
+    }
+  ],
+  "itemProduct": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:magnesium_26_isotope"
+      }
+    }
+  ],
+  "maxEnergy": 6000,
+  "particleInput": [
+    {
+      "amount": 6250000,
+      "focus": 0.0,
+      "meanEnergy": 4500,
+      "particle": "alpha"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "proton"
+    }
+  ]
+}

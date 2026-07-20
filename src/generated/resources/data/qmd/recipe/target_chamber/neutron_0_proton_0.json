@@ -1,0 +1,40 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.25,
+  "energyReleased": 3630,
+  "fluidInput": [],
+  "fluidProduct": [
+    {
+      "amount": 1000,
+      "ingredient": {
+        "fluid": "qmd:neon"
+      }
+    }
+  ],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:isotopes/sodium/22"
+      }
+    }
+  ],
+  "itemProduct": [],
+  "maxEnergy": 11000,
+  "particleInput": [
+    {
+      "amount": 4000000,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "neutron"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "proton"
+    }
+  ]
+}

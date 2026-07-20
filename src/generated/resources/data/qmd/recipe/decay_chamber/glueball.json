@@ -1,0 +1,26 @@
+{
+  "type": "qmd:decay_chamber_recipe",
+  "crossSection": 0.33,
+  "energyReleased": 742000,
+  "maxEnergy": 9223372036854775807,
+  "particleInput": {
+    "amount": 1,
+    "focus": 0.0,
+    "meanEnergy": 0,
+    "particle": "glueball"
+  },
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "kaon_plus"
+    },
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "kaon_minus"
+    }
+  ]
+}

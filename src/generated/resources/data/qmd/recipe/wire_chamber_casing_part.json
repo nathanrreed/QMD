@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "qmd:advanced_processor_semiconductor"
+    },
+    "C": {
+      "item": "qmd:detector_casing_part"
+    },
+    "W": {
+      "item": "qmd:wire_gold_tungsten_part"
+    }
+  },
+  "pattern": [
+    "WWW",
+    "ACA",
+    "WWW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "qmd:wire_chamber_casing_part"
+  }
+}

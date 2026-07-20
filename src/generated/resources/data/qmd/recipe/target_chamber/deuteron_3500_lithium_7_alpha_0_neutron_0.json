@@ -1,0 +1,39 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 1.0,
+  "energyReleased": 15100,
+  "fluidInput": [],
+  "fluidProduct": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:isotopes/lithium/7"
+      }
+    }
+  ],
+  "itemProduct": [],
+  "maxEnergy": 9000,
+  "particleInput": [
+    {
+      "amount": 1000000,
+      "focus": 0.0,
+      "meanEnergy": 3500,
+      "particle": "deuteron"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 2,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "alpha"
+    },
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "neutron"
+    }
+  ]
+}

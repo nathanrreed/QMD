@@ -1,0 +1,40 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.25,
+  "energyReleased": -1950,
+  "fluidInput": [
+    {
+      "amount": 500,
+      "ingredient": {
+        "tag": "c:fluorine"
+      }
+    }
+  ],
+  "fluidProduct": [],
+  "itemInput": [],
+  "itemProduct": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:sodium_22_isotope"
+      }
+    }
+  ],
+  "maxEnergy": 11000,
+  "particleInput": [
+    {
+      "amount": 4000000,
+      "focus": 0.0,
+      "meanEnergy": 6000,
+      "particle": "alpha"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "neutron"
+    }
+  ]
+}

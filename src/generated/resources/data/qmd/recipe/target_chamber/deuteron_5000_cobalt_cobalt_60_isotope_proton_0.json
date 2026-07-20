@@ -1,0 +1,40 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.4,
+  "energyReleased": 5270,
+  "fluidInput": [],
+  "fluidProduct": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ingots/cobalt"
+      }
+    }
+  ],
+  "itemProduct": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:cobalt_60_isotope"
+      }
+    }
+  ],
+  "maxEnergy": 10000,
+  "particleInput": [
+    {
+      "amount": 2500000,
+      "focus": 0.0,
+      "meanEnergy": 5000,
+      "particle": "deuteron"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "proton"
+    }
+  ]
+}

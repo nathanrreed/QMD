@@ -6,6 +6,7 @@ import lach_01298.qmd.QMD;
 import lach_01298.qmd.block.BlockProperties;
 import lach_01298.qmd.enums.BlockTypes;
 import lach_01298.qmd.enums.BlockTypes.CoolerType;
+import lach_01298.qmd.enums.BlockTypes.DetectorType;
 import lach_01298.qmd.enums.BlockTypes.MagnetType;
 import lach_01298.qmd.enums.BlockTypes.RFCavityType;
 import lach_01298.qmd.enums.EnumTypes.IOType;
@@ -69,6 +70,7 @@ public class QMDBlockStateProvider extends BlockStateProvider {
         beamline(beamline);
 
         accelerator();
+        particle_chamber();
     }
 
     private void accelerator() {
@@ -102,6 +104,28 @@ public class QMDBlockStateProvider extends BlockStateProvider {
         facingBlock("computer", "casing", "", "", acceleratorComputerPort, "accelerator", ACTIVE);
         facingBlock("redstone", "casing", "_out", "_in", acceleratorRedstonePort, "accelerator", ACTIVE);
         blockWithItem("port", acceleratorPort, "accelerator");
+    }
+
+    private void particle_chamber() {
+        directionalMachine("target_chamber_controller", targetChamberController, "particle_chamber", ACTIVE);
+        directionalMachine("decay_chamber_controller", decayChamberController, "particle_chamber", ACTIVE);
+        directionalMachine("beam_dump_controller", beamDumpController, "particle_chamber", ACTIVE);
+        directionalMachine("collision_chamber_controller", collisionChamberController, "particle_chamber", ACTIVE);
+
+        blockWithItem("beam", particleChamberBeam, "particle_chamber");
+        booleanBlock("", "frame", "casing", particleChamberCasing, "particle_chamber", FRAME, false);
+        blockWithItemCutout("glass", particleChamberGlass, "particle_chamber");
+
+        blockWithItem("energy_port", particleChamberEnergyPort, "particle_chamber");
+        blockSidesAndTop(particleChamber,"particle_chamber","beam",  "chamber");
+        blockWithItem("port", particleChamberPort, "particle_chamber");
+
+        for (DetectorType type: DetectorType.values()) {
+            blockWithItem(type.getName(), particleChamberDetectors.get(type), "particle_chamber/detector");
+        }
+
+        facingBlock("", "casing", "outlet","inlet", particleChamberFluidPort, "particle_chamber", ACTIVE);
+        beamPort(particleChamberBeamPort, "particle_chamber/beam_port");
     }
 
     private void luminousPaint(String name, DeferredBlock<Block> deferredBlock) {

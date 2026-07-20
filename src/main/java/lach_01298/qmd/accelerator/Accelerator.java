@@ -144,7 +144,6 @@ public class Accelerator extends CuboidalOrToroidalMultiblock<Accelerator> imple
         return beamPorts;
     }
 
-
     public boolean isValidRFCavity(BlockPos center, Axis axis) {
         if (!(this.getWorld().getBlockEntity(center.above()) instanceof TileAcceleratorRFCavity)) {
             return false;
@@ -400,7 +399,7 @@ public class Accelerator extends CuboidalOrToroidalMultiblock<Accelerator> imple
             return false;
         }
 
-        for (IAcceleratorController contr : getPartMap(IAcceleratorController.class).values()) {
+        for (IAcceleratorController<?> contr : getPartMap(IAcceleratorController.class).values()) {
             controller = contr;
         }
 
@@ -412,11 +411,11 @@ public class Accelerator extends CuboidalOrToroidalMultiblock<Accelerator> imple
     @Override
     protected void onAssimilate(IMultiblockController<Accelerator> assimilated) {
         logic.onAssimilate(assimilated);
-
     }
 
     @Override
     protected void onAssimilated(IMultiblockController<Accelerator> assimilator) {
+        super.onAssimilated(assimilator);
         logic.onAssimilated(assimilator);
     }
 

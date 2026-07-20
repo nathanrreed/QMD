@@ -1,0 +1,40 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.32,
+  "energyReleased": 35,
+  "fluidInput": [],
+  "fluidProduct": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:isotopes/magnesium/26"
+      }
+    }
+  ],
+  "itemProduct": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:silicon_gem"
+      }
+    }
+  ],
+  "maxEnergy": 6000,
+  "particleInput": [
+    {
+      "amount": 3125000,
+      "focus": 0.0,
+      "meanEnergy": 4000,
+      "particle": "alpha"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "neutron"
+    }
+  ]
+}

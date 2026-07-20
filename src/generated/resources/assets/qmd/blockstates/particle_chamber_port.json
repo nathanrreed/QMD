@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "qmd:block/particle_chamber_port"
+    }
+  }
+}

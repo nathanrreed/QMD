@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "qmd:target_chamber/proton_100000_gold_iridium_192_isotope_alpha_0_neutron_0_proton_0"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "qmd:target_chamber/proton_100000_gold_iridium_192_isotope_alpha_0_neutron_0_proton_0"
+    ]
+  }
+}

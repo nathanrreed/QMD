@@ -50,6 +50,10 @@ public class QMDRecipe implements IQMDRecipe, Recipe<QMDRecipeInput> {
         return particleIngredients;
     }
 
+    public ParticleStack getParticleIngredient() {
+        return particleIngredients.getFirst();
+    }
+
     @Override
     public List<SizedChanceItemIngredient> getItemProducts() {
         return itemProducts;
@@ -74,7 +78,11 @@ public class QMDRecipe implements IQMDRecipe, Recipe<QMDRecipeInput> {
     }
 
     public ParticleStack getParticleProduct() {
-        return particleProducts.getFirst();
+        return particleProducts.getFirst().copy();
+    }
+
+    public ParticleStack getParticleProduct(int i) {
+        return particleProducts.size() > i ? particleProducts.get(i).copy() : null;
     }
 //
 //    @Override

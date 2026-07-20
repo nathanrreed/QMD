@@ -41,7 +41,9 @@ public class QMDBlockLootTableSubProvider extends BlockLootSubProvider {
         dropSelf(beamline.get());
 
         Stream.of(linearAcceleratorController, ringAcceleratorController, acceleratorBeam, acceleratorCasing, acceleratorGlass, acceleratorVent, acceleratorBeamPort, acceleratorSynchrotronPort, acceleratorYoke, acceleratorSource, acceleratorEnergyPort, beamDiverterController, beamSplitterController, deceleratorController, acceleratorComputerPort, acceleratorPort, acceleratorRedstonePort, massSpectrometerController, acceleratorLaserIonSource, acceleratorIonCollector).forEach(e -> dropSelf(e.get()));
-        Stream.of(acceleratorCoolers, acceleratorMagnets, RFCavities).flatMap(e -> e.values().parallelStream()).map(DeferredHolder::get).forEach(this::dropSelf);
+        Stream.of(acceleratorCoolers, acceleratorMagnets, RFCavities, particleChamberDetectors).flatMap(e -> e.values().parallelStream()).map(DeferredHolder::get).forEach(this::dropSelf);
+
+        Stream.of(targetChamberController, decayChamberController, beamDumpController, collisionChamberController, particleChamberBeam, particleChamberCasing, particleChamberGlass, particleChamberBeamPort, particleChamberEnergyPort, particleChamber, particleChamberPort, particleChamberFluidPort).forEach(e -> dropSelf(e.get()));
 
         for (DeferredBlock<Block> block : dischargeLamps.values()) {
             dropSelf(block.get());
@@ -60,7 +62,8 @@ public class QMDBlockLootTableSubProvider extends BlockLootSubProvider {
         blocks.addAll(Stream.of(beamline, greenLuminousPaint, blueLuminousPaint, orangeLuminousPaint, rtgStrontium, strontium90, fissionReflector, fissionShield, turbineBladeSuperAlloy, irradiator, oreLeacher, atmosphereCollector, liquidCollector, creativeParticleSource).map(DeferredHolder::get).toList());
         blocks.addAll(Stream.of(dischargeLamps).flatMap(e -> e.values().parallelStream()).map(DeferredHolder::get).toList());
         blocks.addAll(Stream.of(linearAcceleratorController, ringAcceleratorController, acceleratorBeam, acceleratorCasing, acceleratorGlass, acceleratorVent, acceleratorBeamPort, acceleratorSynchrotronPort, acceleratorYoke, acceleratorSource, acceleratorEnergyPort, beamDiverterController, beamSplitterController, deceleratorController, acceleratorComputerPort, acceleratorPort, acceleratorRedstonePort, massSpectrometerController, acceleratorLaserIonSource, acceleratorIonCollector).map(DeferredHolder::get).toList());
-        blocks.addAll(Stream.of(acceleratorCoolers, acceleratorMagnets, RFCavities).flatMap(e -> e.values().parallelStream()).map(DeferredHolder::get).toList());
+        blocks.addAll(Stream.of(targetChamberController, decayChamberController, beamDumpController, collisionChamberController, particleChamberBeam, particleChamberCasing, particleChamberGlass, particleChamberBeamPort, particleChamberEnergyPort, particleChamber, particleChamberPort, particleChamberFluidPort).map(DeferredHolder::get).toList());
+        blocks.addAll(Stream.of(acceleratorCoolers, acceleratorMagnets, RFCavities, particleChamberDetectors).flatMap(e -> e.values().parallelStream()).map(DeferredHolder::get).toList());
         return blocks;
     }
 

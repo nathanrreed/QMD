@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "qmd:target_chamber/helion_90000_aluminum_sodium_22_isotope_alpha_0"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "qmd:target_chamber/helion_90000_aluminum_sodium_22_isotope_alpha_0"
+    ]
+  }
+}

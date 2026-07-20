@@ -1,0 +1,46 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.05,
+  "energyReleased": -20700,
+  "fluidInput": [
+    {
+      "amount": 500,
+      "ingredient": {
+        "tag": "c:oxygen"
+      }
+    }
+  ],
+  "fluidProduct": [
+    {
+      "amount": 500,
+      "ingredient": {
+        "fluid": "nuclearcraftneohaul:nitrogen"
+      }
+    }
+  ],
+  "itemInput": [],
+  "itemProduct": [],
+  "maxEnergy": 65000,
+  "particleInput": [
+    {
+      "amount": 20000000,
+      "focus": 0.0,
+      "meanEnergy": 40000,
+      "particle": "proton"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "proton"
+    },
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "deuteron"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.1,
+  "energyReleased": -7220,
+  "fluidInput": [],
+  "fluidProduct": [
+    {
+      "amount": 500,
+      "ingredient": {
+        "fluid": "qmd:chlorine"
+      }
+    }
+  ],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ingots/potassium"
+      }
+    }
+  ],
+  "itemProduct": [],
+  "maxEnergy": 32000,
+  "particleInput": [
+    {
+      "amount": 10000000,
+      "focus": 0.0,
+      "meanEnergy": 15000,
+      "particle": "neutron"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "alpha"
+    },
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "neutron"
+    }
+  ]
+}

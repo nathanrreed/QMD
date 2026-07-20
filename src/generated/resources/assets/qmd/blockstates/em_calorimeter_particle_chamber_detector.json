@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "qmd:block/em_calorimeter_particle_chamber_detector"
+    }
+  }
+}

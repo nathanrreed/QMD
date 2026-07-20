@@ -1,0 +1,45 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.02,
+  "energyReleased": -17400,
+  "fluidInput": [],
+  "fluidProduct": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:isotopes/boron/11"
+      }
+    }
+  ],
+  "itemProduct": [],
+  "maxEnergy": 30500,
+  "particleInput": [
+    {
+      "amount": 50000000,
+      "focus": 0.0,
+      "meanEnergy": 24500,
+      "particle": "photon"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 2,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "alpha"
+    },
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "neutron"
+    },
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "deuteron"
+    }
+  ]
+}

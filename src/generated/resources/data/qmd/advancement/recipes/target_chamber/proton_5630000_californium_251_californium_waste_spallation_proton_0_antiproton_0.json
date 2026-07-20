@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "qmd:target_chamber/proton_5630000_californium_251_californium_waste_spallation_proton_0_antiproton_0"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "qmd:target_chamber/proton_5630000_californium_251_californium_waste_spallation_proton_0_antiproton_0"
+    ]
+  }
+}

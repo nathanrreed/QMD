@@ -1,0 +1,40 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.02,
+  "energyReleased": 4460,
+  "fluidInput": [],
+  "fluidProduct": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:isotopes/lithium/6"
+      }
+    }
+  ],
+  "itemProduct": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:boron_10"
+      }
+    }
+  ],
+  "maxEnergy": 45000,
+  "particleInput": [
+    {
+      "amount": 50000000,
+      "focus": 0.0,
+      "meanEnergy": 27000,
+      "particle": "alpha"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "photon"
+    }
+  ]
+}

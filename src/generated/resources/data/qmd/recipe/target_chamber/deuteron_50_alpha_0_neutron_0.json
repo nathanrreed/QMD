@@ -1,0 +1,39 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.5,
+  "energyReleased": 17100,
+  "fluidInput": [
+    {
+      "amount": 500,
+      "ingredient": {
+        "tag": "c:tritium"
+      }
+    }
+  ],
+  "fluidProduct": [],
+  "itemInput": [],
+  "itemProduct": [],
+  "maxEnergy": 600,
+  "particleInput": [
+    {
+      "amount": 2000000,
+      "focus": 0.0,
+      "meanEnergy": 50,
+      "particle": "deuteron"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "alpha"
+    },
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "neutron"
+    }
+  ]
+}

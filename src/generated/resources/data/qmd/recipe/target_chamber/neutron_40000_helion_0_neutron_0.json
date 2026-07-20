@@ -1,0 +1,39 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.02,
+  "energyReleased": -20600,
+  "fluidInput": [
+    {
+      "amount": 1000,
+      "ingredient": {
+        "tag": "c:helium"
+      }
+    }
+  ],
+  "fluidProduct": [],
+  "itemInput": [],
+  "itemProduct": [],
+  "maxEnergy": 60000,
+  "particleInput": [
+    {
+      "amount": 50000000,
+      "focus": 0.0,
+      "meanEnergy": 40000,
+      "particle": "neutron"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "helion"
+    },
+    {
+      "amount": 2,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "neutron"
+    }
+  ]
+}

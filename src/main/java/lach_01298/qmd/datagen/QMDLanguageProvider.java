@@ -2,6 +2,7 @@ package lach_01298.qmd.datagen;
 
 import com.nred.nuclearcraft.info.NCFluid;
 import lach_01298.qmd.QMD;
+import lach_01298.qmd.enums.BlockTypes.DetectorType;
 import lach_01298.qmd.enums.BlockTypes.MagnetType;
 import lach_01298.qmd.enums.BlockTypes.RFCavityType;
 import lach_01298.qmd.enums.MaterialTypes.*;
@@ -333,6 +334,11 @@ public class QMDLanguageProvider extends LanguageProvider {
         add(QMD.MOD_ID + ".menu.title.accelerator_source", "Accelerator Ion Source");
         add(QMD.MOD_ID + ".menu.title.accelerator_laser_ion_source", "Accelerator Laser Ion Source");
 
+        add(QMD.MOD_ID + ".menu.title.target_chamber_controller", "Target Chamber");
+        add(QMD.MOD_ID + ".menu.title.decay_chamber_controller", "Decay Chamber");
+        add(QMD.MOD_ID + ".menu.title.beam_dump_controller", "Beam Dump");
+        add(QMD.MOD_ID + ".menu.title.collision_chamber_controller", "Collision Chamber");
+
         add("gui.qmd.container.creative_particle_source.set", "Set");
         add("gui.qmd.container.creative_particle_source.particle_name", "Particle Name");
         add("gui.qmd.container.creative_particle_source.particle_amount", "Amount (pu/t)");
@@ -381,6 +387,10 @@ public class QMDLanguageProvider extends LanguageProvider {
         add("gui.qmd.container.beam_diverter.max_energy", "Maximum Energy: %s");
         add("gui.qmd.container.beam_diverter.energy_loss", "Energy Loss: %s");
         add("gui.qmd.container.accelerator_source", "Accelerator Ion Source");
+
+        add("gui.qmd.container.particle_chamber.efficiency", "Efficiency: %s%%");
+        add("gui.qmd.container.particle_chamber.length", "Beam Length: %s");
+        add("gui.qmd.container.collison_chamber.energy", "Collision Energy: %s");
     }
 
     private void recipeViewer() {
@@ -498,6 +508,24 @@ public class QMDLanguageProvider extends LanguageProvider {
         for (CoolerType type : CoolerType.values()) {
             add(acceleratorCoolers.get(type).get(), String.join(" ", Arrays.stream(type.getName().split("_")).map(StringUtils::capitalize).toList()) + " Accelerator Cooler");
         }
+
+        add(targetChamberController.get(), "Target Chamber Controller");
+        add(decayChamberController.get(), "Decay Chamber Controller");
+        add(beamDumpController.get(), "Beam Dump Controller");
+        add(collisionChamberController.get(), "Collision Chamber Controller");
+        add(particleChamberBeam.get(), "Particle Chamber Beam Block");
+        add(particleChamberCasing.get(), "Particle Chamber Casing");
+        add(particleChamberGlass.get(), "Particle Chamber Glass");
+        add(particleChamberBeamPort.get(), "Particle Chamber Beam Port");
+        add(particleChamberEnergyPort.get(), "Particle Chamber Energy Port");
+        add(particleChamber.get(), "Particle Chamber");
+        add(particleChamberPort.get(), "Particle Chamber Item Port");
+        add(particleChamberFluidPort.get(), "Particle Chamber Fluid Port");
+        add(particleChamberDetectors.get(DetectorType.BUBBLE_CHAMBER).get(), "Bubble Chamber Detector");
+        add(particleChamberDetectors.get(DetectorType.SILLICON_TRACKER).get(), "Silicon Tracker Detector");
+        add(particleChamberDetectors.get(DetectorType.WIRE_CHAMBER).get(), "Wire Chamber Detector");
+        add(particleChamberDetectors.get(DetectorType.EM_CALORIMETER).get(), "Electromagnetic Calorimeter Detector");
+        add(particleChamberDetectors.get(DetectorType.HADRON_CALORIMETER).get(), "Hadron Calorimeter Detector");
     }
 
     private void items() {
@@ -832,7 +860,7 @@ public class QMDLanguageProvider extends LanguageProvider {
         add("qmd.block.port_mode.OUTPUT", "OUTPUT");
         add("qmd.block.port_mode.DISABLED", "DISABLED");
         add("qmd.block.port.mode", "mode!");
-        add("qmd.block.particle_chamber_port_setting_toggle", "Toggled port output setting to");
+        add("qmd.block.particle_chamber_port_setting_toggle", "Toggled port output setting to %s");
         add("qmd.block.particle_chamber_port_setting", "Port output setting is %s");
 
         add("qmd.block.redstone_port_toggle", "Toggled redstone port to %s %s");

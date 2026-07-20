@@ -23,6 +23,11 @@ public class RecipeTypeRegistration {
     public static final DeferredHolder<RecipeType<?>, RecipeType<AcceleratorCoolingRecipe>> ACCELERATOR_COOLING_RECIPE_TYPE = RECIPE_TYPES.register("accelerator_cooling", RecipeType::simple);
     public static final DeferredHolder<RecipeType<?>, RecipeType<AcceleratorSourceRecipe>> ACCELERATOR_SOURCE_RECIPE_TYPE = RECIPE_TYPES.register("accelerator_source", RecipeType::simple);
 
+    public static final DeferredHolder<RecipeType<?>, RecipeType<BeamDumpRecipe>> BEAM_DUMP_RECIPE_TYPE = RECIPE_TYPES.register("beam_dump", RecipeType::simple);
+    public static final DeferredHolder<RecipeType<?>, RecipeType<CollisionChamberRecipe>> COLLISION_CHAMBER_RECIPE_TYPE = RECIPE_TYPES.register("collision_chamber", RecipeType::simple);
+    public static final DeferredHolder<RecipeType<?>, RecipeType<DecayChamberRecipe>> DECAY_CHAMBER_RECIPE_TYPE = RECIPE_TYPES.register("decay_chamber", RecipeType::simple);
+    public static final DeferredHolder<RecipeType<?>, RecipeType<TargetChamberRecipe>> TARGET_CHAMBER_RECIPE_TYPE = RECIPE_TYPES.register("target_chamber", RecipeType::simple);
+
     public static void init() {
     }
 

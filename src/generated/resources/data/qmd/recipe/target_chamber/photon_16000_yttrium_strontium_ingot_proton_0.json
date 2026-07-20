@@ -1,0 +1,40 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.016,
+  "energyReleased": -7070,
+  "fluidInput": [],
+  "fluidProduct": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ingots/yttrium"
+      }
+    }
+  ],
+  "itemProduct": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:strontium_ingot"
+      }
+    }
+  ],
+  "maxEnergy": 23000,
+  "particleInput": [
+    {
+      "amount": 62500000,
+      "focus": 0.0,
+      "meanEnergy": 16000,
+      "particle": "photon"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "proton"
+    }
+  ]
+}

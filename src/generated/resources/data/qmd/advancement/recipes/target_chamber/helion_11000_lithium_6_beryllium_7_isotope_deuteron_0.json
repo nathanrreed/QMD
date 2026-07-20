@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "qmd:target_chamber/helion_11000_lithium_6_beryllium_7_isotope_deuteron_0"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "qmd:target_chamber/helion_11000_lithium_6_beryllium_7_isotope_deuteron_0"
+    ]
+  }
+}

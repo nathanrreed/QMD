@@ -1,0 +1,39 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.5,
+  "energyReleased": -1570,
+  "fluidInput": [],
+  "fluidProduct": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ingots/beryllium"
+      }
+    }
+  ],
+  "itemProduct": [],
+  "maxEnergy": 14000,
+  "particleInput": [
+    {
+      "amount": 2000000,
+      "focus": 0.0,
+      "meanEnergy": 4000,
+      "particle": "neutron"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 2,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "alpha"
+    },
+    {
+      "amount": 2,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "neutron"
+    }
+  ]
+}

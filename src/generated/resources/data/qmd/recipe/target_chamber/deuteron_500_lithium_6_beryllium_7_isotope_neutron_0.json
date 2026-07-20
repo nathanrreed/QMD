@@ -1,0 +1,40 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.16,
+  "energyReleased": 3380,
+  "fluidInput": [],
+  "fluidProduct": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:isotopes/lithium/6"
+      }
+    }
+  ],
+  "itemProduct": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:beryllium_7_isotope"
+      }
+    }
+  ],
+  "maxEnergy": 3000,
+  "particleInput": [
+    {
+      "amount": 6250000,
+      "focus": 0.0,
+      "meanEnergy": 500,
+      "particle": "deuteron"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "neutron"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_detector_casing_part": {
+      "conditions": {
+        "items": [
+          {
+            "items": "qmd:detector_casing_part"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "qmd:em_calorimeter_particle_chamber_detector"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_detector_casing_part"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "qmd:em_calorimeter_particle_chamber_detector"
+    ]
+  }
+}

@@ -27,7 +27,7 @@ import java.util.List;
 
 public abstract class EmiQMDRecipeViewerRecipe extends BasicEmiRecipe {
     public final RecipeViewerCategoryInfo categoryInfo;
-    private final RecipeViewer<?> recipeViewer;
+    public final RecipeViewer<?> recipeViewer;
 
     public EmiQMDRecipeViewerRecipe(String name, EmiRecipeCategory category, ResourceLocation id, RecipeViewer<? extends QMDRecipe> recipeViewer) {
         super(category, id, 0, 0);

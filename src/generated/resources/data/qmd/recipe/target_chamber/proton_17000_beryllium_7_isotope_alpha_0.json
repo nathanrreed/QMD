@@ -1,0 +1,40 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.032,
+  "energyReleased": -10500,
+  "fluidInput": [
+    {
+      "amount": 500,
+      "ingredient": {
+        "tag": "c:nitrogen"
+      }
+    }
+  ],
+  "fluidProduct": [],
+  "itemInput": [],
+  "itemProduct": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:beryllium_7_isotope"
+      }
+    }
+  ],
+  "maxEnergy": 26000,
+  "particleInput": [
+    {
+      "amount": 31250000,
+      "focus": 0.0,
+      "meanEnergy": 17000,
+      "particle": "proton"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 2,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "alpha"
+    }
+  ]
+}

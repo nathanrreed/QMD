@@ -29,6 +29,11 @@ public class QMDMenus {
 
     public static final DeferredHolder<MenuType<?>, MenuType<ContainerAcceleratorIonSource>> ACCELERATOR_ION_SOURCE_MENU = MENUS.register("accelerator_ion_source", () -> IMenuTypeExtension.create(ContainerAcceleratorIonSource::new));
 
+    public static final DeferredHolder<MenuType<?>, MenuType<ContainerBeamDumpController>> BEAM_DUMP_CONTROLLER_MENU = MENUS.register("beam_dump_controller", () -> IMenuTypeExtension.create(ContainerBeamDumpController::new));
+    public static final DeferredHolder<MenuType<?>, MenuType<ContainerCollisionChamberController>> COLLISION_CHAMBER_CONTROLLER_MENU = MENUS.register("collision_chamber_controller", () -> IMenuTypeExtension.create(ContainerCollisionChamberController::new));
+    public static final DeferredHolder<MenuType<?>, MenuType<ContainerDecayChamberController>> DECAY_CHAMBER_CONTROLLER_MENU = MENUS.register("decay_chamber_controller", () -> IMenuTypeExtension.create(ContainerDecayChamberController::new));
+    public static final DeferredHolder<MenuType<?>, MenuType<ContainerTargetChamberController>> TARGET_CHAMBER_CONTROLLER_MENU = MENUS.register("target_chamber_controller", () -> IMenuTypeExtension.create(ContainerTargetChamberController::new));
+
     public static void init() {
     }
 

@@ -1,0 +1,49 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ingots/osmium"
+      }
+    }
+  ],
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.025,
+  "energyReleased": 8730,
+  "fluidInput": [],
+  "fluidProduct": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ingots/platinum"
+      }
+    }
+  ],
+  "itemProduct": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ingots/osmium"
+      }
+    }
+  ],
+  "maxEnergy": 27000,
+  "particleInput": [
+    {
+      "amount": 40000000,
+      "focus": 0.0,
+      "meanEnergy": 19000,
+      "particle": "neutron"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "alpha"
+    }
+  ]
+}

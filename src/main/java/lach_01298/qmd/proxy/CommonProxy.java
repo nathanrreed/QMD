@@ -71,7 +71,6 @@ public class CommonProxy {
 //        HeaterPlacement.init();
 //        QMDArmour.blacklistShielding();
 //        MinecraftForge.EVENT_BUS.register(new ArmourBonusHandler());
-        QMDTileInfoHandler.init();
 
         for (NCFluid fluid : fluidValues(QMDFluids.QMD_FLUIDS)) {
             addFluidsMixing(fluid);

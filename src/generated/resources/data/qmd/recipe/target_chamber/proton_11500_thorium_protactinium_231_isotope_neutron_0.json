@@ -1,0 +1,40 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.625,
+  "energyReleased": -6830,
+  "fluidInput": [],
+  "fluidProduct": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ingots/thorium"
+      }
+    }
+  ],
+  "itemProduct": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:protactinium_231_isotope"
+      }
+    }
+  ],
+  "maxEnergy": 16000,
+  "particleInput": [
+    {
+      "amount": 1600000,
+      "focus": 0.0,
+      "meanEnergy": 11500,
+      "particle": "proton"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 2,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "neutron"
+    }
+  ]
+}

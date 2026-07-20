@@ -1,0 +1,40 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.01,
+  "energyReleased": -271,
+  "fluidInput": [],
+  "fluidProduct": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:americium_242"
+      }
+    }
+  ],
+  "itemProduct": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "nuclearcraftneohaul:plutonium_242"
+      }
+    }
+  ],
+  "maxEnergy": 30000,
+  "particleInput": [
+    {
+      "amount": 100000000,
+      "focus": 0.0,
+      "meanEnergy": 300,
+      "particle": "electron_antineutrino"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "positron"
+    }
+  ]
+}

@@ -54,6 +54,18 @@ public class QMDEmiPlugin implements EmiPlugin {
     private static final EmiStack MASS_SPECTROMETER_WORKSTATION = EmiStack.of(massSpectrometerController);
     public static final EmiRecipeCategory EMI_MASS_SPECTROMETER_CATEGORY = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "mass_spectrometer"), MASS_SPECTROMETER_WORKSTATION);
 
+    private static final EmiStack TARGET_CHAMBER_WORKSTATION = EmiStack.of(targetChamberController);
+    public static final EmiRecipeCategory EMI_TARGET_CHAMBER_CATEGORY = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "target_chamber"), TARGET_CHAMBER_WORKSTATION);
+
+    private static final EmiStack DECAY_CHAMBER_WORKSTATION = EmiStack.of(decayChamberController);
+    public static final EmiRecipeCategory EMI_DECAY_CHAMBER_CATEGORY = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "decay_chamber"), DECAY_CHAMBER_WORKSTATION);
+
+    private static final EmiStack BEAM_DUMP_WORKSTATION = EmiStack.of(beamDumpController);
+    public static final EmiRecipeCategory EMI_BEAM_DUMP_CATEGORY = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "beam_dump"), BEAM_DUMP_WORKSTATION);
+
+    private static final EmiStack COLLISION_CHAMBER_WORKSTATION = EmiStack.of(collisionChamberController);
+    public static final EmiRecipeCategory EMI_COLLISION_CHAMBER_CATEGORY = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "collision_chamber"), COLLISION_CHAMBER_WORKSTATION);
+
     public static final EmiRecipeCategory EMI_PARTICLE_INFO_CATEGORY = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "particle_info"), new ParticleEmiStack(Particles.getParticleFromName("alpha"), 0));
 
     @Override
@@ -78,6 +90,11 @@ public class QMDEmiPlugin implements EmiPlugin {
         addCategory(registry, manager, EMI_ACCELERATOR_COOLING_CATEGORY, cooling.stream().map(EmiStack::of).toList(), ACCELERATOR_COOLING_RECIPE_TYPE.get(), EmiAcceleratorCoolingRecipe::new);
         addCategory(registry, manager, EMI_ACCELERATOR_SOURCE_CATEGORY, List.of(ACCELERATOR_SOURCE_WORKSTATION, EmiStack.of(acceleratorLaserIonSource)), ACCELERATOR_SOURCE_RECIPE_TYPE.get(), EmiAcceleratorSourceRecipe::new);
         addCategory(registry, manager, EMI_MASS_SPECTROMETER_CATEGORY, MASS_SPECTROMETER_WORKSTATION, MASS_SPECTROMETER_RECIPE_TYPE.get(), EmiMassSpectrometerRecipe::new);
+
+        addCategory(registry, manager, EMI_TARGET_CHAMBER_CATEGORY, TARGET_CHAMBER_WORKSTATION, TARGET_CHAMBER_RECIPE_TYPE.get(), EmiTargetChamberRecipe::new);
+        addCategory(registry, manager, EMI_DECAY_CHAMBER_CATEGORY, DECAY_CHAMBER_WORKSTATION, DECAY_CHAMBER_RECIPE_TYPE.get(), EmiDecayChamberRecipe::new);
+        addCategory(registry, manager, EMI_BEAM_DUMP_CATEGORY, BEAM_DUMP_WORKSTATION, BEAM_DUMP_RECIPE_TYPE.get(), EmiBeamDumpRecipe::new);
+        addCategory(registry, manager, EMI_COLLISION_CHAMBER_CATEGORY, COLLISION_CHAMBER_WORKSTATION, COLLISION_CHAMBER_RECIPE_TYPE.get(), EmiCollisionChamberRecipe::new);
 
         addCategory(registry, manager, EMI_ATMOSPHERE_COLLECTOR_CATEGORY, ATMOSPHERE_COLLECTOR_WORKSTATION, ATMOSPHERE_COLLECTOR_RECIPE_TYPE.get(), EmiAtmosphereCollectorRecipe::new);
         addCategory(registry, manager, EMI_LIQUID_COLLECTOR_CATEGORY, LIQUID_COLLECTOR_WORKSTATION, LIQUID_COLLECTOR_RECIPE_TYPE.get(), EmiLiquidCollectorRecipe::new);

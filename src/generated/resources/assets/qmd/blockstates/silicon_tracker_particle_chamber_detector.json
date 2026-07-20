@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "qmd:block/silicon_tracker_particle_chamber_detector"
+    }
+  }
+}

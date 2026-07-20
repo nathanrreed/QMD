@@ -1,0 +1,40 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.25,
+  "energyReleased": 1660,
+  "fluidInput": [],
+  "fluidProduct": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ingots/tungsten"
+      }
+    }
+  ],
+  "itemProduct": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:hafnium_ingot"
+      }
+    }
+  ],
+  "maxEnergy": 16500,
+  "particleInput": [
+    {
+      "amount": 4000000,
+      "focus": 0.0,
+      "meanEnergy": 11000,
+      "particle": "photon"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "alpha"
+    }
+  ]
+}

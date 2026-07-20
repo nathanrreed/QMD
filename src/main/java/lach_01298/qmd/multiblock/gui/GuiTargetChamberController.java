@@ -1,206 +1,132 @@
-//package lach_01298.qmd.multiblock.gui;
-//
-//import lach_01298.qmd.QMD;
-//import lach_01298.qmd.gui.GuiParticle;
-//import lach_01298.qmd.multiblock.network.ParticleChamberUpdatePacket;
-//import lach_01298.qmd.multiblock.network.QMDClearTankPacket;
-//import lach_01298.qmd.particleChamber.ParticleChamber;
-//import lach_01298.qmd.particleChamber.ParticleChamberLogic;
-//import lach_01298.qmd.particleChamber.TargetChamberLogic;
-//import lach_01298.qmd.particleChamber.tile.IParticleChamberPart;
-//import lach_01298.qmd.particleChamber.tile.TileTargetChamberController;
-//import lach_01298.qmd.util.Units;
-//import nc.gui.element.GuiFluidRenderer;
-//import nc.gui.element.MultiblockButton;
-//import nc.gui.element.NCButton;
-//import nc.gui.multiblock.controller.GuiLogicMultiblockController;
-//import nc.network.multiblock.ClearAllMaterialPacket;
-//import nc.tile.TileContainerInfo;
-//import nc.util.Lang;
-//import nc.util.NCUtil;
-//import net.minecraft.client.gui.GuiButton;
-//import net.minecraft.client.renderer.GlStateManager;
-//import net.minecraft.entity.player.EntityPlayer;
-//import net.minecraft.inventory.Container;
-//import net.minecraft.util.ResourceLocation;
-//import net.minecraft.util.text.TextFormatting;
-//import org.lwjgl.opengl.GL11;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//public class GuiTargetChamberController
-//		extends GuiLogicMultiblockController<ParticleChamber, ParticleChamberLogic, IParticleChamberPart, ParticleChamberUpdatePacket, TileTargetChamberController, TileContainerInfo<TileTargetChamberController>, TargetChamberLogic>
-//{
-//
-//	protected final ResourceLocation gui_texture;
-//
-//	private final GuiParticle guiParticle;
-//
-//	public GuiTargetChamberController(Container inventory, EntityPlayer player, TileTargetChamberController controller, String textureLocation)
-//	{
-//		super(inventory, player, controller, textureLocation);
-//		gui_texture = new ResourceLocation(QMD.MOD_ID + ":textures/gui/target_chamber_controller.png");
-//		xSize = 176;
-//		ySize = 200;
-//		guiParticle = new GuiParticle(this);
-//	}
-//
-//	@Override
-//	protected ResourceLocation getGuiTexture()
-//	{
-//		return gui_texture;
-//	}
-//
-//	@Override
-//	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
-//	{
-//
-//		int offset = 8;
-//		int fontColor = multiblock.isChamberOn ? -1 : 15641088;
-//		String title = Lang.localize("gui.qmd.container.target_chamber_controller.name");
-//		fontRenderer.drawString(title, offset, 5, fontColor);
-//
-//		String efficiency = Lang.localize("gui.qmd.container.particle_chamber.efficiency",
-//				String.format("%.2f", multiblock.efficiency * 100));
-//		fontRenderer.drawString(efficiency, offset, 98, fontColor);
-//
-//		String length = Lang.localize("gui.qmd.container.particle_chamber.length", logic.getBeamLength());
-//		fontRenderer.drawString(length, offset, 108, fontColor);
-//
-//		if (!NCUtil.isModifierKeyDown())
-//		{
-//
-//		}
-//	}
-//
-//	@Override
-//	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
-//	{
-//
-//		GlStateManager.color(1F, 1F, 1F, 1F);
-//		mc.getTextureManager().bindTexture(getGuiTexture());
-//		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-//
-//		int power = (int) Math.round((double) multiblock.energyStorage.getEnergyStored()
-//				/ (double) multiblock.energyStorage.getMaxEnergyStored() * 74);
-//
-//		drawTexturedModalRect(guiLeft + 161, guiTop + 87 - power, 176, 74 - power, 6, power);
-//
-//		// input
-//		if (multiblock.beams.get(0).getParticleStack() != null)
-//		{
-//			drawTexturedModalRect(guiLeft + 35, guiTop + 51, 182, 12, 16, 6);
-//		}
-//
-//		// top output
-//		if (multiblock.beams.get(1).getParticleStack() != null)
-//		{
-//			drawTexturedModalRect(guiLeft + 69, guiTop + 22, 182, 18, 16, 16);
-//		}
-//
-//		// middle output
-//		if (multiblock.beams.get(2).getParticleStack() != null)
-//		{
-//			drawTexturedModalRect(guiLeft + 112, guiTop + 52, 182, 50, 16, 4);
-//		}
-//
-//		// bottom output
-//		if (multiblock.beams.get(3).getParticleStack() != null)
-//		{
-//			drawTexturedModalRect(guiLeft + 69, guiTop + 71, 182, 34, 16, 16);
-//		}
-//
-//		// draw progress bar
-//		int progress = Math
-//				.min((int) Math.round((double) getLogic().particleWorkDone / (double) getLogic().recipeParticleWork * 21), 21);
-//		drawTexturedModalRect(guiLeft + 71, guiTop + 48, 182, 0, progress, 12);
-//
-//
-//		GuiFluidRenderer.renderGuiTank(multiblock.tanks.get(0), guiLeft + 53, guiTop + 55, zLevel, 16, 16);
-//		GuiFluidRenderer.renderGuiTank(multiblock.tanks.get(1), guiLeft + 94, guiTop + 55, zLevel, 16, 16);
-//		GL11.glColor4ub((byte) 255, (byte) 255, (byte) 255, (byte) 255);
-//
-//
-//
-//		guiParticle.drawParticleStack(multiblock.beams.get(0).getParticleStack(), guiLeft + 18, guiTop + 46);
-//		guiParticle.drawParticleStack(multiblock.beams.get(1).getParticleStack(), guiLeft + 86, guiTop + 15);
-//		guiParticle.drawParticleStack(multiblock.beams.get(2).getParticleStack(), guiLeft + 129, guiTop + 46);
-//		guiParticle.drawParticleStack(multiblock.beams.get(3).getParticleStack(), guiLeft + 86, guiTop + 78);
-//	}
-//
-//	@Override
-//	public void renderTooltips(int mouseX, int mouseY)
-//	{
-//		if (NCUtil.isModifierKeyDown())
-//			drawTooltip(clearAllInfo(), mouseX, mouseY, 128, 70, 18, 18);
-//
-//		drawFluidTooltip(multiblock.tanks.get(0), mouseX, mouseY, 53, 55, 16, 16);
-//		drawFluidTooltip(multiblock.tanks.get(1), mouseX, mouseY, 94, 55, 16, 16);
-//
-//		drawTooltip(energyInfo(), mouseX, mouseY, 160, 12, 8, 76);
-//
-//		guiParticle.drawToolTipBoxwithFocus(multiblock.beams.get(0).getParticleStack(), guiLeft + 18, guiTop + 46,
-//				mouseX, mouseY);
-//		guiParticle.drawToolTipBoxwithFocus(multiblock.beams.get(1).getParticleStack(), guiLeft + 86, guiTop + 15,
-//				mouseX, mouseY);
-//		guiParticle.drawToolTipBoxwithFocus(multiblock.beams.get(2).getParticleStack(), guiLeft + 129, guiTop + 46,
-//				mouseX, mouseY);
-//		guiParticle.drawToolTipBoxwithFocus(multiblock.beams.get(3).getParticleStack(), guiLeft + 86, guiTop + 78,
-//				mouseX, mouseY);
-//	}
-//
-//	public List<String> energyInfo()
-//	{
-//		List<String> info = new ArrayList<String>();
-//		info.add(TextFormatting.YELLOW + Lang.localize("gui.qmd.container.energy_stored",
-//				Units.getSIFormat(multiblock.energyStorage.getEnergyStored(), "RF"),
-//				Units.getSIFormat(multiblock.energyStorage.getMaxEnergyStored(), "RF")));
-//		info.add(TextFormatting.RED + Lang.localize("gui.qmd.container.required_energy",
-//				Units.getSIFormat(multiblock.requiredEnergy, "RF/t")));
-//		return info;
-//	}
-//
-//	@Override
-//	public void drawScreen(int mouseX, int mouseY, float partialTicks)
-//	{
-//		super.drawScreen(mouseX, mouseY, partialTicks);
-//
-//		renderTooltips(mouseX, mouseY);
-//	}
-//
-//	@Override
-//	public void initGui()
-//	{
-//		super.initGui();
-//		buttonList.add(new MultiblockButton.ClearAllMaterial(0, guiLeft + 128, guiTop + 70));
-//		buttonList.add(new NCButton.ClearTank(1, guiLeft + 53, guiTop + 55, 16, 16));
-//		buttonList.add(new NCButton.ClearTank(2, guiLeft + 94, guiTop + 55, 16, 16));
-//	}
-//
-//	@Override
-//	protected void actionPerformed(GuiButton guiButton)
-//	{
-//		if (multiblock.WORLD.isRemote)
-//		{
-//			if(NCUtil.isModifierKeyDown())
-//			{
-//				switch(guiButton.id)
-//				{
-//				case 0:
-//					new ClearAllMaterialPacket(tile.getTilePos()).sendToServer();
-//					break;
-//				case 1:
-//					new QMDClearTankPacket(tile.getTilePos(),0).sendToServer();
-//					break;
-//				case 2:
-//					new QMDClearTankPacket(tile.getTilePos(),1).sendToServer();
-//					break;
-//				}
-//
-//			}
-//
-//		}
-//	}
-//
-//}
+package lach_01298.qmd.multiblock.gui;
+
+import com.nred.nuclearcraft.gui.MultiblockButton;
+import com.nred.nuclearcraft.gui.NCButton;
+import com.nred.nuclearcraft.handler.BlockEntityMenuInfo;
+import com.nred.nuclearcraft.payload.multiblock.ClearAllMaterialPacket;
+import com.nred.nuclearcraft.screen.multiblock.controller.LogicMultiblockControllerScreen;
+import com.nred.nuclearcraft.util.NCUtil;
+import lach_01298.qmd.QMD;
+import lach_01298.qmd.gui.GuiParticle;
+import lach_01298.qmd.multiblock.container.ContainerTargetChamberController;
+import lach_01298.qmd.multiblock.network.ParticleChamberUpdatePacket;
+import lach_01298.qmd.multiblock.network.QMDClearTankPacket;
+import lach_01298.qmd.particleChamber.ParticleChamber;
+import lach_01298.qmd.particleChamber.ParticleChamberLogic;
+import lach_01298.qmd.particleChamber.TargetChamberLogic;
+import lach_01298.qmd.particleChamber.tile.TileTargetChamberController;
+import lach_01298.qmd.util.Units;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class GuiTargetChamberController extends LogicMultiblockControllerScreen<ParticleChamber, ParticleChamberLogic, ParticleChamberUpdatePacket, TileTargetChamberController, BlockEntityMenuInfo<TileTargetChamberController>, TargetChamberLogic, ContainerTargetChamberController> {
+    protected static final ResourceLocation gui_texture = ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "screen/target_chamber_controller");
+    private final GuiParticle guiParticle;
+
+    public GuiTargetChamberController(ContainerTargetChamberController menu, Inventory inventory, Component title) {
+        super(menu, inventory, title, gui_texture);
+        imageWidth = 176;
+        imageHeight = 200;
+        guiParticle = new GuiParticle(this);
+    }
+
+    @Override
+    protected void drawForegroundLayer(GuiGraphics guiGraphics, float partialTicks, int mouseX, int mouseY) {
+        int offset = leftPos + 8;
+
+        int fontColor = multiblock.isChamberOn ? -1 : 15641088;
+        guiGraphics.drawString(font, title, offset, topPos + 5, fontColor);
+
+        Component efficiency = Component.translatable("gui.qmd.container.particle_chamber.efficiency", String.format("%.2f", multiblock.efficiency * 100));
+        guiGraphics.drawString(font, efficiency, offset, topPos + 98, fontColor);
+
+        Component length = Component.translatable("gui.qmd.container.particle_chamber.length", logic.getBeamLength());
+        guiGraphics.drawString(font, length, offset, topPos + 108, fontColor);
+    }
+
+    @Override
+    protected void drawBackgroundLayer(GuiGraphics guiGraphics, float partialTicks, int mouseX, int mouseY) {
+        super.drawBackgroundLayer(guiGraphics, partialTicks, mouseX, mouseY);
+
+        int power = (int) Math.round((double) multiblock.energyStorage.getEnergyStored() / (double) multiblock.energyStorage.getMaxEnergyStored() * 74);
+        guiGraphics.blitSprite(guiTextures, 256, 256, 176, 74 - power, leftPos + 161, topPos + 87 - power, 6, power);
+
+        // input
+        if (multiblock.beams.get(0).getParticleStack() != null) {
+            guiGraphics.blitSprite(guiTextures, 256, 256, 182, 12, leftPos + 35, topPos + 51, 16, 6);
+        }
+
+        // top output
+        if (multiblock.beams.get(1).getParticleStack() != null) {
+            guiGraphics.blitSprite(guiTextures, 256, 256, 182, 18, leftPos + 69, topPos + 22, 16, 16);
+        }
+
+        // middle output
+        if (multiblock.beams.get(2).getParticleStack() != null) {
+            guiGraphics.blitSprite(guiTextures, 256, 256, 182, 50, leftPos + 112, topPos + 52, 16, 4);
+        }
+
+        // bottom output
+        if (multiblock.beams.get(3).getParticleStack() != null) {
+            guiGraphics.blitSprite(guiTextures, 256, 256, 182, 34, leftPos + 69, topPos + 71, 16, 16);
+        }
+
+        // draw progress bar
+        int progress = Math.min((int) Math.round((double) getLogic().particleWorkDone / (double) getLogic().recipeParticleWork * 21), 21);
+        guiGraphics.blitSprite(guiTextures, 256, 256, 182, 0, leftPos + 71, topPos + 48, progress, 12);
+
+
+        renderGuiTank(guiGraphics, multiblock.tanks.get(0), leftPos + 53, topPos + 55, 16, 1, 1);
+        renderGuiTank(guiGraphics, multiblock.tanks.get(1), leftPos + 94, topPos + 55, 16, 1, 1);
+
+        guiParticle.drawParticleStack(guiGraphics, multiblock.beams.get(0).getParticleStack(), leftPos + 18, topPos + 46);
+        guiParticle.drawParticleStack(guiGraphics, multiblock.beams.get(1).getParticleStack(), leftPos + 86, topPos + 15);
+        guiParticle.drawParticleStack(guiGraphics, multiblock.beams.get(2).getParticleStack(), leftPos + 129, topPos + 46);
+        guiParticle.drawParticleStack(guiGraphics, multiblock.beams.get(3).getParticleStack(), leftPos + 86, topPos + 78);
+    }
+
+    @Override
+    public void renderTooltip(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        super.renderTooltip(guiGraphics, mouseX, mouseY);
+
+        drawFluidTooltip(guiGraphics, multiblock.tanks.get(0), mouseX, mouseY, 53, 55, 16, 16);
+        drawFluidTooltip(guiGraphics, multiblock.tanks.get(1), mouseX, mouseY, 94, 55, 16, 16);
+
+        drawTooltip(guiGraphics, energyInfo(), mouseX, mouseY, 160, 12, 8, 76);
+
+        guiParticle.drawToolTipBoxWithFocus(guiGraphics, multiblock.beams.get(0).getParticleStack(), leftPos + 18, topPos + 46, mouseX, mouseY);
+        guiParticle.drawToolTipBoxWithFocus(guiGraphics, multiblock.beams.get(1).getParticleStack(), leftPos + 86, topPos + 15, mouseX, mouseY);
+        guiParticle.drawToolTipBoxWithFocus(guiGraphics, multiblock.beams.get(2).getParticleStack(), leftPos + 129, topPos + 46, mouseX, mouseY);
+        guiParticle.drawToolTipBoxWithFocus(guiGraphics, multiblock.beams.get(3).getParticleStack(), leftPos + 86, topPos + 78, mouseX, mouseY);
+    }
+
+    public List<Component> energyInfo() {
+        List<Component> info = new ArrayList<>();
+        info.add(Component.translatable("gui.qmd.container.energy_stored",
+                Units.getSIFormat(multiblock.energyStorage.getEnergyStored(), "RF"),
+                Units.getSIFormat(multiblock.energyStorage.getMaxEnergyStored(), "RF")).withStyle(ChatFormatting.YELLOW));
+        info.add(Component.translatable("gui.qmd.container.required_energy",
+                Units.getSIFormat(multiblock.requiredEnergy, "RF/t")).withStyle(ChatFormatting.RED));
+        return info;
+    }
+
+    @Override
+    public void init() {
+        super.init();
+        clearAllButton = this.addRenderableWidget(new MultiblockButton.ClearAllMaterial(getGuiLeft() + 128, getGuiTop() + 70, (btn) -> {
+            if (NCUtil.isModifierKeyDown()) new ClearAllMaterialPacket(tile.getBlockPos()).sendToServer();
+        }));
+        addWidget(new NCButton.ClearTank(1, leftPos + 53, topPos + 55, 16, 16, (btn, button) -> {
+            new QMDClearTankPacket(tile.getTilePos(), 0).sendToServer();
+        }));
+        addWidget(new NCButton.ClearTank(2, leftPos + 94, topPos + 55, 16, 16, (btn, button) -> {
+            new QMDClearTankPacket(tile.getTilePos(), 1).sendToServer();
+        }));
+    }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "qmd:decay_chamber_recipe",
+  "crossSection": 0.07,
+  "energyReleased": 1980000,
+  "maxEnergy": 9223372036854775807,
+  "particleInput": {
+    "amount": 1,
+    "focus": 0.0,
+    "meanEnergy": 0,
+    "particle": "charmed_eta"
+  },
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "kaon_naught"
+    },
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "antikaon_naught"
+    }
+  ]
+}

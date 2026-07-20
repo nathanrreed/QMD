@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "qmd:target_chamber/proton_600000_gold_gold_waste_spallation_pion_plus_0_pion_minus_0"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "qmd:target_chamber/proton_600000_gold_gold_waste_spallation_pion_plus_0_pion_minus_0"
+    ]
+  }
+}

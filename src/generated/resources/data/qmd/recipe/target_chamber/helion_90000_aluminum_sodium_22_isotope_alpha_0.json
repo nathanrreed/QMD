@@ -1,0 +1,40 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.16,
+  "energyReleased": -1930,
+  "fluidInput": [],
+  "fluidProduct": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ingots/aluminum"
+      }
+    }
+  ],
+  "itemProduct": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:sodium_22_isotope"
+      }
+    }
+  ],
+  "maxEnergy": 165000,
+  "particleInput": [
+    {
+      "amount": 6250000,
+      "focus": 0.0,
+      "meanEnergy": 90000,
+      "particle": "helion"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 2,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "alpha"
+    }
+  ]
+}

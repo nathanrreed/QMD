@@ -1,0 +1,40 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.5,
+  "energyReleased": -7770,
+  "fluidInput": [],
+  "fluidProduct": [],
+  "itemInput": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ingots/iridium"
+      }
+    }
+  ],
+  "itemProduct": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "qmd:iridium_192_isotope"
+      }
+    }
+  ],
+  "maxEnergy": 16000,
+  "particleInput": [
+    {
+      "amount": 2000000,
+      "focus": 0.0,
+      "meanEnergy": 12000,
+      "particle": "photon"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "neutron"
+    }
+  ]
+}

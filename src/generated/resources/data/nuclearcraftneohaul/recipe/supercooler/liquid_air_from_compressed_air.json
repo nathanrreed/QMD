@@ -1,0 +1,22 @@
+{
+  "type": "nuclearcraftneohaul:supercooler_recipe",
+  "fluidIngredients": [
+    {
+      "amount": 64,
+      "ingredient": {
+        "fluid": "qmd:compressed_air"
+      }
+    }
+  ],
+  "fluidProducts": [
+    {
+      "amount": 1,
+      "ingredient": {
+        "fluid": "qmd:liquid_air"
+      }
+    }
+  ],
+  "powerModifier": 1.0,
+  "radiation": 0.0,
+  "timeModifier": 0.013333333333333334
+}

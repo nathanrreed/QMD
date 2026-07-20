@@ -14,62 +14,6 @@ item . qmd . boots_hev                 . name                 = HEV Boots
 
 //blocks
 
-tile.qmd.accelerator_cooler1.water.name=Water Accelerator Cooler
-tile.qmd.accelerator_cooler1.iron.name=Iron Accelerator Cooler
-tile.qmd.accelerator_cooler1.redstone.name=Redstone Accelerator Cooler
-tile.qmd.accelerator_cooler1.quartz.name=Quartz Accelerator Cooler
-tile.qmd.accelerator_cooler1.obsidian.name=Obsidian Accelerator Cooler
-tile.qmd.accelerator_cooler1.nether_brick.name=Nether Brick Accelerator Cooler
-tile.qmd.accelerator_cooler1.glowstone.name=Glowstone Accelerator Cooler
-tile.qmd.accelerator_cooler1.lapis.name=Lapis Accelerator Cooler
-tile.qmd.accelerator_cooler1.gold.name=Gold Accelerator Cooler
-tile.qmd.accelerator_cooler1.prismarine.name=Prismarine Accelerator Cooler
-tile.qmd.accelerator_cooler1.slime.name=Slime Accelerator Cooler
-tile.qmd.accelerator_cooler1.end_stone.name=End Stone Accelerator Cooler
-tile.qmd.accelerator_cooler1.purpur.name=Purpur Accelerator Cooler
-tile.qmd.accelerator_cooler1.diamond.name=Diamond Accelerator Cooler
-tile.qmd.accelerator_cooler1.emerald.name=Emerald Accelerator Cooler
-tile.qmd.accelerator_cooler1.copper.name=Copper Accelerator Cooler
-tile.qmd.accelerator_cooler1.name=Accelerator Cooler
-tile.qmd.accelerator_cooler2.tin.name=Tin Accelerator Cooler
-tile.qmd.accelerator_cooler2.lead.name=Lead Accelerator Cooler
-tile.qmd.accelerator_cooler2.boron.name=Boron Accelerator Cooler
-tile.qmd.accelerator_cooler2.lithium.name=Lithium Accelerator Cooler
-tile.qmd.accelerator_cooler2.magnesium.name=Magnesium Accelerator Cooler
-tile.qmd.accelerator_cooler2.manganese.name=Manganese Accelerator Cooler
-tile.qmd.accelerator_cooler2.aluminum.name=Aluminum Accelerator Cooler
-tile.qmd.accelerator_cooler2.silver.name=Silver Accelerator Cooler
-tile.qmd.accelerator_cooler2.fluorite.name=Fluorite Accelerator Cooler
-tile.qmd.accelerator_cooler2.villiaumite.name=Villiaumite Accelerator Cooler
-tile.qmd.accelerator_cooler2.carobbiite.name=Carobbiite Accelerator Cooler
-tile.qmd.accelerator_cooler2.arsenic.name=Arsenic Accelerator Cooler
-tile.qmd.accelerator_cooler2.liquid_nitrogen.name=Liquid Nitrogen Accelerator Cooler
-tile.qmd.accelerator_cooler2.liquid_helium.name=Liquid Helium Accelerator Cooler
-tile.qmd.accelerator_cooler2.enderium.name=Enderium Accelerator Cooler
-tile.qmd.accelerator_cooler2.cryotheum.name=Cryotheum Accelerator Cooler
-tile.qmd.accelerator_cooler2.name=Accelerator Cooler
-
-tile.qmd.target_chamber_controller.name=Target Chamber Controller
-tile.qmd.decay_chamber_controller.name=Decay Chamber Controller
-tile.qmd.beam_dump_controller.name=Beam Dump Controller
-tile.qmd.collision_chamber_controller.name=Collision Chamber Controller
-
-tile.qmd.particle_chamber_beam_port.name=Particle Chamber Beam Port
-tile.qmd.particle_chamber_casing.name=Particle Chamber Casing
-tile.qmd.particle_chamber_glass.name=Particle Chamber Glass
-tile.qmd.particle_chamber_beam.name=Particle Chamber Beam Block
-tile.qmd.particle_chamber.name=Particle Chamber
-tile.qmd.particle_chamber_port.name=Particle Chamber Item Port
-tile.qmd.particle_chamber_energy_port.name=Particle Chamber Energy Port
-tile.qmd.particle_chamber_fluid_port.name=Particle Chamber Fluid Port
-
-tile.qmd.particle_chamber_detector.bubble_chamber.name=Bubble Chamber Detector
-tile.qmd.particle_chamber_detector.silicon_tracker.name=Silicon Tracker Detector
-tile.qmd.particle_chamber_detector.wire_chamber.name=Wire Chamber Detector
-tile.qmd.particle_chamber_detector.em_calorimeter.name=Electromagnetic Calorimeter Detector
-tile.qmd.particle_chamber_detector.hadron_calorimeter.name=Hadron Calorimeter Detector
-tile.qmd.particle_chamber_detector.name=Particle Detector
-
 tile.qmd.neutral_containment_controller.name=Exotic Containment Chamber Controller
 tile.qmd.containment_casing.name=Vacuum Chamber Casing
 tile.qmd.containment_glass.name=Vacuum Chamber Glass
@@ -119,18 +63,8 @@ item.qmd.legs_hev.desc=Allows the wearer to jump 2.5 blocks and gives a speed bo
 item.qmd.boots_hev.desc=Gives wearer step assist, reduces fall height by 4 blocks and reduces fall damage by half.
 
 //gui container
-gui.qmd.container.target_chamber_controller.name=Target Chamber
-gui.qmd.container.decay_chamber_controller.name=Decay Chamber
-gui.qmd.container.beam_dump_controller.name=Beam Dump
-gui.qmd.container.particle_chamber.efficiency=Efficiency: %s%%
-gui.qmd.container.particle_chamber.length=Beam Length: %s
-
 gui.qmd.container.exotic_containment_controller.name=Exotic Containment
 gui.qmd.container.nucleosynthesis_chamber_controller.name=Nucleosynthesis Chamber
-
-
-gui.qmd.container.collison_chamber.energy=Collision Energy: %s
-gui.qmd.container.collision_chamber_controller.name=Collision Chamber
 
 gui.qmd.container.nucleosynthesis_chamber.efficiency=Output Efficiency: %s%%
 

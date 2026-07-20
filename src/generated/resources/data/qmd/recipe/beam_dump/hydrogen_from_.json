@@ -1,0 +1,16 @@
+{
+  "type": "qmd:beam_dump_recipe",
+  "fluidProduct": {
+    "amount": 1,
+    "ingredient": {
+      "fluid": "nuclearcraftneohaul:hydrogen"
+    }
+  },
+  "maxEnergy": 9223372036854775807,
+  "particleInput": {
+    "amount": 2000,
+    "focus": 0.0,
+    "meanEnergy": 0,
+    "particle": "proton"
+  }
+}

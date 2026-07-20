@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "qmd:basic_processor_semiconductor"
+    },
+    "S": {
+      "tag": "c:ingots/stainless_steel"
+    },
+    "T": {
+      "tag": "c:ingots/tungsten"
+    }
+  },
+  "pattern": [
+    "STS",
+    "SBS",
+    "STS"
+  ],
+  "result": {
+    "count": 4,
+    "id": "qmd:detector_casing_part"
+  }
+}

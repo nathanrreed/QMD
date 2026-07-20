@@ -1,0 +1,34 @@
+{
+  "type": "qmd:collision_chamber_recipe",
+  "crossSection": 0.5,
+  "energyReleased": 5490,
+  "maxEnergy": 10000,
+  "particleInputs": [
+    {
+      "amount": 1,
+      "focus": 5.0,
+      "meanEnergy": 700,
+      "particle": "antiproton"
+    },
+    {
+      "amount": 1,
+      "focus": 5.0,
+      "meanEnergy": 700,
+      "particle": "antideuteron"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 5.0,
+      "meanEnergy": 700,
+      "particle": "antiproton"
+    },
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "photon"
+    }
+  ]
+}

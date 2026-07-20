@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "qmd:detector_casing_part"
+    },
+    "S": {
+      "item": "qmd:scintillator_pwo_part"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "SCS",
+    "SSS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "qmd:em_calorimeter_particle_chamber_detector"
+  }
+}

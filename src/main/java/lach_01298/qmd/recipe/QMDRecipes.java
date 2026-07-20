@@ -7,10 +7,7 @@ import com.nred.nuclearcraft.util.NCUtil;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import lach_01298.qmd.QMD;
-import lach_01298.qmd.recipe.types.AcceleratorCoolingRecipe;
-import lach_01298.qmd.recipe.types.AcceleratorSourceRecipe;
-import lach_01298.qmd.recipe.types.LiquefierCoolantRecipe;
-import lach_01298.qmd.recipe.types.MassSpectrometerRecipe;
+import lach_01298.qmd.recipe.types.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -33,15 +30,14 @@ public class QMDRecipes {
     //    public static LiquefierRecipes liquefier; TODO
     public static LiquefierCoolantRecipes liquefier_coolant;
 
-    //    public static TargetChamberRecipes target_chamber;
-//    public static DecayChamberRecipes decay_chamber;
-//    public static BeamDumpRecipes beam_dump;
-//    public static CollisionChamberRecipes collision_chamber;
-//
+    public static TargetChamberRecipes target_chamber;
+    public static DecayChamberRecipes decay_chamber;
+    public static BeamDumpRecipes beam_dump;
+    public static CollisionChamberRecipes collision_chamber;
+
     public static OreLeacherRecipes ore_leacher;
     public static IrradiatorRecipes irradiator;
-//    public static IrradiatorFuel irradiator_fuel;
-//
+
 //    public static NeutralContainmentRecipes neutral_containment;
 //    public static CellFillingRecipes cell_filling;
 //    public static NucleosynthesisChamberRecipes nucleosynthesis_chamber;
@@ -78,22 +74,20 @@ public class QMDRecipes {
 //        putHandler(new LiquefierRecipes());
         NCRecipes.putHandler(new LiquefierCoolantRecipes());
 
-//        putHandler(new TargetChamberRecipes());
-//        putHandler(new DecayChamberRecipes());
-//        putHandler(new BeamDumpRecipes());
-//        putHandler(new CollisionChamberRecipes());
-//
+        putHandler(new TargetChamberRecipes());
+        putHandler(new DecayChamberRecipes());
+        putHandler(new BeamDumpRecipes());
+        putHandler(new CollisionChamberRecipes());
+
         NCRecipes.putHandler(new OreLeacherRecipes());
         NCRecipes.putHandler(new IrradiatorRecipes());
-//        putHandler(new IrradiatorFuel());
-//
+
 //        putHandler(new NeutralContainmentRecipes());
 //        putHandler(new CellFillingRecipes());
 //        putHandler(new NucleosynthesisChamberRecipes());
 //        putHandler(new VacuumChamberHeaterRecipes());
 
         registerShortcuts();
-//        addRecipes();
 
         initialized = true;
     }
@@ -106,15 +100,14 @@ public class QMDRecipes {
 //        liquefier = (LiquefierRecipes) getHandler("liquefier");
         liquefier_coolant = NCRecipes.getHandler("liquefier_coolant");
 
-//        target_chamber = (TargetChamberRecipes) getHandler("target_chamber");
-//        decay_chamber = (DecayChamberRecipes) getHandler("decay_chamber");
-//        beam_dump = (BeamDumpRecipes) getHandler("beam_dump");
-//        collision_chamber = (CollisionChamberRecipes) getHandler("collision_chamber");
-//
+        target_chamber = (TargetChamberRecipes) getHandler("target_chamber");
+        decay_chamber = (DecayChamberRecipes) getHandler("decay_chamber");
+        beam_dump = (BeamDumpRecipes) getHandler("beam_dump");
+        collision_chamber = (CollisionChamberRecipes) getHandler("collision_chamber");
+
         ore_leacher = NCRecipes.getHandler("ore_leacher");
         irradiator = NCRecipes.getHandler("irradiator");
-//        irradiator_fuel = (IrradiatorFuel) getHandler("irradiator_fuel");
-//
+
 //        neutral_containment = (NeutralContainmentRecipes) getHandler("neutral_containment");
 //        cell_filling = (CellFillingRecipes) getHandler("cell_filling");
 //        nucleosynthesis_chamber = (NucleosynthesisChamberRecipes) getHandler("nucleosynthesis_chamber");
@@ -188,6 +181,30 @@ public class QMDRecipes {
     public static class AcceleratorSourceRecipes extends QMDRecipeHandler<AcceleratorSourceRecipe> {
         public AcceleratorSourceRecipes() {
             super("accelerator_source", 1, 1, 0, 0, 0, 1);
+        }
+    }
+
+    public static class TargetChamberRecipes extends QMDRecipeHandler<TargetChamberRecipe> {
+        public TargetChamberRecipes() {
+            super("target_chamber", 1, 1, 1, 1, 1, 3);
+        }
+    }
+
+    public static class DecayChamberRecipes extends QMDRecipeHandler<DecayChamberRecipe> {
+        public DecayChamberRecipes() {
+            super("decay_chamber", 0, 0, 1, 0, 0, 3);
+        }
+    }
+
+    public static class BeamDumpRecipes extends QMDRecipeHandler<BeamDumpRecipe> {
+        public BeamDumpRecipes() {
+            super("beam_dump", 0, 0, 1, 0, 1, 0);
+        }
+    }
+
+    public static class CollisionChamberRecipes extends QMDRecipeHandler<CollisionChamberRecipe> {
+        public CollisionChamberRecipes() {
+            super("collision_chamber", 0, 0, 2, 0, 0, 4);
         }
     }
 }

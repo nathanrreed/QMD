@@ -21,6 +21,11 @@ public class EmiLangProvider extends LanguageProvider {
         add("emi.category." + ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "accelerator_source").toLanguageKey(), "Ion Source");
         add("emi.category." + ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "mass_spectrometer").toLanguageKey(), "Mass Spectrometer");
 
+        add("emi.category." + ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "target_chamber").toLanguageKey(), "Target Chamber");
+        add("emi.category." + ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "decay_chamber").toLanguageKey(), "Decay Chamber");
+        add("emi.category." + ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "beam_dump").toLanguageKey(), "Beam Dump");
+        add("emi.category." + ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "collision_chamber").toLanguageKey(), "Collision Chamber");
+
         add("emi.category." + ResourceLocation.fromNamespaceAndPath(QMD.MOD_ID, "particle_info").toLanguageKey(), "Particle Information");
     }
 }

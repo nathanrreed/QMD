@@ -1,9 +1,6 @@
 package lach_01298.qmd;
 
 import com.mojang.logging.LogUtils;
-import com.nred.nuclearcraft.NuclearcraftNeohaul;
-import com.nred.nuclearcraft.recipe.NCRecipes;
-import com.nred.nuclearcraft.util.NCUtil;
 import lach_01298.qmd.config.QMDServerConfig;
 import lach_01298.qmd.config.QMDStartupConfig;
 import lach_01298.qmd.proxy.CommonProxy;
@@ -28,8 +25,6 @@ public class QMD {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public QMD(IEventBus modEventBus, ModContainer modContainer) {
-//        modEventBus.addListener(this::commonSetup);
-
         QMDRecipes.registerRecipes();
 
         modContainer.registerConfig(ModConfig.Type.SERVER, QMDServerConfig.SPEC);

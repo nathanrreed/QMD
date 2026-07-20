@@ -7,6 +7,8 @@ import it.zerono.mods.zerocore.lib.block.multiblock.MultiblockPartBlock;
 import it.zerono.mods.zerocore.lib.block.multiblock.MultiblockPartTypeProperties;
 import lach_01298.qmd.accelerator.block.*;
 import lach_01298.qmd.accelerator.tile.IAcceleratorPartType;
+import lach_01298.qmd.multiblock.block.GenericIOTooltipDeviceBlock;
+import lach_01298.qmd.multiblock.block.MultiblockCasing;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.jetbrains.annotations.NotNull;
@@ -24,10 +26,10 @@ public enum AcceleratorPartType implements IAcceleratorPartType {
     DeceleratorController(() -> TILE_DECELERATOR_CONTROLLER::get, GenericActiveDirectionalTooltipDeviceBlock::new),
     MassSpectrometerController(() -> TILE_MASS_SPECTROMETER_CONTROLLER::get, GenericActiveDirectionalTooltipDeviceBlock::new),
     AcceleratorBeam(() -> TILE_ACCELERATOR_BEAM::get, GenericTooltipDeviceBlock::new),
-    AcceleratorCasing(() -> TILE_ACCELERATOR_CASING::get, BlockAcceleratorCasing::new),
+    AcceleratorCasing(() -> TILE_ACCELERATOR_CASING::get, MultiblockCasing::new),
     AcceleratorGlass(() -> TILE_ACCELERATOR_GLASS::get, GlassBlock::new, GlassBlock::addGlassProperties),
     AcceleratorVent(() -> TILE_ACCELERATOR_VENT::get, BlockAcceleratorVent::new),
-    AcceleratorBeamPort(() -> TILE_ACCELERATOR_BEAM_PORT::get, BlockAcceleratorBeamPort::new),
+    AcceleratorBeamPort(() -> TILE_ACCELERATOR_BEAM_PORT::get, GenericIOTooltipDeviceBlock::new),
     AcceleratorSynchrotronPort(() -> TILE_ACCELERATOR_SYNCHROTRON_PORT::get, GenericTooltipDeviceBlock::new),
     AcceleratorSource(() -> TILE_ACCELERATOR_ION_SOURCE_BASIC::get, BlockAcceleratorSource::new),
     AcceleratorLaserIonSource(() -> TILE_ACCELERATOR_ION_SOURCE_LASER::get, BlockAcceleratorSource::new),

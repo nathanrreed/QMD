@@ -33,18 +33,20 @@ public class QMDPackets {
         registrar.playToClient(DeceleratorUpdatePacket.TYPE, DeceleratorUpdatePacket.STREAM_CODEC, DeceleratorUpdatePacket.Handler::handleOnClient);
         registrar.playToClient(MassSpectrometerUpdatePacket.TYPE, MassSpectrometerUpdatePacket.STREAM_CODEC, MassSpectrometerUpdatePacket.Handler::handleOnClient);
 
-//        wrapper.registerMessage(TargetChamberUpdatePacket.Handler.class, TargetChamberUpdatePacket.class, nextID(), Side.CLIENT);
-//        wrapper.registerMessage(DecayChamberUpdatePacket.Handler.class, DecayChamberUpdatePacket.class, nextID(), Side.CLIENT);
-//        wrapper.registerMessage(BeamDumpUpdatePacket.Handler.class, BeamDumpUpdatePacket.class, nextID(), Side.CLIENT);
-//        wrapper.registerMessage(NeutralContainmentUpdatePacket.Handler.class, NeutralContainmentUpdatePacket.class, nextID(), Side.CLIENT);
-//        wrapper.registerMessage(ContainmentRenderPacket.Handler.class, ContainmentRenderPacket.class, nextID(), Side.CLIENT);
-//        wrapper.registerMessage(CollisionChamberUpdatePacket.Handler.class, CollisionChamberUpdatePacket.class, nextID(), Side.CLIENT);
+        registrar.playToClient(TargetChamberUpdatePacket.TYPE, TargetChamberUpdatePacket.STREAM_CODEC, TargetChamberUpdatePacket.Handler::handleOnClient);
+        registrar.playToClient(DecayChamberUpdatePacket.TYPE, DecayChamberUpdatePacket.STREAM_CODEC, DecayChamberUpdatePacket.Handler::handleOnClient);
+        registrar.playToClient(CollisionChamberUpdatePacket.TYPE, CollisionChamberUpdatePacket.STREAM_CODEC, CollisionChamberUpdatePacket.Handler::handleOnClient);
+        registrar.playToClient(BeamDumpUpdatePacket.TYPE, BeamDumpUpdatePacket.STREAM_CODEC, BeamDumpUpdatePacket.Handler::handleOnClient);
 
         registrar.playToClient(CreativeParticleSourceUpdatePacket.TYPE, CreativeParticleSourceUpdatePacket.STREAM_CODEC, CreativeParticleSourceUpdatePacket.Handler::handleOnClient);
 
+//        wrapper.registerMessage(NeutralContainmentUpdatePacket.Handler.class, NeutralContainmentUpdatePacket.class, nextID(), Side.CLIENT);
+//        wrapper.registerMessage(ContainmentRenderPacket.Handler.class, ContainmentRenderPacket.class, nextID(), Side.CLIENT);
 //        wrapper.registerMessage(NucleosynthesisChamberUpdatePacket.Handler.class, NucleosynthesisChamberUpdatePacket.class, nextID(), Side.CLIENT);
+
         registrar.playToClient(AcceleratorSourceUpdatePacket.TYPE, AcceleratorSourceUpdatePacket.STREAM_CODEC, AcceleratorSourceUpdatePacket.Handler::handleOnClient);
-//        wrapper.registerMessage(LiquefierUpdatePacket.Handler.class, LiquefierUpdatePacket.class, nextID(), Side.CLIENT);
+
+        //        wrapper.registerMessage(LiquefierUpdatePacket.Handler.class, LiquefierUpdatePacket.class, nextID(), Side.CLIENT);
 //        wrapper.registerMessage(LiquefierRenderPacket.Handler.class, LiquefierRenderPacket.class, nextID(), Side.CLIENT);
     }
 }

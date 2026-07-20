@@ -2,6 +2,7 @@ package lach_01298.qmd.proxy;
 
 import com.nred.nuclearcraft.info.NCFluid;
 import lach_01298.qmd.QMDTooltipHandler;
+import lach_01298.qmd.tile.QMDTileInfoHandler;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -38,6 +39,8 @@ public class ClientProxy {
     @SubscribeEvent
     public static void postInit(FMLClientSetupEvent event) {
         NeoForge.EVENT_BUS.register(new QMDTooltipHandler());
+        QMDTileInfoHandler.init();
+
 //        MinecraftForge.EVENT_BUS.register(new ArmPositionHandler()); TODO
 //        MinecraftForge.EVENT_BUS.register(new BeamRenderer());
 //        ((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager()).registerReloadListener(DrillBlockRenderHandler.INSTANCE);

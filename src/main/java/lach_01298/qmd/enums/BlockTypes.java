@@ -18,7 +18,7 @@ public class BlockTypes {
     public static final TurbineRotorBladeType SUPER_ALLOY = new TurbineRotorBladeType("qmd:super_alloy", () -> QMDStartupConfig.turbine_blade_efficiency[0], () -> QMDStartupConfig.turbine_blade_expansion[0]);
     public static final FissionNeutronShieldType HAFNIUM = new FissionNeutronShieldType("qmd:hafnium", () -> QMDStartupConfig.fission_shield_heat_per_flux[0], () -> QMDStartupConfig.fission_shield_efficiency[0]);
 
-    public enum CoolerType implements StringRepresentable, IMultiblockVariant, ICoolerEnum {
+    public enum CoolerType implements StringRepresentable, IMultiblockVariant, ICoolerEnum { // TODO use QMDServerConfig
         WATER("water", QMDStartupConfig.cooler_heat_removed[0]),
         IRON("iron", QMDStartupConfig.cooler_heat_removed[1]),
         REDSTONE("redstone", QMDStartupConfig.cooler_heat_removed[2]),
@@ -261,21 +261,26 @@ public class BlockTypes {
         }
     }
 
-    public enum DetectorType implements StringRepresentable {
-        BUBBLE_CHAMBER("bubble_chamber", QMDStartupConfig.detector_efficiency[0], QMDStartupConfig.detector_base_power[0]),
-        SILLICON_TRACKER("silicon_tracker", QMDStartupConfig.detector_efficiency[1], QMDStartupConfig.detector_base_power[1]),
-        WIRE_CHAMBER("wire_chamber", QMDStartupConfig.detector_efficiency[2], QMDStartupConfig.detector_base_power[2]),
-        EM_CALORIMETER("em_calorimeter", QMDStartupConfig.detector_efficiency[3], QMDStartupConfig.detector_base_power[3]),
-        HADRON_CALORIMETER("hadron_calorimeter", QMDStartupConfig.detector_efficiency[4], QMDStartupConfig.detector_base_power[4]);
+    public enum DetectorType implements StringRepresentable, IMultiblockVariant {
+        BUBBLE_CHAMBER("bubble_chamber", QMDStartupConfig.detector_efficiency[0], QMDStartupConfig.detector_base_power[0], 2, true),
+        SILLICON_TRACKER("silicon_tracker", QMDStartupConfig.detector_efficiency[1], QMDStartupConfig.detector_base_power[1], 1, true),
+        WIRE_CHAMBER("wire_chamber", QMDStartupConfig.detector_efficiency[2], QMDStartupConfig.detector_base_power[2], 2, true),
+        EM_CALORIMETER("em_calorimeter", QMDStartupConfig.detector_efficiency[3], QMDStartupConfig.detector_base_power[3], 3, true),
+        HADRON_CALORIMETER("hadron_calorimeter", QMDStartupConfig.detector_efficiency[4], QMDStartupConfig.detector_base_power[4], 5, true);
 
         private String name;
         private double efficiency;
         private int basePower;
+        public int taxiDistance;
+        public boolean within;
 
-        DetectorType(String name, double efficiency, int basePower) {
+
+        DetectorType(String name, double efficiency, int basePower, int taxiDistance, boolean within) {
             this.name = name;
             this.efficiency = efficiency;
             this.basePower = basePower;
+            this.taxiDistance = taxiDistance;
+            this.within = within;
         }
 
         @Override
@@ -296,30 +301,25 @@ public class BlockTypes {
             return basePower;
         }
 
-//        @Override TODO
-//        public int getHarvestLevel() {
-//            return 0;
-//        }
-//
-//        @Override
-//        public String getHarvestTool() {
-//            return "pickaxe";
-//        }
-//
-//        @Override
-//        public float getHardness() {
-//            return 2;
-//        }
-//
-//        @Override
-//        public float getResistance() {
-//            return 10;
-//        }
-//
-//        @Override
-//        public int getLightValue() {
-//            return 0;
-//        }
+        @Override
+        public int getId() {
+            return ordinal();
+        }
+
+        @Override
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public String getTranslationKey() {
+            return "";
+        }
+
+        @Override
+        public BlockBehaviour.Properties getBlockProperties() {
+            return getDefaultBlockProperties();
+        }
     }
 
     public enum LampType implements StringRepresentable {

@@ -3,6 +3,7 @@ package lach_01298.qmd.recipe_viewer;
 import com.nred.nuclearcraft.NuclearcraftNeohaul;
 import com.nred.nuclearcraft.compat.recipe_viewer.RecipeViewerImpl.ProcessorRecipeViewer;
 import com.nred.nuclearcraft.util.UnitHelper;
+import lach_01298.qmd.QMDConstants;
 import lach_01298.qmd.config.QMDServerConfig;
 import lach_01298.qmd.recipe.QMDRecipe;
 import lach_01298.qmd.recipe.types.*;
@@ -90,6 +91,71 @@ public class QMDRecipeViewerImpl {
             return List.of(
                     Component.translatable(NuclearcraftNeohaul.MODID + ".tooltip.process_time", Component.literal(UnitHelper.applyTimeUnitShort(recipe.getBaseProcessTime(QMDServerConfig.processor_time[2]), 3)).withStyle(ChatFormatting.WHITE)).withStyle(ChatFormatting.GREEN)
             );
+        }
+    }
+
+    public static class TargetChamberRecipeViewer extends RecipeViewer<TargetChamberRecipe> {
+        public TargetChamberRecipeViewer(TargetChamberRecipe recipe) {
+            super(recipe);
+        }
+
+        @Override
+        public int getProgressArrowTime() {
+            return Math.max(recipe.getParticleIngredient().getAmount() / (QMDConstants.ionSourceOutput * 10), 5);
+        }
+
+        @Override
+        public List<Component> progressTooltips(int var1, int var2) {
+            return List.of();
+        }
+    }
+
+    public static class DecayChamberRecipeViewer extends RecipeViewer<DecayChamberRecipe> {
+        public DecayChamberRecipeViewer(DecayChamberRecipe recipe) {
+            super(recipe);
+        }
+
+        @Override
+        public int getProgressArrowTime() {
+            return 0;
+        }
+
+        @Override
+        public List<Component> progressTooltips(int var1, int var2) {
+            return List.of();
+        }
+    }
+
+    public static class BeamDumpRecipeViewer extends RecipeViewer<BeamDumpRecipe> {
+        public BeamDumpRecipeViewer(BeamDumpRecipe recipe) {
+            super(recipe);
+        }
+
+        @Override
+        public int getProgressArrowTime() {
+            return Math.max(recipe.getParticleIngredient().getAmount() / Math.max(QMDConstants.ionSourceOutput / 200, 1), 5);
+
+        }
+
+        @Override
+        public List<Component> progressTooltips(int var1, int var2) {
+            return List.of();
+        }
+    }
+
+    public static class CollisionChamberRecipeViewer extends RecipeViewer<CollisionChamberRecipe> {
+        public CollisionChamberRecipeViewer(CollisionChamberRecipe recipe) {
+            super(recipe);
+        }
+
+        @Override
+        public int getProgressArrowTime() {
+            return 0;
+        }
+
+        @Override
+        public List<Component> progressTooltips(int var1, int var2) {
+            return List.of();
         }
     }
 }

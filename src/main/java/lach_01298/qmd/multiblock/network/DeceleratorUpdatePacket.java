@@ -55,7 +55,6 @@ public class DeceleratorUpdatePacket extends AcceleratorUpdatePacket {
     }
 
     public static class Handler extends MultiblockUpdatePacket.Handler<Accelerator, AcceleratorUpdatePacket, TileDeceleratorController, BlockEntityMenuInfo<TileDeceleratorController>, DeceleratorUpdatePacket> {
-
         public static void handleOnClient(DeceleratorUpdatePacket payload, IPayloadContext context) {
             context.enqueueWork(() -> {
                 BlockEntity tile = context.player().level().getBlockEntity(payload.pos);

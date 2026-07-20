@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_beamline": {
+      "conditions": {
+        "items": [
+          {
+            "items": "qmd:beamline"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "qmd:particle_chamber_beam"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_beamline"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "qmd:particle_chamber_beam"
+    ]
+  }
+}

@@ -1,6 +1,5 @@
 package lach_01298.qmd.datagen;
 
-import com.nred.nuclearcraft.datagen.ModItemModelProvider;
 import com.nred.nuclearcraft.helpers.Location;
 import com.nred.nuclearcraft.info.NCFluid;
 import lach_01298.qmd.QMD;
@@ -9,8 +8,6 @@ import lach_01298.qmd.fluid.QMDFluids;
 import net.minecraft.data.PackOutput;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.material.Fluid;
-import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.loaders.DynamicFluidContainerModelBuilder;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;

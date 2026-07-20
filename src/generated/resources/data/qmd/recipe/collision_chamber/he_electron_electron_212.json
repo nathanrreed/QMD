@@ -1,0 +1,40 @@
+{
+  "type": "qmd:collision_chamber_recipe",
+  "crossSection": 0.025,
+  "energyReleased": -211000,
+  "maxEnergy": 348000,
+  "particleInputs": [
+    {
+      "amount": 1,
+      "focus": 5.0,
+      "meanEnergy": 232000,
+      "particle": "electron"
+    },
+    {
+      "amount": 1,
+      "focus": 5.0,
+      "meanEnergy": 232000,
+      "particle": "electron"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 5.0,
+      "meanEnergy": 232000,
+      "particle": "electron"
+    },
+    {
+      "amount": 2,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "muon"
+    },
+    {
+      "amount": 2,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "muon_antineutrino"
+    }
+  ]
+}

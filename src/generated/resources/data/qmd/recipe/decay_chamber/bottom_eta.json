@@ -1,0 +1,26 @@
+{
+  "type": "qmd:decay_chamber_recipe",
+  "crossSection": 0.08,
+  "energyReleased": 5840000,
+  "maxEnergy": 9223372036854775807,
+  "particleInput": {
+    "amount": 1,
+    "focus": 0.0,
+    "meanEnergy": 0,
+    "particle": "bottom_eta"
+  },
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "antitau"
+    },
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "tau"
+    }
+  ]
+}

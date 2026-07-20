@@ -5,6 +5,7 @@ import com.nred.nuclearcraft.block_entity.fluid.ITileFluid;
 import com.nred.nuclearcraft.block_entity.inventory.ITileInventory;
 import lach_01298.qmd.QMD;
 import lach_01298.qmd.accelerator.tile.*;
+import lach_01298.qmd.particleChamber.tile.*;
 import lach_01298.qmd.pipe.TileBeamline;
 import lach_01298.qmd.tile.TileCreativeParticleSource;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -58,5 +59,11 @@ public class CapabilityRegistration {
 
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, TILE_MASS_SPECTROMETER_CONTROLLER.get(), TileMassSpectrometerController::getItemSideCapability);
 
+        event.registerBlockEntity(CapabilityParticleStackHandler.BLOCK, TILE_PARTICLE_CHAMBER_BEAM_PORT.get(), TileParticleChamberBeamPort::getCapability);
+
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, TILE_PARTICLE_CHAMBER_ENERGY_PORT.get(), TileParticleChamberEnergyPort::getEnergySideCapability);
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, TILE_PARTICLE_CHAMBER_FLUID_PORT.get(), TileParticleChamberFluidPort::getFluidSideCapability);
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, TILE_TARGET_CHAMBER_CONTROLLER.get(), TileTargetChamberController::getItemSideCapability);
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, TILE_PARTICLE_CHAMBER_PORT.get(), TileParticleChamberPort::getItemSideCapability);
     }
 }

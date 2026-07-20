@@ -17,6 +17,10 @@ import lach_01298.qmd.machine.container.MachineMenuImpl;
 import lach_01298.qmd.machine.container.MachineMenuImpl.CreativeParticleSourceMenu;
 import lach_01298.qmd.machine.tile.TileQMDProcessors;
 import lach_01298.qmd.multiblock.container.*;
+import lach_01298.qmd.particleChamber.tile.TileBeamDumpController;
+import lach_01298.qmd.particleChamber.tile.TileCollisionChamberController;
+import lach_01298.qmd.particleChamber.tile.TileDecayChamberController;
+import lach_01298.qmd.particleChamber.tile.TileTargetChamberController;
 import lach_01298.qmd.pipe.TileBeamline;
 import lach_01298.qmd.recipe_viewer.RecipeViewerQMDCategoryInfoBuilder;
 import net.minecraft.core.BlockPos;
@@ -52,12 +56,12 @@ public class QMDTileInfoHandler {
         registerContainerInfo(new BlockEntityMenuInfo<>("beam_splitter_controller", TileBeamSplitterController.class, ContainerBeamSplitterController::new));
         registerContainerInfo(new BlockEntityMenuInfo<>("mass_spectrometer_controller", TileMassSpectrometerController.class, ContainerMassSpectrometerController::new));
 
+        registerContainerInfo(new BlockEntityMenuInfo<>("target_chamber_controller", TileTargetChamberController.class, ContainerTargetChamberController::new));
+        registerContainerInfo(new BlockEntityMenuInfo<>("decay_chamber_controller", TileDecayChamberController.class, ContainerDecayChamberController::new));
+        registerContainerInfo(new BlockEntityMenuInfo<>("beam_dump_controller", TileBeamDumpController.class, ContainerBeamDumpController::new));
+        registerContainerInfo(new BlockEntityMenuInfo<>("collision_chamber_controller", TileCollisionChamberController.class, ContainerCollisionChamberController::new));
+
         // TODO
-//		registerContainerInfo(new BlockEntityMenuInfo<>( "target_chamber_controller", TileTargetChamberController.class, ContainerTargetChamberController::new, clientGetGuiInfoTileFunction(() -> GuiTargetChamberController::new)));
-//		registerContainerInfo(new BlockEntityMenuInfo<>( "decay_chamber_controller", TileDecayChamberController.class, ContainerDecayChamberController::new, clientGetGuiInfoTileFunction(() -> GuiDecayChamberController::new)));
-//		registerContainerInfo(new BlockEntityMenuInfo<>( "beam_dump_controller", TileBeamDumpController.class, ContainerBeamDumpController::new, clientGetGuiInfoTileFunction(() -> GuiBeamDumpController::new)));
-//		registerContainerInfo(new BlockEntityMenuInfo<>( "collision_chamber_controller", TileCollisionChamberController.class, ContainerCollisionChamberController::new, clientGetGuiInfoTileFunction(() -> GuiCollisionChamberController::new)));
-//
 //		registerContainerInfo(new BlockEntityMenuInfo<>( "neutral_containment_controller", TileExoticContainmentController.class, ContainerExoticContainmentController::new, clientGetGuiInfoTileFunction(() -> GuiNeutralContainmentController::new)));
 //		registerContainerInfo(new BlockEntityMenuInfo<>( "nucleosynthesis_chamber_controller", TileNucleosynthesisChamberController.class, ContainerNucleosynthesisChamberController::new, clientGetGuiInfoTileFunction(() -> GuiNucleosynthesisChamberController::new)));
 
@@ -78,6 +82,11 @@ public class QMDTileInfoHandler {
             registerRecipeViewerCategoryInfo(new RecipeViewerQMDCategoryInfoBuilder<>("accelerator_cooling").setFluidInputSlots(standardSlot(9, 5)).setFluidOutputSlots(bigSlot(65, 1)).setProgressBarGuiXYWHUV(27, 6, 37, 16, 93, 0).buildCategoryInfo());
             registerRecipeViewerCategoryInfo(new RecipeViewerQMDCategoryInfoBuilder<>("accelerator_source").setItemInputSlots(standardSlot(9, 5)).setFluidInputSlots(standardSlot(9, 22)).setParticleOutputSlots(standardSlot(61, 14)).setRecipeViewerTexture("qmd:textures/gui/sprites/recipe_viewer/ion_source.png").disableProgressBar().buildCategoryInfo());
             registerRecipeViewerCategoryInfo(new RecipeViewerQMDCategoryInfoBuilder<>("mass_spectrometer").setRecipeViewerTexture("qmd:textures/gui/sprites/screen/mass_spectrometer_controller.png").setItemInputSlots(standardSlot(46, 14)).setFluidInputSlots(standardSlot(46, 33)).setItemOutputSlots(standardSlot(82, 14), standardSlot(101, 14), standardSlot(120, 14), standardSlot(139, 14)).setFluidOutputSlots(standardSlot(82, 33), standardSlot(101, 33), standardSlot(120, 33), standardSlot(139, 33)).setRecipeViewerBackgroundXYWH(45, 13, 111, 93).setProgressBarGuiXYWHUV(52, 51, 101, 55, 0, 201).buildCategoryInfo());
+
+            registerRecipeViewerCategoryInfo(new RecipeViewerQMDCategoryInfoBuilder<>("target_chamber").setParticleInputSlots(standardSlot(8, 34)).setItemInputSlots(standardSlot(43, 26)).setFluidInputSlots(standardSlot(43, 43)).setItemOutputSlots(standardSlot(84, 26)).setFluidOutputSlots(standardSlot(84, 43)).setParticleOutputSlots(standardSlot(76, 3), standardSlot(119, 34), standardSlot(76, 66)).setRecipeViewerBackgroundXYWH(0, 0, 150, 115).setProgressBarGuiXYWHUV(61, 36, 21, 12, 182, 0).buildCategoryInfo());
+            registerRecipeViewerCategoryInfo(new RecipeViewerQMDCategoryInfoBuilder<>("decay_chamber").setParticleInputSlots(standardSlot(49, 31)).setParticleOutputSlots(standardSlot(82, 8), standardSlot(82, 31), standardSlot(82, 54)).disableProgressBar().setRecipeViewerBackgroundXYWH(0, 0, 150, 100).buildCategoryInfo());
+            registerRecipeViewerCategoryInfo(new RecipeViewerQMDCategoryInfoBuilder<>("beam_dump").setRecipeViewerTexture("qmd:textures/gui/sprites/screen/beam_dump_controller.png").setParticleInputSlots(standardSlot(37, 37)).setFluidOutputSlots(standardSlot(81, 37)).setProgressBarGuiXYWHUV(54, 38, 26, 14, 143, 6).buildCategoryInfo());
+            registerRecipeViewerCategoryInfo(new RecipeViewerQMDCategoryInfoBuilder<>("collision_chamber").setParticleInputSlots(standardSlot(43, 33), standardSlot(111, 33)).setParticleOutputSlots(standardSlot(46, 2), standardSlot(46, 64), standardSlot(108, 2), standardSlot(108, 64)).disableProgressBar().setRecipeViewerBackgroundXYWH(0, 0, 160, 112).buildCategoryInfo());
         }
     }
 }

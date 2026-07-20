@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_particle_chamber_casing": {
+      "conditions": {
+        "items": [
+          {
+            "items": "qmd:particle_chamber_casing"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "qmd:particle_chamber_glass"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_particle_chamber_casing"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "qmd:particle_chamber_glass"
+    ]
+  }
+}

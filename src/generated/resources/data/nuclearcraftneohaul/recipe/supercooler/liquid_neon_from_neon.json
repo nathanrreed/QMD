@@ -1,0 +1,22 @@
+{
+  "type": "nuclearcraftneohaul:supercooler_recipe",
+  "fluidIngredients": [
+    {
+      "amount": 64,
+      "ingredient": {
+        "tag": "c:neon"
+      }
+    }
+  ],
+  "fluidProducts": [
+    {
+      "amount": 1,
+      "ingredient": {
+        "fluid": "qmd:liquid_neon"
+      }
+    }
+  ],
+  "powerModifier": 3.75,
+  "radiation": 0.0,
+  "timeModifier": 0.013333333333333334
+}

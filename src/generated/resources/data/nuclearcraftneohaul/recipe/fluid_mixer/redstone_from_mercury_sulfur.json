@@ -10,7 +10,7 @@
     {
       "amount": 666,
       "ingredient": {
-        "fluid": "nuclearcraftneohaul:sulfur"
+        "tag": "c:sulfur"
       }
     }
   ],

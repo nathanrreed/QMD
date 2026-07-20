@@ -68,6 +68,20 @@ public class QMDCreativeTabs {
                 output.acceptAll(RFCavities.values().stream().map(e -> e.get().asItem().getDefaultInstance()).toList());
                 output.acceptAll(acceleratorMagnets.values().stream().map(e -> e.get().asItem().getDefaultInstance()).toList());
                 output.acceptAll(acceleratorCoolers.values().stream().map(e -> e.get().asItem().getDefaultInstance()).toList());
+
+                output.accept(targetChamberController);
+                output.accept(decayChamberController);
+                output.accept(beamDumpController);
+                output.accept(collisionChamberController);
+                output.accept(particleChamberBeam);
+                output.accept(particleChamberCasing);
+                output.accept(particleChamberGlass);
+                output.accept(particleChamberBeamPort);
+                output.accept(particleChamberEnergyPort);
+                output.accept(particleChamber);
+                output.accept(particleChamberPort);
+                output.accept(particleChamberFluidPort);
+                output.acceptAll(particleChamberDetectors.values().stream().map(e -> e.get().asItem().getDefaultInstance()).toList());
             }).build());
 
     public static DeferredHolder<CreativeModeTab, CreativeModeTab> BLOCKS_TAB = CREATIVE_MODE_TABS.register(QMD.MOD_ID + "_blocks_tab", () -> CreativeModeTab.builder()

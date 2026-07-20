@@ -8,7 +8,12 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.neoforged.neoforge.network.connection.ConnectionType;
+import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class ParticleStack {
     private Particle particle;
@@ -44,6 +49,16 @@ public class ParticleStack {
             buf.writeInt(particleStack.amount);
             buf.writeLong(particleStack.meanEnergy);
             buf.writeDouble(particleStack.focus);
+        }
+    };
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, List<ParticleStack>> PARTICLE_STACK_LIST_STREAM_CODEC = new StreamCodec<RegistryFriendlyByteBuf, List<ParticleStack>>() {
+        public @NotNull List<ParticleStack> decode(RegistryFriendlyByteBuf buffer) {
+            return Arrays.stream(buffer.readArray(ParticleStack[]::new, (buf) -> ParticleStack.STREAM_CODEC.decode(new RegistryFriendlyByteBuf(buf, buffer.registryAccess(), ConnectionType.NEOFORGE)))).toList();
+        }
+
+        public void encode(RegistryFriendlyByteBuf buffer, List<ParticleStack> value) {
+            buffer.writeArray(value.toArray(), (buf, ing) -> ParticleStack.STREAM_CODEC.encode(new RegistryFriendlyByteBuf(buf, buffer.registryAccess(), ConnectionType.NEOFORGE), (ParticleStack) ing));
         }
     };
 

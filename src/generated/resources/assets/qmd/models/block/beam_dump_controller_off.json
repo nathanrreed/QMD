@@ -1,0 +1,10 @@
+{
+  "parent": "nuclearcraftneohaul:block/machine",
+  "textures": {
+    "back": "qmd:block/particle_chamber/casing",
+    "bottom": "qmd:block/particle_chamber/casing",
+    "front": "qmd:block/particle_chamber/beam_dump_controller_front_off",
+    "side": "qmd:block/particle_chamber/casing",
+    "top": "qmd:block/particle_chamber/casing"
+  }
+}

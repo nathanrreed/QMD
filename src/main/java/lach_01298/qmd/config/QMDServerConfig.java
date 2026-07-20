@@ -106,6 +106,8 @@ public class QMDServerConfig { // TODO cleanup
     public static double irradiator_rad_res;
     public static int irradiator_fuel_usage;
     public static int drill_energy_usage;
+    public static int[] drill_energy_capacity;
+    public static int[] drill_radius;
 
     public static double[] lepton_damage;
     public static double[] lepton_radiation;
@@ -255,6 +257,8 @@ public class QMDServerConfig { // TODO cleanup
     private static final ModConfigSpec.DoubleValue propertyLiquefierNozzleSpeed = add(CATEGORY_HEAT_EXCHANGER, "liquefier_nozzle_speed", 0.4D, 0.0, Double.MAX_VALUE);
 
     private static final ModConfigSpec.IntValue propertyDrillEnergyUsage = add(CATEGORY_TOOLS, "drill_energy_usage", 100, 0, Integer.MAX_VALUE);
+    private static final ModConfigSpec.ConfigValue<List<? extends Integer>> propertyDrillEnergyCapacity = add(CATEGORY_TOOLS, "drill_energy_capacity", List.of(250000, 2500000), 0, Integer.MAX_VALUE, true);
+    private static final ModConfigSpec.ConfigValue<List<? extends Integer>> propertyDrillRadius = add(CATEGORY_TOOLS, "drill_radius", List.of(1, 2), 0, 20, true);
 
     private static final ModConfigSpec.ConfigValue<List<? extends Double>> propertyLeptonDamage = add(CATEGORY_TOOLS, "lepton_damage", List.of(7.0, 14.0, 28.0), 0, Float.MAX_VALUE, true);
     private static final ModConfigSpec.ConfigValue<List<? extends Double>> propertyLeptonRadiation = add(CATEGORY_TOOLS, "lepton_radiation", List.of(10.0, 20.0, 40.0), 0, Double.MAX_VALUE, true);
@@ -383,6 +387,8 @@ public class QMDServerConfig { // TODO cleanup
         liquefier_nozzle_speed = propertyLiquefierNozzleSpeed.getAsDouble();
 
         drill_energy_usage = propertyDrillEnergyUsage.getAsInt();
+        drill_energy_capacity = readIntegerArray(propertyDrillEnergyCapacity);
+        drill_radius = readIntegerArray(propertyDrillRadius);
 
         lepton_damage = readDoubleArray(propertyLeptonDamage);
         lepton_radiation = readDoubleArray(propertyLeptonRadiation);

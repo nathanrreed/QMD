@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "qmd:block/bubble_chamber_particle_chamber_detector"
+    }
+  }
+}

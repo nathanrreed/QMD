@@ -121,7 +121,6 @@
 //		GuiFluidRenderer.renderGuiTank(multiblock.tanks.get(7), guiLeft + 134, guiTop + 42, zLevel, 16, 16);
 //
 //
-//		GL11.glColor4ub((byte) 255, (byte) 255, (byte) 255, (byte) 255);
 //		guiParticle.drawParticleStack(multiblock.beams.get(0).getParticleStack(), guiLeft + 32, guiTop + 30);
 //
 //

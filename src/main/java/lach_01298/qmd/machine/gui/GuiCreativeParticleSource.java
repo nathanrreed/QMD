@@ -14,9 +14,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
 
 import java.util.regex.Pattern;
@@ -111,5 +109,13 @@ public class GuiCreativeParticleSource extends InfoTileScreen<CreativeParticleSo
             }
             new CreativeParticleSourceGuiPacket(tile).sendToServer();
         }
+    }
+
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        if (keyCode == 256) {
+            this.minecraft.player.closeContainer();
+        }
+
+        return !this.particleNameField.keyPressed(keyCode, scanCode, modifiers) && !this.particleNameField.canConsumeInput() ? super.keyPressed(keyCode, scanCode, modifiers) : true;
     }
 }

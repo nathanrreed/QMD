@@ -91,7 +91,7 @@ public class QMDInfo { // TODO should QMDServerConfig be used here instead?
         return Component.translatable("tile." + QMD.MOD_ID + ".beamline.desc");
     }
 
-    public static Component beamlineFixedlineInfo() {
+    public static Component beamlineFixedLineInfo() {
         return Component.translatable("info." + QMD.MOD_ID + ".beamline.attenuation", QMDStartupConfig.beamAttenuationRate);
     }
 

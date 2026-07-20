@@ -4,7 +4,7 @@
     {
       "amount": 120,
       "ingredient": {
-        "fluid": "nuclearcraftneohaul:alumina"
+        "tag": "c:alumina"
       }
     }
   ],

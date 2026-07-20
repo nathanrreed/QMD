@@ -2,9 +2,13 @@
   "emi.category.qmd.accelerator_cooling": "Accelerator Cooling",
   "emi.category.qmd.accelerator_source": "Ion Source",
   "emi.category.qmd.atmosphere_collector": "Atmosphere Collector",
+  "emi.category.qmd.beam_dump": "Beam Dump",
+  "emi.category.qmd.collision_chamber": "Collision Chamber",
+  "emi.category.qmd.decay_chamber": "Decay Chamber",
   "emi.category.qmd.irradiator": "Irradiator",
   "emi.category.qmd.liquid_collector": "Liquid Collector",
   "emi.category.qmd.mass_spectrometer": "Mass Spectrometer",
   "emi.category.qmd.ore_leacher": "Ore Leacher",
-  "emi.category.qmd.particle_info": "Particle Information"
+  "emi.category.qmd.particle_info": "Particle Information",
+  "emi.category.qmd.target_chamber": "Target Chamber"
 }

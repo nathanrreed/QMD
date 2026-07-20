@@ -25,6 +25,12 @@ public class RecipeSerializerRegistration {
     public static final DeferredHolder<RecipeSerializer<?>, AtmosphereCollectorRecipe.Serializer> ATMOSPHERE_COLLECTOR_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("atmosphere_collector_recipe", AtmosphereCollectorRecipe.Serializer::new);
     public static final DeferredHolder<RecipeSerializer<?>, LiquidCollectorRecipe.Serializer> LIQUID_COLLECTOR_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("liquid_collector_recipe", LiquidCollectorRecipe.Serializer::new);
 
+
+    public static final DeferredHolder<RecipeSerializer<?>, BeamDumpRecipe.Serializer> BEAM_DUMP_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("beam_dump_recipe", BeamDumpRecipe.Serializer::new);
+    public static final DeferredHolder<RecipeSerializer<?>, CollisionChamberRecipe.Serializer> COLLISION_CHAMBER_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("collision_chamber_recipe", CollisionChamberRecipe.Serializer::new);
+    public static final DeferredHolder<RecipeSerializer<?>, DecayChamberRecipe.Serializer> DECAY_CHAMBER_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("decay_chamber_recipe", DecayChamberRecipe.Serializer::new);
+    public static final DeferredHolder<RecipeSerializer<?>, TargetChamberRecipe.Serializer> TARGET_CHAMBER_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("target_chamber_recipe", TargetChamberRecipe.Serializer::new);
+
     // Needs to have ItemStack recipe out
     public static final DeferredHolder<RecipeSerializer<?>, TungstenFilementAssemblerRecipe.Serializer> TUNGSTEN_FILAMENT_ASSEMBLER_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register("tungsten_filement_assembler_recipe", TungstenFilementAssemblerRecipe.Serializer::new);
 

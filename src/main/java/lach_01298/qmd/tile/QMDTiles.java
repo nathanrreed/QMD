@@ -4,9 +4,11 @@ import it.zerono.mods.zerocore.lib.block.multiblock.MultiblockPartBlock;
 import lach_01298.qmd.QMD;
 import lach_01298.qmd.accelerator.tile.*;
 import lach_01298.qmd.enums.BlockTypes.CoolerType;
+import lach_01298.qmd.enums.BlockTypes.DetectorType;
 import lach_01298.qmd.enums.BlockTypes.MagnetType;
 import lach_01298.qmd.enums.BlockTypes.RFCavityType;
 import lach_01298.qmd.machine.tile.TileQMDProcessors.OreLeacherEntity;
+import lach_01298.qmd.particleChamber.tile.*;
 import lach_01298.qmd.pipe.TileBeamline;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
@@ -71,40 +73,27 @@ public class QMDTiles {
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileBeamline>> TILE_BEAMLINE = BLOCK_ENTITY_TYPES.register("beamline", () -> BlockEntityType.Builder.of(TileBeamline::new, beamline.get()).build(null));
 
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileTargetChamberController>> TILE_TARGET_CHAMBER_CONTROLLER = BLOCK_ENTITY_TYPES.register("target_chamber_controller", () -> BlockEntityType.Builder.of(TileTargetChamberController::new, targetChamberController.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileDecayChamberController>> TILE_DECAY_CHAMBER_CONTROLLER = BLOCK_ENTITY_TYPES.register("decay_chamber_controller", () -> BlockEntityType.Builder.of(TileDecayChamberController::new, decayChamberController.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileBeamDumpController>> TILE_BEAM_DUMP_CONTROLLER = BLOCK_ENTITY_TYPES.register("beam_dump_controller", () -> BlockEntityType.Builder.of(TileBeamDumpController::new, beamDumpController.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileCollisionChamberController>> TILE_COLLISION_CHAMBER_CONTROLLER = BLOCK_ENTITY_TYPES.register("collision_chamber_controller", () -> BlockEntityType.Builder.of(TileCollisionChamberController::new, collisionChamberController.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileParticleChamberBeam>> TILE_PARTICLE_CHAMBER_BEAM = BLOCK_ENTITY_TYPES.register("particle_chamber_beam", () -> BlockEntityType.Builder.of(TileParticleChamberBeam::new, particleChamberBeam.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileParticleChamberCasing>> TILE_PARTICLE_CHAMBER_CASING = BLOCK_ENTITY_TYPES.register("particle_chamber_casing", () -> BlockEntityType.Builder.of(TileParticleChamberCasing::new, particleChamberCasing.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileParticleChamberGlass>> TILE_PARTICLE_CHAMBER_GLASS = BLOCK_ENTITY_TYPES.register("particle_chamber_glass", () -> BlockEntityType.Builder.of(TileParticleChamberGlass::new, particleChamberGlass.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileParticleChamberBeamPort>> TILE_PARTICLE_CHAMBER_BEAM_PORT = BLOCK_ENTITY_TYPES.register("particle_chamber_beam_port", () -> BlockEntityType.Builder.of(TileParticleChamberBeamPort::new, particleChamberBeamPort.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileParticleChamber>> TILE_PARTICLE_CHAMBER = BLOCK_ENTITY_TYPES.register("particle_chamber", () -> BlockEntityType.Builder.of(TileParticleChamber::new, particleChamber.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileParticleChamberEnergyPort>> TILE_PARTICLE_CHAMBER_ENERGY_PORT = BLOCK_ENTITY_TYPES.register("particle_chamber_energy_port", () -> BlockEntityType.Builder.of(TileParticleChamberEnergyPort::new, particleChamberEnergyPort.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileParticleChamberPort>> TILE_PARTICLE_CHAMBER_PORT = BLOCK_ENTITY_TYPES.register("particle_chamber_port", () -> BlockEntityType.Builder.of(TileParticleChamberPort::new, particleChamberPort.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileParticleChamberFluidPort>> TILE_PARTICLE_CHAMBER_FLUID_PORT = BLOCK_ENTITY_TYPES.register("particle_chamber_fluid_port", () -> BlockEntityType.Builder.of(TileParticleChamberFluidPort::new, particleChamberFluidPort.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<? extends TileParticleChamberDetector>> TILE_PARTICLE_CHAMBER_DETECTOR = BLOCK_ENTITY_TYPES.register("particle_chamber_detector", () -> BlockEntityType.Builder.of((pos, state) -> new TileParticleChamberDetector(pos, state, ((DetectorType) ((MultiblockPartBlock<?, ?>) state.getBlock()).getMultiblockVariant().get())), particleChamberDetectors.values().stream().map(DeferredHolder::get).toArray(Block[]::new)).build(null));
+
     public static void init() {
     }
 
     public static void register(IEventBus modEventBus) {
         BLOCK_ENTITY_TYPES.register(modEventBus);
 
-//		//Particle Chamber Parts
-//		GameRegistry.registerTileEntity(TileTargetChamberController.class,Util.appendPath(chamberPath, "target_chamber_controller"));
-//		GameRegistry.registerTileEntity(TileDecayChamberController.class,Util.appendPath(chamberPath, "decay_chamber_controller"));
-//		GameRegistry.registerTileEntity(TileBeamDumpController.class,Util.appendPath(chamberPath, "beam_dump_controller"));
-//		GameRegistry.registerTileEntity(TileCollisionChamberController.class,Util.appendPath(chamberPath, "collision_chamber_controller"));
-//		GameRegistry.registerTileEntity(TileParticleChamberBeam.class,Util.appendPath(chamberPath, "beam"));
-//		GameRegistry.registerTileEntity(TileParticleChamberCasing.class,Util.appendPath(chamberPath, "casing"));
-//		GameRegistry.registerTileEntity(TileParticleChamberGlass.class,Util.appendPath(chamberPath, "glass"));;
-//		GameRegistry.registerTileEntity(TileParticleChamberBeamPort.class,Util.appendPath(chamberPath, "beam_port"));
-//		GameRegistry.registerTileEntity(TileParticleChamber.class,Util.appendPath(chamberPath, "particle_chamber"));
-//		GameRegistry.registerTileEntity(TileParticleChamberEnergyPort.class,Util.appendPath(chamberPath, "energy_port"));
-//		GameRegistry.registerTileEntity(TileParticleChamberPort.class,Util.appendPath(chamberPath, "port"));
-//		GameRegistry.registerTileEntity(TileParticleChamberFluidPort.class,Util.appendPath(chamberPath, "fluid_port"));
-//
-//		//detectors
-//		GameRegistry.registerTileEntity(TileParticleChamberDetector.class, Util.appendPath(detectorPath, "detector"));
-//		GameRegistry.registerTileEntity(TileParticleChamberDetector.BubbleChamber.class, Util.appendPath(detectorPath, DetectorType.BUBBLE_CHAMBER.getName()));
-//		GameRegistry.registerTileEntity(TileParticleChamberDetector.SiliconTracker.class, Util.appendPath(detectorPath, DetectorType.SILLICON_TRACKER.getName()));
-//		GameRegistry.registerTileEntity(TileParticleChamberDetector.WireChamber.class, Util.appendPath(detectorPath, DetectorType.WIRE_CHAMBER.getName()));
-//		GameRegistry.registerTileEntity(TileParticleChamberDetector.EMCalorimeter.class, Util.appendPath(detectorPath, DetectorType.EM_CALORIMETER.getName()));
-//		GameRegistry.registerTileEntity(TileParticleChamberDetector.HadronCalorimeter.class, Util.appendPath(detectorPath, DetectorType.HADRON_CALORIMETER.getName()));
-//
-//		//machines
-//		GameRegistry.registerTileEntity(TileQMDProcessors.TileOreLeacher.class,new ResourceLocation(QMD.MOD_ID,"ore_leacher"));
-//		GameRegistry.registerTileEntity(TileQMDProcessors.TileIrradiator.class,new ResourceLocation(QMD.MOD_ID,"irradiator"));
-//		GameRegistry.registerTileEntity(TileAtmosphereCollector.class,new ResourceLocation(QMD.MOD_ID,"atmosphere_collector"));
-//		GameRegistry.registerTileEntity(TileLiquidCollector.class,new ResourceLocation(QMD.MOD_ID,"liquid_collector"));
-//
 //		//vacuum chamber parts
 //		GameRegistry.registerTileEntity(TileExoticContainmentController.class,Util.appendPath(containmentPath, "neutral_containment_controller"));
 //		GameRegistry.registerTileEntity(TileNucleosynthesisChamberController.class,Util.appendPath(containmentPath, "neucleosynthesis_chamber_controller"));

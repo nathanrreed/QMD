@@ -3,10 +3,7 @@ package lach_01298.qmd.datagen;
 import lach_01298.qmd.QMD;
 import lach_01298.qmd.block.QMDBlocks;
 import lach_01298.qmd.datagen.recipe.*;
-import lach_01298.qmd.enums.BlockTypes.CoolerType;
-import lach_01298.qmd.enums.BlockTypes.LampType;
-import lach_01298.qmd.enums.BlockTypes.MagnetType;
-import lach_01298.qmd.enums.BlockTypes.RFCavityType;
+import lach_01298.qmd.enums.BlockTypes.*;
 import lach_01298.qmd.enums.MaterialTypes.*;
 import lach_01298.qmd.item.IItemParticleAmount;
 import lach_01298.qmd.item.QMDItems;
@@ -52,7 +49,12 @@ public class QMDRecipeProvider extends RecipeProvider implements IConditionBuild
         new MassSpectrometerProvider(recipeOutput);
         new OreLeacherProvider(recipeOutput);
 
-        NCRecipeProvider.buildRecipes(recipeOutput);
+        new TargetChamberProvider(recipeOutput);
+        new CollisionChamberProvider(recipeOutput);
+        new DecayChamberProvider(recipeOutput);
+        new BeamDumpProvider(recipeOutput);
+
+        NeohaulRecipeProvider.buildRecipes(recipeOutput);
 
         // Crafting
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.beamline, 6).pattern("SSS").pattern("   ").pattern("SSS").define('S', tag(INGOTS, "stainless_steel"))
@@ -96,7 +98,7 @@ public class QMDRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('W', parts.get(PartType.WIRE_BSCCO)).define('O', tag(INGOTS, "osmiridium")).define('R', RTG_MAP.get("rtg_californium")).define('E', semiconductors.get(SemiconductorType.ELITE_PROCESSOR))
                 .unlockedBy(getHasName(semiconductors.get(SemiconductorType.ELITE_PROCESSOR)), has(semiconductors.get(SemiconductorType.ELITE_PROCESSOR))).save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(MISC, QMDItems.parts.get(PartType.ACCELERATING_BARREL)).pattern("WMW").pattern("BEB").pattern("WMW")
+        ShapedRecipeBuilder.shaped(MISC, parts.get(PartType.ACCELERATING_BARREL)).pattern("WMW").pattern("BEB").pattern("WMW")
                 .define('W', QMDBlocks.RFCavities.get(RFCavityType.BSCCO)).define('M', parts.get(PartType.MAGNET_ND)).define('B', QMDBlocks.beamline).define('E', semiconductors.get(SemiconductorType.ELITE_PROCESSOR))
                 .unlockedBy(getHasName(semiconductors.get(SemiconductorType.ELITE_PROCESSOR)), has(semiconductors.get(SemiconductorType.ELITE_PROCESSOR))).save(recipeOutput);
 
@@ -168,127 +170,127 @@ public class QMDRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy(getHasName(copernicium.get(CoperniciumType._291_ZA)), has(copernicium.get(CoperniciumType._291_ZA))).save(recipeOutput);
 
         // Coolers
-        ShapedRecipeBuilder.shaped(MISC, QMDItems.parts.get(PartType.EMPTY_COOLER), 8).pattern("STS").pattern("SHS").pattern("STS")
+        ShapedRecipeBuilder.shaped(MISC, parts.get(PartType.EMPTY_COOLER), 8).pattern("STS").pattern("SHS").pattern("STS")
                 .define('S', tag(INGOTS, "stainless_steel")).define('T', tag(INGOTS, "tough")).define('H', tag(INGOTS, "thermoconducting"))
                 .unlockedBy(getHasName(ingotAlloys.get(IngotAlloyType.STAINLESS_STEEL)), has(ingotAlloys.get(IngotAlloyType.STAINLESS_STEEL))).save(recipeOutput);
 
-        ShapelessRecipeBuilder.shapeless(MISC, acceleratorCoolers.get(CoolerType.WATER)).requires(Tags.Items.BUCKETS_WATER).requires(QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(MISC, acceleratorCoolers.get(CoolerType.WATER)).requires(Tags.Items.BUCKETS_WATER).requires(parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.IRON)).pattern(" I ").pattern("ICI").pattern(" I ")
-                .define('I', tag(INGOTS, "iron")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', tag(INGOTS, "iron")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.REDSTONE)).pattern("III").pattern("ICI")
-                .pattern("III").define('I', tag(Tags.Items.DUSTS, "redstone")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .pattern("III").define('I', tag(Tags.Items.DUSTS, "redstone")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.QUARTZ)).pattern("III").pattern("ICI")
-                .pattern("III").define('I', tag(Tags.Items.GEMS, "quartz")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .pattern("III").define('I', tag(Tags.Items.GEMS, "quartz")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.OBSIDIAN)).pattern("DID").pattern("ICI").pattern("DID")
-                .define('I', Items.OBSIDIAN).define('D', tag(Tags.Items.DUSTS, "obsidian")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', Items.OBSIDIAN).define('D', tag(Tags.Items.DUSTS, "obsidian")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.NETHER_BRICK)).pattern("DID").pattern("ICI").pattern("DID")
-                .define('I', Blocks.NETHER_BRICKS).define('D', Tags.Items.BRICKS_NETHER).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', Blocks.NETHER_BRICKS).define('D', Tags.Items.BRICKS_NETHER).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.GLOWSTONE)).pattern("III").pattern("ICI").pattern("III")
-                .define('I', tag(Tags.Items.DUSTS, "glowstone")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', tag(Tags.Items.DUSTS, "glowstone")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.LAPIS)).pattern("III").pattern("ICI").pattern("III")
-                .define('I', tag(Tags.Items.GEMS, "lapis")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', tag(Tags.Items.GEMS, "lapis")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.GOLD)).pattern(" I ").pattern("ICI").pattern(" I ")
-                .define('I', tag(INGOTS, "gold")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', tag(INGOTS, "gold")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.PRISMARINE)).pattern(" I ").pattern("ICI").pattern(" I ")
-                .define('I', tag(Tags.Items.GEMS, "prismarine")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', tag(Tags.Items.GEMS, "prismarine")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.SLIME)).pattern("III").pattern("ICI").pattern("III")
-                .define('I', Tags.Items.SLIME_BALLS).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', Tags.Items.SLIME_BALLS).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.END_STONE)).pattern("DID").pattern("ICI").pattern("DID")
-                .define('I', Blocks.END_STONE).define('D', tag(Tags.Items.DUSTS, "endstone")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', Blocks.END_STONE).define('D', tag(Tags.Items.DUSTS, "endstone")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.PURPUR)).pattern("DID").pattern("ICI").pattern("DID")
-                .define('I', Blocks.PURPUR_BLOCK).define('D', Items.POPPED_CHORUS_FRUIT).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', Blocks.PURPUR_BLOCK).define('D', Items.POPPED_CHORUS_FRUIT).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.DIAMOND)).pattern(" I ").pattern("ICI").pattern(" I ")
-                .define('I', tag(Tags.Items.GEMS, "diamond")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', tag(Tags.Items.GEMS, "diamond")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.EMERALD)).pattern(" I ").pattern("ICI").pattern(" I ")
-                .define('I', tag(Tags.Items.GEMS, "emerald")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', tag(Tags.Items.GEMS, "emerald")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.COPPER)).pattern(" I ").pattern("ICI").pattern(" I ")
-                .define('I', tag(INGOTS, "copper")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', tag(INGOTS, "copper")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.TIN)).pattern(" I ").pattern("ICI").pattern(" I ")
-                .define('I', tag(INGOTS, "tin")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', tag(INGOTS, "tin")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.LEAD)).pattern(" I ").pattern("ICI").pattern(" I ")
-                .define('I', tag(INGOTS, "lead")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', tag(INGOTS, "lead")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.BORON)).pattern(" I ").pattern("ICI").pattern(" I ")
-                .define('I', tag(INGOTS, "boron")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', tag(INGOTS, "boron")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.LITHIUM)).pattern(" I ").pattern("ICI").pattern(" I ")
-                .define('I', tag(INGOTS, "lithium")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', tag(INGOTS, "lithium")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.MAGNESIUM)).pattern(" I ").pattern("ICI").pattern(" I ")
-                .define('I', tag(INGOTS, "magnesium")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', tag(INGOTS, "magnesium")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.MANGANESE)).pattern(" I ").pattern("ICI").pattern(" I ")
-                .define('I', tag(INGOTS, "manganese")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', tag(INGOTS, "manganese")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.ALUMINUM)).pattern(" I ").pattern("ICI").pattern(" I ")
-                .define('I', tag(INGOTS, "aluminum")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', tag(INGOTS, "aluminum")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.SILVER)).pattern(" I ").pattern("ICI").pattern(" I ")
-                .define('I', tag(INGOTS, "silver")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', tag(INGOTS, "silver")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.FLUORITE)).pattern("III").pattern("ICI").pattern("III")
-                .define('I', tag(Tags.Items.GEMS, "fluorite")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', tag(Tags.Items.GEMS, "fluorite")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.VILLIAUMITE)).pattern("III").pattern("ICI").pattern("III")
-                .define('I', tag(Tags.Items.GEMS, "villiaumite")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', tag(Tags.Items.GEMS, "villiaumite")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.CAROBBIITE)).pattern("III").pattern("ICI").pattern("III")
-                .define('I', tag(Tags.Items.GEMS, "carobbiite")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', tag(Tags.Items.GEMS, "carobbiite")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorCoolers.get(CoolerType.ARSENIC)).pattern("III").pattern("ICI").pattern("III")
-                .define('I', tag(Tags.Items.DUSTS, "arsenic")).define('C', QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+                .define('I', tag(Tags.Items.DUSTS, "arsenic")).define('C', parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
-        ShapelessRecipeBuilder.shapeless(MISC, acceleratorCoolers.get(CoolerType.LIQUID_NITROGEN)).requires(tag(Tags.Items.BUCKETS, "liquid_nitrogen")).requires(QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
-        ShapelessRecipeBuilder.shapeless(MISC, acceleratorCoolers.get(CoolerType.LIQUID_HELIUM)).requires(tag(Tags.Items.BUCKETS, "liquid_helium")).requires(QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
-        ShapelessRecipeBuilder.shapeless(MISC, acceleratorCoolers.get(CoolerType.CRYOTHEUM)).requires(tag(Tags.Items.BUCKETS, "cryotheum")).requires(QMDItems.parts.get(PartType.EMPTY_COOLER))
-                .unlockedBy(getHasName(QMDItems.parts.get(PartType.EMPTY_COOLER)), has(QMDItems.parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(MISC, acceleratorCoolers.get(CoolerType.LIQUID_NITROGEN)).requires(tag(Tags.Items.BUCKETS, "liquid_nitrogen")).requires(parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(MISC, acceleratorCoolers.get(CoolerType.LIQUID_HELIUM)).requires(tag(Tags.Items.BUCKETS, "liquid_helium")).requires(parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(MISC, acceleratorCoolers.get(CoolerType.CRYOTHEUM)).requires(tag(Tags.Items.BUCKETS, "cryotheum")).requires(parts.get(PartType.EMPTY_COOLER))
+                .unlockedBy(getHasName(parts.get(PartType.EMPTY_COOLER)), has(parts.get(PartType.EMPTY_COOLER))).save(recipeOutput);
 
         // Accelerator Controllers
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.linearAcceleratorController).pattern("PEP").pattern("BFB").pattern("PEP")
@@ -354,7 +356,7 @@ public class QMDRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('A', PART_MAP.get("advanced_plating")).define('C', QMDBlocks.acceleratorCasing).define('T', QMDItems.sources.get(SourceType.TUNGSTEN_FILAMENT))
                 .unlockedBy(getHasName(QMDBlocks.acceleratorCasing), has(QMDBlocks.acceleratorCasing)).save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorLaserIonSource).pattern("LPL").pattern("EIE").pattern("LPL").define('L', QMDItems.parts.get(PartType.LASER_ASSEMBLY)).define('P', PART_MAP.get("elite_plating")).define('E', semiconductors.get(SemiconductorType.ELITE_PROCESSOR)).define('I', QMDBlocks.acceleratorSource)
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorLaserIonSource).pattern("LPL").pattern("EIE").pattern("LPL").define('L', parts.get(PartType.LASER_ASSEMBLY)).define('P', PART_MAP.get("elite_plating")).define('E', semiconductors.get(SemiconductorType.ELITE_PROCESSOR)).define('I', QMDBlocks.acceleratorSource)
                 .unlockedBy(getHasName(QMDBlocks.acceleratorSource), has(QMDBlocks.acceleratorSource)).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(MISC, QMDBlocks.acceleratorPort, 4).pattern("SHS").pattern("VFV").pattern("SHS")
@@ -440,23 +442,57 @@ public class QMDRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('S', tag(INGOTS, "stainless_steel")).define('C', parts.get(PartType.WIRE_YBCO))
                 .unlockedBy(getHasName(ingotAlloys.get(IngotAlloyType.STAINLESS_STEEL)), has(ingotAlloys.get(IngotAlloyType.STAINLESS_STEEL))).save(recipeOutput);
 
+        // Particle Chamber Controllers
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.targetChamberController, 1).pattern("PTP").pattern("BFB").pattern("PTP")
+                .define('P', PART_MAP.get("elite_plating")).define('T', tag(INGOTS, "tough")).define('B', semiconductors.get(SemiconductorType.BASIC_PROCESSOR)).define('F', QMDBlocks.particleChamberCasing)
+                .unlockedBy(getHasName(QMDBlocks.particleChamberCasing), has(QMDBlocks.particleChamberCasing)).save(recipeOutput);
 
-//        //particle chamber controllers TODO
-//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.targetChamberController.pattern("PTP").pattern("BFB").pattern("PTP").define('P', PART_MAP.get("elite_plating"), 'T', tag(INGOTS, "tough").define('B', semiconductors.get(SemiconductorType.BASIC_PROCESSOR)).define('F', QMDBlocks.particleChamberCasing});
-//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.decayChamberController.pattern("PTP").pattern("BFB").pattern("PTP").define('P', PART_MAP.get("elite_plating"), 'T', tag(INGOTS, "tough").define('B', semiconductors.get(SemiconductorType.BASIC_PROCESSOR)).define('F', NCBlocks.decay_hastener});
-//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.beamDumpController.pattern("PTP").pattern("BFB").pattern("PTP").define('P', PART_MAP.get("elite_plating"), 'T', tag(INGOTS, "tough").define('B', semiconductors.get(SemiconductorType.BASIC_PROCESSOR)).define('F', "blockCopper"});
-//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.collisionChamberController.pattern("PTP").pattern("BFB").pattern("PTP").define('P', PART_MAP.get("elite_plating"), 'T', tag(INGOTS, "tough").define('B', semiconductors.get(SemiconductorType.ELITE_PROCESSOR)).define('F', QMDBlocks.particleChamberCasing});
-//
-//        //particle chamber parts
-//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.particleChamberCasing, 16).pattern("STS").pattern("TFT").pattern("STS").define('S', tag(INGOTS, "stainless_steel").define('T', tag(INGOTS, "tungsten").define('F', PART_BLOCK_MAP.get("steel_chassis")});
-//        addShapelessOreRecipe(QMDBlocks.particleChamberCasing.pattern(QMDBlocks.particleChamberGlass});
-//        addShapelessOreRecipe(QMDBlocks.particleChamberGlass.pattern(QMDBlocks.particleChamberCasing, "blockGlass"});
-//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.particleChamberPort, 4).pattern("THT").pattern("VFV").pattern("THT").define('T', tag(INGOTS, "tungsten").define('H', Blocks.HOPPER, 'V', "servo").define('F', PART_BLOCK_MAP.get("steel_chassis")});
-//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.particleChamberEnergyPort, 4).pattern("SIS").pattern("TFT").pattern("SIS").define('S', tag(INGOTS, "stainless_steel").define('T', tag(INGOTS, "tungsten").define('F', PART_BLOCK_MAP.get("steel_chassis"), 'I', tag(INGOTS, "niobium_tin"});
-//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.particleChamberBeam, 3).pattern("STS").pattern("BBB").pattern("STS").define('S', tag(INGOTS, "stainless_steel").define('B', QMDBlocks.beamline, 'T', tag(INGOTS, "tungsten"});
-//        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.particleChamber.pattern("NSN").pattern("NCN").pattern("NSN").define('S', tag(INGOTS, "stainless_steel").define('C', PART_BLOCK_MAP.get("machine_chassis"), 'N', tag(INGOTS, "niobium_tin"});
-//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.particleChamberBeamPort, 4).pattern("STS").pattern("BFB").pattern("STS").define('S', tag(INGOTS, "stainless_steel").define('T', tag(INGOTS, "tungsten").define('B', QMDBlocks.beamline, 'F', PART_BLOCK_MAP.get("steel_chassis")});
-//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.particleChamberFluidPort, 4).pattern("SIS").pattern("TFT").pattern("STS").define('S', tag(INGOTS, "stainless_steel").define('T', tag(INGOTS, "tungsten").define('F', PART_BLOCK_MAP.get("steel_chassis"), 'I', "servo"});
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.decayChamberController, 1).pattern("PTP").pattern("BFB").pattern("PTP")
+                .define('P', PART_MAP.get("elite_plating")).define('T', tag(INGOTS, "tough")).define('B', semiconductors.get(SemiconductorType.BASIC_PROCESSOR)).define('F', PROCESSOR_MAP.get("decay_hastener"))
+                .unlockedBy(getHasName(PROCESSOR_MAP.get("decay_hastener")), has(PROCESSOR_MAP.get("decay_hastener"))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.beamDumpController, 1).pattern("PTP").pattern("BFB").pattern("PTP")
+                .define('P', PART_MAP.get("elite_plating")).define('T', tag(INGOTS, "tough")).define('B', semiconductors.get(SemiconductorType.BASIC_PROCESSOR)).define('F', Items.COPPER_BLOCK)
+                .unlockedBy(getHasName(semiconductors.get(SemiconductorType.BASIC_PROCESSOR)), has(semiconductors.get(SemiconductorType.BASIC_PROCESSOR))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.collisionChamberController, 1).pattern("PTP").pattern("BFB").pattern("PTP")
+                .define('P', PART_MAP.get("elite_plating")).define('T', tag(INGOTS, "tough")).define('B', semiconductors.get(SemiconductorType.ELITE_PROCESSOR)).define('F', QMDBlocks.particleChamberCasing)
+                .unlockedBy(getHasName(QMDBlocks.particleChamberCasing), has(QMDBlocks.particleChamberCasing)).save(recipeOutput);
+
+
+        // Particle Chamber Parts
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.particleChamberCasing, 16).pattern("STS").pattern("TFT").pattern("STS")
+                .define('S', tag(INGOTS, "stainless_steel")).define('T', tag(INGOTS, "tungsten")).define('F', PART_BLOCK_MAP.get("steel_chassis"))
+                .unlockedBy(getHasName(PART_BLOCK_MAP.get("steel_chassis")), has(PART_BLOCK_MAP.get("steel_chassis"))).save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(MISC, QMDBlocks.particleChamberCasing).requires(QMDBlocks.particleChamberGlass)
+                .unlockedBy(getHasName(QMDBlocks.particleChamberGlass), has(QMDBlocks.particleChamberGlass)).save(recipeOutput, "particle_chamber_casing_from_glass");
+        ShapelessRecipeBuilder.shapeless(MISC, QMDBlocks.particleChamberGlass).requires(QMDBlocks.particleChamberCasing).requires(Tags.Items.GLASS_BLOCKS)
+                .unlockedBy(getHasName(QMDBlocks.particleChamberCasing), has(QMDBlocks.particleChamberCasing)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.particleChamberPort, 4).pattern("THT").pattern("VFV").pattern("THT")
+                .define('T', tag(INGOTS, "tungsten")).define('H', Blocks.HOPPER).define('V', PART_MAP.get("servomechanism")).define('F', PART_BLOCK_MAP.get("steel_chassis"))
+                .unlockedBy(getHasName(PART_BLOCK_MAP.get("steel_chassis")), has(PART_BLOCK_MAP.get("steel_chassis"))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.particleChamberEnergyPort, 4).pattern("SIS").pattern("TFT").pattern("SIS")
+                .define('S', tag(INGOTS, "stainless_steel")).define('T', tag(INGOTS, "tungsten")).define('F', PART_BLOCK_MAP.get("steel_chassis")).define('I', tag(INGOTS, "niobium_tin"))
+                .unlockedBy(getHasName(PART_BLOCK_MAP.get("steel_chassis")), has(PART_BLOCK_MAP.get("steel_chassis"))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.particleChamberBeam, 3).pattern("STS").pattern("BBB").pattern("STS")
+                .define('S', tag(INGOTS, "stainless_steel")).define('B', QMDBlocks.beamline).define('T', tag(INGOTS, "tungsten"))
+                .unlockedBy(getHasName(QMDBlocks.beamline), has(QMDBlocks.beamline)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.particleChamber, 1).pattern("NSN").pattern("NCN").pattern("NSN")
+                .define('S', tag(INGOTS, "stainless_steel")).define('C', PART_BLOCK_MAP.get("machine_chassis")).define('N', tag(INGOTS, "niobium_tin"))
+                .unlockedBy(getHasName(PART_BLOCK_MAP.get("machine_chassis")), has(PART_BLOCK_MAP.get("machine_chassis"))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.particleChamberBeamPort, 4).pattern("STS").pattern("BFB").pattern("STS")
+                .define('S', tag(INGOTS, "stainless_steel")).define('T', tag(INGOTS, "tungsten")).define('B', QMDBlocks.beamline).define('F', PART_BLOCK_MAP.get("steel_chassis"))
+                .unlockedBy(getHasName(PART_BLOCK_MAP.get("steel_chassis")), has(PART_BLOCK_MAP.get("steel_chassis"))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.particleChamberFluidPort, 4).pattern("SIS").pattern("TFT").pattern("STS")
+                .define('S', tag(INGOTS, "stainless_steel")).define('T', tag(INGOTS, "tungsten")).define('F', PART_BLOCK_MAP.get("steel_chassis")).define('I', PART_MAP.get("servomechanism"))
+                .unlockedBy(getHasName(PART_BLOCK_MAP.get("steel_chassis")), has(PART_BLOCK_MAP.get("steel_chassis"))).save(recipeOutput);
 
         // Sources
         ShapedRecipeBuilder.shaped(MISC, IItemParticleAmount.fullItem(new ItemStack(QMDItems.sources.get(SourceType.SODIUM_22).get()))).pattern("BSB").pattern("SSS").pattern("BSB")
@@ -475,14 +511,28 @@ public class QMDRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('S', isotopeTag("calcium/48")).define('B', PART_MAP.get("bioplastic"))
                 .unlockedBy(getHasName(isotopes.get(IsotopeType.CALCIUM_48)), has(isotopes.get(IsotopeType.CALCIUM_48))).save(recipeOutput);
 
-//        //detectors TODO
-//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDItems.part, 4, MaterialTypes.PartType.DETECTOR_CASING)).pattern("STS").pattern("SBS").pattern("STS").define('S', tag(INGOTS, "stainless_steel").define('T', tag(INGOTS, "tungsten").define('B', semiconductors.get(SemiconductorType.BASIC_PROCESSOR)});
-//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.WIRE_CHAMBER_CASING)).pattern("WWW").pattern("ACA").pattern("WWW").define('W', "wireGoldTungsten").define('A', semiconductors.get(SemiconductorType.ADVANCED_PROCESSOR)).define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.DETECTOR_CASING))});
-//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.particleChamberDetector, 1, BlockTypes.DetectorType.EM_CALORIMETER)).pattern("SSS").pattern("SCS").pattern("SSS").define('S', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.SCINTILLATOR_PWO)), 'C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.DETECTOR_CASING))});
-//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.particleChamberDetector, 1, BlockTypes.DetectorType.HADRON_CALORIMETER)).pattern("SSS").pattern("SCS").pattern("SSS").define('S', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.SCINTILLATOR_PLASTIC)), 'C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.DETECTOR_CASING))});
-//        ShapedRecipeBuilder.shaped(MISC, new ItemStack(QMDBlocks.particleChamberDetector, 1, BlockTypes.DetectorType.SILLICON_TRACKER)).pattern("BAB").pattern("ACA").pattern("BAB").define('B', semiconductors.get(SemiconductorType.BASIC_PROCESSOR)).define('A', semiconductors.get(SemiconductorType.ADVANCED_PROCESSOR)).define('C', new ItemStack(QMDItems.part, 1, MaterialTypes.PartType.DETECTOR_CASING))});
-//
-//        // Containment Controllers
+        // Detectors
+        ShapedRecipeBuilder.shaped(MISC, parts.get(PartType.DETECTOR_CASING), 4).pattern("STS").pattern("SBS").pattern("STS")
+                .define('S', tag(INGOTS, "stainless_steel")).define('T', tag(INGOTS, "tungsten")).define('B', semiconductors.get(SemiconductorType.BASIC_PROCESSOR))
+                .unlockedBy(getHasName(semiconductors.get(SemiconductorType.BASIC_PROCESSOR)), has(semiconductors.get(SemiconductorType.BASIC_PROCESSOR))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, parts.get(PartType.WIRE_CHAMBER_CASING), 1).pattern("WWW").pattern("ACA").pattern("WWW")
+                .define('W', parts.get(PartType.WIRE_GOLD_TUNGSTEN)).define('A', semiconductors.get(SemiconductorType.ADVANCED_PROCESSOR)).define('C', parts.get(PartType.DETECTOR_CASING))
+                .unlockedBy(getHasName(semiconductors.get(SemiconductorType.ADVANCED_PROCESSOR)), has(semiconductors.get(SemiconductorType.ADVANCED_PROCESSOR))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.particleChamberDetectors.get(DetectorType.EM_CALORIMETER), 1).pattern("SSS").pattern("SCS").pattern("SSS")
+                .define('S', parts.get(PartType.SCINTILLATOR_PWO)).define('C', parts.get(PartType.DETECTOR_CASING))
+                .unlockedBy(getHasName(parts.get(PartType.DETECTOR_CASING)), has(parts.get(PartType.DETECTOR_CASING))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.particleChamberDetectors.get(DetectorType.HADRON_CALORIMETER), 1).pattern("SSS").pattern("SCS").pattern("SSS")
+                .define('S', parts.get(PartType.SCINTILLATOR_PLASTIC)).define('C', parts.get(PartType.DETECTOR_CASING))
+                .unlockedBy(getHasName(parts.get(PartType.DETECTOR_CASING)), has(parts.get(PartType.DETECTOR_CASING))).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.particleChamberDetectors.get(DetectorType.SILLICON_TRACKER), 1).pattern("BAB").pattern("ACA").pattern("BAB")
+                .define('B', semiconductors.get(SemiconductorType.BASIC_PROCESSOR)).define('A', semiconductors.get(SemiconductorType.ADVANCED_PROCESSOR)).define('C', parts.get(PartType.DETECTOR_CASING))
+                .unlockedBy(getHasName(parts.get(PartType.DETECTOR_CASING)), has(parts.get(PartType.DETECTOR_CASING))).save(recipeOutput);
+
+//        // Containment Controllers TODO
 //        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.exoticContainmentController.pattern("PEP").pattern("BFB").pattern("PEP").define('P', PART_MAP.get("elite_plating"), 'E', tag(INGOTS, "extreme").define('B', semiconductors.get(SemiconductorType.ELITE_PROCESSOR)).define('F', QMDBlocks.vacuumChamberCasing});
 //        ShapedRecipeBuilder.shaped(MISC, QMDBlocks.nucleosynthesisChamberController.pattern("PEP").pattern("BFB").pattern("PEP").define('P', PART_MAP.get("elite_plating"), 'E', tag(INGOTS, "super_alloy").define('B', semiconductors.get(SemiconductorType.ELITE_PROCESSOR)).define('F', QMDBlocks.vacuumChamberCasing});
 //

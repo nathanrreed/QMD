@@ -28,6 +28,11 @@ public class QMDScreens {
         event.register(LINEAR_ACCELERATOR_CONTROLLER_MENU.get(), GuiLinearAcceleratorController::new);
         event.register(RING_ACCELERATOR_CONTROLLER_MENU.get(), GuiRingAcceleratorController::new);
         event.register(MASS_SPECTROMETER_CONTROLLER_MENU.get(), GuiMassSpectrometerController::new);
-        event.register(ACCELERATOR_ION_SOURCE_MENU.get(), GUIAcceleratorIonSource::new);
+        event.register(ACCELERATOR_ION_SOURCE_MENU.get(), GuiAcceleratorIonSource::new);
+
+        event.register(COLLISION_CHAMBER_CONTROLLER_MENU.get(), GuiCollisionChamberController::new);
+        event.register(DECAY_CHAMBER_CONTROLLER_MENU.get(), GuiDecayChamberController::new);
+        event.register(TARGET_CHAMBER_CONTROLLER_MENU.get(), GuiTargetChamberController::new);
+        event.register(BEAM_DUMP_CONTROLLER_MENU.get(), GuiBeamDumpController::new);
     }
 }

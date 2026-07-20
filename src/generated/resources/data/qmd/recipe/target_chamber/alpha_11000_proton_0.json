@@ -1,0 +1,40 @@
+{
+  "type": "qmd:target_chamber_recipe",
+  "crossSection": 0.16,
+  "energyReleased": 1670,
+  "fluidInput": [
+    {
+      "amount": 500,
+      "ingredient": {
+        "tag": "c:fluorine"
+      }
+    }
+  ],
+  "fluidProduct": [
+    {
+      "amount": 1000,
+      "ingredient": {
+        "fluid": "qmd:neon"
+      }
+    }
+  ],
+  "itemInput": [],
+  "itemProduct": [],
+  "maxEnergy": 17500,
+  "particleInput": [
+    {
+      "amount": 6250000,
+      "focus": 0.0,
+      "meanEnergy": 11000,
+      "particle": "alpha"
+    }
+  ],
+  "particleProducts": [
+    {
+      "amount": 1,
+      "focus": 0.0,
+      "meanEnergy": 0,
+      "particle": "proton"
+    }
+  ]
+}
