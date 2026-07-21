@@ -136,7 +136,7 @@ public class QMDRecipes {
 //        }
 //    }
 
-    public static class QMDProcessorRecipeHandler extends BasicRecipeHandler<ProcessorRecipe> {
+    public static class QMDProcessorRecipeHandler extends NCRecipes.BasicProcessorRecipeHandler {
         public QMDProcessorRecipeHandler(@NotNull String name, int itemInputSize, int fluidInputSize, int itemOutputSize, int fluidOutputSize) {
             super(name, itemInputSize, fluidInputSize, itemOutputSize, fluidOutputSize);
         }
