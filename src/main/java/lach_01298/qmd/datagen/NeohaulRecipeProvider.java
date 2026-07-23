@@ -164,7 +164,7 @@ public class NeohaulRecipeProvider {
         new ProcessorRecipeBuilder(IngotFormerRecipe.class, 0.5, 1).addFluidInput(fluidTag("coal"), COAL_DUST_VOLUME).addItemResult(Items.COAL, 1).save(recipeOutput);
 
         // Crystallizer
-        new ProcessorRecipeBuilder(CrystallizerRecipe.class, 2, 2).addFluidInput(QMD_FLUIDS.get("silicon"), INGOT_BLOCK_VOLUME).addItemResult(semiconductors.get(SemiconductorType.SILICON_BOULE), 1).save(recipeOutput);
+        new ProcessorRecipeBuilder(CrystallizerRecipe.class, 2, 2).addFluidInput(MOLTEN_MAP.get("silicon"), INGOT_BLOCK_VOLUME).addItemResult(semiconductors.get(SemiconductorType.SILICON_BOULE), 1).save(recipeOutput);
         new ProcessorRecipeBuilder(CrystallizerRecipe.class, 1, 1).addFluidInput(QMD_FLUIDS.get("lead_tungstate_solution"), GEM_VOLUME).addItemResult(parts.get(PartType.SCINTILLATOR_PWO), 1).save(recipeOutput);
         new ProcessorRecipeBuilder(CrystallizerRecipe.class, 1, 1).addFluidInput(QMD_FLUIDS.get("sodium_nitrate_solution"), GEM_VOLUME).addItemResult(chemicalDusts.get(ChemicalDustType.SODIUM_NITRATE), 1).save(recipeOutput);
         new ProcessorRecipeBuilder(CrystallizerRecipe.class, 1, 1).addFluidInput(QMD_FLUIDS.get("sodium_chloride_solution"), GEM_VOLUME).addItemResult(tag(DUSTS, "salt"), 1).save(tagExists(recipeOutput, tag(DUSTS, "salt")), "salt_from_sodium_chloride_solution");

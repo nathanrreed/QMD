@@ -61,7 +61,6 @@ public class QMDFluids {
         addFluidPair(NCFluid.GAS_TYPE, "compressed_air", 0xBDF0FF);
 
         //molten
-        addFluidPair(NCFluid.MOLTEN_TYPE, "silicon", 0x676767);
         addFluidPair(NCFluid.MOLTEN_TYPE, "yag", 0xfffddb);
         addFluidPair(NCFluid.MOLTEN_TYPE, "nd_yag", 0xe4bcf5);
         addFluidPair(NCFluid.MOLTEN_TYPE, "tungsten", 0x4E564F);
