@@ -4,7 +4,7 @@
 		"type":"ctm",
 		"layer":"CUTOUT",
 		"textures":[
-			"qmd:blocks/particle_chamber/glass_ctm"
+			"qmd:block/particle_chamber/glass_ctm"
 		]
 	}
 }

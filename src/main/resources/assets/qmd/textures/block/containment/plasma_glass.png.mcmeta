@@ -4,7 +4,7 @@
 		"type":"ctm",
 		"layer":"TRANSLUCENT",
 		"textures":[
-			"qmd:blocks/containment/plasma_glass_ctm"
+			"qmd:block/containment/plasma_glass_ctm"
 		]
 	}
 }

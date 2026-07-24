@@ -4,7 +4,7 @@
         "type": "ctm",
         "layer": "SOLID",
         "textures": [
-            "qmd:blocks/accelerator/cavity/niobium_titanium_ctm"
+            "qmd:block/accelerator/cavity/niobium_titanium_ctm"
         ]
     }
 }
