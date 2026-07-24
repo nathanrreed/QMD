@@ -304,7 +304,6 @@ public class QMDLanguageProvider extends LanguageProvider {
         fluidAndBucket(QMD_FLUIDS.get("radium"), "Molten Radium");
         fluidAndBucket(QMD_FLUIDS.get("salt_water"), "Salt Water");
         fluidAndBucket(QMD_FLUIDS.get("samarium"), "Molten Samarium");
-        fluidAndBucket(QMD_FLUIDS.get("silicon"), "Molten Silicon");
         fluidAndBucket(QMD_FLUIDS.get("sodium_chloride"), "Molten Sodium Chloride");
         fluidAndBucket(QMD_FLUIDS.get("sodium_chloride_solution"), "Sodium Chloride Solution");
         fluidAndBucket(QMD_FLUIDS.get("sodium_nitrate_solution"), "Sodium Nitrate Solution");
