@@ -4,7 +4,7 @@
 		"type":"ctm",
 		"layer":"SOLID",
 		"textures":[
-			"qmd:blocks/containment/frame_ctm"
+			"qmd:block/containment/frame_ctm"
 		]
 	}
 }
